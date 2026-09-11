@@ -1,6 +1,6 @@
 # symfony-user
 
-Version: 1.0.2
+Version: 1.0.3
 
 The repository does not provide any concrete code that could be documented for now.
 
