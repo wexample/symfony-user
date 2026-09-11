@@ -1,0 +1,10 @@
+domain: symfony-user.wex
+git:
+  publication_strategy: main_push
+global:
+  name: symfony-user
+  type: php-package
+  version: 1.0.2
+wex:
+  migration: 5
+  version: 6.0.136
