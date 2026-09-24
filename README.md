@@ -1,12 +1,13 @@
 # symfony-user
 
-Version: 1.0.4
+Version: 4.0.0
 
 The repository does not provide any concrete code that could be documented for now.
 
 ## Table of Contents
 
 - [Integration in the Suite](#integration-in-the-suite)
+- [Dependencies](#dependencies)
 - [Versioning & Compatibility Policy](#versioning--compatibility-policy)
 - [License](#license)
 - [About us](#about-us)
@@ -23,6 +24,15 @@ This package is part of the Wexample Suite — a collection of high-quality, mod
 The suite includes packages for configuration management, file handling, prompts, and more. Each package can be used independently or as part of the integrated suite.
 
 Visit the [Wexample Suite documentation](https://docs.wexample.com) for the complete package ecosystem.
+
+## Dependencies
+
+- php: >=8.5
+- doctrine/orm: ^3.0
+- symfony/security-bundle: ^7.4
+- wexample/symfony-helpers: >=10.0.0
+- wexample/symfony-translations: >=4.0.0
+- symfony/validator: ^7.4
 
 ## Versioning & Compatibility Policy
 
