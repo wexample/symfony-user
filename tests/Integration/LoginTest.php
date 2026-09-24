@@ -5,8 +5,8 @@ namespace Wexample\SymfonyUser\Tests\Integration;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Wexample\SymfonyUser\Service\FormProcessor\LoginFormProcessor;
 use Wexample\SymfonyUser\Security\UserChecker;
+use Wexample\SymfonyUser\Service\FormProcessor\LoginFormProcessor;
 use Wexample\SymfonyUser\Tests\Fixtures\App\Entity\User;
 use Wexample\SymfonyUser\Tests\Traits\DatabaseTestTrait;
 

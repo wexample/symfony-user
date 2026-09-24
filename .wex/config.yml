@@ -4,7 +4,7 @@ git:
 global:
   name: symfony-user
   type: php-package
-  version: 4.0.0
+  version: 5.0.0
 wex:
   migration: 7
   version: 6.0.136

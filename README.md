@@ -1,6 +1,6 @@
 # symfony-user
 
-Version: 4.0.0
+Version: 5.0.0
 
 The repository does not provide any concrete code that could be documented for now.
 
@@ -33,6 +33,9 @@ Visit the [Wexample Suite documentation](https://docs.wexample.com) for the comp
 - wexample/symfony-helpers: >=10.0.0
 - wexample/symfony-translations: >=4.0.0
 - symfony/validator: ^7.4
+- wexample/symfony-forms: >=8.0.0
+- wexample/symfony-loader: >=14.0.0
+- symfony/form: ^7.4
 
 ## Versioning & Compatibility Policy
 
