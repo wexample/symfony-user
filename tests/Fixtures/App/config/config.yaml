@@ -1,0 +1,17 @@
+framework:
+  test: true
+  secret: "test"
+  session:
+    storage_factory_id: session.storage.factory.mock_file
+
+doctrine:
+  orm:
+    enable_native_lazy_objects: true
+
+security:
+  providers:
+    users_in_memory: { memory: null }
+  firewalls:
+    main:
+      lazy: true
+      provider: users_in_memory

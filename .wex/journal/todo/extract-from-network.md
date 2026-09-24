@@ -130,6 +130,6 @@ Source root below: `S=/home/weeger/Desktop/WIP/WEB/WEXAMPLE/NETWORK/archeo/trees
 - Tests: follow `symfony-loader` (`phpunit.xml`, `tests/Unit` + `tests/Integration`, kernel in `tests/Fixtures/App`, SQLite).
 - Entity export: abstract classes (`AbstractUser`) should be skipped by the export; export concrete entities only.
 - Docs: the four standard pages, no filler.
-- Code input widget (step 7): built in `symfony-design-system` as `code-input`, see its todo `code-input.md`. This package only uses it.
+- Code input widget (step 7): done in `symfony-design-system` as `otp-input` (`code-input` was taken by `symfony-coding`), with `Wexample\SymfonyForms\Form\Type\OtpInputType` in `symfony-forms`. The 2FA form just does `->add('code', OtpInputType::class)`; nothing to port from `double-factor-code-char.ts`.
 - Demo: `symfony-user-demo` exists, wired on MOJOE design-system. Ship an empty page first.
 - Tunnel steps tied to the current user are declared here (asked by the symfony-tunnels agent); `symfony-tunnels` stays an optional dependency.

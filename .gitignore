@@ -36,3 +36,6 @@ coverage*.lcov
 .php-cs-fixer.cache
 .scannerwork
 /vendor
+/tests/Fixtures/App/var/
+/tests/Fixtures/App/config/reference.php
+.phpunit.result.cache

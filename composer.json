@@ -1,11 +1,49 @@
 {
   "name": "wexample/symfony-user",
-  "version": "1.0.4",
+  "description": "User accounts and authentication for Symfony",
   "type": "library",
   "license": "MIT",
+  "version": "1.0.4",
   "autoload": {
     "psr-4": {
       "Wexample\\SymfonyUser\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Wexample\\SymfonyUser\\Tests\\": "tests/"
+    }
+  },
+  "authors": [
+    {
+      "name": "weeger",
+      "email": "romain.weeger@wexample.com"
+    }
+  ],
+  "require": {
+    "php": ">=8.5",
+    "doctrine/orm": "^3.0",
+    "symfony/security-bundle": "^7.4",
+    "wexample/symfony-helpers": ">=9.0.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "wexample/symfony-testing": ">=2.0.0",
+    "symfony/browser-kit": "^7.4",
+    "symfony/css-selector": "^7.4"
+  },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../*",
+      "options": {
+        "symlink": true
+      }
+    }
+  ],
+  "extra": {
+    "install": {
+      "bundle_env": "all"
     }
   }
 }
