@@ -133,3 +133,14 @@ Source root below: `S=/home/weeger/Desktop/WIP/WEB/WEXAMPLE/NETWORK/archeo/trees
 - Code input widget (step 7): done in `symfony-design-system` as `otp-input` (`code-input` was taken by `symfony-coding`), with `Wexample\SymfonyForms\Form\Type\OtpInputType` in `symfony-forms`. The 2FA form just does `->add('code', OtpInputType::class)`; nothing to port from `double-factor-code-char.ts`.
 - Demo: `symfony-user-demo` exists, wired on MOJOE design-system. Ship an empty page first.
 - Tunnel steps tied to the current user are declared here (asked by the symfony-tunnels agent); `symfony-tunnels` stays an optional dependency.
+
+## Progress
+
+- Step 1 done (2026-09-24). No bundle config tree yet: each option comes with the step that reads it.
+- Step 2 done (2026-09-24). Divergences from the plan:
+  - `AbstractUser` is not a `MappedSuperclass`, like `AbstractEntity` above it (Doctrine otherwise maps `id` twice).
+  - No `Repository/Traits`: `AbstractUserRepository` implements `UserLoaderInterface` and `PasswordUpgraderInterface`, so an `entity` provider without `property` resolves email or username.
+  - The "ambiguous username" case does not exist: `username` is a unique column and cannot contain `@`.
+  - `isEqualTo` also compares `locked`, so banning a user ends their session.
+  - Removed from `symfony-helpers`: `AbstractUser`, `AbstractUserRepository`, `UserEntityTrait`, `UserWithNameTrait` (now here, without `getUserIdentifier`), `UserWithRolesTrait`, `HasPasswordTrait`, `HasRolesTrait`, `HasDateLastLoginTrait`. Helpers keeps `UserEntityInterface`; its voter types against Symfony `UserInterface`. Breaking change for helpers: major bump.
+  - SYRTIS `local/api` rewired (entity, `UserRepository`, `TokenRepository` now a plain `AbstractRepository`, `ProjectRepository`). Its `user.username` column becomes nullable, 30 chars: needs a migration.

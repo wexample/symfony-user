@@ -7,11 +7,30 @@ framework:
 doctrine:
   orm:
     enable_native_lazy_objects: true
+    mappings:
+      FixtureApp:
+        type: attribute
+        dir: '%kernel.project_dir%/Entity'
+        prefix: 'Wexample\SymfonyUser\Tests\Fixtures\App\Entity'
+        is_bundle: false
 
 security:
+  password_hashers:
+    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: plaintext
   providers:
-    users_in_memory: { memory: null }
+    users:
+      entity:
+        class: Wexample\SymfonyUser\Tests\Fixtures\App\Entity\User
   firewalls:
     main:
       lazy: true
-      provider: users_in_memory
+      provider: users
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  Wexample\SymfonyUser\Tests\Fixtures\App\Repository\:
+    resource: '../Repository/'
