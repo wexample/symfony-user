@@ -39,7 +39,7 @@ Source root below: `S=/home/weeger/Desktop/WIP/WEB/WEXAMPLE/NETWORK/archeo/trees
 
 - `wexample/symfony-helpers` (>= 9): already has `Entity/AbstractUser`, `Entity/Traits/{UserEntityTrait,HasPasswordTrait,HasRolesTrait,UserWithRolesTrait,UserWithNameTrait}`, `Repository/AbstractUserRepository`, `Voter/*`, `Helper/RoleHelper` (all in `/home/weeger/Desktop/WIP/WEB/WEXAMPLE/PACKAGES/PHP/packages/wexample/symfony-helpers/src`).
 - `symfony/security-bundle` 7.4, `symfony/rate-limiter`, `symfony/notifier` or `symfony/mailer`, `doctrine/orm`.
-- Owner decision pending (see the questions below): whether to build on `scheb/2fa-bundle`. Do steps 1–3 first: they do not depend on it.
+- Owner decision (2026-09-24): build on `scheb/2fa-bundle` (+ `scheb/2fa-email`, `scheb/2fa-totp`, `scheb/2fa-backup-code`, `scheb/2fa-trusted-device`). The owner asked for "the best" option; scheb is the maintained Symfony standard and already covers email code, TOTP, backup codes and trusted devices. Steps 5, 6 and 11 become configuration + wrapping (templates, AJAX/tunnel responses, code mailer, policy `always|new_device|never`) rather than a home-made implementation; re-check each rule of "Do not" against scheb's behaviour.
 
 ## Steps
 
@@ -82,7 +82,7 @@ Source root below: `S=/home/weeger/Desktop/WIP/WEB/WEXAMPLE/NETWORK/archeo/trees
    - `Service/PasswordUpdater` (hash + flush).
    - `Form/ChangePasswordForm`: current password required, except when an admin edits someone else (#29). Repeated new password, `PasswordStrength` + `NotCompromisedPassword` (optional).
    - Admin "set password".
-   - Reset flow: the owner decides between a token reset and a magic link.
+   - Reset flow — owner decision (2026-09-24): support both, the app using the package chooses. Add a bundle config option (e.g. `password_reset: token|magic_link|both`); the token flow is a dedicated signed, single-use, expiring reset token (evaluate `symfonycasts/reset-password-bundle`), the magic-link flow reuses step 8 and lands on a "set a new password" page.
    - Read the working FOS-era versions: `$P/src/Wex/BaseBundle/Form/Traits/SecurityFormTrait.php`, `$P/src/Form/Entity/User/UserAccountChangePasswordEntityForm.php`, `$P/src/Wex/BaseBundle/Controller/ResettingController.php`, `$P/src/Wex/BaseBundle/Service/MailerUser.php`, `$P/src/Wex/BaseBundle/Form/PasswordType.php` + `Resources/js/components/password-type.ts` (show/hide toggle).
    - Tests: change own password (wrong current → error); admin changes another user's password without the current one; reset or magic flow.
 10. **Roles helpers.**
@@ -123,3 +123,13 @@ Source root below: `S=/home/weeger/Desktop/WIP/WEB/WEXAMPLE/NETWORK/archeo/trees
 
 - `symfony-testing`: `src/Traits/LoggedUserTestCaseTrait.php` types `App\Entity\User`, and `src/Traits/Application/LoggedUserApplicationTestCaseTrait.php` hardcodes `fos_user_security_login`/`fos_user_security_logout`. Adapt them to this package's route config once step 3 exists.
 - Migration of network prod users (for network 2027): roles are PHP-serialized (`DC2Type:array`) and must be converted to JSON; do not reset `enabled` to 0; lowercase emails and check uniqueness before dropping FOS `*_canonical`; bcrypt hashes are compatible.
+
+## Owner decisions (2026-09-24, after reading `symfony-tunnels/.wex/journal/todo/todo-common.md`)
+
+- `AbstractUser` and the user traits move from `symfony-helpers` to this package (helpers was a catch-all). Fix the apps that break; stop only on serious breakage.
+- Tests: follow `symfony-loader` (`phpunit.xml`, `tests/Unit` + `tests/Integration`, kernel in `tests/Fixtures/App`, SQLite).
+- Entity export: abstract classes (`AbstractUser`) should be skipped by the export; export concrete entities only.
+- Docs: the four standard pages, no filler.
+- Code input widget (step 7): built in `symfony-design-system` as `code-input`, see its todo `code-input.md`. This package only uses it.
+- Demo: `symfony-user-demo` exists, wired on MOJOE design-system. Ship an empty page first.
+- Tunnel steps tied to the current user are declared here (asked by the symfony-tunnels agent); `symfony-tunnels` stays an optional dependency.
