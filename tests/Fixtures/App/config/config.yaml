@@ -1,6 +1,12 @@
 framework:
   test: true
   secret: "test"
+  # The stateless CSRF protection of the Symfony Flex recipe.
+  form:
+    csrf_protection:
+      token_id: submit
+  csrf_protection:
+    stateless_token_ids: [submit, authenticate, logout]
   session:
     storage_factory_id: session.storage.factory.mock_file
 
@@ -25,6 +31,18 @@ security:
     main:
       lazy: true
       provider: users
+      custom_authenticators:
+        - Wexample\SymfonyUser\Security\Authenticator\LoginFormAuthenticator
+      entry_point: Wexample\SymfonyUser\Security\Authenticator\LoginFormAuthenticator
+      user_checker: Wexample\SymfonyUser\Security\UserChecker
+      logout:
+        path: user_security_logout
+  access_control:
+    - { path: ^/protected, roles: ROLE_USER }
+
+wexample_symfony_loader:
+  front_paths:
+    front: '%kernel.project_dir%/../front/'
 
 services:
   _defaults:
@@ -34,3 +52,12 @@ services:
 
   Wexample\SymfonyUser\Tests\Fixtures\App\Repository\:
     resource: '../Repository/'
+
+  Wexample\SymfonyUser\Tests\Fixtures\App\Controller\:
+    resource: '../Controller/'
+    tags: ['controller.service_arguments']
+
+  # symfony-testing registers it with the string '@kernel' instead of a
+  # reference, which only YAML turns into the kernel service.
+  Wexample\SymfonyHelpers\Service\BundleService:
+    arguments: ['@kernel']

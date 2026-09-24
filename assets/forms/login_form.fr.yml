@@ -1,0 +1,18 @@
+field:
+  identifier:
+    label: Email ou nom d'utilisateur
+  password:
+    label: Mot de passe
+  remember_me:
+    label: Rester connecté
+
+action:
+  submit: Se connecter
+
+error:
+  invalid_credentials: Utilisateur inconnu ou mot de passe incorrect.
+  too_many_attempts: Trop de tentatives, réessayez dans quelques minutes.
+  invalid_csrf: Le formulaire a expiré, rechargez la page et réessayez.
+  account_status: Ce compte ne peut pas se connecter.
+  account_locked: Ce compte a été bloqué.
+  account_disabled: Ce compte n'est pas encore activé.

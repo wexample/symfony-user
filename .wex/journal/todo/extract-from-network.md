@@ -144,3 +144,9 @@ Source root below: `S=/home/weeger/Desktop/WIP/WEB/WEXAMPLE/NETWORK/archeo/trees
   - `isEqualTo` also compares `locked`, so banning a user ends their session.
   - Removed from `symfony-helpers`: `AbstractUser`, `AbstractUserRepository`, `UserEntityTrait`, `UserWithNameTrait` (now here, without `getUserIdentifier`), `UserWithRolesTrait`, `HasPasswordTrait`, `HasRolesTrait`, `HasDateLastLoginTrait`. Helpers keeps `UserEntityInterface`; its voter types against Symfony `UserInterface`. Breaking change for helpers: major bump.
   - SYRTIS `local/api` rewired (entity, `UserRepository`, `TokenRepository` now a plain `AbstractRepository`, `ProjectRepository`). Its `user.username` column becomes nullable, 30 chars: needs a migration.
+- Step 3 done (2026-09-24). Divergences from the plan:
+  - No separate check / success / failure / ajax-redirect routes. `LoginForm` is an ordinary ajax form of `symfony-forms`: it posts to `/_forms/submit/form-login_form`, and `LoginFormAuthenticator` takes that request before the form processor does. JSON callers get the usual `FormResponsePayload` (errors, redirect action), a page gets a redirect back to the referer (same host only) or `/login`.
+  - CSRF uses the token id the form was built with, so the stateless CSRF of the Flex recipe works.
+  - `UserChecker` checks in `checkPostAuth`: a wrong password on a locked account still reads "unknown user or wrong password".
+  - Only `/login` and `/logout` routes (`user_security_login`, `user_security_logout`). No configurable route names yet.
+  - Demo: public login form on `/design-system/user/`, `/design-system/user/account` behind `#[IsGranted]`. Test accounts: `bin/console user-demo:create-user <email> [--username=]`, password asked, never printed.

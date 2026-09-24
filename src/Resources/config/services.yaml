@@ -3,3 +3,10 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+
+    Wexample\SymfonyUser\:
+        resource: '../../{EventSubscriber,Form,Security,Service}'
+
+    Wexample\SymfonyUser\Controller\:
+        resource: '../../Controller/'
+        tags: ['controller.service_arguments']

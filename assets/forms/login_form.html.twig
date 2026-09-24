@@ -1,0 +1,10 @@
+{%- extends '@WexampleSymfonyLoaderBundle/bases/form.html.twig' -%}
+
+{% block form_body %}
+    {{ form_row(form.identifier) }}
+    {{ form_row(form.password) }}
+    {{ form_row(form.remember_me) }}
+    <div class="form--actions">
+        {{ form_widget(form.submit) }}
+    </div>
+{% endblock %}

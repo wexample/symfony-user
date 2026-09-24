@@ -12,7 +12,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wexample\SymfonyHelpers\Entity\AbstractEntity;
 use Wexample\SymfonyHelpers\Entity\Interfaces\UserEntityInterface;
-use Wexample\SymfonyHelpers\Entity\Traits\HasDateCreatedTrait;
 use Wexample\SymfonyHelpers\Helper\RoleHelper;
 
 /**
@@ -28,8 +27,6 @@ abstract class AbstractUser extends AbstractEntity implements
     PasswordAuthenticatedUserInterface,
     EquatableInterface
 {
-    use HasDateCreatedTrait;
-
     public const string USERNAME_PATTERN = '/^[a-z0-9][a-z0-9_-]{2,28}[a-z0-9]$/';
 
     #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
@@ -69,11 +66,21 @@ abstract class AbstractUser extends AbstractEntity implements
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     protected ?DateTimeImmutable $dateLastLogin = null;
 
+    // Not HasDateCreatedTrait: its property is private, and Doctrine does not
+    // map a private property inherited from a class that is not an entity.
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    protected DateTimeImmutable $dateCreated;
+
     public function __construct()
     {
         parent::__construct();
 
-        $this->setDateCreatedNow();
+        $this->dateCreated = new DateTimeImmutable();
+    }
+
+    public function getDateCreated(): DateTimeImmutable
+    {
+        return $this->dateCreated;
     }
 
     public function getUserIdentifier(): string

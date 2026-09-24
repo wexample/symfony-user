@@ -1,0 +1,18 @@
+field:
+  identifier:
+    label: Email or username
+  password:
+    label: Password
+  remember_me:
+    label: Keep me signed in
+
+action:
+  submit: Sign in
+
+error:
+  invalid_credentials: Unknown user or wrong password.
+  too_many_attempts: Too many attempts, try again in a few minutes.
+  invalid_csrf: The form has expired, reload the page and try again.
+  account_status: This account cannot sign in.
+  account_locked: This account has been locked.
+  account_disabled: This account is not activated yet.

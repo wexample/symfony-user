@@ -62,6 +62,23 @@ class UserRepositoryTest extends KernelTestCase
         $provider->loadUserByIdentifier('john');
     }
 
+    public function testEveryColumnIsStored(): void
+    {
+        $this->user->setRoles(['ROLE_ADMIN'])->setEnabled(true)->setLocked(true)->setDateLastLogin(new \DateTimeImmutable());
+        $this->entityManager->flush();
+        $this->entityManager->clear();
+
+        $stored = $this->repository->findOneByUserIdentifier('jane');
+        $this->assertSame(['ROLE_ADMIN', 'ROLE_USER'], $stored->getRoles());
+        $this->assertTrue($stored->isEnabled());
+        $this->assertTrue($stored->isLocked());
+        $this->assertNotNull($stored->getDateLastLogin());
+        $this->assertEquals(
+            $this->user->getDateCreated()->format('Y-m-d H:i:s'),
+            $stored->getDateCreated()->format('Y-m-d H:i:s')
+        );
+    }
+
     public function testUpgradePasswordIsStored(): void
     {
         $this->repository->upgradePassword($this->user, 'rehashed');

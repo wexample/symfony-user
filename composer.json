@@ -26,7 +26,10 @@
     "symfony/security-bundle": "^7.4",
     "wexample/symfony-helpers": ">=10.0.0",
     "wexample/symfony-translations": ">=4.0.0",
-    "symfony/validator": "^7.4"
+    "symfony/validator": "^7.4",
+    "wexample/symfony-forms": ">=8.0.0",
+    "wexample/symfony-loader": ">=12.0.0",
+    "symfony/form": "^7.4"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
