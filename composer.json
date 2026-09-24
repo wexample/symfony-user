@@ -24,7 +24,8 @@
     "php": ">=8.5",
     "doctrine/orm": "^3.0",
     "symfony/security-bundle": "^7.4",
-    "wexample/symfony-helpers": ">=9.0.0"
+    "wexample/symfony-helpers": ">=9.0.0",
+    "wexample/symfony-translations": ">=4.0.0"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
