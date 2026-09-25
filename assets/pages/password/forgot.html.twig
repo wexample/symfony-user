@@ -1,11 +1,16 @@
 {%- extends '@front/layouts/private/layout.html.twig' -%}
 
+{%- set page_show_title = true -%}
+
 {%- block page_body -%}
-    <article class="content">
-        <h1>{{ '@page::page_title' | trans }}</h1>
-        {%- if link_invalid -%}
-            <p>{{ '@page::link_invalid' | trans }}</p>
-        {%- endif -%}
-        {{ form_load(render_pass, password_reset_request_form, '@WexampleSymfonyUserBundle/forms/password_reset_request_form.html.twig') }}
-    </article>
+    {#- Sent back here by a link that no longer holds. -#}
+    {%- if link_invalid -%}
+        {{ message_warning('@page::link_invalid' | trans) }}
+    {%- endif -%}
+
+    <section class="block block--card">
+        <div class="block--body">
+            {{ form_load(render_pass, password_reset_request_form, '@WexampleSymfonyUserBundle/forms/password_reset_request_form.html.twig') }}
+        </div>
+    </section>
 {%- endblock -%}

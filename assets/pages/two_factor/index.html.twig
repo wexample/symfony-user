@@ -1,19 +1,24 @@
 {%- extends '@front/layouts/private/layout.html.twig' -%}
 
+{%- set page_show_title = true -%}
+
+{#- The code sent by email, then what to do when it does not come: ask for
+    another, once a minute, or leave with another account. -#}
 {%- block page_body -%}
-    <article class="content">
-        <h1>{{ '@page::page_title' | trans }}</h1>
-        <p>{{ '@page::intro' | trans({'%email%': email}) }}</p>
-        {{ form_load(render_pass, two_factor_code_form, '@WexampleSymfonyUserBundle/forms/two_factor_code_form.html.twig') }}
-        <form method="post" action="{{ path('user_security_two_factor_resend') }}">
-            <p>
+    <section class="block block--card">
+        <div class="block--body stack--vertical">
+            <p class="lead">{{ '@page::intro' | trans({'%email%': email}) }}</p>
+            {{ form_load(render_pass, two_factor_code_form, '@WexampleSymfonyUserBundle/forms/two_factor_code_form.html.twig') }}
+        </div>
+        <div class="block--footer">
+            <form method="post" action="{{ path('user_security_two_factor_resend') }}">
                 {%- if can_resend -%}
-                    <button type="submit">{{ '@page::action.resend' | trans }}</button>
+                    {{ button('ph:bold/arrow-clockwise', '@page::action.resend' | trans, { type: 'submit', class: 'button--flat' }) }}
                 {%- else -%}
-                    {{ '@page::resend_later' | trans }}
-                {%- endif %}
-                <a href="{{ path('user_security_logout') }}">{{ '@page::action.cancel' | trans }}</a>
-            </p>
-        </form>
-    </article>
+                    <span class="text-secondary">{{ '@page::resend_later' | trans }}</span>
+                {%- endif -%}
+            </form>
+            {{ button_link('ph:bold/sign-out', '@page::action.cancel' | trans, path('user_security_logout'), { class: 'button--flat' }) }}
+        </div>
+    </section>
 {%- endblock -%}

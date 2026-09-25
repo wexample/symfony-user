@@ -1,10 +1,26 @@
 {%- extends '@front/layouts/private/layout.html.twig' -%}
 
+{%- set page_show_title = true -%}
+
+{#- Two ways in, one card each: the password, with the way back when it is
+    forgotten at its foot, then the link sent by email. -#}
 {%- block page_body -%}
-    <article class="content">
-        <h1>{{ '@page::page_title' | trans }}</h1>
-        {{ form_load(render_pass, login_form, '@WexampleSymfonyUserBundle/forms/login_form.html.twig') }}
-        <p><a href="{{ path('user_password_forgot') }}">{{ '@page::forgot_password' | trans }}</a></p>
-        {{ form_load(render_pass, magic_link_request_form, '@WexampleSymfonyUserBundle/forms/magic_link_request_form.html.twig') }}
-    </article>
+    <section class="block block--card">
+        <div class="block--body">
+            {{ form_load(render_pass, login_form, '@WexampleSymfonyUserBundle/forms/login_form.html.twig') }}
+        </div>
+        <div class="block--footer">
+            {{ button_link('ph:bold/key', '@page::forgot_password' | trans, path('user_password_forgot'), { class: 'button--flat' }) }}
+        </div>
+    </section>
+
+    <section class="block block--card">
+        <div class="block--title">
+            <span class="block--title-leading">{{ icon('ph:bold/envelope-simple') }}</span>
+            <span class="block--title-label">{{ '@page::magic_link' | trans }}</span>
+        </div>
+        <div class="block--body">
+            {{ form_load(render_pass, magic_link_request_form, '@WexampleSymfonyUserBundle/forms/magic_link_request_form.html.twig') }}
+        </div>
+    </section>
 {%- endblock -%}

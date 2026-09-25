@@ -1,0 +1,10 @@
+// What the pages of the user bundle are laid with: a card per thing asked,
+// its lead, its secondary links at its foot, and the components the forms and
+// the pages draw — buttons, messages, the fields' own being loaded by the form.
+@use '@wexample/symfony-design-system/css/shapes/block';
+@use '@wexample/symfony-design-system/css/shapes/lead';
+@use '@wexample/symfony-design-system/css/shapes/stack';
+@use '@wexample/symfony-design-system/css/shapes/cluster';
+@use '@wexample/symfony-design-system/components/button/button';
+@use '@wexample/symfony-design-system/components/message/message';
+@use '@wexample/symfony-design-system/components/form/otp-input/otp-input';
