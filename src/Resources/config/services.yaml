@@ -7,8 +7,8 @@ services:
     Wexample\SymfonyUser\:
         resource: '../../{EventSubscriber,Form,Security,Service}'
 
-    Wexample\SymfonyUser\Interface\MagicLinkSenderInterface:
-        alias: Wexample\SymfonyUser\Service\MagicLinkMailerSenderService
+    Wexample\SymfonyUser\Interface\SecurityLinkSenderInterface:
+        alias: Wexample\SymfonyUser\Service\SecurityLinkMailerSenderService
 
     Wexample\SymfonyUser\Controller\:
         resource: '../../Controller/'

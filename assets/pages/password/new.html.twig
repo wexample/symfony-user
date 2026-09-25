@@ -1,0 +1,9 @@
+{%- extends '@front/layouts/private/layout.html.twig' -%}
+
+{%- block page_body -%}
+    <article class="content">
+        <h1>{{ '@page::page_title' | trans }}</h1>
+        <p>{{ '@page::intro' | trans({'%email%': user.email}) }}</p>
+        {{ form_load(render_pass, set_password_form, '@WexampleSymfonyUserBundle/forms/set_password_form.html.twig') }}
+    </article>
+{%- endblock -%}

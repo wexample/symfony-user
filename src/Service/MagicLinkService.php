@@ -8,7 +8,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Http\LoginLink\LoginLinkDetails;
 use Symfony\Component\Security\Http\LoginLink\LoginLinkHandlerInterface;
 use Wexample\SymfonyUser\Entity\AbstractUser;
-use Wexample\SymfonyUser\Interface\MagicLinkSenderInterface;
+use Wexample\SymfonyUser\Enum\SecurityLinkType;
+use Wexample\SymfonyUser\Interface\SecurityLinkSenderInterface;
 
 /**
  * Creates the links of the `login_link` key of the firewall. Their signature
@@ -20,7 +21,7 @@ class MagicLinkService
     public const string TARGET_PATH_PARAMETER = '_target_path';
 
     public function __construct(
-        private readonly MagicLinkSenderInterface $sender,
+        private readonly SecurityLinkSenderInterface $sender,
         private readonly RequestStack $requestStack,
         // Both absent when no firewall declares `login_link`. The first one
         // picks the firewall of the current request; the second one serves
@@ -73,7 +74,8 @@ class MagicLinkService
             return false;
         }
 
-        $this->sender->send($user, $this->createLink($user, $targetPath));
+        $link = $this->createLink($user, $targetPath);
+        $this->sender->send($user, SecurityLinkType::MAGIC_LINK, $link->getUrl(), $link->getExpiresAt());
 
         return true;
     }

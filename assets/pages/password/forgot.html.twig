@@ -1,0 +1,11 @@
+{%- extends '@front/layouts/private/layout.html.twig' -%}
+
+{%- block page_body -%}
+    <article class="content">
+        <h1>{{ '@page::page_title' | trans }}</h1>
+        {%- if link_invalid -%}
+            <p>{{ '@page::link_invalid' | trans }}</p>
+        {%- endif -%}
+        {{ form_load(render_pass, password_reset_request_form, '@WexampleSymfonyUserBundle/forms/password_reset_request_form.html.twig') }}
+    </article>
+{%- endblock -%}

@@ -11,6 +11,10 @@ class WexampleSymfonyUserExtension extends AbstractWexampleSymfonyExtension
         array $configs,
         ContainerBuilder $container
     ): void {
+        $config = $this->processConfiguration(new Configuration(), $configs);
+
+        $container->setParameter('wexample_symfony_user.password_reset', $config['password_reset']);
+
         $this->loadConfig(
             __DIR__,
             $container

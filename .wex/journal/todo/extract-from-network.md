@@ -82,7 +82,7 @@ Source root below: `S=/home/weeger/Desktop/WIP/WEB/WEXAMPLE/NETWORK/archeo/trees
    - `Service/PasswordUpdater` (hash + flush).
    - `Form/ChangePasswordForm`: current password required, except when an admin edits someone else (#29). Repeated new password, `PasswordStrength` + `NotCompromisedPassword` (optional).
    - Admin "set password".
-   - Reset flow — owner decision (2026-09-24): support both, the app using the package chooses. Add a bundle config option (e.g. `password_reset: token|magic_link|both`); the token flow is a dedicated signed, single-use, expiring reset token (evaluate `symfonycasts/reset-password-bundle`), the magic-link flow reuses step 8 and lands on a "set a new password" page.
+   - Reset flow — owner decision (2026-09-24): support both, the app using the package chooses. Add a bundle config option (`password_reset: token|magic_link`, one per application: "the client chooses"); the token flow is a dedicated signed, single-use, expiring reset token (evaluate `symfonycasts/reset-password-bundle`), the magic-link flow reuses step 8 and lands on a "set a new password" page.
    - Read the working FOS-era versions: `$P/src/Wex/BaseBundle/Form/Traits/SecurityFormTrait.php`, `$P/src/Form/Entity/User/UserAccountChangePasswordEntityForm.php`, `$P/src/Wex/BaseBundle/Controller/ResettingController.php`, `$P/src/Wex/BaseBundle/Service/MailerUser.php`, `$P/src/Wex/BaseBundle/Form/PasswordType.php` + `Resources/js/components/password-type.ts` (show/hide toggle).
    - Tests: change own password (wrong current → error); admin changes another user's password without the current one; reset or magic flow.
 10. **Roles helpers.**
@@ -157,3 +157,10 @@ Source root below: `S=/home/weeger/Desktop/WIP/WEB/WEXAMPLE/NETWORK/archeo/trees
   - `signature_properties: [password, dateLastLogin]` with no `max_uses`: the last login date already makes a link single-use, without a cache pool.
   - A refused link counts as a failed login for the throttling.
 - Step 10 done (2026-09-25). `ReversedRoleHierarchyService::getParentRoles()`, `AbstractUserRepository::queryByRoles()/findByRoles()` (whole JSON element, `CONCAT(roles, '')` so it runs on Postgres JSON columns too, checked on the design-system app), `AssignableRolesService`. No `user_is_impersonator()` Twig function: Symfony already offers `is_granted('IS_IMPERSONATOR')`; `switch_user` goes to the docs (step 12).
+- Step 9 done (2026-09-25).
+  - `PasswordUpdaterService` hashes, flushes, and migrates the session of a user changing their own password; their other sessions end at the next request (`isEqualTo` compares the hash).
+  - `ChangePasswordForm` (current password, `UserPassword`) extends `SetPasswordForm` (repeated new password, `Length(min: 8)`, `PasswordStrength` medium). `NotCompromisedPassword` left out: it calls an external API.
+  - Admin "set password": no dedicated form. An application reuses `SetPasswordForm` and `PasswordUpdaterService` in its own processor, bounded by `AssignableRolesService` for roles.
+  - Reset: `wexample_symfony_user.password_reset: token|magic_link` (default `token`), no `both`. Both modes end on a proof kept in session for 15 minutes (`PasswordResetService`): a signed reset link grants it (Symfony `SignatureHasher` over `password` and `email`, so no table and single use), or a sign-in through a magic link. `/password/new` then sets the password without the current one and signs the user in.
+  - Mails go through `Interface\SecurityLinkSenderInterface` (renamed from `MagicLinkSenderInterface`), one template per `Enum\SecurityLinkType`.
+  - Translation files: `~extends` merges shallowly, a child redefining `field:` loses the parent's fields. `change_password_form` carries its own full file.
