@@ -178,6 +178,6 @@ Source root below: `S=/home/weeger/Desktop/WIP/WEB/WEXAMPLE/NETWORK/archeo/trees
 
 - Step 11: TOTP and backup codes (scheb/2fa-totp, scheb/2fa-backup-code).
 - Tunnel steps tied to the current user, asked by the symfony-tunnels agent.
-- `symfony-testing` traits still typed on `App\Entity\User` and FOS routes.
+- ~~`symfony-testing` traits typed on `App\Entity\User` and FOS routes~~: done 2026-09-25 (ea3477c), typed on Symfony `UserInterface`, default routes `user_security_login` / `user_security_logout`.
 - Switching app-board from `users_in_memory` to the package (acceptance criterion), not tried.
 - Mail templates are English only.
