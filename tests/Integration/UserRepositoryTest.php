@@ -79,6 +79,22 @@ class UserRepositoryTest extends KernelTestCase
         );
     }
 
+    public function testRolesMatchWholeElementsOnly(): void
+    {
+        $admin = (new User())->setEmail('admin@example.com')->setRoles(['ROLE_ADMIN']);
+        $superAdmin = (new User())->setEmail('super@example.com')->setRoles(['ROLE_SUPER_ADMIN']);
+        $wildcard = (new User())->setEmail('wildcard@example.com')->setRoles(['ROLExADMIN']);
+        foreach ([$admin, $superAdmin, $wildcard] as $user) {
+            $this->entityManager->persist($user);
+        }
+        $this->entityManager->flush();
+
+        $this->assertSame([$admin], $this->repository->findByRoles(['ROLE_ADMIN']));
+        $this->assertCount(2, $this->repository->findByRoles(['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']));
+        $this->assertCount(4, $this->repository->findByRoles(['ROLE_USER']));
+        $this->assertSame([], $this->repository->findByRoles([]));
+    }
+
     public function testUpgradePasswordIsStored(): void
     {
         $this->repository->upgradePassword($this->user, 'rehashed');

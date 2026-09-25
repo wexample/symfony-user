@@ -156,3 +156,4 @@ Source root below: `S=/home/weeger/Desktop/WIP/WEB/WEXAMPLE/NETWORK/archeo/trees
   - `MagicLinkService::createLink($user, $targetPath)` is the `MagicLinkFactory::createFor` of the plan (#139, #306). It works outside a request (commands, workers) by falling back on the handler of the `main` firewall. Target paths must be local.
   - `signature_properties: [password, dateLastLogin]` with no `max_uses`: the last login date already makes a link single-use, without a cache pool.
   - A refused link counts as a failed login for the throttling.
+- Step 10 done (2026-09-25). `ReversedRoleHierarchyService::getParentRoles()`, `AbstractUserRepository::queryByRoles()/findByRoles()` (whole JSON element, `CONCAT(roles, '')` so it runs on Postgres JSON columns too, checked on the design-system app), `AssignableRolesService`. No `user_is_impersonator()` Twig function: Symfony already offers `is_granted('IS_IMPERSONATOR')`; `switch_user` goes to the docs (step 12).
