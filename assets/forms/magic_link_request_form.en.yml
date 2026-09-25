@@ -1,0 +1,11 @@
+description: Receive a link by email that signs you in without a password.
+
+field:
+  identifier:
+    label: Email or username
+
+action:
+  submit: Send me a link
+
+success:
+  message: If this account exists, a sign-in link has been sent to its email address.

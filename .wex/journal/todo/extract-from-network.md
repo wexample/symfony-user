@@ -151,3 +151,8 @@ Source root below: `S=/home/weeger/Desktop/WIP/WEB/WEXAMPLE/NETWORK/archeo/trees
   - Only `/login` and `/logout` routes (`user_security_login`, `user_security_logout`). No configurable route names yet.
   - Demo: public login form on `/design-system/user/`, `/design-system/user/account` behind `#[IsGranted]`. Test accounts: `bin/console user-demo:create-user <email> [--username=]`, password asked, never printed.
 - Step 4 done (2026-09-25). `symfony/rate-limiter` is a requirement of the package; the app enables `login_throttling` on its firewall (5 attempts per identifier and IP per minute by default). Throttled even with the right password, error `error.too_many_attempts`. Tests clear `cache.rate_limiter` in `setUp`: an array cache would be reset between requests by the test client.
+- Step 8 done (2026-09-25). Divergences from the plan:
+  - No notifier: `MagicLinkService::sendLink()` hands the link to `Interface\MagicLinkSenderInterface`, aliased by default to `MagicLinkMailerSenderService` (symfony/mailer, sender from `framework.mailer.headers.From`). The demo aliases it to a session mailbox. The mail template is English only for now: the suite has no mail package yet to say how mails are translated.
+  - `MagicLinkService::createLink($user, $targetPath)` is the `MagicLinkFactory::createFor` of the plan (#139, #306). It works outside a request (commands, workers) by falling back on the handler of the `main` firewall. Target paths must be local.
+  - `signature_properties: [password, dateLastLogin]` with no `max_uses`: the last login date already makes a link single-use, without a cache pool.
+  - A refused link counts as a failed login for the throttling.

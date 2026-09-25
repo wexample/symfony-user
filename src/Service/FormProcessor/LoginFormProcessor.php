@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Exception\TooManyLoginAttemptsAuthenticationException;
+use Symfony\Component\Security\Http\LoginLink\Exception\InvalidLoginLinkAuthenticationException;
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
 use Wexample\SymfonyHelpers\Helper\RoleHelper;
 
@@ -22,6 +23,7 @@ class LoginFormProcessor extends AbstractFormProcessor
     public const string ERROR_TOO_MANY_ATTEMPTS = 'error.too_many_attempts';
     public const string ERROR_INVALID_CSRF = 'error.invalid_csrf';
     public const string ERROR_ACCOUNT_STATUS = 'error.account_status';
+    public const string ERROR_INVALID_LOGIN_LINK = 'error.invalid_login_link';
 
     public function getRequiredRoles(): array
     {
@@ -39,6 +41,7 @@ class LoginFormProcessor extends AbstractFormProcessor
         $key = match (true) {
             $exception instanceof TooManyLoginAttemptsAuthenticationException => self::ERROR_TOO_MANY_ATTEMPTS,
             $exception instanceof InvalidCsrfTokenException => self::ERROR_INVALID_CSRF,
+            $exception instanceof InvalidLoginLinkAuthenticationException => self::ERROR_INVALID_LOGIN_LINK,
             // Raised by UserChecker once the password is known to be right.
             $exception instanceof CustomUserMessageAccountStatusException => $exception->getMessageKey(),
             $exception instanceof AccountStatusException => self::ERROR_ACCOUNT_STATUS,

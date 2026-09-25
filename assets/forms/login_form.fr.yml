@@ -16,3 +16,4 @@ error:
   account_status: Ce compte ne peut pas se connecter.
   account_locked: Ce compte a été bloqué.
   account_disabled: Ce compte n'est pas encore activé.
+  invalid_login_link: Ce lien de connexion a expiré ou a déjà servi, demandez-en un nouveau.

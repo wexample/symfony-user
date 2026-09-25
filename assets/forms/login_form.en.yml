@@ -16,3 +16,4 @@ error:
   account_status: This account cannot sign in.
   account_locked: This account has been locked.
   account_disabled: This account is not activated yet.
+  invalid_login_link: This sign-in link has expired or was already used, ask for a new one.

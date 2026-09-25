@@ -4,5 +4,6 @@
     <article class="content">
         <h1>{{ '@page::page_title' | trans }}</h1>
         {{ form_load(render_pass, login_form, '@WexampleSymfonyUserBundle/forms/login_form.html.twig') }}
+        {{ form_load(render_pass, magic_link_request_form, '@WexampleSymfonyUserBundle/forms/magic_link_request_form.html.twig') }}
     </article>
 {%- endblock -%}

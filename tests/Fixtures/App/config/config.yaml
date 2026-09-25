@@ -9,6 +9,10 @@ framework:
     stateless_token_ids: [submit, authenticate, logout]
   session:
     storage_factory_id: session.storage.factory.mock_file
+  mailer:
+    dsn: 'null://null'
+    headers:
+      From: 'no-reply@example.com'
 
 doctrine:
   orm:
@@ -39,6 +43,10 @@ security:
         path: user_security_logout
       login_throttling:
         max_attempts: 3
+      login_link:
+        check_route: user_security_login_link
+        signature_properties: [password, dateLastLogin]
+        lifetime: 600
   access_control:
     - { path: ^/protected, roles: ROLE_USER }
 

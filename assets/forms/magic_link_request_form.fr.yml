@@ -1,0 +1,11 @@
+description: Recevez par email un lien qui vous connecte sans mot de passe.
+
+field:
+  identifier:
+    label: Email ou nom d'utilisateur
+
+action:
+  submit: M'envoyer un lien
+
+success:
+  message: Si ce compte existe, un lien de connexion a été envoyé à son adresse email.
