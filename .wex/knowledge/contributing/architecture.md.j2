@@ -24,6 +24,10 @@ An authenticator app uses scheb's own `totp` provider, and the email provider st
 
 Every link and code leaves through {{ path("src/Interface/SecurityMessageSenderInterface.php") }}, aliased to {{ path("src/Service/SecurityMessageMailerSenderService.php") }}, one template per {{ path("src/Enum/SecurityMessageType.php") }} under `assets/mails/`.
 
+### Tunnel steps
+
+{{ path("src/Service/Tunnel/Step/LoginStep.php") }} is a plain step: it saves its own URL as the firewall target path when displayed, so the login form, and the second factor after it, come back to it; it then redirects a signed-in visitor to its next cursor, which completes it (`ON_NEXT_REDIRECT`). The tunnel session survives the login: `symfony-tunnels` lets the account signing in take on the anonymous session of its own browser. {{ path("src/Service/Tunnel/Step/AbstractUserMailStep.php") }} is a form step, its form posting to the step URL like every tunnel form; it keeps the account it goes on with, and the one it created, as session variables of the tunnel.
+
 ### Tests
 
 The fixture kernel ({{ path("tests/Fixtures/App/AppKernel.php") }}) boots the security, forms, loader and scheb bundles on SQLite in memory, with the stateless CSRF of the Flex recipe. Integration tests walk the flows over HTTP with `disableReboot()`; two traps:

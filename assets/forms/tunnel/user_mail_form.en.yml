@@ -1,0 +1,6 @@
+field:
+  email:
+    label: Your email
+
+error:
+  email: This email address is not valid.

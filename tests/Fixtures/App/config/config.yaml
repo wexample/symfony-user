@@ -91,6 +91,9 @@ services:
   Wexample\SymfonyUser\Tests\Fixtures\App\Repository\:
     resource: '../Repository/'
 
+  Wexample\SymfonyUser\Tests\Fixtures\Tunnel\:
+    resource: '../../Tunnel/'
+
   Wexample\SymfonyUser\Tests\Fixtures\App\Controller\:
     resource: '../Controller/'
     tags: ['controller.service_arguments']

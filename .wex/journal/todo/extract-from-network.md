@@ -176,8 +176,8 @@ Source root below: `S=/home/weeger/Desktop/WIP/WEB/WEXAMPLE/NETWORK/archeo/trees
 
 ## Left
 
-- Tunnel steps tied to the current user, asked by the symfony-tunnels agent.
 - ~~`symfony-testing` traits typed on `App\Entity\User` and FOS routes~~: done 2026-09-25 (ea3477c), typed on Symfony `UserInterface`, default routes `user_security_login` / `user_security_logout`.
 - Switching app-board from `users_in_memory` to the package (acceptance criterion), not tried.
 - Mail templates are English only.
 - Step 11 done (2026-09-25): scheb/2fa-totp and scheb/2fa-backup-code, `endroid/qr-code` for the QR. The secret is encrypted with a sodium key derived from `kernel.secret`, decrypted on load. Ten backup codes, stored as sha256 hashes, shown once. Setting the app up needs a first code; turning it off needs the password. The app replaces the email code; backup codes are typed on `/login/2fa?backup=1` (the OTP field only takes six digits). The demo mailbox shows the current app code of the account.
+- Tunnel steps done (2026-09-25): `LoginStep` and `AbstractUserMailStep`, ported from network's `Custom\LoginStep` and `Cart\UserMail` without the cart. `symfony-tunnels` is a plain requirement, not an optional one: the dependency check of wex only reads `require`. `symfony-tunnels` changed to let an account signing in take on the anonymous tunnel session of its own browser (never through a hash, never from one account to another). Demo: a sign-up tunnel on `/user/signup/user-mail`; resetting the demo accounts deletes the accounts it created.

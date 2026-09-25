@@ -28,11 +28,40 @@ return $this->renderPage('login_step', [
 ]);
 ```
 
-```twig
+{% raw %}```twig
 {{ form_load(render_pass, login_form, '@WexampleSymfonyUserBundle/forms/login_form.html.twig') }}
-```
+```{% endraw %}
 
 An ajax call reaching a protected URL gets a `401` JSON payload whose action redirects to `/login`, instead of an HTML redirect.
+
+## Tunnel steps
+
+Two steps for `symfony-tunnels`, for a checkout or a sign-up that does not start with a login:
+
+- `LoginStep` (`login`) signs the visitor in with the package's login form — second factor included — and sends them on; a signed-in visitor goes straight through.
+- `AbstractUserMailStep` (`user-mail`) asks an email. An activated account goes through the login step, the address typed already; any other address gets an account, not activated, created once per tunnel session. The application extends it:
+
+```php
+class CheckoutUserMailStep extends AbstractUserMailStep
+{
+    protected function getStepAfter(TunnelCursor $cursor): AbstractTunnelStep
+    {
+        return $this->addressesStep;
+    }
+
+    protected function createUser(string $email): AbstractUser
+    {
+        return new User();
+    }
+
+    protected function onUserResolved(AbstractUser $user, TunnelCursor $cursor): void
+    {
+        $this->cart->setUser($user);
+    }
+}
+```
+
+The later steps read the account with `getTunnelUser($cursor)`. The tunnel templates of the application include the bodies the package ships: `@WexampleSymfonyUserBundle/tunnels/partials/user_mail.html.twig` and `login.html.twig`.
 
 ## Magic links in application mails
 

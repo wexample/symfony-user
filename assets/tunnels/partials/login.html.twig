@@ -1,0 +1,5 @@
+{#- The body of a LoginStep, for the tunnel template of the application:
+    `{% include '@WexampleSymfonyUserBundle/tunnels/partials/login.html.twig' %}`.
+    Its form has its own button: it signs in, it does not submit the step. -#}
+{{ form_load(render_pass, login_form, '@WexampleSymfonyUserBundle/forms/login_form.html.twig') }}
+<p><a href="{{ path('user_password_forgot') }}">{{ 'WexampleSymfonyUserBundle.pages.security.login::forgot_password' | trans }}</a></p>

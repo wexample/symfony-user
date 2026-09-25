@@ -6,6 +6,7 @@ services:
 
     Wexample\SymfonyUser\:
         resource: '../../{EventSubscriber,Form,Security,Service}'
+        exclude: '../../Service/Tunnel/Step/Abstract*.php'
 
     Wexample\SymfonyUser\Interface\SecurityMessageSenderInterface:
         alias: Wexample\SymfonyUser\Service\SecurityMessageMailerSenderService

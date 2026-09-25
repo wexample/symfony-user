@@ -37,7 +37,8 @@
     "scheb/2fa-trusted-device": "^8.6",
     "scheb/2fa-totp": "^8.6",
     "scheb/2fa-backup-code": "^8.6",
-    "endroid/qr-code": "^6.0"
+    "endroid/qr-code": "^6.0",
+    "wexample/symfony-tunnels": ">=2.0.3"
   },
   "require-dev": {
     "phpunit/phpunit": "*",

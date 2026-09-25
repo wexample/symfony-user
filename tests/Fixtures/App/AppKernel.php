@@ -9,6 +9,7 @@ use Wexample\SymfonyForms\WexampleSymfonyFormsBundle;
 use Wexample\SymfonyLoader\WexampleSymfonyLoaderBundle;
 use Wexample\SymfonyTesting\Tests\Fixtures\AbstractFixtureKernel;
 use Wexample\SymfonyTranslations\WexampleSymfonyTranslationsBundle;
+use Wexample\SymfonyTunnels\WexampleSymfonyTunnelsBundle;
 use Wexample\SymfonyUser\WexampleSymfonyUserBundle;
 
 class AppKernel extends AbstractFixtureKernel
@@ -26,6 +27,7 @@ class AppKernel extends AbstractFixtureKernel
             new WexampleSymfonyLoaderBundle(),
             new WexampleSymfonyTranslationsBundle(),
             new WexampleSymfonyFormsBundle(),
+            new WexampleSymfonyTunnelsBundle(),
             new WexampleSymfonyUserBundle(),
         ];
     }
@@ -40,6 +42,7 @@ class AppKernel extends AbstractFixtureKernel
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
         $routes->import('@WexampleSymfonyFormsBundle/Resources/config/routes.yaml');
+        $routes->import('@WexampleSymfonyTunnelsBundle/Resources/config/routes.yaml');
         $routes->import(__DIR__ . '/../../../src/Controller/', 'attribute');
         $routes->import(__DIR__ . '/Controller/', 'attribute');
     }
