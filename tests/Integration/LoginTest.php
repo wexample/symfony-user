@@ -31,6 +31,8 @@ class LoginTest extends WebTestCase
         // empty one at every request.
         $this->client->disableReboot();
         $this->entityManager = $this->createDatabaseSchema();
+        // The failed attempts are counted in a cache that outlives the test.
+        self::getContainer()->get('cache.rate_limiter')->clear();
 
         $this->createUser('jane@example.com', 'jane');
         $this->createUser('locked@example.com', 'locked')->setLocked(true);
@@ -89,6 +91,25 @@ class LoginTest extends WebTestCase
             ['@form::' . LoginFormProcessor::ERROR_INVALID_CREDENTIALS],
             $this->submitJson('locked', 'wrong')['form']['errors']['form']
         );
+    }
+
+    public function testRepeatedFailuresThrottleEvenTheRightPassword(): void
+    {
+        // The fixture firewall allows 3 attempts per identifier and IP.
+        for ($attempt = 0; $attempt < 3; ++$attempt) {
+            $this->submitJson('jane', 'wrong');
+        }
+
+        $this->assertSame(
+            ['@form::' . LoginFormProcessor::ERROR_TOO_MANY_ATTEMPTS],
+            $this->submitJson('jane', 'secret')['form']['errors']['form']
+        );
+        $this->assertNotLoggedIn();
+
+        // Another account from the same address is still let in.
+        $this->createUser('john@example.com', 'john');
+        $this->entityManager->flush();
+        $this->assertTrue($this->submitJson('john', 'secret')['ok']);
     }
 
     public function testAMissingCsrfTokenIsRefused(): void

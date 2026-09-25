@@ -37,6 +37,8 @@ security:
       user_checker: Wexample\SymfonyUser\Security\UserChecker
       logout:
         path: user_security_logout
+      login_throttling:
+        max_attempts: 3
   access_control:
     - { path: ^/protected, roles: ROLE_USER }
 

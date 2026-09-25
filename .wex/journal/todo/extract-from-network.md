@@ -150,3 +150,4 @@ Source root below: `S=/home/weeger/Desktop/WIP/WEB/WEXAMPLE/NETWORK/archeo/trees
   - `UserChecker` checks in `checkPostAuth`: a wrong password on a locked account still reads "unknown user or wrong password".
   - Only `/login` and `/logout` routes (`user_security_login`, `user_security_logout`). No configurable route names yet.
   - Demo: public login form on `/design-system/user/`, `/design-system/user/account` behind `#[IsGranted]`. Test accounts: `bin/console user-demo:create-user <email> [--username=]`, password asked, never printed.
+- Step 4 done (2026-09-25). `symfony/rate-limiter` is a requirement of the package; the app enables `login_throttling` on its firewall (5 attempts per identifier and IP per minute by default). Throttled even with the right password, error `error.too_many_attempts`. Tests clear `cache.rate_limiter` in `setUp`: an array cache would be reset between requests by the test client.
