@@ -3,7 +3,7 @@
   "description": "User accounts and authentication for Symfony",
   "type": "library",
   "license": "MIT",
-  "version": "5.0.0",
+  "version": "7.0.0",
   "autoload": {
     "psr-4": {
       "Wexample\\SymfonyUser\\": "src/"
@@ -38,7 +38,7 @@
     "scheb/2fa-totp": "^8.6",
     "scheb/2fa-backup-code": "^8.6",
     "endroid/qr-code": "^6.0",
-    "wexample/symfony-tunnels": ">=2.0.3"
+    "wexample/symfony-tunnels": ">=8.0.0"
   },
   "require-dev": {
     "phpunit/phpunit": "*",

@@ -1,1 +1,38 @@
-The repository does not provide any concrete code that could be documented for now.
+## Architecture
+
+Every form of the package is an ordinary `symfony-forms` ajax form: it posts to `/_forms/submit/{name}`, and the front `Form` class reads a `FormResponsePayload` back. The security forms keep that transport, but the firewall answers before the forms bundle does. This section follows a login through those layers.
+
+### Login
+
+src/Form/LoginForm.php is rendered through src/Service/FormProcessor/LoginFormProcessor.php, which is never asked to process it. On submission, src/Security/Authenticator/LoginFormAuthenticator.php `supports()` the forms bundle route for that form name and builds a passport: a `UserBadge` resolved by the firewall provider — src/Repository/AbstractUserRepository.php reads an email or a username —, the password, a CSRF badge using the token id the form was built with, and a remember-me badge.
+
+Symfony then runs its own listeners: login throttling, password check, src/Security/UserChecker.php after the password (so a locked account is only revealed to its owner), password upgrade. src/EventSubscriber/LastLoginSubscriber.php stamps `dateLastLogin`.
+
+`onAuthenticationSuccess()` and `onAuthenticationFailure()` answer JSON with the payload builder of the forms bundle when the caller expects it, a redirect otherwise. Failures become form errors through `LoginFormProcessor::addAuthenticationError()`, which maps unknown user and wrong password to the same message.
+
+### Second factor
+
+scheb/2fa-bundle turns the token of a password login into a `TwoFactorToken` when src/Security/TwoFactor/EmailCodeTwoFactorProvider.php begins, which it does only for the login form route. `prepare_on_login` makes src/Service/TwoFactorCodeService.php send the code with the password check: the code is kept hmac-hashed in session, with its expiry and attempts, and failures are also counted per account in `cache.app`.
+
+`LoginFormAuthenticator` sees the `TwoFactorToken` and answers with the code page, src/Controller/Pages/TwoFactorController.php. The code form posts to the forms bundle route too, which the firewall declares as scheb's `check_path`; src/Security/Handler/TwoFactorResponseHandler.php answers success, failure and "code required" the same way the login does. Trusted devices are scheb's signed cookie, versioned by `AbstractUser::getTrustedTokenVersion()`.
+
+An authenticator app uses scheb's own `totp` provider, and the email provider steps aside for a user who has one. src/Service/TotpService.php keeps the secret being set up in session until a first code proves the app holds it, then stores it encrypted by src/Service/TotpSecretCipherService.php; src/EventSubscriber/TotpSecretSubscriber.php decrypts it on load, in memory only. Backup codes are stored as hashes on the user and checked by scheb before the provider.
+
+### Links
+
+src/Service/MagicLinkService.php wraps the `login_link` handler of the firewall — the one of the current request, or of `main` without a request — and appends a checked local `_target_path`. src/Service/PasswordResetService.php signs reset links with Symfony's `SignatureHasher` over the password hash, so nothing is stored and the new password kills the link. Both reset modes end on a proof kept in session, granted by the reset link or, in magic link mode, by src/EventSubscriber/PasswordResetProofSubscriber.php; src/Service/FormProcessor/SetPasswordFormProcessor.php requires it.
+
+Every link and code leaves through src/Interface/SecurityMessageSenderInterface.php, aliased to src/Service/SecurityMessageMailerSenderService.php, one template per src/Enum/SecurityMessageType.php under `assets/mails/`.
+
+### Tunnel steps
+
+src/Service/Tunnel/Step/LoginStep.php is a plain step: it saves its own URL as the firewall target path when displayed, so the login form, and the second factor after it, come back to it; it then redirects a signed-in visitor to its next cursor, which completes it (`ON_NEXT_REDIRECT`). The tunnel session survives the login: `symfony-tunnels` lets the account signing in take on the anonymous session of its own browser. src/Service/Tunnel/Step/AbstractUserMailStep.php is a form step, its form posting to the step URL like every tunnel form; it keeps the account it goes on with, and the one it created, as session variables of the tunnel.
+
+### Tests
+
+The fixture kernel (tests/Fixtures/App/AppKernel.php) boots the security, forms, loader and scheb bundles on SQLite in memory, with the stateless CSRF of the Flex recipe. Integration tests walk the flows over HTTP with `disableReboot()`; two traps:
+
+- The test client resets services between requests: the entity manager forgets the entities a test holds, and an array cache is emptied. Reload entities before changing them, and clear `cache.rate_limiter` / `cache.app` in `setUp()` rather than using an array cache.
+- Loader pages cannot be rendered twice by the same fixture kernel: controllers redirect with a query flag rather than render an error page, and tests assert the redirect.
+
+Tests run from the design-system containers: `docker exec design_system_local_symfony sh -lc 'cd /var/www/vendor-dev/wexample/symfony-user && php vendor/bin/phpunit'`.
