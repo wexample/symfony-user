@@ -172,3 +172,12 @@ Source root below: `S=/home/weeger/Desktop/WIP/WEB/WEXAMPLE/NETWORK/archeo/trees
   - `emailTwoFactorEnabled` (default true) and `trustedTokenVersion` columns on `AbstractUser`. Policy `always` / `never` of the plan: `trusted_device.enabled: false` / `emailTwoFactorEnabled` false, no bundle option.
   - During the second factor, scheb only lets through the paths `access_control` opens to `PUBLIC_ACCESS` or `IS_AUTHENTICATED_2FA_IN_PROGRESS`.
   - Messages go through `Interface\SecurityMessageSenderInterface` (renamed again: it carries codes too), one mail template per `Enum\SecurityMessageType`.
+- Step 12 done (2026-09-25): `readme/introduction`, `readme/installation`, `usage/overview`, `contributing/architecture`. The rendered `built/` pages are left to wex.
+
+## Left
+
+- Step 11: TOTP and backup codes (scheb/2fa-totp, scheb/2fa-backup-code).
+- Tunnel steps tied to the current user, asked by the symfony-tunnels agent.
+- `symfony-testing` traits still typed on `App\Entity\User` and FOS routes.
+- Switching app-board from `users_in_memory` to the package (acceptance criterion), not tried.
+- Mail templates are English only.
