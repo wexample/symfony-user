@@ -15,8 +15,8 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Wexample\SymfonyUser\Controller\Pages\PasswordController;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Enum\PasswordResetMode;
-use Wexample\SymfonyUser\Enum\SecurityLinkType;
-use Wexample\SymfonyUser\Interface\SecurityLinkSenderInterface;
+use Wexample\SymfonyUser\Enum\SecurityMessageType;
+use Wexample\SymfonyUser\Interface\SecurityMessageSenderInterface;
 
 /**
  * Lets a user who forgot their password choose a new one.
@@ -37,7 +37,7 @@ class PasswordResetService
     private readonly SignatureHasher $signatureHasher;
 
     public function __construct(
-        private readonly SecurityLinkSenderInterface $sender,
+        private readonly SecurityMessageSenderInterface $sender,
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly RequestStack $requestStack,
         private readonly UserProviderInterface $userProvider,
@@ -80,7 +80,7 @@ class PasswordResetService
 
         $this->sender->send(
             $user,
-            SecurityLinkType::PASSWORD_RESET,
+            SecurityMessageType::PASSWORD_RESET,
             $this->urlGenerator->generate(
                 PasswordController::ROUTE_RESET,
                 [

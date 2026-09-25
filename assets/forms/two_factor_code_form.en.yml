@@ -1,0 +1,13 @@
+field:
+  code:
+    label: Code
+  trusted:
+    label: Trust this device, do not ask again here
+
+action:
+  submit: Sign in
+
+error:
+  invalid: Wrong code.
+  expired: This code has expired, ask for a new one.
+  too_many_attempts: Too many wrong codes, ask for a new one or try again later.

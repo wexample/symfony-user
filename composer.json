@@ -32,7 +32,9 @@
     "symfony/form": "^7.4",
     "symfony/rate-limiter": "^7.4",
     "symfony/mailer": "^7.4",
-    "symfony/twig-bridge": "^7.4"
+    "symfony/twig-bridge": "^7.4",
+    "scheb/2fa-bundle": "^8.6",
+    "scheb/2fa-trusted-device": "^8.6"
   },
   "require-dev": {
     "phpunit/phpunit": "*",

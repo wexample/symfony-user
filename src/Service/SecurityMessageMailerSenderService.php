@@ -7,18 +7,19 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Wexample\SymfonyUser\Entity\AbstractUser;
-use Wexample\SymfonyUser\Enum\SecurityLinkType;
-use Wexample\SymfonyUser\Interface\SecurityLinkSenderInterface;
+use Wexample\SymfonyUser\Enum\SecurityMessageType;
+use Wexample\SymfonyUser\Interface\SecurityMessageSenderInterface;
 
 /**
  * The sender comes from the mailer configuration of the application
  * (`framework.mailer.headers.From` or its envelope).
  */
-class SecurityLinkMailerSenderService implements SecurityLinkSenderInterface
+class SecurityMessageMailerSenderService implements SecurityMessageSenderInterface
 {
     private const array SUBJECTS = [
-        SecurityLinkType::MAGIC_LINK->value => 'Your sign-in link',
-        SecurityLinkType::PASSWORD_RESET->value => 'Reset your password',
+        SecurityMessageType::MAGIC_LINK->value => 'Your sign-in link',
+        SecurityMessageType::PASSWORD_RESET->value => 'Reset your password',
+        SecurityMessageType::TWO_FACTOR_CODE->value => 'Your sign-in code',
     ];
 
     public function __construct(
@@ -28,8 +29,8 @@ class SecurityLinkMailerSenderService implements SecurityLinkSenderInterface
 
     public function send(
         AbstractUser $user,
-        SecurityLinkType $type,
-        string $url,
+        SecurityMessageType $type,
+        string $value,
         DateTimeImmutable $expiresAt
     ): void {
         $this->mailer->send(
@@ -38,7 +39,7 @@ class SecurityLinkMailerSenderService implements SecurityLinkSenderInterface
                 ->subject(self::SUBJECTS[$type->value])
                 ->htmlTemplate('@WexampleSymfonyUserBundle/mails/' . $type->value . '.html.twig')
                 ->context([
-                    'url' => $url,
+                    'value' => $value,
                     'expires_at' => $expiresAt,
                 ])
         );

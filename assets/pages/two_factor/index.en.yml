@@ -1,0 +1,7 @@
+page_title: Check your email
+page_icon: ph:bold/shield-check
+intro: A code has been sent to %email%.
+resend_later: You can ask for a new code in a minute.
+action:
+  resend: Send a new code
+  cancel: Use another account

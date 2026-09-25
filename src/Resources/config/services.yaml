@@ -7,8 +7,12 @@ services:
     Wexample\SymfonyUser\:
         resource: '../../{EventSubscriber,Form,Security,Service}'
 
-    Wexample\SymfonyUser\Interface\SecurityLinkSenderInterface:
-        alias: Wexample\SymfonyUser\Service\SecurityLinkMailerSenderService
+    Wexample\SymfonyUser\Interface\SecurityMessageSenderInterface:
+        alias: Wexample\SymfonyUser\Service\SecurityMessageMailerSenderService
+
+    Wexample\SymfonyUser\Security\TwoFactor\EmailCodeTwoFactorProvider:
+        tags:
+            - { name: scheb_two_factor.provider, alias: email_code }
 
     Wexample\SymfonyUser\Controller\:
         resource: '../../Controller/'

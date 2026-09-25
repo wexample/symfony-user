@@ -36,6 +36,7 @@ class PasswordResetTest extends WebTestCase
                 ->setUsername('jane')
                 ->setPassword('secret')
                 ->setEnabled(true)
+                ->setEmailTwoFactorEnabled(false)
         );
         $this->entityManager->flush();
     }

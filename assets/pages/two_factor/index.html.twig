@@ -1,0 +1,19 @@
+{%- extends '@front/layouts/private/layout.html.twig' -%}
+
+{%- block page_body -%}
+    <article class="content">
+        <h1>{{ '@page::page_title' | trans }}</h1>
+        <p>{{ '@page::intro' | trans({'%email%': email}) }}</p>
+        {{ form_load(render_pass, two_factor_code_form, '@WexampleSymfonyUserBundle/forms/two_factor_code_form.html.twig') }}
+        <form method="post" action="{{ path('user_security_two_factor_resend') }}">
+            <p>
+                {%- if can_resend -%}
+                    <button type="submit">{{ '@page::action.resend' | trans }}</button>
+                {%- else -%}
+                    {{ '@page::resend_later' | trans }}
+                {%- endif %}
+                <a href="{{ path('user_security_logout') }}">{{ '@page::action.cancel' | trans }}</a>
+            </p>
+        </form>
+    </article>
+{%- endblock -%}

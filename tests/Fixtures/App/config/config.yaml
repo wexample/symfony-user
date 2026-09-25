@@ -1,6 +1,7 @@
 framework:
   test: true
-  secret: "test"
+  # 256 bits at least: the trusted device cookie is a JWT signed with it.
+  secret: "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
   # The stateless CSRF protection of the Symfony Flex recipe.
   form:
     csrf_protection:
@@ -47,8 +48,29 @@ security:
         check_route: user_security_login_link
         signature_properties: [password, dateLastLogin]
         lifetime: 600
+      two_factor:
+        auth_form_path: user_security_two_factor
+        # The code leaves with the password check, the form may be a modal.
+        prepare_on_login: true
+        check_path: /_forms/submit/form-two_factor_code_form
+        auth_code_parameter_name: two_factor_code_form[code]
+        trusted_parameter_name: two_factor_code_form[trusted]
+        success_handler: Wexample\SymfonyUser\Security\Handler\TwoFactorResponseHandler
+        failure_handler: Wexample\SymfonyUser\Security\Handler\TwoFactorResponseHandler
+        authentication_required_handler: Wexample\SymfonyUser\Security\Handler\TwoFactorResponseHandler
+        enable_csrf: true
+        csrf_parameter: two_factor_code_form[_token]
+        csrf_token_id: submit
   access_control:
+    - { path: ^/login/2fa, roles: IS_AUTHENTICATED_2FA_IN_PROGRESS }
     - { path: ^/protected, roles: ROLE_USER }
+
+scheb_two_factor:
+  security_tokens:
+    - Symfony\Component\Security\Http\Authenticator\Token\PostAuthenticationToken
+  trusted_device:
+    enabled: true
+    lifetime: 5184000
 
 wexample_symfony_loader:
   front_paths:

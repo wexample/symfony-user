@@ -2,6 +2,7 @@
 
 namespace Wexample\SymfonyUser\Security\Authenticator;
 
+use Scheb\TwoFactorBundle\Security\Authentication\Token\TwoFactorTokenInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +23,7 @@ use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
 use Wexample\SymfonyForms\Service\FormProcessor\FormResponsePayloadBuilder;
 use Wexample\SymfonyHelpers\Helper\RequestHelper;
 use Wexample\SymfonyUser\Controller\Pages\SecurityController;
+use Wexample\SymfonyUser\Controller\Pages\TwoFactorController;
 use Wexample\SymfonyUser\Form\LoginForm;
 use Wexample\SymfonyUser\Service\FormProcessor\LoginFormProcessor;
 
@@ -44,6 +46,14 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     }
 
     public function supports(Request $request): bool
+    {
+        return self::isLoginRequest($request);
+    }
+
+    /**
+     * The submission of LoginForm, whatever page showed it.
+     */
+    public static function isLoginRequest(Request $request): bool
     {
         return $request->isMethod(Request::METHOD_POST)
             && $request->attributes->get('_route') === AbstractFormProcessor::FORM_SUBMIT_ROUTE
@@ -87,8 +97,15 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         string $firewallName
     ): ?Response {
         $session = $request->getSession();
-        $url = $this->getTargetPath($session, $firewallName) ?: $request->getBasePath() . '/';
-        $this->removeTargetPath($session, $firewallName);
+
+        // The password was right, the second factor is still to come: the
+        // target path waits in session for the code to be checked.
+        if ($token instanceof TwoFactorTokenInterface) {
+            $url = $this->urlGenerator->generate(TwoFactorController::ROUTE_FORM);
+        } else {
+            $url = $this->getTargetPath($session, $firewallName) ?: $request->getBasePath() . '/';
+            $this->removeTargetPath($session, $firewallName);
+        }
 
         if (! RequestHelper::isJsonRequest($request)) {
             return new RedirectResponse($url);

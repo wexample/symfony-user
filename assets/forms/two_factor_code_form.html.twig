@@ -1,0 +1,9 @@
+{%- extends '@WexampleSymfonyLoaderBundle/bases/form.html.twig' -%}
+
+{% block form_body %}
+    {{ form_row(form.code) }}
+    {{ form_row(form.trusted) }}
+    <div class="form--actions">
+        {{ form_widget(form.submit) }}
+    </div>
+{% endblock %}

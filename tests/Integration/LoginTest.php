@@ -161,7 +161,8 @@ class LoginTest extends WebTestCase
             ->setEmail($email)
             ->setUsername($username)
             ->setPassword('secret')
-            ->setEnabled(true);
+            ->setEnabled(true)
+            ->setEmailTwoFactorEnabled(false);
 
         $this->entityManager->persist($user);
 

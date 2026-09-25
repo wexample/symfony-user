@@ -1,0 +1,13 @@
+field:
+  code:
+    label: Code
+  trusted:
+    label: Faire confiance à cet appareil, ne plus demander ici
+
+action:
+  submit: Se connecter
+
+error:
+  invalid: Code incorrect.
+  expired: Ce code a expiré, demandez-en un nouveau.
+  too_many_attempts: Trop de codes incorrects, demandez-en un nouveau ou réessayez plus tard.

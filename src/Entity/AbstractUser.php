@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Scheb\TwoFactorBundle\Model\TrustedDeviceInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -26,7 +27,8 @@ abstract class AbstractUser extends AbstractEntity implements
     UserEntityInterface,
     UserInterface,
     PasswordAuthenticatedUserInterface,
-    EquatableInterface
+    EquatableInterface,
+    TrustedDeviceInterface
 {
     use HasDateCreatedTrait;
 
@@ -68,6 +70,19 @@ abstract class AbstractUser extends AbstractEntity implements
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     protected ?DateTimeImmutable $dateLastLogin = null;
+
+    /**
+     * Asks a code sent by email after the password, on a device not trusted yet.
+     */
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
+    protected bool $emailTwoFactorEnabled = true;
+
+    /**
+     * Part of the signature of every trusted device cookie: raising it
+     * revokes them all.
+     */
+    #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
+    protected int $trustedTokenVersion = 0;
 
     public function __construct()
     {
@@ -173,6 +188,33 @@ abstract class AbstractUser extends AbstractEntity implements
         $this->dateLastLogin = $dateLastLogin === null
             ? null
             : DateTimeImmutable::createFromInterface($dateLastLogin);
+
+        return $this;
+    }
+
+    public function isEmailTwoFactorEnabled(): bool
+    {
+        return $this->emailTwoFactorEnabled;
+    }
+
+    public function setEmailTwoFactorEnabled(bool $emailTwoFactorEnabled): static
+    {
+        $this->emailTwoFactorEnabled = $emailTwoFactorEnabled;
+
+        return $this;
+    }
+
+    public function getTrustedTokenVersion(): int
+    {
+        return $this->trustedTokenVersion;
+    }
+
+    /**
+     * Every device trusted so far asks for a code again at its next login.
+     */
+    public function revokeTrustedDevices(): static
+    {
+        ++$this->trustedTokenVersion;
 
         return $this;
     }
