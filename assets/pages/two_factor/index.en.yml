@@ -1,7 +1,12 @@
-page_title: Check your email
+page_title: Confirm it is you
 page_icon: ph:bold/shield-check
-intro: A code has been sent to %email%.
+intro:
+  email_code: A code has been sent to %email%.
+  totp: Type the code your authenticator app shows for this account.
+  backup_code: Type one of the backup codes given when the app was set up. Each works once.
 resend_later: You can ask for a new code in a minute.
 action:
   resend: Send a new code
+  use_backup: Use a backup code
+  use_app: Use the app
   cancel: Use another account

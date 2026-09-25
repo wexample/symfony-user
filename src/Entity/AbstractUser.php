@@ -6,6 +6,10 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Scheb\TwoFactorBundle\Model\BackupCodeInterface;
+use Scheb\TwoFactorBundle\Model\Totp\TotpConfiguration;
+use Scheb\TwoFactorBundle\Model\Totp\TotpConfigurationInterface;
+use Scheb\TwoFactorBundle\Model\Totp\TwoFactorInterface as TotpTwoFactorInterface;
 use Scheb\TwoFactorBundle\Model\TrustedDeviceInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -28,7 +32,9 @@ abstract class AbstractUser extends AbstractEntity implements
     UserInterface,
     PasswordAuthenticatedUserInterface,
     EquatableInterface,
-    TrustedDeviceInterface
+    TrustedDeviceInterface,
+    TotpTwoFactorInterface,
+    BackupCodeInterface
 {
     use HasDateCreatedTrait;
 
@@ -83,6 +89,26 @@ abstract class AbstractUser extends AbstractEntity implements
      */
     #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
     protected int $trustedTokenVersion = 0;
+
+    /**
+     * The secret of the authenticator app, encrypted by TotpSecretCipherService:
+     * a leaked database gives no code away.
+     */
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    protected ?string $totpSecretEncrypted = null;
+
+    /**
+     * Decrypted on load by TotpSecretSubscriber, never stored.
+     */
+    protected ?string $totpSecret = null;
+
+    /**
+     * Hashes of the unused backup codes.
+     *
+     * @var list<string>
+     */
+    #[ORM\Column(type: Types::JSON, options: ['default' => '[]'])]
+    protected array $backupCodes = [];
 
     public function __construct()
     {
@@ -217,6 +243,73 @@ abstract class AbstractUser extends AbstractEntity implements
         ++$this->trustedTokenVersion;
 
         return $this;
+    }
+
+    public function isTotpAuthenticationEnabled(): bool
+    {
+        return $this->totpSecret !== null;
+    }
+
+    public function getTotpAuthenticationUsername(): ?string
+    {
+        return $this->getUserIdentifier();
+    }
+
+    public function getTotpAuthenticationConfiguration(): ?TotpConfigurationInterface
+    {
+        return $this->totpSecret === null
+            ? null
+            : new TotpConfiguration($this->totpSecret, TotpConfiguration::ALGORITHM_SHA1, 30, 6);
+    }
+
+    public function getTotpSecretEncrypted(): ?string
+    {
+        return $this->totpSecretEncrypted;
+    }
+
+    /**
+     * Only for TotpService and TotpSecretSubscriber, which keep the two in step.
+     */
+    public function setTotpSecret(?string $secret, ?string $encryptedSecret): static
+    {
+        $this->totpSecret = $secret;
+        $this->totpSecretEncrypted = $encryptedSecret;
+
+        return $this;
+    }
+
+    /**
+     * @param list<string> $codes the plain codes, shown once to the user
+     */
+    public function setBackupCodes(array $codes): static
+    {
+        $this->backupCodes = array_values(array_map(self::hashBackupCode(...), $codes));
+
+        return $this;
+    }
+
+    public function countBackupCodes(): int
+    {
+        return count($this->backupCodes);
+    }
+
+    public function isBackupCode(string $code): bool
+    {
+        return in_array(self::hashBackupCode($code), $this->backupCodes, true);
+    }
+
+    public function invalidateBackupCode(string $code): void
+    {
+        $this->backupCodes = array_values(array_diff($this->backupCodes, [self::hashBackupCode($code)]));
+    }
+
+    /**
+     * The codes are random and long: a plain hash is enough, and needs no key
+     * the entity could not reach.
+     */
+    private static function hashBackupCode(string $code): string
+    {
+        return hash('sha256', strtolower(preg_replace('/[^a-z0-9]/i', '', $code)));
     }
 
     /**

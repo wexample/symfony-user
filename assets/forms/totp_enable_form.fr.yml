@@ -1,0 +1,9 @@
+field:
+  code:
+    label: Code affiché par l'application
+
+action:
+  submit: Activer l'application
+
+error:
+  invalid: Code incorrect, vérifiez l'heure de votre téléphone et réessayez.

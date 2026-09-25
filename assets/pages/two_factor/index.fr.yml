@@ -1,7 +1,12 @@
-page_title: Vérifiez vos emails
+page_title: Confirmez que c'est vous
 page_icon: ph:bold/shield-check
-intro: Un code a été envoyé à %email%.
+intro:
+  email_code: Un code a été envoyé à %email%.
+  totp: Saisissez le code affiché par votre application d'authentification pour ce compte.
+  backup_code: Saisissez l'un des codes de secours donnés lors de la configuration de l'application. Chacun ne sert qu'une fois.
 resend_later: Vous pourrez demander un nouveau code dans une minute.
 action:
   resend: Envoyer un nouveau code
+  use_backup: Utiliser un code de secours
+  use_app: Utiliser l'application
   cancel: Utiliser un autre compte

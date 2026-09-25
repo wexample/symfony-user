@@ -2,22 +2,29 @@
 
 {%- set page_show_title = true -%}
 
-{#- The code sent by email, then what to do when it does not come: ask for
-    another, once a minute, or leave with another account. -#}
+{#- The code of the second factor — sent by email, or read in the
+    authenticator app, or a backup code —, then what to do without it: ask for
+    another email, once a minute, switch to a backup code, or leave. -#}
 {%- block page_body -%}
     <section class="block block--card">
         <div class="block--body stack--vertical">
-            <p class="lead">{{ '@page::intro' | trans({'%email%': email}) }}</p>
+            <p class="lead">{{ ('@page::intro.' ~ method) | trans({'%email%': email}) }}</p>
             {{ form_load(render_pass, two_factor_code_form, '@WexampleSymfonyUserBundle/forms/two_factor_code_form.html.twig') }}
         </div>
         <div class="block--footer">
-            <form method="post" action="{{ path('user_security_two_factor_resend') }}">
-                {%- if can_resend -%}
-                    {{ button('ph:bold/arrow-clockwise', '@page::action.resend' | trans, { type: 'submit', class: 'button--flat' }) }}
-                {%- else -%}
-                    <span class="text-secondary">{{ '@page::resend_later' | trans }}</span>
-                {%- endif -%}
-            </form>
+            {%- if method == 'email_code' -%}
+                <form method="post" action="{{ path('user_security_two_factor_resend') }}">
+                    {%- if can_resend -%}
+                        {{ button('ph:bold/arrow-clockwise', '@page::action.resend' | trans, { type: 'submit', class: 'button--flat' }) }}
+                    {%- else -%}
+                        <span class="text-secondary">{{ '@page::resend_later' | trans }}</span>
+                    {%- endif -%}
+                </form>
+            {%- elseif method == 'backup_code' -%}
+                {{ button_link('ph:bold/device-mobile', '@page::action.use_app' | trans, path('user_security_two_factor'), { class: 'button--flat' }) }}
+            {%- elseif has_backup_codes -%}
+                {{ button_link('ph:bold/key', '@page::action.use_backup' | trans, path('user_security_two_factor', { backup: 1 }), { class: 'button--flat' }) }}
+            {%- endif -%}
             {{ button_link('ph:bold/sign-out', '@page::action.cancel' | trans, path('user_security_logout'), { class: 'button--flat' }) }}
         </div>
     </section>

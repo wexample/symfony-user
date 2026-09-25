@@ -1,6 +1,7 @@
 field:
   code:
     label: Code
+    backup_label: Backup code
   trusted:
     label: Trust this device, do not ask again here
 

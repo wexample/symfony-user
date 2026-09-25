@@ -71,6 +71,12 @@ scheb_two_factor:
   trusted_device:
     enabled: true
     lifetime: 5184000
+  totp:
+    enabled: true
+    issuer: Fixture
+    leeway: 1
+  backup_codes:
+    enabled: true
 
 wexample_symfony_loader:
   front_paths:

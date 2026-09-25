@@ -9,6 +9,8 @@
 | `user_password_forgot` | `/password/forgot` | reset request |
 | `user_password_reset` | `/password/reset` | target of the reset mail |
 | `user_password_new` | `/password/new` | new password, once the reset is proven |
+| `user_totp_index` | `/account/authenticator` | set the authenticator app up, or turn it off |
+| `user_totp_backup_codes` | `/account/authenticator/backup-codes` | the new backup codes, shown once |
 
 Templates live under the bundle `assets/` and are overridden like any `symfony-loader` template.
 
@@ -51,6 +53,7 @@ The link signs the user in and lands on the given local path. It dies with the n
 - `AbstractUser::setEmailTwoFactorEnabled(false)` spares an account the code.
 - `AbstractUser::revokeTrustedDevices()` makes every trusted device ask for a code again.
 - Only password logins ask for the code; magic links and the login after a reset do not.
+- An authenticator app, once set up on `/account/authenticator`, replaces the email code. Its ten backup codes are shown once; each signs in once, on `/login/2fa?backup=1`.
 
 ## Roles
 

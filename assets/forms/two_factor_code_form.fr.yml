@@ -1,6 +1,7 @@
 field:
   code:
     label: Code
+    backup_label: Code de secours
   trusted:
     label: Faire confiance à cet appareil, ne plus demander ici
 

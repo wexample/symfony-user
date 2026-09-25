@@ -83,9 +83,16 @@ scheb_two_factor:
     trusted_device:
         enabled: true
         lifetime: 5184000
+    # Authenticator apps, and their backup codes: /account/authenticator
+    totp:
+        enabled: true
+        issuer: 'My application'
+        leeway: 1
+    backup_codes:
+        enabled: true
 ```
 
-- `APP_SECRET` must be 32 bytes at least: the trusted device cookie is a JWT signed with it.
+- `APP_SECRET` must be 32 bytes at least: the trusted device cookie is a JWT signed with it. The authenticator secrets are encrypted with a key derived from it too: changing it makes users set their app up again.
 - While a login waits for its code, scheb only lets through the paths `access_control` opens to `PUBLIC_ACCESS` or `IS_AUTHENTICATED_2FA_IN_PROGRESS`.
 - Without a second factor, drop the `two_factor` key; to ask it on every login, set `trusted_device.enabled: false`.
 

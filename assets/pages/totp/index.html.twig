@@ -1,0 +1,35 @@
+{%- extends '@front/layouts/private/layout.html.twig' -%}
+
+{%- set page_show_title = true -%}
+
+{#- Off: the QR code to scan, the secret to type when scanning is not an
+    option, and the first code that proves the app holds it. On: the backup
+    codes left, and the way out. -#}
+{%- block page_body -%}
+    {%- if enabled -%}
+        <section class="block block--card">
+            <div class="block--body stack--vertical">
+                <p class="lead">{{ '@page::enabled.intro' | trans }}</p>
+                <p>{{ '@page::enabled.backup_codes' | trans({'%count%': backup_codes_count}) }}</p>
+                <form method="post" action="{{ path('user_totp_regenerate') }}">
+                    {{ button('ph:bold/arrow-clockwise', '@page::action.regenerate' | trans, { type: 'submit' }) }}
+                </form>
+            </div>
+        </section>
+        <section class="block block--card">
+            <div class="block--body stack--vertical">
+                <p>{{ '@page::disable.intro' | trans }}</p>
+                {{ form_load(render_pass, totp_disable_form, '@WexampleSymfonyUserBundle/forms/totp_disable_form.html.twig') }}
+            </div>
+        </section>
+    {%- else -%}
+        <section class="block block--card">
+            <div class="block--body stack--vertical">
+                <p class="lead">{{ '@page::setup.intro' | trans }}</p>
+                <p><img src="{{ qr_code }}" alt="{{ '@page::setup.qr_alt' | trans }}" width="240" height="240"></p>
+                <p class="text-secondary">{{ '@page::setup.secret' | trans }} <code>{{ secret }}</code></p>
+                {{ form_load(render_pass, totp_enable_form, '@WexampleSymfonyUserBundle/forms/totp_enable_form.html.twig') }}
+            </div>
+        </section>
+    {%- endif -%}
+{%- endblock -%}

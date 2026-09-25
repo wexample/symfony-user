@@ -16,6 +16,8 @@ scheb/2fa-bundle turns the token of a password login into a `TwoFactorToken` whe
 
 `LoginFormAuthenticator` sees the `TwoFactorToken` and answers with the code page, {{ path("src/Controller/Pages/TwoFactorController.php") }}. The code form posts to the forms bundle route too, which the firewall declares as scheb's `check_path`; {{ path("src/Security/Handler/TwoFactorResponseHandler.php") }} answers success, failure and "code required" the same way the login does. Trusted devices are scheb's signed cookie, versioned by `AbstractUser::getTrustedTokenVersion()`.
 
+An authenticator app uses scheb's own `totp` provider, and the email provider steps aside for a user who has one. {{ path("src/Service/TotpService.php") }} keeps the secret being set up in session until a first code proves the app holds it, then stores it encrypted by {{ path("src/Service/TotpSecretCipherService.php") }}; {{ path("src/EventSubscriber/TotpSecretSubscriber.php") }} decrypts it on load, in memory only. Backup codes are stored as hashes on the user and checked by scheb before the provider.
+
 ### Links
 
 {{ path("src/Service/MagicLinkService.php") }} wraps the `login_link` handler of the firewall — the one of the current request, or of `main` without a request — and appends a checked local `_target_path`. {{ path("src/Service/PasswordResetService.php") }} signs reset links with Symfony's `SignatureHasher` over the password hash, so nothing is stored and the new password kills the link. Both reset modes end on a proof kept in session, granted by the reset link or, in magic link mode, by {{ path("src/EventSubscriber/PasswordResetProofSubscriber.php") }}; {{ path("src/Service/FormProcessor/SetPasswordFormProcessor.php") }} requires it.

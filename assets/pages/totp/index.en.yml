@@ -1,0 +1,13 @@
+page_title: Authenticator app
+page_icon: ph:bold/device-mobile
+setup:
+  intro: Scan this code with an authenticator app, then type the code it shows. It will then be asked at sign-in, instead of the email code.
+  qr_alt: QR code to scan with the authenticator app
+  secret: "Cannot scan? Type this key in the app:"
+enabled:
+  intro: Your authenticator app is asked at sign-in, on the devices not trusted yet.
+  backup_codes: "Backup codes left: %count%."
+disable:
+  intro: Turn the app off. The code will be sent by email again.
+action:
+  regenerate: New backup codes

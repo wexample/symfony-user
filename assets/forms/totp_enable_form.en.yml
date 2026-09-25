@@ -1,0 +1,9 @@
+field:
+  code:
+    label: Code shown by the app
+
+action:
+  submit: Turn the app on
+
+error:
+  invalid: Wrong code, check the clock of your phone and try again.

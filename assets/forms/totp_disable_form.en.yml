@@ -1,0 +1,9 @@
+field:
+  current_password:
+    label: Current password
+
+action:
+  submit: Turn the app off
+
+error:
+  current_password: The current password is wrong.

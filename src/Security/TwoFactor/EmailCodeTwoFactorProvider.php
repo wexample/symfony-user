@@ -33,8 +33,10 @@ class EmailCodeTwoFactorProvider implements TwoFactorProviderInterface, TwoFacto
     {
         $user = $context->getUser();
 
+        // An authenticator app, once set up, replaces the email code.
         return $user instanceof AbstractUser
             && $user->isEmailTwoFactorEnabled()
+            && ! $user->isTotpAuthenticationEnabled()
             && LoginFormAuthenticator::isLoginRequest($context->getRequest());
     }
 

@@ -1,0 +1,13 @@
+page_title: Application d'authentification
+page_icon: ph:bold/device-mobile
+setup:
+  intro: Scannez ce code avec une application d'authentification, puis saisissez le code qu'elle affiche. Elle sera ensuite demandée à la connexion, à la place du code par email.
+  qr_alt: QR code à scanner avec l'application d'authentification
+  secret: "Impossible de scanner ? Saisissez cette clé dans l'application :"
+enabled:
+  intro: Votre application d'authentification est demandée à la connexion, sur les appareils pas encore de confiance.
+  backup_codes: "Codes de secours restants : %count%."
+disable:
+  intro: Désactiver l'application. Le code sera de nouveau envoyé par email.
+action:
+  regenerate: Nouveaux codes de secours
