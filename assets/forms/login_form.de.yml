@@ -1,0 +1,17 @@
+field:
+  identifier:
+    label: 'E-Mail oder Benutzername'
+  password:
+    label: Passwort
+  remember_me:
+    label: 'Angemeldet bleiben'
+action:
+  submit: Anmelden
+error:
+  invalid_credentials: 'Unbekannter Benutzer oder falsches Passwort.'
+  too_many_attempts: 'Zu viele Versuche, versuchen Sie es in ein paar Minuten erneut.'
+  invalid_csrf: 'Das Formular ist abgelaufen, laden Sie die Seite neu und versuchen Sie es erneut.'
+  account_status: 'Dieses Konto kann sich nicht anmelden.'
+  account_locked: 'Dieses Konto wurde gesperrt.'
+  account_disabled: 'Dieses Konto ist noch nicht aktiviert.'
+  invalid_login_link: 'Dieser Anmeldelink ist abgelaufen oder wurde bereits verwendet, fordern Sie einen neuen an.'

@@ -1,0 +1,12 @@
+page_title: '본인 확인'
+page_icon: 'ph:bold/shield-check'
+intro:
+  email_code: '코드가 %email%으로 전송되었습니다.'
+  totp: '이 계정에 대해 인증기 앱에서 표시되는 코드를 입력하세요.'
+  backup_code: '앱 설정 시 제공된 백업 코드 중 하나를 입력하세요. 각각 한 번만 사용 가능합니다.'
+resend_later: '1분 후에 새 코드를 요청할 수 있습니다.'
+action:
+  resend: '새 코드 전송'
+  use_backup: '백업 코드 사용'
+  use_app: '앱 사용'
+  cancel: '다른 계정 사용'

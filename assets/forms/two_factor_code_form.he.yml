@@ -1,0 +1,12 @@
+field:
+  code:
+    label: קוד
+    backup_label: 'קוד גיבוי'
+  trusted:
+    label: 'סמוך על מכשיר זה, אל תשאל שוב כאן'
+action:
+  submit: התחבר
+error:
+  invalid: 'קוד שגוי.'
+  expired: 'הקוד הזה פג תוקף, בקש קוד חדש.'
+  too_many_attempts: 'יותר מדי קודים שגויים, בקש קוד חדש או נסה שוב מאוחר יותר.'

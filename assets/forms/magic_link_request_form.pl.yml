@@ -1,0 +1,8 @@
+description: 'Otrzymaj link na email, który zaloguje Cię bez hasła.'
+field:
+  identifier:
+    label: 'Email lub nazwa użytkownika'
+action:
+  submit: 'Wyślij mi link'
+success:
+  message: 'Jeśli to konto istnieje, link do logowania został wysłany na jego adres email.'

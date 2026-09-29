@@ -1,0 +1,17 @@
+field:
+  identifier:
+    label: 'ایمیل یا نام کاربری'
+  password:
+    label: 'رمز عبور'
+  remember_me:
+    label: 'من را به خاطر بسپار'
+action:
+  submit: ورود
+error:
+  invalid_credentials: 'کاربر ناشناس یا رمز عبور نادرست است.'
+  too_many_attempts: 'تعداد تلاش‌ها بیش از حد است، چند دقیقه دیگر تلاش کنید.'
+  invalid_csrf: 'فرم منقضی شده است، صفحه را دوباره بارگذاری کنید و دوباره تلاش کنید.'
+  account_status: 'این حساب نمی‌تواند وارد شود.'
+  account_locked: 'این حساب قفل شده است.'
+  account_disabled: 'این حساب هنوز فعال نشده است.'
+  invalid_login_link: 'این لینک ورود منقضی شده است یا قبلاً استفاده شده است، درخواست لینک جدید کنید.'

@@ -1,0 +1,8 @@
+description: 'Saat sähköpostitse linkin, joka kirjautuu sisään ilman salasanaa.'
+field:
+  identifier:
+    label: 'Sähköposti tai käyttäjätunnus'
+action:
+  submit: 'Lähetä minulle linkki'
+success:
+  message: 'Jos tämä tili on olemassa, kirjautumislinkki on lähetetty sen sähköpostiosoitteeseen.'

@@ -1,0 +1,7 @@
+field:
+  current_password:
+    label: รหัสผ่านปัจจุบัน
+action:
+  submit: ปิดแอป
+error:
+  current_password: รหัสผ่านปัจจุบันไม่ถูกต้อง.

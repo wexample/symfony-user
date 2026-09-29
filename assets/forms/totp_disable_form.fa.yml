@@ -1,0 +1,7 @@
+field:
+  current_password:
+    label: 'رمز عبور فعلی'
+action:
+  submit: 'برنامه را خاموش کنید'
+error:
+  current_password: 'رمز عبور فعلی اشتباه است.'

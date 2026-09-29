@@ -1,0 +1,7 @@
+field:
+  current_password:
+    label: 現在のパスワード
+action:
+  submit: アプリを終了する
+error:
+  current_password: 現在のパスワードが間違っています。

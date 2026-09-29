@@ -1,0 +1,5 @@
+field:
+  email:
+    label: 'আপনার ইমেইল'
+error:
+  email: 'এই ইমেইল ঠিকানা বৈধ নয়।'

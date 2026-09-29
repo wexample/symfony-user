@@ -1,0 +1,7 @@
+field:
+  current_password:
+    label: 'Текущий пароль'
+action:
+  submit: 'Выключить приложение'
+error:
+  current_password: 'Текущий пароль неверен.'

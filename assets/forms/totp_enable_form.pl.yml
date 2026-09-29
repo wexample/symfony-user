@@ -1,0 +1,7 @@
+field:
+  code:
+    label: 'Kod wyświetlany przez aplikację'
+action:
+  submit: 'Włącz aplikację'
+error:
+  invalid: 'Niepoprawny kod, sprawdź zegar w swoim telefonie i spróbuj ponownie.'

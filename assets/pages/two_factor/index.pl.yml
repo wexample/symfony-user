@@ -1,0 +1,12 @@
+page_title: 'Potwierdź, że to ty'
+page_icon: 'ph:bold/shield-check'
+intro:
+  email_code: 'Kod został wysłany na %email%.'
+  totp: 'Wpisz kod, który pokazuje aplikacja uwierzytelniająca dla tego konta.'
+  backup_code: 'Wpisz jeden z kodów zapasowych podanych podczas konfiguracji aplikacji. Każdy działa tylko raz.'
+resend_later: 'Możesz poprosić o nowy kod za minutę.'
+action:
+  resend: 'Wyślij nowy kod'
+  use_backup: 'Użyj kodu zapasowego'
+  use_app: 'Użyj aplikacji'
+  cancel: 'Użyj innego konta'

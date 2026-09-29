@@ -1,0 +1,7 @@
+field:
+  code:
+    label: アプリに表示されるコード
+action:
+  submit: アプリを起動する
+error:
+  invalid: コードが間違っています。電話の時計を確認して、再試行してください。

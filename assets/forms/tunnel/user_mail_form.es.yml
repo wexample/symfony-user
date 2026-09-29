@@ -1,0 +1,5 @@
+field:
+  email:
+    label: 'Tu correo electrónico'
+error:
+  email: 'Esta dirección de correo electrónico no es válida.'

@@ -1,0 +1,17 @@
+field:
+  identifier:
+    label: '이메일 또는 사용자 이름'
+  password:
+    label: 비밀번호
+  remember_me:
+    label: '로그인 상태 유지'
+action:
+  submit: 로그인
+error:
+  invalid_credentials: '알 수 없는 사용자 또는 잘못된 비밀번호입니다.'
+  too_many_attempts: '시도가 너무 많습니다. 몇 분 후에 다시 시도하세요.'
+  invalid_csrf: '폼이 만료되었습니다. 페이지를 새로 고치고 다시 시도하세요.'
+  account_status: '이 계정으로 로그인할 수 없습니다.'
+  account_locked: '이 계정이 잠겼습니다.'
+  account_disabled: '이 계정은 아직 활성화되지 않았습니다.'
+  invalid_login_link: '이 로그인 링크는 만료되었거나 이미 사용되었습니다. 새 링크를 요청하세요.'

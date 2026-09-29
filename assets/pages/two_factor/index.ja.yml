@@ -1,0 +1,12 @@
+page_title: あなたであることを確認
+page_icon: 'ph:bold/shield-check'
+intro:
+  email_code: 'コードが %email% に送信されました。'
+  totp: このアカウントの認証アプリに表示されるコードを入力してください。
+  backup_code: アプリ設定時に提供されたバックアップコードの1つを入力してください。各コードは1回のみ使用できます。
+resend_later: 1分後に新しいコードをリクエストできます。
+action:
+  resend: 新しいコードを送信
+  use_backup: バックアップコードを使用
+  use_app: アプリを使用
+  cancel: 別のアカウントを使用

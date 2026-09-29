@@ -1,0 +1,7 @@
+field:
+  current_password:
+    label: 'Nykyinen salasana'
+action:
+  submit: 'Sulje sovellus'
+error:
+  current_password: 'Nykyinen salasana on väärin.'

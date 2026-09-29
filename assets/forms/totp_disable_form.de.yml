@@ -1,0 +1,7 @@
+field:
+  current_password:
+    label: 'Aktuelles Passwort'
+action:
+  submit: 'App ausschalten'
+error:
+  current_password: 'Das aktuelle Passwort ist falsch.'

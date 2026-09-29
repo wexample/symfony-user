@@ -1,0 +1,12 @@
+field:
+  code:
+    label: Código
+    backup_label: 'Código de respaldo'
+  trusted:
+    label: 'Confía en este dispositivo, no preguntes de nuevo aquí'
+action:
+  submit: 'Iniciar sesión'
+error:
+  invalid: 'Código incorrecto.'
+  expired: 'Este código ha expirado, solicita uno nuevo.'
+  too_many_attempts: 'Demasiados códigos incorrectos, solicita uno nuevo o intenta de nuevo más tarde.'

@@ -1,0 +1,5 @@
+field:
+  email:
+    label: 'آپ کا ای میل'
+error:
+  email: 'یہ ای میل پتہ درست نہیں ہے۔'

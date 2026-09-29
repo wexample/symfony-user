@@ -1,0 +1,12 @@
+page_title: 'Vahvista, että olet sinä'
+page_icon: 'ph:bold/shield-check'
+intro:
+  email_code: 'Koodi on lähetetty osoitteeseen %email%.'
+  totp: 'Kirjoita koodi, jonka autentikointisovellus näyttää tälle tilille.'
+  backup_code: 'Kirjoita yksi varakoodi, joka annettiin sovelluksen asennuksen yhteydessä. Jokainen toimii kerran.'
+resend_later: 'Voit pyytää uutta koodia minuutin kuluttua.'
+action:
+  resend: 'Lähetä uusi koodi'
+  use_backup: 'Käytä varakoodia'
+  use_app: 'Käytä sovellusta'
+  cancel: 'Käytä toista tiliä'

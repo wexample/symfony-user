@@ -1,0 +1,5 @@
+page_title: 'Kody zapasowe'
+page_icon: 'ph:bold/key'
+intro: 'Zachowaj te kody w bezpiecznym miejscu. Każdy z nich loguje się raz bez aplikacji. Nie będą już pokazywane.'
+action:
+  done: 'Zachowałem je'

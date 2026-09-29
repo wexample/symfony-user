@@ -1,0 +1,12 @@
+field:
+  code:
+    label: Kod
+    backup_label: 'Kod zapasowy'
+  trusted:
+    label: 'Zaufaj temu urządzeniu, nie pytaj ponownie tutaj'
+action:
+  submit: 'Zaloguj się'
+error:
+  invalid: 'Zły kod.'
+  expired: 'Ten kod wygasł, poproś o nowy.'
+  too_many_attempts: 'Za dużo błędnych kodów, poproś o nowy lub spróbuj później.'

@@ -1,0 +1,8 @@
+description: パスワードなしでサインインできるリンクをメールで受け取ります。
+field:
+  identifier:
+    label: メールアドレスまたはユーザー名
+action:
+  submit: リンクを送信
+success:
+  message: このアカウントが存在する場合、サインインリンクがそのメールアドレスに送信されました。
