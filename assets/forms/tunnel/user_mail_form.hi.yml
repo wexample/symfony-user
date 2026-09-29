@@ -1,0 +1,5 @@
+field:
+  email:
+    label: 'आपका ईमेल'
+error:
+  email: 'यह ईमेल पता मान्य नहीं है।'

@@ -1,0 +1,7 @@
+field:
+  code:
+    label: 应用程序显示的代码
+action:
+  submit: 开启应用程序
+error:
+  invalid: 错误的代码，请检查手机的时间并重试。

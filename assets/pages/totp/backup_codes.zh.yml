@@ -1,0 +1,5 @@
+page_title: 备份代码
+page_icon: 'ph:bold/key'
+intro: 请将这些代码保存在安全的地方。每个代码可以让您在没有应用程序的情况下登录一次。它们不会再显示。
+action:
+  done: 我保留了它们

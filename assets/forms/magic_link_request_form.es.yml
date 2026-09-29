@@ -1,0 +1,8 @@
+description: 'Recibe un enlace por correo electrónico que te inicia sesión sin necesidad de contraseña.'
+field:
+  identifier:
+    label: 'Correo electrónico o nombre de usuario'
+action:
+  submit: 'Envíame un enlace'
+success:
+  message: 'Si esta cuenta existe, se ha enviado un enlace de inicio de sesión a su dirección de correo electrónico.'

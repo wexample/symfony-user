@@ -1,0 +1,7 @@
+field:
+  current_password:
+    label: 当前密码
+action:
+  submit: 关闭应用程序
+error:
+  current_password: 当前密码错误。
