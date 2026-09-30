@@ -1,0 +1,7 @@
+field:
+  current_password:
+    label: 'Huidig wachtwoord'
+action:
+  submit: 'Zet de app uit'
+error:
+  current_password: 'Het huidige wachtwoord is onjuist.'

@@ -1,0 +1,7 @@
+field:
+  code:
+    label: 'Uygulamanın gösterdiği kod'
+action:
+  submit: 'Uygulamayı aç'
+error:
+  invalid: 'Yanlış kod, telefonunun saatini kontrol et ve tekrar dene.'

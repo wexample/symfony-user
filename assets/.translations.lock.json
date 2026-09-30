@@ -239,6 +239,66 @@
             "engine": "syrtis"
         }
     },
+    "forms/change_password_form.id.yml": {
+        "action.submit": {
+            "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
+            "engine": "syrtis"
+        },
+        "error.current_password": {
+            "hash": "ec4ff227c7fe48e5019aa86a8c52b2b8",
+            "engine": "syrtis"
+        },
+        "error.mismatch": {
+            "hash": "31ea28920e12736640261a09d0558212",
+            "engine": "syrtis"
+        },
+        "field.current_password.label": {
+            "hash": "ba4685adc0622faa897c51030b8962d9",
+            "engine": "syrtis"
+        },
+        "field.new_password.first.label": {
+            "hash": "666fe36622b78e896a570100cdb24472",
+            "engine": "syrtis"
+        },
+        "field.new_password.second.label": {
+            "hash": "4c6edbcf02d57f2a59aca901ccafd36c",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9a786394ab5fc19a22d6cec4d900b35e",
+            "engine": "syrtis"
+        }
+    },
+    "forms/change_password_form.it.yml": {
+        "action.submit": {
+            "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
+            "engine": "syrtis"
+        },
+        "error.current_password": {
+            "hash": "ec4ff227c7fe48e5019aa86a8c52b2b8",
+            "engine": "syrtis"
+        },
+        "error.mismatch": {
+            "hash": "31ea28920e12736640261a09d0558212",
+            "engine": "syrtis"
+        },
+        "field.current_password.label": {
+            "hash": "ba4685adc0622faa897c51030b8962d9",
+            "engine": "syrtis"
+        },
+        "field.new_password.first.label": {
+            "hash": "666fe36622b78e896a570100cdb24472",
+            "engine": "syrtis"
+        },
+        "field.new_password.second.label": {
+            "hash": "4c6edbcf02d57f2a59aca901ccafd36c",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9a786394ab5fc19a22d6cec4d900b35e",
+            "engine": "syrtis"
+        }
+    },
     "forms/change_password_form.ja.yml": {
         "action.submit": {
             "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
@@ -299,7 +359,67 @@
             "engine": "syrtis"
         }
     },
+    "forms/change_password_form.nl.yml": {
+        "action.submit": {
+            "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
+            "engine": "syrtis"
+        },
+        "error.current_password": {
+            "hash": "ec4ff227c7fe48e5019aa86a8c52b2b8",
+            "engine": "syrtis"
+        },
+        "error.mismatch": {
+            "hash": "31ea28920e12736640261a09d0558212",
+            "engine": "syrtis"
+        },
+        "field.current_password.label": {
+            "hash": "ba4685adc0622faa897c51030b8962d9",
+            "engine": "syrtis"
+        },
+        "field.new_password.first.label": {
+            "hash": "666fe36622b78e896a570100cdb24472",
+            "engine": "syrtis"
+        },
+        "field.new_password.second.label": {
+            "hash": "4c6edbcf02d57f2a59aca901ccafd36c",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9a786394ab5fc19a22d6cec4d900b35e",
+            "engine": "syrtis"
+        }
+    },
     "forms/change_password_form.pl.yml": {
+        "action.submit": {
+            "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
+            "engine": "syrtis"
+        },
+        "error.current_password": {
+            "hash": "ec4ff227c7fe48e5019aa86a8c52b2b8",
+            "engine": "syrtis"
+        },
+        "error.mismatch": {
+            "hash": "31ea28920e12736640261a09d0558212",
+            "engine": "syrtis"
+        },
+        "field.current_password.label": {
+            "hash": "ba4685adc0622faa897c51030b8962d9",
+            "engine": "syrtis"
+        },
+        "field.new_password.first.label": {
+            "hash": "666fe36622b78e896a570100cdb24472",
+            "engine": "syrtis"
+        },
+        "field.new_password.second.label": {
+            "hash": "4c6edbcf02d57f2a59aca901ccafd36c",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9a786394ab5fc19a22d6cec4d900b35e",
+            "engine": "syrtis"
+        }
+    },
+    "forms/change_password_form.pt_BR.yml": {
         "action.submit": {
             "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
             "engine": "syrtis"
@@ -389,7 +509,67 @@
             "engine": "syrtis"
         }
     },
+    "forms/change_password_form.tr.yml": {
+        "action.submit": {
+            "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
+            "engine": "syrtis"
+        },
+        "error.current_password": {
+            "hash": "ec4ff227c7fe48e5019aa86a8c52b2b8",
+            "engine": "syrtis"
+        },
+        "error.mismatch": {
+            "hash": "31ea28920e12736640261a09d0558212",
+            "engine": "syrtis"
+        },
+        "field.current_password.label": {
+            "hash": "ba4685adc0622faa897c51030b8962d9",
+            "engine": "syrtis"
+        },
+        "field.new_password.first.label": {
+            "hash": "666fe36622b78e896a570100cdb24472",
+            "engine": "syrtis"
+        },
+        "field.new_password.second.label": {
+            "hash": "4c6edbcf02d57f2a59aca901ccafd36c",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9a786394ab5fc19a22d6cec4d900b35e",
+            "engine": "syrtis"
+        }
+    },
     "forms/change_password_form.ur.yml": {
+        "action.submit": {
+            "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
+            "engine": "syrtis"
+        },
+        "error.current_password": {
+            "hash": "ec4ff227c7fe48e5019aa86a8c52b2b8",
+            "engine": "syrtis"
+        },
+        "error.mismatch": {
+            "hash": "31ea28920e12736640261a09d0558212",
+            "engine": "syrtis"
+        },
+        "field.current_password.label": {
+            "hash": "ba4685adc0622faa897c51030b8962d9",
+            "engine": "syrtis"
+        },
+        "field.new_password.first.label": {
+            "hash": "666fe36622b78e896a570100cdb24472",
+            "engine": "syrtis"
+        },
+        "field.new_password.second.label": {
+            "hash": "4c6edbcf02d57f2a59aca901ccafd36c",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9a786394ab5fc19a22d6cec4d900b35e",
+            "engine": "syrtis"
+        }
+    },
+    "forms/change_password_form.vi.yml": {
         "action.submit": {
             "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
             "engine": "syrtis"
@@ -817,6 +997,98 @@
             "engine": "syrtis"
         }
     },
+    "forms/login_form.id.yml": {
+        "action.submit": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        },
+        "error.account_disabled": {
+            "hash": "0cb214bb268ecd704d56abcf9324d449",
+            "engine": "syrtis"
+        },
+        "error.account_locked": {
+            "hash": "fcf9b3dcd57fb4f547e62590def4a55c",
+            "engine": "syrtis"
+        },
+        "error.account_status": {
+            "hash": "d16b9a04e9747eb8263a1899c0169788",
+            "engine": "syrtis"
+        },
+        "error.invalid_credentials": {
+            "hash": "f0da3dd8c02972dad8eb585853a1f227",
+            "engine": "syrtis"
+        },
+        "error.invalid_csrf": {
+            "hash": "7bf2a9980c26312755deb616d9e65f87",
+            "engine": "syrtis"
+        },
+        "error.invalid_login_link": {
+            "hash": "098810a684ed83008baed70f32290bd4",
+            "engine": "syrtis"
+        },
+        "error.too_many_attempts": {
+            "hash": "c1351acc133f2f7a5533f35df10fe526",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "field.password.label": {
+            "hash": "1aa98548771633c079485698a9e1dac8",
+            "engine": "syrtis"
+        },
+        "field.remember_me.label": {
+            "hash": "0d060c54ff3e00a14d8e0e7e96775186",
+            "engine": "syrtis"
+        }
+    },
+    "forms/login_form.it.yml": {
+        "action.submit": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        },
+        "error.account_disabled": {
+            "hash": "0cb214bb268ecd704d56abcf9324d449",
+            "engine": "syrtis"
+        },
+        "error.account_locked": {
+            "hash": "fcf9b3dcd57fb4f547e62590def4a55c",
+            "engine": "syrtis"
+        },
+        "error.account_status": {
+            "hash": "d16b9a04e9747eb8263a1899c0169788",
+            "engine": "syrtis"
+        },
+        "error.invalid_credentials": {
+            "hash": "f0da3dd8c02972dad8eb585853a1f227",
+            "engine": "syrtis"
+        },
+        "error.invalid_csrf": {
+            "hash": "7bf2a9980c26312755deb616d9e65f87",
+            "engine": "syrtis"
+        },
+        "error.invalid_login_link": {
+            "hash": "098810a684ed83008baed70f32290bd4",
+            "engine": "syrtis"
+        },
+        "error.too_many_attempts": {
+            "hash": "c1351acc133f2f7a5533f35df10fe526",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "field.password.label": {
+            "hash": "1aa98548771633c079485698a9e1dac8",
+            "engine": "syrtis"
+        },
+        "field.remember_me.label": {
+            "hash": "0d060c54ff3e00a14d8e0e7e96775186",
+            "engine": "syrtis"
+        }
+    },
     "forms/login_form.ja.yml": {
         "action.submit": {
             "hash": "a4d2313525c47af15e444c88880bc766",
@@ -909,7 +1181,99 @@
             "engine": "syrtis"
         }
     },
+    "forms/login_form.nl.yml": {
+        "action.submit": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        },
+        "error.account_disabled": {
+            "hash": "0cb214bb268ecd704d56abcf9324d449",
+            "engine": "syrtis"
+        },
+        "error.account_locked": {
+            "hash": "fcf9b3dcd57fb4f547e62590def4a55c",
+            "engine": "syrtis"
+        },
+        "error.account_status": {
+            "hash": "d16b9a04e9747eb8263a1899c0169788",
+            "engine": "syrtis"
+        },
+        "error.invalid_credentials": {
+            "hash": "f0da3dd8c02972dad8eb585853a1f227",
+            "engine": "syrtis"
+        },
+        "error.invalid_csrf": {
+            "hash": "7bf2a9980c26312755deb616d9e65f87",
+            "engine": "syrtis"
+        },
+        "error.invalid_login_link": {
+            "hash": "098810a684ed83008baed70f32290bd4",
+            "engine": "syrtis"
+        },
+        "error.too_many_attempts": {
+            "hash": "c1351acc133f2f7a5533f35df10fe526",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "field.password.label": {
+            "hash": "1aa98548771633c079485698a9e1dac8",
+            "engine": "syrtis"
+        },
+        "field.remember_me.label": {
+            "hash": "0d060c54ff3e00a14d8e0e7e96775186",
+            "engine": "syrtis"
+        }
+    },
     "forms/login_form.pl.yml": {
+        "action.submit": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        },
+        "error.account_disabled": {
+            "hash": "0cb214bb268ecd704d56abcf9324d449",
+            "engine": "syrtis"
+        },
+        "error.account_locked": {
+            "hash": "fcf9b3dcd57fb4f547e62590def4a55c",
+            "engine": "syrtis"
+        },
+        "error.account_status": {
+            "hash": "d16b9a04e9747eb8263a1899c0169788",
+            "engine": "syrtis"
+        },
+        "error.invalid_credentials": {
+            "hash": "f0da3dd8c02972dad8eb585853a1f227",
+            "engine": "syrtis"
+        },
+        "error.invalid_csrf": {
+            "hash": "7bf2a9980c26312755deb616d9e65f87",
+            "engine": "syrtis"
+        },
+        "error.invalid_login_link": {
+            "hash": "098810a684ed83008baed70f32290bd4",
+            "engine": "syrtis"
+        },
+        "error.too_many_attempts": {
+            "hash": "c1351acc133f2f7a5533f35df10fe526",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "field.password.label": {
+            "hash": "1aa98548771633c079485698a9e1dac8",
+            "engine": "syrtis"
+        },
+        "field.remember_me.label": {
+            "hash": "0d060c54ff3e00a14d8e0e7e96775186",
+            "engine": "syrtis"
+        }
+    },
+    "forms/login_form.pt_BR.yml": {
         "action.submit": {
             "hash": "a4d2313525c47af15e444c88880bc766",
             "engine": "syrtis"
@@ -1047,7 +1411,99 @@
             "engine": "syrtis"
         }
     },
+    "forms/login_form.tr.yml": {
+        "action.submit": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        },
+        "error.account_disabled": {
+            "hash": "0cb214bb268ecd704d56abcf9324d449",
+            "engine": "syrtis"
+        },
+        "error.account_locked": {
+            "hash": "fcf9b3dcd57fb4f547e62590def4a55c",
+            "engine": "syrtis"
+        },
+        "error.account_status": {
+            "hash": "d16b9a04e9747eb8263a1899c0169788",
+            "engine": "syrtis"
+        },
+        "error.invalid_credentials": {
+            "hash": "f0da3dd8c02972dad8eb585853a1f227",
+            "engine": "syrtis"
+        },
+        "error.invalid_csrf": {
+            "hash": "7bf2a9980c26312755deb616d9e65f87",
+            "engine": "syrtis"
+        },
+        "error.invalid_login_link": {
+            "hash": "098810a684ed83008baed70f32290bd4",
+            "engine": "syrtis"
+        },
+        "error.too_many_attempts": {
+            "hash": "c1351acc133f2f7a5533f35df10fe526",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "field.password.label": {
+            "hash": "1aa98548771633c079485698a9e1dac8",
+            "engine": "syrtis"
+        },
+        "field.remember_me.label": {
+            "hash": "0d060c54ff3e00a14d8e0e7e96775186",
+            "engine": "syrtis"
+        }
+    },
     "forms/login_form.ur.yml": {
+        "action.submit": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        },
+        "error.account_disabled": {
+            "hash": "0cb214bb268ecd704d56abcf9324d449",
+            "engine": "syrtis"
+        },
+        "error.account_locked": {
+            "hash": "fcf9b3dcd57fb4f547e62590def4a55c",
+            "engine": "syrtis"
+        },
+        "error.account_status": {
+            "hash": "d16b9a04e9747eb8263a1899c0169788",
+            "engine": "syrtis"
+        },
+        "error.invalid_credentials": {
+            "hash": "f0da3dd8c02972dad8eb585853a1f227",
+            "engine": "syrtis"
+        },
+        "error.invalid_csrf": {
+            "hash": "7bf2a9980c26312755deb616d9e65f87",
+            "engine": "syrtis"
+        },
+        "error.invalid_login_link": {
+            "hash": "098810a684ed83008baed70f32290bd4",
+            "engine": "syrtis"
+        },
+        "error.too_many_attempts": {
+            "hash": "c1351acc133f2f7a5533f35df10fe526",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "field.password.label": {
+            "hash": "1aa98548771633c079485698a9e1dac8",
+            "engine": "syrtis"
+        },
+        "field.remember_me.label": {
+            "hash": "0d060c54ff3e00a14d8e0e7e96775186",
+            "engine": "syrtis"
+        }
+    },
+    "forms/login_form.vi.yml": {
         "action.submit": {
             "hash": "a4d2313525c47af15e444c88880bc766",
             "engine": "syrtis"
@@ -1283,6 +1739,42 @@
             "engine": "syrtis"
         }
     },
+    "forms/magic_link_request_form.id.yml": {
+        "action.submit": {
+            "hash": "1a52105d855c6d6060627f8ab7921681",
+            "engine": "syrtis"
+        },
+        "description": {
+            "hash": "ac4c57b330e3511c475184db631c6916",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "39802b2f154b0bf5d28d3db3374ddb8b",
+            "engine": "syrtis"
+        }
+    },
+    "forms/magic_link_request_form.it.yml": {
+        "action.submit": {
+            "hash": "1a52105d855c6d6060627f8ab7921681",
+            "engine": "syrtis"
+        },
+        "description": {
+            "hash": "ac4c57b330e3511c475184db631c6916",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "39802b2f154b0bf5d28d3db3374ddb8b",
+            "engine": "syrtis"
+        }
+    },
     "forms/magic_link_request_form.ja.yml": {
         "action.submit": {
             "hash": "1a52105d855c6d6060627f8ab7921681",
@@ -1319,7 +1811,43 @@
             "engine": "syrtis"
         }
     },
+    "forms/magic_link_request_form.nl.yml": {
+        "action.submit": {
+            "hash": "1a52105d855c6d6060627f8ab7921681",
+            "engine": "syrtis"
+        },
+        "description": {
+            "hash": "ac4c57b330e3511c475184db631c6916",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "39802b2f154b0bf5d28d3db3374ddb8b",
+            "engine": "syrtis"
+        }
+    },
     "forms/magic_link_request_form.pl.yml": {
+        "action.submit": {
+            "hash": "1a52105d855c6d6060627f8ab7921681",
+            "engine": "syrtis"
+        },
+        "description": {
+            "hash": "ac4c57b330e3511c475184db631c6916",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "39802b2f154b0bf5d28d3db3374ddb8b",
+            "engine": "syrtis"
+        }
+    },
+    "forms/magic_link_request_form.pt_BR.yml": {
         "action.submit": {
             "hash": "1a52105d855c6d6060627f8ab7921681",
             "engine": "syrtis"
@@ -1373,7 +1901,43 @@
             "engine": "syrtis"
         }
     },
+    "forms/magic_link_request_form.tr.yml": {
+        "action.submit": {
+            "hash": "1a52105d855c6d6060627f8ab7921681",
+            "engine": "syrtis"
+        },
+        "description": {
+            "hash": "ac4c57b330e3511c475184db631c6916",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "39802b2f154b0bf5d28d3db3374ddb8b",
+            "engine": "syrtis"
+        }
+    },
     "forms/magic_link_request_form.ur.yml": {
+        "action.submit": {
+            "hash": "1a52105d855c6d6060627f8ab7921681",
+            "engine": "syrtis"
+        },
+        "description": {
+            "hash": "ac4c57b330e3511c475184db631c6916",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "39802b2f154b0bf5d28d3db3374ddb8b",
+            "engine": "syrtis"
+        }
+    },
+    "forms/magic_link_request_form.vi.yml": {
         "action.submit": {
             "hash": "1a52105d855c6d6060627f8ab7921681",
             "engine": "syrtis"
@@ -1521,6 +2085,34 @@
             "engine": "syrtis"
         }
     },
+    "forms/password_reset_request_form.id.yml": {
+        "action.submit": {
+            "hash": "1a52105d855c6d6060627f8ab7921681",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9dee20cdd27fcad4e5af64f36e4061e6",
+            "engine": "syrtis"
+        }
+    },
+    "forms/password_reset_request_form.it.yml": {
+        "action.submit": {
+            "hash": "1a52105d855c6d6060627f8ab7921681",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9dee20cdd27fcad4e5af64f36e4061e6",
+            "engine": "syrtis"
+        }
+    },
     "forms/password_reset_request_form.ja.yml": {
         "action.submit": {
             "hash": "1a52105d855c6d6060627f8ab7921681",
@@ -1549,7 +2141,35 @@
             "engine": "syrtis"
         }
     },
+    "forms/password_reset_request_form.nl.yml": {
+        "action.submit": {
+            "hash": "1a52105d855c6d6060627f8ab7921681",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9dee20cdd27fcad4e5af64f36e4061e6",
+            "engine": "syrtis"
+        }
+    },
     "forms/password_reset_request_form.pl.yml": {
+        "action.submit": {
+            "hash": "1a52105d855c6d6060627f8ab7921681",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9dee20cdd27fcad4e5af64f36e4061e6",
+            "engine": "syrtis"
+        }
+    },
+    "forms/password_reset_request_form.pt_BR.yml": {
         "action.submit": {
             "hash": "1a52105d855c6d6060627f8ab7921681",
             "engine": "syrtis"
@@ -1591,7 +2211,35 @@
             "engine": "syrtis"
         }
     },
+    "forms/password_reset_request_form.tr.yml": {
+        "action.submit": {
+            "hash": "1a52105d855c6d6060627f8ab7921681",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9dee20cdd27fcad4e5af64f36e4061e6",
+            "engine": "syrtis"
+        }
+    },
     "forms/password_reset_request_form.ur.yml": {
+        "action.submit": {
+            "hash": "1a52105d855c6d6060627f8ab7921681",
+            "engine": "syrtis"
+        },
+        "field.identifier.label": {
+            "hash": "fc6d219a525e952ec6ff568fad1dc35b",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9dee20cdd27fcad4e5af64f36e4061e6",
+            "engine": "syrtis"
+        }
+    },
+    "forms/password_reset_request_form.vi.yml": {
         "action.submit": {
             "hash": "1a52105d855c6d6060627f8ab7921681",
             "engine": "syrtis"
@@ -1827,6 +2475,58 @@
             "engine": "syrtis"
         }
     },
+    "forms/set_password_form.id.yml": {
+        "action.submit": {
+            "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
+            "engine": "syrtis"
+        },
+        "error.mismatch": {
+            "hash": "31ea28920e12736640261a09d0558212",
+            "engine": "syrtis"
+        },
+        "error.no_proof": {
+            "hash": "d856a8c5845120895ded396c0470d017",
+            "engine": "syrtis"
+        },
+        "field.new_password.first.label": {
+            "hash": "666fe36622b78e896a570100cdb24472",
+            "engine": "syrtis"
+        },
+        "field.new_password.second.label": {
+            "hash": "4c6edbcf02d57f2a59aca901ccafd36c",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9a786394ab5fc19a22d6cec4d900b35e",
+            "engine": "syrtis"
+        }
+    },
+    "forms/set_password_form.it.yml": {
+        "action.submit": {
+            "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
+            "engine": "syrtis"
+        },
+        "error.mismatch": {
+            "hash": "31ea28920e12736640261a09d0558212",
+            "engine": "syrtis"
+        },
+        "error.no_proof": {
+            "hash": "d856a8c5845120895ded396c0470d017",
+            "engine": "syrtis"
+        },
+        "field.new_password.first.label": {
+            "hash": "666fe36622b78e896a570100cdb24472",
+            "engine": "syrtis"
+        },
+        "field.new_password.second.label": {
+            "hash": "4c6edbcf02d57f2a59aca901ccafd36c",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9a786394ab5fc19a22d6cec4d900b35e",
+            "engine": "syrtis"
+        }
+    },
     "forms/set_password_form.ja.yml": {
         "action.submit": {
             "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
@@ -1879,7 +2579,59 @@
             "engine": "syrtis"
         }
     },
+    "forms/set_password_form.nl.yml": {
+        "action.submit": {
+            "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
+            "engine": "syrtis"
+        },
+        "error.mismatch": {
+            "hash": "31ea28920e12736640261a09d0558212",
+            "engine": "syrtis"
+        },
+        "error.no_proof": {
+            "hash": "d856a8c5845120895ded396c0470d017",
+            "engine": "syrtis"
+        },
+        "field.new_password.first.label": {
+            "hash": "666fe36622b78e896a570100cdb24472",
+            "engine": "syrtis"
+        },
+        "field.new_password.second.label": {
+            "hash": "4c6edbcf02d57f2a59aca901ccafd36c",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9a786394ab5fc19a22d6cec4d900b35e",
+            "engine": "syrtis"
+        }
+    },
     "forms/set_password_form.pl.yml": {
+        "action.submit": {
+            "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
+            "engine": "syrtis"
+        },
+        "error.mismatch": {
+            "hash": "31ea28920e12736640261a09d0558212",
+            "engine": "syrtis"
+        },
+        "error.no_proof": {
+            "hash": "d856a8c5845120895ded396c0470d017",
+            "engine": "syrtis"
+        },
+        "field.new_password.first.label": {
+            "hash": "666fe36622b78e896a570100cdb24472",
+            "engine": "syrtis"
+        },
+        "field.new_password.second.label": {
+            "hash": "4c6edbcf02d57f2a59aca901ccafd36c",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9a786394ab5fc19a22d6cec4d900b35e",
+            "engine": "syrtis"
+        }
+    },
+    "forms/set_password_form.pt_BR.yml": {
         "action.submit": {
             "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
             "engine": "syrtis"
@@ -1957,7 +2709,59 @@
             "engine": "syrtis"
         }
     },
+    "forms/set_password_form.tr.yml": {
+        "action.submit": {
+            "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
+            "engine": "syrtis"
+        },
+        "error.mismatch": {
+            "hash": "31ea28920e12736640261a09d0558212",
+            "engine": "syrtis"
+        },
+        "error.no_proof": {
+            "hash": "d856a8c5845120895ded396c0470d017",
+            "engine": "syrtis"
+        },
+        "field.new_password.first.label": {
+            "hash": "666fe36622b78e896a570100cdb24472",
+            "engine": "syrtis"
+        },
+        "field.new_password.second.label": {
+            "hash": "4c6edbcf02d57f2a59aca901ccafd36c",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9a786394ab5fc19a22d6cec4d900b35e",
+            "engine": "syrtis"
+        }
+    },
     "forms/set_password_form.ur.yml": {
+        "action.submit": {
+            "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
+            "engine": "syrtis"
+        },
+        "error.mismatch": {
+            "hash": "31ea28920e12736640261a09d0558212",
+            "engine": "syrtis"
+        },
+        "error.no_proof": {
+            "hash": "d856a8c5845120895ded396c0470d017",
+            "engine": "syrtis"
+        },
+        "field.new_password.first.label": {
+            "hash": "666fe36622b78e896a570100cdb24472",
+            "engine": "syrtis"
+        },
+        "field.new_password.second.label": {
+            "hash": "4c6edbcf02d57f2a59aca901ccafd36c",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "9a786394ab5fc19a22d6cec4d900b35e",
+            "engine": "syrtis"
+        }
+    },
+    "forms/set_password_form.vi.yml": {
         "action.submit": {
             "hash": "eca38b84a2d139bc7e3ce7f40cbd9bbb",
             "engine": "syrtis"
@@ -2121,6 +2925,34 @@
             "engine": "syrtis"
         }
     },
+    "forms/totp_disable_form.id.yml": {
+        "action.submit": {
+            "hash": "398a1683faa1011b01937783237013e0",
+            "engine": "syrtis"
+        },
+        "error.current_password": {
+            "hash": "ec4ff227c7fe48e5019aa86a8c52b2b8",
+            "engine": "syrtis"
+        },
+        "field.current_password.label": {
+            "hash": "ba4685adc0622faa897c51030b8962d9",
+            "engine": "syrtis"
+        }
+    },
+    "forms/totp_disable_form.it.yml": {
+        "action.submit": {
+            "hash": "398a1683faa1011b01937783237013e0",
+            "engine": "syrtis"
+        },
+        "error.current_password": {
+            "hash": "ec4ff227c7fe48e5019aa86a8c52b2b8",
+            "engine": "syrtis"
+        },
+        "field.current_password.label": {
+            "hash": "ba4685adc0622faa897c51030b8962d9",
+            "engine": "syrtis"
+        }
+    },
     "forms/totp_disable_form.ja.yml": {
         "action.submit": {
             "hash": "398a1683faa1011b01937783237013e0",
@@ -2149,7 +2981,35 @@
             "engine": "syrtis"
         }
     },
+    "forms/totp_disable_form.nl.yml": {
+        "action.submit": {
+            "hash": "398a1683faa1011b01937783237013e0",
+            "engine": "syrtis"
+        },
+        "error.current_password": {
+            "hash": "ec4ff227c7fe48e5019aa86a8c52b2b8",
+            "engine": "syrtis"
+        },
+        "field.current_password.label": {
+            "hash": "ba4685adc0622faa897c51030b8962d9",
+            "engine": "syrtis"
+        }
+    },
     "forms/totp_disable_form.pl.yml": {
+        "action.submit": {
+            "hash": "398a1683faa1011b01937783237013e0",
+            "engine": "syrtis"
+        },
+        "error.current_password": {
+            "hash": "ec4ff227c7fe48e5019aa86a8c52b2b8",
+            "engine": "syrtis"
+        },
+        "field.current_password.label": {
+            "hash": "ba4685adc0622faa897c51030b8962d9",
+            "engine": "syrtis"
+        }
+    },
+    "forms/totp_disable_form.pt_BR.yml": {
         "action.submit": {
             "hash": "398a1683faa1011b01937783237013e0",
             "engine": "syrtis"
@@ -2191,7 +3051,35 @@
             "engine": "syrtis"
         }
     },
+    "forms/totp_disable_form.tr.yml": {
+        "action.submit": {
+            "hash": "398a1683faa1011b01937783237013e0",
+            "engine": "syrtis"
+        },
+        "error.current_password": {
+            "hash": "ec4ff227c7fe48e5019aa86a8c52b2b8",
+            "engine": "syrtis"
+        },
+        "field.current_password.label": {
+            "hash": "ba4685adc0622faa897c51030b8962d9",
+            "engine": "syrtis"
+        }
+    },
     "forms/totp_disable_form.ur.yml": {
+        "action.submit": {
+            "hash": "398a1683faa1011b01937783237013e0",
+            "engine": "syrtis"
+        },
+        "error.current_password": {
+            "hash": "ec4ff227c7fe48e5019aa86a8c52b2b8",
+            "engine": "syrtis"
+        },
+        "field.current_password.label": {
+            "hash": "ba4685adc0622faa897c51030b8962d9",
+            "engine": "syrtis"
+        }
+    },
+    "forms/totp_disable_form.vi.yml": {
         "action.submit": {
             "hash": "398a1683faa1011b01937783237013e0",
             "engine": "syrtis"
@@ -2331,6 +3219,34 @@
             "engine": "syrtis"
         }
     },
+    "forms/totp_enable_form.id.yml": {
+        "action.submit": {
+            "hash": "6b9f65b6dce57092770802cf8883d4f8",
+            "engine": "syrtis"
+        },
+        "error.invalid": {
+            "hash": "ada6148970c0891c495c7e1edcbb35e5",
+            "engine": "syrtis"
+        },
+        "field.code.label": {
+            "hash": "721747b4b84bb9e9e71fc0e89ccf3a99",
+            "engine": "syrtis"
+        }
+    },
+    "forms/totp_enable_form.it.yml": {
+        "action.submit": {
+            "hash": "6b9f65b6dce57092770802cf8883d4f8",
+            "engine": "syrtis"
+        },
+        "error.invalid": {
+            "hash": "ada6148970c0891c495c7e1edcbb35e5",
+            "engine": "syrtis"
+        },
+        "field.code.label": {
+            "hash": "721747b4b84bb9e9e71fc0e89ccf3a99",
+            "engine": "syrtis"
+        }
+    },
     "forms/totp_enable_form.ja.yml": {
         "action.submit": {
             "hash": "6b9f65b6dce57092770802cf8883d4f8",
@@ -2359,7 +3275,35 @@
             "engine": "syrtis"
         }
     },
+    "forms/totp_enable_form.nl.yml": {
+        "action.submit": {
+            "hash": "6b9f65b6dce57092770802cf8883d4f8",
+            "engine": "syrtis"
+        },
+        "error.invalid": {
+            "hash": "ada6148970c0891c495c7e1edcbb35e5",
+            "engine": "syrtis"
+        },
+        "field.code.label": {
+            "hash": "721747b4b84bb9e9e71fc0e89ccf3a99",
+            "engine": "syrtis"
+        }
+    },
     "forms/totp_enable_form.pl.yml": {
+        "action.submit": {
+            "hash": "6b9f65b6dce57092770802cf8883d4f8",
+            "engine": "syrtis"
+        },
+        "error.invalid": {
+            "hash": "ada6148970c0891c495c7e1edcbb35e5",
+            "engine": "syrtis"
+        },
+        "field.code.label": {
+            "hash": "721747b4b84bb9e9e71fc0e89ccf3a99",
+            "engine": "syrtis"
+        }
+    },
+    "forms/totp_enable_form.pt_BR.yml": {
         "action.submit": {
             "hash": "6b9f65b6dce57092770802cf8883d4f8",
             "engine": "syrtis"
@@ -2401,7 +3345,35 @@
             "engine": "syrtis"
         }
     },
+    "forms/totp_enable_form.tr.yml": {
+        "action.submit": {
+            "hash": "6b9f65b6dce57092770802cf8883d4f8",
+            "engine": "syrtis"
+        },
+        "error.invalid": {
+            "hash": "ada6148970c0891c495c7e1edcbb35e5",
+            "engine": "syrtis"
+        },
+        "field.code.label": {
+            "hash": "721747b4b84bb9e9e71fc0e89ccf3a99",
+            "engine": "syrtis"
+        }
+    },
     "forms/totp_enable_form.ur.yml": {
+        "action.submit": {
+            "hash": "6b9f65b6dce57092770802cf8883d4f8",
+            "engine": "syrtis"
+        },
+        "error.invalid": {
+            "hash": "ada6148970c0891c495c7e1edcbb35e5",
+            "engine": "syrtis"
+        },
+        "field.code.label": {
+            "hash": "721747b4b84bb9e9e71fc0e89ccf3a99",
+            "engine": "syrtis"
+        }
+    },
+    "forms/totp_enable_form.vi.yml": {
         "action.submit": {
             "hash": "6b9f65b6dce57092770802cf8883d4f8",
             "engine": "syrtis"
@@ -2509,6 +3481,26 @@
             "engine": "syrtis"
         }
     },
+    "forms/tunnel/user_mail_form.id.yml": {
+        "error.email": {
+            "hash": "37b467397ecf92161337be8254534fe7",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "3b3f7cab02a17190aac977f53b51986f",
+            "engine": "syrtis"
+        }
+    },
+    "forms/tunnel/user_mail_form.it.yml": {
+        "error.email": {
+            "hash": "37b467397ecf92161337be8254534fe7",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "3b3f7cab02a17190aac977f53b51986f",
+            "engine": "syrtis"
+        }
+    },
     "forms/tunnel/user_mail_form.ja.yml": {
         "error.email": {
             "hash": "37b467397ecf92161337be8254534fe7",
@@ -2529,7 +3521,27 @@
             "engine": "syrtis"
         }
     },
+    "forms/tunnel/user_mail_form.nl.yml": {
+        "error.email": {
+            "hash": "37b467397ecf92161337be8254534fe7",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "3b3f7cab02a17190aac977f53b51986f",
+            "engine": "syrtis"
+        }
+    },
     "forms/tunnel/user_mail_form.pl.yml": {
+        "error.email": {
+            "hash": "37b467397ecf92161337be8254534fe7",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "3b3f7cab02a17190aac977f53b51986f",
+            "engine": "syrtis"
+        }
+    },
+    "forms/tunnel/user_mail_form.pt_BR.yml": {
         "error.email": {
             "hash": "37b467397ecf92161337be8254534fe7",
             "engine": "syrtis"
@@ -2559,7 +3571,27 @@
             "engine": "syrtis"
         }
     },
+    "forms/tunnel/user_mail_form.tr.yml": {
+        "error.email": {
+            "hash": "37b467397ecf92161337be8254534fe7",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "3b3f7cab02a17190aac977f53b51986f",
+            "engine": "syrtis"
+        }
+    },
     "forms/tunnel/user_mail_form.ur.yml": {
+        "error.email": {
+            "hash": "37b467397ecf92161337be8254534fe7",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "3b3f7cab02a17190aac977f53b51986f",
+            "engine": "syrtis"
+        }
+    },
+    "forms/tunnel/user_mail_form.vi.yml": {
         "error.email": {
             "hash": "37b467397ecf92161337be8254534fe7",
             "engine": "syrtis"
@@ -2819,6 +3851,66 @@
             "engine": "syrtis"
         }
     },
+    "forms/two_factor_code_form.id.yml": {
+        "action.submit": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        },
+        "error.expired": {
+            "hash": "ddc5cee80189763c7710b538b6d5f0e3",
+            "engine": "syrtis"
+        },
+        "error.invalid": {
+            "hash": "7973abf4ea4e5054e3952d27a771e67b",
+            "engine": "syrtis"
+        },
+        "error.too_many_attempts": {
+            "hash": "e04e0ba5226300de1e51918a8ed75b6e",
+            "engine": "syrtis"
+        },
+        "field.code.backup_label": {
+            "hash": "95e5c637c2d80f94e02569e178062d45",
+            "engine": "syrtis"
+        },
+        "field.code.label": {
+            "hash": "4db727b1f7912e23036a40cafa2b6efa",
+            "engine": "syrtis"
+        },
+        "field.trusted.label": {
+            "hash": "607a9e3714241fdfa58e420b445ba998",
+            "engine": "syrtis"
+        }
+    },
+    "forms/two_factor_code_form.it.yml": {
+        "action.submit": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        },
+        "error.expired": {
+            "hash": "ddc5cee80189763c7710b538b6d5f0e3",
+            "engine": "syrtis"
+        },
+        "error.invalid": {
+            "hash": "7973abf4ea4e5054e3952d27a771e67b",
+            "engine": "syrtis"
+        },
+        "error.too_many_attempts": {
+            "hash": "e04e0ba5226300de1e51918a8ed75b6e",
+            "engine": "syrtis"
+        },
+        "field.code.backup_label": {
+            "hash": "95e5c637c2d80f94e02569e178062d45",
+            "engine": "syrtis"
+        },
+        "field.code.label": {
+            "hash": "4db727b1f7912e23036a40cafa2b6efa",
+            "engine": "syrtis"
+        },
+        "field.trusted.label": {
+            "hash": "607a9e3714241fdfa58e420b445ba998",
+            "engine": "syrtis"
+        }
+    },
     "forms/two_factor_code_form.ja.yml": {
         "action.submit": {
             "hash": "a4d2313525c47af15e444c88880bc766",
@@ -2879,7 +3971,67 @@
             "engine": "syrtis"
         }
     },
+    "forms/two_factor_code_form.nl.yml": {
+        "action.submit": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        },
+        "error.expired": {
+            "hash": "ddc5cee80189763c7710b538b6d5f0e3",
+            "engine": "syrtis"
+        },
+        "error.invalid": {
+            "hash": "7973abf4ea4e5054e3952d27a771e67b",
+            "engine": "syrtis"
+        },
+        "error.too_many_attempts": {
+            "hash": "e04e0ba5226300de1e51918a8ed75b6e",
+            "engine": "syrtis"
+        },
+        "field.code.backup_label": {
+            "hash": "95e5c637c2d80f94e02569e178062d45",
+            "engine": "syrtis"
+        },
+        "field.code.label": {
+            "hash": "4db727b1f7912e23036a40cafa2b6efa",
+            "engine": "syrtis"
+        },
+        "field.trusted.label": {
+            "hash": "607a9e3714241fdfa58e420b445ba998",
+            "engine": "syrtis"
+        }
+    },
     "forms/two_factor_code_form.pl.yml": {
+        "action.submit": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        },
+        "error.expired": {
+            "hash": "ddc5cee80189763c7710b538b6d5f0e3",
+            "engine": "syrtis"
+        },
+        "error.invalid": {
+            "hash": "7973abf4ea4e5054e3952d27a771e67b",
+            "engine": "syrtis"
+        },
+        "error.too_many_attempts": {
+            "hash": "e04e0ba5226300de1e51918a8ed75b6e",
+            "engine": "syrtis"
+        },
+        "field.code.backup_label": {
+            "hash": "95e5c637c2d80f94e02569e178062d45",
+            "engine": "syrtis"
+        },
+        "field.code.label": {
+            "hash": "4db727b1f7912e23036a40cafa2b6efa",
+            "engine": "syrtis"
+        },
+        "field.trusted.label": {
+            "hash": "607a9e3714241fdfa58e420b445ba998",
+            "engine": "syrtis"
+        }
+    },
+    "forms/two_factor_code_form.pt_BR.yml": {
         "action.submit": {
             "hash": "a4d2313525c47af15e444c88880bc766",
             "engine": "syrtis"
@@ -2969,7 +4121,67 @@
             "engine": "syrtis"
         }
     },
+    "forms/two_factor_code_form.tr.yml": {
+        "action.submit": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        },
+        "error.expired": {
+            "hash": "ddc5cee80189763c7710b538b6d5f0e3",
+            "engine": "syrtis"
+        },
+        "error.invalid": {
+            "hash": "7973abf4ea4e5054e3952d27a771e67b",
+            "engine": "syrtis"
+        },
+        "error.too_many_attempts": {
+            "hash": "e04e0ba5226300de1e51918a8ed75b6e",
+            "engine": "syrtis"
+        },
+        "field.code.backup_label": {
+            "hash": "95e5c637c2d80f94e02569e178062d45",
+            "engine": "syrtis"
+        },
+        "field.code.label": {
+            "hash": "4db727b1f7912e23036a40cafa2b6efa",
+            "engine": "syrtis"
+        },
+        "field.trusted.label": {
+            "hash": "607a9e3714241fdfa58e420b445ba998",
+            "engine": "syrtis"
+        }
+    },
     "forms/two_factor_code_form.ur.yml": {
+        "action.submit": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        },
+        "error.expired": {
+            "hash": "ddc5cee80189763c7710b538b6d5f0e3",
+            "engine": "syrtis"
+        },
+        "error.invalid": {
+            "hash": "7973abf4ea4e5054e3952d27a771e67b",
+            "engine": "syrtis"
+        },
+        "error.too_many_attempts": {
+            "hash": "e04e0ba5226300de1e51918a8ed75b6e",
+            "engine": "syrtis"
+        },
+        "field.code.backup_label": {
+            "hash": "95e5c637c2d80f94e02569e178062d45",
+            "engine": "syrtis"
+        },
+        "field.code.label": {
+            "hash": "4db727b1f7912e23036a40cafa2b6efa",
+            "engine": "syrtis"
+        },
+        "field.trusted.label": {
+            "hash": "607a9e3714241fdfa58e420b445ba998",
+            "engine": "syrtis"
+        }
+    },
+    "forms/two_factor_code_form.vi.yml": {
         "action.submit": {
             "hash": "a4d2313525c47af15e444c88880bc766",
             "engine": "syrtis"
@@ -3141,6 +4353,34 @@
             "engine": "syrtis"
         }
     },
+    "mails/magic_link.id.yml": {
+        "intro": {
+            "hash": "9197abea0d8e560c639f1f20cacfa44c",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "2bd5747fade3445dfc68901e3c1c5096",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "3124c53bd993498194873b197f4f257f",
+            "engine": "syrtis"
+        }
+    },
+    "mails/magic_link.it.yml": {
+        "intro": {
+            "hash": "9197abea0d8e560c639f1f20cacfa44c",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "2bd5747fade3445dfc68901e3c1c5096",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "3124c53bd993498194873b197f4f257f",
+            "engine": "syrtis"
+        }
+    },
     "mails/magic_link.ja.yml": {
         "intro": {
             "hash": "9197abea0d8e560c639f1f20cacfa44c",
@@ -3169,7 +4409,35 @@
             "engine": "syrtis"
         }
     },
+    "mails/magic_link.nl.yml": {
+        "intro": {
+            "hash": "9197abea0d8e560c639f1f20cacfa44c",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "2bd5747fade3445dfc68901e3c1c5096",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "3124c53bd993498194873b197f4f257f",
+            "engine": "syrtis"
+        }
+    },
     "mails/magic_link.pl.yml": {
+        "intro": {
+            "hash": "9197abea0d8e560c639f1f20cacfa44c",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "2bd5747fade3445dfc68901e3c1c5096",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "3124c53bd993498194873b197f4f257f",
+            "engine": "syrtis"
+        }
+    },
+    "mails/magic_link.pt_BR.yml": {
         "intro": {
             "hash": "9197abea0d8e560c639f1f20cacfa44c",
             "engine": "syrtis"
@@ -3211,7 +4479,35 @@
             "engine": "syrtis"
         }
     },
+    "mails/magic_link.tr.yml": {
+        "intro": {
+            "hash": "9197abea0d8e560c639f1f20cacfa44c",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "2bd5747fade3445dfc68901e3c1c5096",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "3124c53bd993498194873b197f4f257f",
+            "engine": "syrtis"
+        }
+    },
     "mails/magic_link.ur.yml": {
+        "intro": {
+            "hash": "9197abea0d8e560c639f1f20cacfa44c",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "2bd5747fade3445dfc68901e3c1c5096",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "3124c53bd993498194873b197f4f257f",
+            "engine": "syrtis"
+        }
+    },
+    "mails/magic_link.vi.yml": {
         "intro": {
             "hash": "9197abea0d8e560c639f1f20cacfa44c",
             "engine": "syrtis"
@@ -3351,6 +4647,34 @@
             "engine": "syrtis"
         }
     },
+    "mails/password_reset.id.yml": {
+        "intro": {
+            "hash": "4ee2b26e71a06ffaed167cc688d3b21c",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "7b26b234637fd9b6daa38e10b4b9f954",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "85f721ecc5480179165edd03384aa847",
+            "engine": "syrtis"
+        }
+    },
+    "mails/password_reset.it.yml": {
+        "intro": {
+            "hash": "4ee2b26e71a06ffaed167cc688d3b21c",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "7b26b234637fd9b6daa38e10b4b9f954",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "85f721ecc5480179165edd03384aa847",
+            "engine": "syrtis"
+        }
+    },
     "mails/password_reset.ja.yml": {
         "intro": {
             "hash": "4ee2b26e71a06ffaed167cc688d3b21c",
@@ -3379,7 +4703,35 @@
             "engine": "syrtis"
         }
     },
+    "mails/password_reset.nl.yml": {
+        "intro": {
+            "hash": "4ee2b26e71a06ffaed167cc688d3b21c",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "7b26b234637fd9b6daa38e10b4b9f954",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "85f721ecc5480179165edd03384aa847",
+            "engine": "syrtis"
+        }
+    },
     "mails/password_reset.pl.yml": {
+        "intro": {
+            "hash": "4ee2b26e71a06ffaed167cc688d3b21c",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "7b26b234637fd9b6daa38e10b4b9f954",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "85f721ecc5480179165edd03384aa847",
+            "engine": "syrtis"
+        }
+    },
+    "mails/password_reset.pt_BR.yml": {
         "intro": {
             "hash": "4ee2b26e71a06ffaed167cc688d3b21c",
             "engine": "syrtis"
@@ -3421,7 +4773,35 @@
             "engine": "syrtis"
         }
     },
+    "mails/password_reset.tr.yml": {
+        "intro": {
+            "hash": "4ee2b26e71a06ffaed167cc688d3b21c",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "7b26b234637fd9b6daa38e10b4b9f954",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "85f721ecc5480179165edd03384aa847",
+            "engine": "syrtis"
+        }
+    },
     "mails/password_reset.ur.yml": {
+        "intro": {
+            "hash": "4ee2b26e71a06ffaed167cc688d3b21c",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "7b26b234637fd9b6daa38e10b4b9f954",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "85f721ecc5480179165edd03384aa847",
+            "engine": "syrtis"
+        }
+    },
+    "mails/password_reset.vi.yml": {
         "intro": {
             "hash": "4ee2b26e71a06ffaed167cc688d3b21c",
             "engine": "syrtis"
@@ -3561,6 +4941,34 @@
             "engine": "syrtis"
         }
     },
+    "mails/two_factor_code.id.yml": {
+        "intro": {
+            "hash": "7b895833f21a257d67dbbaacca7da028",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "fe7ee288eff9c346e04b5d066b793800",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "14add19f6f390a26e205071b7d7c5d7a",
+            "engine": "syrtis"
+        }
+    },
+    "mails/two_factor_code.it.yml": {
+        "intro": {
+            "hash": "7b895833f21a257d67dbbaacca7da028",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "fe7ee288eff9c346e04b5d066b793800",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "14add19f6f390a26e205071b7d7c5d7a",
+            "engine": "syrtis"
+        }
+    },
     "mails/two_factor_code.ja.yml": {
         "intro": {
             "hash": "7b895833f21a257d67dbbaacca7da028",
@@ -3589,7 +4997,35 @@
             "engine": "syrtis"
         }
     },
+    "mails/two_factor_code.nl.yml": {
+        "intro": {
+            "hash": "7b895833f21a257d67dbbaacca7da028",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "fe7ee288eff9c346e04b5d066b793800",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "14add19f6f390a26e205071b7d7c5d7a",
+            "engine": "syrtis"
+        }
+    },
     "mails/two_factor_code.pl.yml": {
+        "intro": {
+            "hash": "7b895833f21a257d67dbbaacca7da028",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "fe7ee288eff9c346e04b5d066b793800",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "14add19f6f390a26e205071b7d7c5d7a",
+            "engine": "syrtis"
+        }
+    },
+    "mails/two_factor_code.pt_BR.yml": {
         "intro": {
             "hash": "7b895833f21a257d67dbbaacca7da028",
             "engine": "syrtis"
@@ -3631,7 +5067,35 @@
             "engine": "syrtis"
         }
     },
+    "mails/two_factor_code.tr.yml": {
+        "intro": {
+            "hash": "7b895833f21a257d67dbbaacca7da028",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "fe7ee288eff9c346e04b5d066b793800",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "14add19f6f390a26e205071b7d7c5d7a",
+            "engine": "syrtis"
+        }
+    },
     "mails/two_factor_code.ur.yml": {
+        "intro": {
+            "hash": "7b895833f21a257d67dbbaacca7da028",
+            "engine": "syrtis"
+        },
+        "subject": {
+            "hash": "fe7ee288eff9c346e04b5d066b793800",
+            "engine": "syrtis"
+        },
+        "validity": {
+            "hash": "14add19f6f390a26e205071b7d7c5d7a",
+            "engine": "syrtis"
+        }
+    },
+    "mails/two_factor_code.vi.yml": {
         "intro": {
             "hash": "7b895833f21a257d67dbbaacca7da028",
             "engine": "syrtis"
@@ -3771,6 +5235,34 @@
             "engine": "syrtis"
         }
     },
+    "pages/password/forgot.id.yml": {
+        "link_invalid": {
+            "hash": "f58153cacdb56ab49c768d616e26f0be",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "173b71823ac074fbad1afe8f2637ad8e",
+            "engine": "syrtis"
+        }
+    },
+    "pages/password/forgot.it.yml": {
+        "link_invalid": {
+            "hash": "f58153cacdb56ab49c768d616e26f0be",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "173b71823ac074fbad1afe8f2637ad8e",
+            "engine": "syrtis"
+        }
+    },
     "pages/password/forgot.ja.yml": {
         "link_invalid": {
             "hash": "f58153cacdb56ab49c768d616e26f0be",
@@ -3799,7 +5291,35 @@
             "engine": "syrtis"
         }
     },
+    "pages/password/forgot.nl.yml": {
+        "link_invalid": {
+            "hash": "f58153cacdb56ab49c768d616e26f0be",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "173b71823ac074fbad1afe8f2637ad8e",
+            "engine": "syrtis"
+        }
+    },
     "pages/password/forgot.pl.yml": {
+        "link_invalid": {
+            "hash": "f58153cacdb56ab49c768d616e26f0be",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "173b71823ac074fbad1afe8f2637ad8e",
+            "engine": "syrtis"
+        }
+    },
+    "pages/password/forgot.pt_BR.yml": {
         "link_invalid": {
             "hash": "f58153cacdb56ab49c768d616e26f0be",
             "engine": "syrtis"
@@ -3841,7 +5361,35 @@
             "engine": "syrtis"
         }
     },
+    "pages/password/forgot.tr.yml": {
+        "link_invalid": {
+            "hash": "f58153cacdb56ab49c768d616e26f0be",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "173b71823ac074fbad1afe8f2637ad8e",
+            "engine": "syrtis"
+        }
+    },
     "pages/password/forgot.ur.yml": {
+        "link_invalid": {
+            "hash": "f58153cacdb56ab49c768d616e26f0be",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "173b71823ac074fbad1afe8f2637ad8e",
+            "engine": "syrtis"
+        }
+    },
+    "pages/password/forgot.vi.yml": {
         "link_invalid": {
             "hash": "f58153cacdb56ab49c768d616e26f0be",
             "engine": "syrtis"
@@ -3981,6 +5529,34 @@
             "engine": "syrtis"
         }
     },
+    "pages/password/new.id.yml": {
+        "intro": {
+            "hash": "d9ac5ae4d48740d84103552a04ac337c",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "127d7278a5b5ce32582e66fd186c15ec",
+            "engine": "syrtis"
+        }
+    },
+    "pages/password/new.it.yml": {
+        "intro": {
+            "hash": "d9ac5ae4d48740d84103552a04ac337c",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "127d7278a5b5ce32582e66fd186c15ec",
+            "engine": "syrtis"
+        }
+    },
     "pages/password/new.ja.yml": {
         "intro": {
             "hash": "d9ac5ae4d48740d84103552a04ac337c",
@@ -4009,7 +5585,35 @@
             "engine": "syrtis"
         }
     },
+    "pages/password/new.nl.yml": {
+        "intro": {
+            "hash": "d9ac5ae4d48740d84103552a04ac337c",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "127d7278a5b5ce32582e66fd186c15ec",
+            "engine": "syrtis"
+        }
+    },
     "pages/password/new.pl.yml": {
+        "intro": {
+            "hash": "d9ac5ae4d48740d84103552a04ac337c",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "127d7278a5b5ce32582e66fd186c15ec",
+            "engine": "syrtis"
+        }
+    },
+    "pages/password/new.pt_BR.yml": {
         "intro": {
             "hash": "d9ac5ae4d48740d84103552a04ac337c",
             "engine": "syrtis"
@@ -4051,7 +5655,35 @@
             "engine": "syrtis"
         }
     },
+    "pages/password/new.tr.yml": {
+        "intro": {
+            "hash": "d9ac5ae4d48740d84103552a04ac337c",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "127d7278a5b5ce32582e66fd186c15ec",
+            "engine": "syrtis"
+        }
+    },
     "pages/password/new.ur.yml": {
+        "intro": {
+            "hash": "d9ac5ae4d48740d84103552a04ac337c",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "127d7278a5b5ce32582e66fd186c15ec",
+            "engine": "syrtis"
+        }
+    },
+    "pages/password/new.vi.yml": {
         "intro": {
             "hash": "d9ac5ae4d48740d84103552a04ac337c",
             "engine": "syrtis"
@@ -4223,6 +5855,42 @@
             "engine": "syrtis"
         }
     },
+    "pages/security/login.id.yml": {
+        "forgot_password": {
+            "hash": "173b71823ac074fbad1afe8f2637ad8e",
+            "engine": "syrtis"
+        },
+        "magic_link": {
+            "hash": "078c1a879a32aff822e9dee694b98a3a",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "1331f3c4d8fccacb8677096428c4dad6",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        }
+    },
+    "pages/security/login.it.yml": {
+        "forgot_password": {
+            "hash": "173b71823ac074fbad1afe8f2637ad8e",
+            "engine": "syrtis"
+        },
+        "magic_link": {
+            "hash": "078c1a879a32aff822e9dee694b98a3a",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "1331f3c4d8fccacb8677096428c4dad6",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        }
+    },
     "pages/security/login.ja.yml": {
         "forgot_password": {
             "hash": "173b71823ac074fbad1afe8f2637ad8e",
@@ -4259,7 +5927,43 @@
             "engine": "syrtis"
         }
     },
+    "pages/security/login.nl.yml": {
+        "forgot_password": {
+            "hash": "173b71823ac074fbad1afe8f2637ad8e",
+            "engine": "syrtis"
+        },
+        "magic_link": {
+            "hash": "078c1a879a32aff822e9dee694b98a3a",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "1331f3c4d8fccacb8677096428c4dad6",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        }
+    },
     "pages/security/login.pl.yml": {
+        "forgot_password": {
+            "hash": "173b71823ac074fbad1afe8f2637ad8e",
+            "engine": "syrtis"
+        },
+        "magic_link": {
+            "hash": "078c1a879a32aff822e9dee694b98a3a",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "1331f3c4d8fccacb8677096428c4dad6",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        }
+    },
+    "pages/security/login.pt_BR.yml": {
         "forgot_password": {
             "hash": "173b71823ac074fbad1afe8f2637ad8e",
             "engine": "syrtis"
@@ -4313,7 +6017,43 @@
             "engine": "syrtis"
         }
     },
+    "pages/security/login.tr.yml": {
+        "forgot_password": {
+            "hash": "173b71823ac074fbad1afe8f2637ad8e",
+            "engine": "syrtis"
+        },
+        "magic_link": {
+            "hash": "078c1a879a32aff822e9dee694b98a3a",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "1331f3c4d8fccacb8677096428c4dad6",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        }
+    },
     "pages/security/login.ur.yml": {
+        "forgot_password": {
+            "hash": "173b71823ac074fbad1afe8f2637ad8e",
+            "engine": "syrtis"
+        },
+        "magic_link": {
+            "hash": "078c1a879a32aff822e9dee694b98a3a",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "1331f3c4d8fccacb8677096428c4dad6",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "a4d2313525c47af15e444c88880bc766",
+            "engine": "syrtis"
+        }
+    },
+    "pages/security/login.vi.yml": {
         "forgot_password": {
             "hash": "173b71823ac074fbad1afe8f2637ad8e",
             "engine": "syrtis"
@@ -4493,6 +6233,42 @@
             "engine": "syrtis"
         }
     },
+    "pages/totp/backup_codes.id.yml": {
+        "action.done": {
+            "hash": "ee359c2bb05f9c9e65fae6cb9406ecc6",
+            "engine": "syrtis"
+        },
+        "intro": {
+            "hash": "c9d5fd91c90399dd4d00f8f480843ecf",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "f4f985527eac53eb1c2d3c94173b8a6d",
+            "engine": "syrtis"
+        }
+    },
+    "pages/totp/backup_codes.it.yml": {
+        "action.done": {
+            "hash": "ee359c2bb05f9c9e65fae6cb9406ecc6",
+            "engine": "syrtis"
+        },
+        "intro": {
+            "hash": "c9d5fd91c90399dd4d00f8f480843ecf",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "f4f985527eac53eb1c2d3c94173b8a6d",
+            "engine": "syrtis"
+        }
+    },
     "pages/totp/backup_codes.ja.yml": {
         "action.done": {
             "hash": "ee359c2bb05f9c9e65fae6cb9406ecc6",
@@ -4529,7 +6305,43 @@
             "engine": "syrtis"
         }
     },
+    "pages/totp/backup_codes.nl.yml": {
+        "action.done": {
+            "hash": "ee359c2bb05f9c9e65fae6cb9406ecc6",
+            "engine": "syrtis"
+        },
+        "intro": {
+            "hash": "c9d5fd91c90399dd4d00f8f480843ecf",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "f4f985527eac53eb1c2d3c94173b8a6d",
+            "engine": "syrtis"
+        }
+    },
     "pages/totp/backup_codes.pl.yml": {
+        "action.done": {
+            "hash": "ee359c2bb05f9c9e65fae6cb9406ecc6",
+            "engine": "syrtis"
+        },
+        "intro": {
+            "hash": "c9d5fd91c90399dd4d00f8f480843ecf",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "f4f985527eac53eb1c2d3c94173b8a6d",
+            "engine": "syrtis"
+        }
+    },
+    "pages/totp/backup_codes.pt_BR.yml": {
         "action.done": {
             "hash": "ee359c2bb05f9c9e65fae6cb9406ecc6",
             "engine": "syrtis"
@@ -4583,7 +6395,43 @@
             "engine": "syrtis"
         }
     },
+    "pages/totp/backup_codes.tr.yml": {
+        "action.done": {
+            "hash": "ee359c2bb05f9c9e65fae6cb9406ecc6",
+            "engine": "syrtis"
+        },
+        "intro": {
+            "hash": "c9d5fd91c90399dd4d00f8f480843ecf",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "f4f985527eac53eb1c2d3c94173b8a6d",
+            "engine": "syrtis"
+        }
+    },
     "pages/totp/backup_codes.ur.yml": {
+        "action.done": {
+            "hash": "ee359c2bb05f9c9e65fae6cb9406ecc6",
+            "engine": "syrtis"
+        },
+        "intro": {
+            "hash": "c9d5fd91c90399dd4d00f8f480843ecf",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "86d8acaf24ce115ef0ceefc86df30f5d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "f4f985527eac53eb1c2d3c94173b8a6d",
+            "engine": "syrtis"
+        }
+    },
+    "pages/totp/backup_codes.vi.yml": {
         "action.done": {
             "hash": "ee359c2bb05f9c9e65fae6cb9406ecc6",
             "engine": "syrtis"
@@ -4923,6 +6771,82 @@
             "engine": "syrtis"
         }
     },
+    "pages/totp/index.id.yml": {
+        "action.regenerate": {
+            "hash": "be1712b527c78ce322823c00cbdc0909",
+            "engine": "syrtis"
+        },
+        "disable.intro": {
+            "hash": "2fcd373abcec438e35acf3563b9c4968",
+            "engine": "syrtis"
+        },
+        "enabled.backup_codes": {
+            "hash": "6a63ab217a1cf292c6d06715f58abcba",
+            "engine": "syrtis"
+        },
+        "enabled.intro": {
+            "hash": "8d695831ef5b27762075cf17731b32a3",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "ac354f52aa9fd269eec2fe484fa489bd",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "1f2ccb564147feeb5516caee727a654f",
+            "engine": "syrtis"
+        },
+        "setup.intro": {
+            "hash": "2e80f8b8ab95efe46d30bcf1e2bf98ff",
+            "engine": "syrtis"
+        },
+        "setup.qr_alt": {
+            "hash": "5a567d73c78d237e8e0c6ac595ef16bf",
+            "engine": "syrtis"
+        },
+        "setup.secret": {
+            "hash": "8d28cba9197e40764f96e5377c47120b",
+            "engine": "syrtis"
+        }
+    },
+    "pages/totp/index.it.yml": {
+        "action.regenerate": {
+            "hash": "be1712b527c78ce322823c00cbdc0909",
+            "engine": "syrtis"
+        },
+        "disable.intro": {
+            "hash": "2fcd373abcec438e35acf3563b9c4968",
+            "engine": "syrtis"
+        },
+        "enabled.backup_codes": {
+            "hash": "6a63ab217a1cf292c6d06715f58abcba",
+            "engine": "syrtis"
+        },
+        "enabled.intro": {
+            "hash": "8d695831ef5b27762075cf17731b32a3",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "ac354f52aa9fd269eec2fe484fa489bd",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "1f2ccb564147feeb5516caee727a654f",
+            "engine": "syrtis"
+        },
+        "setup.intro": {
+            "hash": "2e80f8b8ab95efe46d30bcf1e2bf98ff",
+            "engine": "syrtis"
+        },
+        "setup.qr_alt": {
+            "hash": "5a567d73c78d237e8e0c6ac595ef16bf",
+            "engine": "syrtis"
+        },
+        "setup.secret": {
+            "hash": "8d28cba9197e40764f96e5377c47120b",
+            "engine": "syrtis"
+        }
+    },
     "pages/totp/index.ja.yml": {
         "action.regenerate": {
             "hash": "be1712b527c78ce322823c00cbdc0909",
@@ -4999,7 +6923,83 @@
             "engine": "syrtis"
         }
     },
+    "pages/totp/index.nl.yml": {
+        "action.regenerate": {
+            "hash": "be1712b527c78ce322823c00cbdc0909",
+            "engine": "syrtis"
+        },
+        "disable.intro": {
+            "hash": "2fcd373abcec438e35acf3563b9c4968",
+            "engine": "syrtis"
+        },
+        "enabled.backup_codes": {
+            "hash": "6a63ab217a1cf292c6d06715f58abcba",
+            "engine": "syrtis"
+        },
+        "enabled.intro": {
+            "hash": "8d695831ef5b27762075cf17731b32a3",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "ac354f52aa9fd269eec2fe484fa489bd",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "1f2ccb564147feeb5516caee727a654f",
+            "engine": "syrtis"
+        },
+        "setup.intro": {
+            "hash": "2e80f8b8ab95efe46d30bcf1e2bf98ff",
+            "engine": "syrtis"
+        },
+        "setup.qr_alt": {
+            "hash": "5a567d73c78d237e8e0c6ac595ef16bf",
+            "engine": "syrtis"
+        },
+        "setup.secret": {
+            "hash": "8d28cba9197e40764f96e5377c47120b",
+            "engine": "syrtis"
+        }
+    },
     "pages/totp/index.pl.yml": {
+        "action.regenerate": {
+            "hash": "be1712b527c78ce322823c00cbdc0909",
+            "engine": "syrtis"
+        },
+        "disable.intro": {
+            "hash": "2fcd373abcec438e35acf3563b9c4968",
+            "engine": "syrtis"
+        },
+        "enabled.backup_codes": {
+            "hash": "6a63ab217a1cf292c6d06715f58abcba",
+            "engine": "syrtis"
+        },
+        "enabled.intro": {
+            "hash": "8d695831ef5b27762075cf17731b32a3",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "ac354f52aa9fd269eec2fe484fa489bd",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "1f2ccb564147feeb5516caee727a654f",
+            "engine": "syrtis"
+        },
+        "setup.intro": {
+            "hash": "2e80f8b8ab95efe46d30bcf1e2bf98ff",
+            "engine": "syrtis"
+        },
+        "setup.qr_alt": {
+            "hash": "5a567d73c78d237e8e0c6ac595ef16bf",
+            "engine": "syrtis"
+        },
+        "setup.secret": {
+            "hash": "8d28cba9197e40764f96e5377c47120b",
+            "engine": "syrtis"
+        }
+    },
+    "pages/totp/index.pt_BR.yml": {
         "action.regenerate": {
             "hash": "be1712b527c78ce322823c00cbdc0909",
             "engine": "syrtis"
@@ -5113,7 +7113,83 @@
             "engine": "syrtis"
         }
     },
+    "pages/totp/index.tr.yml": {
+        "action.regenerate": {
+            "hash": "be1712b527c78ce322823c00cbdc0909",
+            "engine": "syrtis"
+        },
+        "disable.intro": {
+            "hash": "2fcd373abcec438e35acf3563b9c4968",
+            "engine": "syrtis"
+        },
+        "enabled.backup_codes": {
+            "hash": "6a63ab217a1cf292c6d06715f58abcba",
+            "engine": "syrtis"
+        },
+        "enabled.intro": {
+            "hash": "8d695831ef5b27762075cf17731b32a3",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "ac354f52aa9fd269eec2fe484fa489bd",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "1f2ccb564147feeb5516caee727a654f",
+            "engine": "syrtis"
+        },
+        "setup.intro": {
+            "hash": "2e80f8b8ab95efe46d30bcf1e2bf98ff",
+            "engine": "syrtis"
+        },
+        "setup.qr_alt": {
+            "hash": "5a567d73c78d237e8e0c6ac595ef16bf",
+            "engine": "syrtis"
+        },
+        "setup.secret": {
+            "hash": "8d28cba9197e40764f96e5377c47120b",
+            "engine": "syrtis"
+        }
+    },
     "pages/totp/index.ur.yml": {
+        "action.regenerate": {
+            "hash": "be1712b527c78ce322823c00cbdc0909",
+            "engine": "syrtis"
+        },
+        "disable.intro": {
+            "hash": "2fcd373abcec438e35acf3563b9c4968",
+            "engine": "syrtis"
+        },
+        "enabled.backup_codes": {
+            "hash": "6a63ab217a1cf292c6d06715f58abcba",
+            "engine": "syrtis"
+        },
+        "enabled.intro": {
+            "hash": "8d695831ef5b27762075cf17731b32a3",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "ac354f52aa9fd269eec2fe484fa489bd",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "1f2ccb564147feeb5516caee727a654f",
+            "engine": "syrtis"
+        },
+        "setup.intro": {
+            "hash": "2e80f8b8ab95efe46d30bcf1e2bf98ff",
+            "engine": "syrtis"
+        },
+        "setup.qr_alt": {
+            "hash": "5a567d73c78d237e8e0c6ac595ef16bf",
+            "engine": "syrtis"
+        },
+        "setup.secret": {
+            "hash": "8d28cba9197e40764f96e5377c47120b",
+            "engine": "syrtis"
+        }
+    },
+    "pages/totp/index.vi.yml": {
         "action.regenerate": {
             "hash": "be1712b527c78ce322823c00cbdc0909",
             "engine": "syrtis"
@@ -5525,6 +7601,90 @@
             "engine": "syrtis"
         }
     },
+    "pages/two_factor/index.id.yml": {
+        "action.cancel": {
+            "hash": "d3caf0e02c492419ac7f6392e04a8038",
+            "engine": "syrtis"
+        },
+        "action.resend": {
+            "hash": "4c3f3c6fbb032fed067f69c0bea88a63",
+            "engine": "syrtis"
+        },
+        "action.use_app": {
+            "hash": "ab13c1e9d0a15a5979e565684fd1374f",
+            "engine": "syrtis"
+        },
+        "action.use_backup": {
+            "hash": "1df7749744372ff90116f2334378dae1",
+            "engine": "syrtis"
+        },
+        "intro.backup_code": {
+            "hash": "b4ecf347d015b1e6dae91763896e0f45",
+            "engine": "syrtis"
+        },
+        "intro.email_code": {
+            "hash": "34a6b002f7a417ff3ef104e222a79466",
+            "engine": "syrtis"
+        },
+        "intro.totp": {
+            "hash": "2b951e23c9853878489c766a3f621407",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "22762eb2da578880a776e67d3272f61d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "129ec6af0091079b34c5d7735580bd1d",
+            "engine": "syrtis"
+        },
+        "resend_later": {
+            "hash": "e22b8f978b8520afd6d91333fe2910e6",
+            "engine": "syrtis"
+        }
+    },
+    "pages/two_factor/index.it.yml": {
+        "action.cancel": {
+            "hash": "d3caf0e02c492419ac7f6392e04a8038",
+            "engine": "syrtis"
+        },
+        "action.resend": {
+            "hash": "4c3f3c6fbb032fed067f69c0bea88a63",
+            "engine": "syrtis"
+        },
+        "action.use_app": {
+            "hash": "ab13c1e9d0a15a5979e565684fd1374f",
+            "engine": "syrtis"
+        },
+        "action.use_backup": {
+            "hash": "1df7749744372ff90116f2334378dae1",
+            "engine": "syrtis"
+        },
+        "intro.backup_code": {
+            "hash": "b4ecf347d015b1e6dae91763896e0f45",
+            "engine": "syrtis"
+        },
+        "intro.email_code": {
+            "hash": "34a6b002f7a417ff3ef104e222a79466",
+            "engine": "syrtis"
+        },
+        "intro.totp": {
+            "hash": "2b951e23c9853878489c766a3f621407",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "22762eb2da578880a776e67d3272f61d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "129ec6af0091079b34c5d7735580bd1d",
+            "engine": "syrtis"
+        },
+        "resend_later": {
+            "hash": "e22b8f978b8520afd6d91333fe2910e6",
+            "engine": "syrtis"
+        }
+    },
     "pages/two_factor/index.ja.yml": {
         "action.cancel": {
             "hash": "d3caf0e02c492419ac7f6392e04a8038",
@@ -5609,7 +7769,91 @@
             "engine": "syrtis"
         }
     },
+    "pages/two_factor/index.nl.yml": {
+        "action.cancel": {
+            "hash": "d3caf0e02c492419ac7f6392e04a8038",
+            "engine": "syrtis"
+        },
+        "action.resend": {
+            "hash": "4c3f3c6fbb032fed067f69c0bea88a63",
+            "engine": "syrtis"
+        },
+        "action.use_app": {
+            "hash": "ab13c1e9d0a15a5979e565684fd1374f",
+            "engine": "syrtis"
+        },
+        "action.use_backup": {
+            "hash": "1df7749744372ff90116f2334378dae1",
+            "engine": "syrtis"
+        },
+        "intro.backup_code": {
+            "hash": "b4ecf347d015b1e6dae91763896e0f45",
+            "engine": "syrtis"
+        },
+        "intro.email_code": {
+            "hash": "34a6b002f7a417ff3ef104e222a79466",
+            "engine": "syrtis"
+        },
+        "intro.totp": {
+            "hash": "2b951e23c9853878489c766a3f621407",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "22762eb2da578880a776e67d3272f61d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "129ec6af0091079b34c5d7735580bd1d",
+            "engine": "syrtis"
+        },
+        "resend_later": {
+            "hash": "e22b8f978b8520afd6d91333fe2910e6",
+            "engine": "syrtis"
+        }
+    },
     "pages/two_factor/index.pl.yml": {
+        "action.cancel": {
+            "hash": "d3caf0e02c492419ac7f6392e04a8038",
+            "engine": "syrtis"
+        },
+        "action.resend": {
+            "hash": "4c3f3c6fbb032fed067f69c0bea88a63",
+            "engine": "syrtis"
+        },
+        "action.use_app": {
+            "hash": "ab13c1e9d0a15a5979e565684fd1374f",
+            "engine": "syrtis"
+        },
+        "action.use_backup": {
+            "hash": "1df7749744372ff90116f2334378dae1",
+            "engine": "syrtis"
+        },
+        "intro.backup_code": {
+            "hash": "b4ecf347d015b1e6dae91763896e0f45",
+            "engine": "syrtis"
+        },
+        "intro.email_code": {
+            "hash": "34a6b002f7a417ff3ef104e222a79466",
+            "engine": "syrtis"
+        },
+        "intro.totp": {
+            "hash": "2b951e23c9853878489c766a3f621407",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "22762eb2da578880a776e67d3272f61d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "129ec6af0091079b34c5d7735580bd1d",
+            "engine": "syrtis"
+        },
+        "resend_later": {
+            "hash": "e22b8f978b8520afd6d91333fe2910e6",
+            "engine": "syrtis"
+        }
+    },
+    "pages/two_factor/index.pt_BR.yml": {
         "action.cancel": {
             "hash": "d3caf0e02c492419ac7f6392e04a8038",
             "engine": "syrtis"
@@ -5735,7 +7979,91 @@
             "engine": "syrtis"
         }
     },
+    "pages/two_factor/index.tr.yml": {
+        "action.cancel": {
+            "hash": "d3caf0e02c492419ac7f6392e04a8038",
+            "engine": "syrtis"
+        },
+        "action.resend": {
+            "hash": "4c3f3c6fbb032fed067f69c0bea88a63",
+            "engine": "syrtis"
+        },
+        "action.use_app": {
+            "hash": "ab13c1e9d0a15a5979e565684fd1374f",
+            "engine": "syrtis"
+        },
+        "action.use_backup": {
+            "hash": "1df7749744372ff90116f2334378dae1",
+            "engine": "syrtis"
+        },
+        "intro.backup_code": {
+            "hash": "b4ecf347d015b1e6dae91763896e0f45",
+            "engine": "syrtis"
+        },
+        "intro.email_code": {
+            "hash": "34a6b002f7a417ff3ef104e222a79466",
+            "engine": "syrtis"
+        },
+        "intro.totp": {
+            "hash": "2b951e23c9853878489c766a3f621407",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "22762eb2da578880a776e67d3272f61d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "129ec6af0091079b34c5d7735580bd1d",
+            "engine": "syrtis"
+        },
+        "resend_later": {
+            "hash": "e22b8f978b8520afd6d91333fe2910e6",
+            "engine": "syrtis"
+        }
+    },
     "pages/two_factor/index.ur.yml": {
+        "action.cancel": {
+            "hash": "d3caf0e02c492419ac7f6392e04a8038",
+            "engine": "syrtis"
+        },
+        "action.resend": {
+            "hash": "4c3f3c6fbb032fed067f69c0bea88a63",
+            "engine": "syrtis"
+        },
+        "action.use_app": {
+            "hash": "ab13c1e9d0a15a5979e565684fd1374f",
+            "engine": "syrtis"
+        },
+        "action.use_backup": {
+            "hash": "1df7749744372ff90116f2334378dae1",
+            "engine": "syrtis"
+        },
+        "intro.backup_code": {
+            "hash": "b4ecf347d015b1e6dae91763896e0f45",
+            "engine": "syrtis"
+        },
+        "intro.email_code": {
+            "hash": "34a6b002f7a417ff3ef104e222a79466",
+            "engine": "syrtis"
+        },
+        "intro.totp": {
+            "hash": "2b951e23c9853878489c766a3f621407",
+            "engine": "syrtis"
+        },
+        "page_icon": {
+            "hash": "22762eb2da578880a776e67d3272f61d",
+            "engine": "syrtis"
+        },
+        "page_title": {
+            "hash": "129ec6af0091079b34c5d7735580bd1d",
+            "engine": "syrtis"
+        },
+        "resend_later": {
+            "hash": "e22b8f978b8520afd6d91333fe2910e6",
+            "engine": "syrtis"
+        }
+    },
+    "pages/two_factor/index.vi.yml": {
         "action.cancel": {
             "hash": "d3caf0e02c492419ac7f6392e04a8038",
             "engine": "syrtis"

@@ -1,0 +1,12 @@
+field:
+  code:
+    label: Code
+    backup_label: Back-upcode
+  trusted:
+    label: 'Vertrouw dit apparaat, vraag hier niet opnieuw'
+action:
+  submit: Inloggen
+error:
+  invalid: 'Foutieve code.'
+  expired: 'Deze code is verlopen, vraag een nieuwe aan.'
+  too_many_attempts: 'Te veel foutieve codes, vraag een nieuwe aan of probeer het later opnieuw.'

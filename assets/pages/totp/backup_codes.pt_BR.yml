@@ -1,0 +1,5 @@
+page_title: 'Códigos de backup'
+page_icon: 'ph:bold/key'
+intro: 'Guarde esses códigos em um lugar seguro. Cada um faz login uma vez sem o aplicativo. Eles não serão exibidos novamente.'
+action:
+  done: 'Eu os guardei'

@@ -1,0 +1,17 @@
+field:
+  identifier:
+    label: 'Email atau nama pengguna'
+  password:
+    label: 'Kata sandi'
+  remember_me:
+    label: 'Ingat saya'
+action:
+  submit: Masuk
+error:
+  invalid_credentials: 'Pengguna tidak dikenal atau kata sandi salah.'
+  too_many_attempts: 'Terlalu banyak percobaan, coba lagi dalam beberapa menit.'
+  invalid_csrf: 'Formulir telah kedaluwarsa, muat ulang halaman dan coba lagi.'
+  account_status: 'Akun ini tidak dapat masuk.'
+  account_locked: 'Akun ini telah dikunci.'
+  account_disabled: 'Akun ini belum diaktifkan.'
+  invalid_login_link: 'Tautan masuk ini telah kedaluwarsa atau sudah digunakan, minta yang baru.'

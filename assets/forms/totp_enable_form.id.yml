@@ -1,0 +1,7 @@
+field:
+  code:
+    label: 'Kode yang ditampilkan oleh aplikasi'
+action:
+  submit: 'Nyalakan aplikasi'
+error:
+  invalid: 'Kode salah, periksa jam di ponsel Anda dan coba lagi.'

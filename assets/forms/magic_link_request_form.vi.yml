@@ -1,0 +1,8 @@
+description: 'Nhận liên kết qua email để đăng nhập mà không cần mật khẩu.'
+field:
+  identifier:
+    label: 'Email hoặc tên người dùng'
+action:
+  submit: 'Gửi cho tôi một liên kết'
+success:
+  message: 'Nếu tài khoản này tồn tại, một liên kết đăng nhập đã được gửi đến địa chỉ email của nó.'

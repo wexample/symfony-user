@@ -1,0 +1,17 @@
+field:
+  identifier:
+    label: 'Email ou nome de usuário'
+  password:
+    label: Senha
+  remember_me:
+    label: 'Manter-me conectado'
+action:
+  submit: Entrar
+error:
+  invalid_credentials: 'Usuário desconhecido ou senha incorreta.'
+  too_many_attempts: 'Muitas tentativas, tente novamente em alguns minutos.'
+  invalid_csrf: 'O formulário expirou, recarregue a página e tente novamente.'
+  account_status: 'Esta conta não pode ser acessada.'
+  account_locked: 'Esta conta foi bloqueada.'
+  account_disabled: 'Esta conta ainda não está ativada.'
+  invalid_login_link: 'Este link de acesso expirou ou já foi utilizado, solicite um novo.'

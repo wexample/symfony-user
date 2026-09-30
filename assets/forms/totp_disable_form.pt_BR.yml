@@ -1,0 +1,7 @@
+field:
+  current_password:
+    label: 'Senha atual'
+action:
+  submit: 'Desligar o aplicativo'
+error:
+  current_password: 'A senha atual está incorreta.'

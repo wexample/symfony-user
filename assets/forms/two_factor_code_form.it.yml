@@ -1,0 +1,12 @@
+field:
+  code:
+    label: Codice
+    backup_label: 'Codice di backup'
+  trusted:
+    label: 'Fidati di questo dispositivo, non chiedere di nuovo qui'
+action:
+  submit: Accedi
+error:
+  invalid: 'Codice errato.'
+  expired: 'Questo codice è scaduto, richiedine uno nuovo.'
+  too_many_attempts: 'Troppi codici errati, richiedine uno nuovo o riprova più tardi.'

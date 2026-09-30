@@ -1,0 +1,13 @@
+page_title: 'Aplicativo autenticador'
+page_icon: 'ph:bold/device-mobile'
+setup:
+  intro: 'Escaneie este código com um aplicativo autenticador e, em seguida, digite o código que ele mostrar. Ele será solicitado ao fazer login, em vez do código por e-mail.'
+  qr_alt: 'Código QR para escanear com o aplicativo autenticador'
+  secret: 'Não consegue escanear? Digite esta chave no aplicativo:'
+enabled:
+  intro: 'Seu aplicativo autenticador será solicitado ao fazer login, nos dispositivos que ainda não são confiáveis.'
+  backup_codes: 'Códigos de backup restantes: %count%.'
+disable:
+  intro: 'Desative o aplicativo. O código será enviado por e-mail novamente.'
+action:
+  regenerate: 'Novos códigos de backup'

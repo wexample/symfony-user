@@ -1,0 +1,12 @@
+field:
+  code:
+    label: Kod
+    backup_label: 'Yedek kod'
+  trusted:
+    label: 'Bu cihazı güvenilir olarak işaretle, burada tekrar sorma'
+action:
+  submit: 'Giriş yap'
+error:
+  invalid: 'Yanlış kod.'
+  expired: 'Bu kodun süresi dolmuş, yenisini iste.'
+  too_many_attempts: 'Çok fazla yanlış kod denemesi, yenisini iste veya daha sonra tekrar dene.'

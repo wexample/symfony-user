@@ -1,0 +1,8 @@
+description: 'Şifresiz giriş yapmanızı sağlayan bir bağlantıyı e-posta ile alın.'
+field:
+  identifier:
+    label: 'E-posta veya kullanıcı adı'
+action:
+  submit: 'Bana bir bağlantı gönder'
+success:
+  message: 'Eğer bu hesap varsa, giriş bağlantısı e-posta adresine gönderilmiştir.'

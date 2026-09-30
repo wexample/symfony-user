@@ -1,0 +1,12 @@
+field:
+  code:
+    label: Mã
+    backup_label: 'Mã dự phòng'
+  trusted:
+    label: 'Tin cậy thiết bị này, không hỏi lại ở đây'
+action:
+  submit: 'Đăng nhập'
+error:
+  invalid: 'Mã không đúng.'
+  expired: 'Mã này đã hết hạn, yêu cầu một mã mới.'
+  too_many_attempts: 'Quá nhiều mã sai, yêu cầu một mã mới hoặc thử lại sau.'

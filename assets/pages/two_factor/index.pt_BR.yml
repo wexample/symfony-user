@@ -1,0 +1,12 @@
+page_title: 'Confirme que é você'
+page_icon: 'ph:bold/shield-check'
+intro:
+  email_code: 'Um código foi enviado para %email%.'
+  totp: 'Digite o código que seu aplicativo de autenticação mostra para esta conta.'
+  backup_code: 'Digite um dos códigos de backup fornecidos quando o aplicativo foi configurado. Cada um funciona uma vez.'
+resend_later: 'Você pode solicitar um novo código em um minuto.'
+action:
+  resend: 'Enviar um novo código'
+  use_backup: 'Usar um código de backup'
+  use_app: 'Usar o aplicativo'
+  cancel: 'Usar outra conta'

@@ -1,0 +1,12 @@
+page_title: 'Xác nhận bạn là người'
+page_icon: 'ph:bold/shield-check'
+intro:
+  email_code: 'Một mã đã được gửi tới %email%.'
+  totp: 'Nhập mã mà ứng dụng xác thực hiển thị cho tài khoản này.'
+  backup_code: 'Nhập một trong các mã dự phòng được cung cấp khi thiết lập ứng dụng. Mỗi mã chỉ dùng một lần.'
+resend_later: 'Bạn có thể yêu cầu mã mới trong một phút.'
+action:
+  resend: 'Gửi mã mới'
+  use_backup: 'Sử dụng mã dự phòng'
+  use_app: 'Sử dụng ứng dụng'
+  cancel: 'Sử dụng tài khoản khác'

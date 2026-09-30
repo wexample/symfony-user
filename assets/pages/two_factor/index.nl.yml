@@ -1,0 +1,12 @@
+page_title: 'Bevestig dat jij het bent'
+page_icon: 'ph:bold/shield-check'
+intro:
+  email_code: 'Er is een code verzonden naar %email%.'
+  totp: 'Typ de code die je authenticator-app voor dit account toont.'
+  backup_code: 'Typ een van de back-upcodes die gegeven zijn toen de app werd ingesteld. Elke code werkt één keer.'
+resend_later: 'Je kunt over een minuut om een nieuwe code vragen.'
+action:
+  resend: 'Stuur een nieuwe code'
+  use_backup: 'Gebruik een back-upcode'
+  use_app: 'Gebruik de app'
+  cancel: 'Gebruik een ander account'

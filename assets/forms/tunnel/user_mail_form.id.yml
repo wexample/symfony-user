@@ -1,0 +1,5 @@
+field:
+  email:
+    label: 'Email Anda'
+error:
+  email: 'Alamat email ini tidak valid.'

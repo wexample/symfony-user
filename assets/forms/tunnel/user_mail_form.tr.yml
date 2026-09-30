@@ -1,0 +1,5 @@
+field:
+  email:
+    label: 'E-posta adresiniz'
+error:
+  email: 'Bu e-posta adresi geçerli değil.'

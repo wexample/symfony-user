@@ -1,0 +1,8 @@
+description: 'Ontvang een link per e-mail waarmee je je zonder wachtwoord kunt aanmelden.'
+field:
+  identifier:
+    label: 'E-mail of gebruikersnaam'
+action:
+  submit: 'Stuur me een link'
+success:
+  message: 'Als dit account bestaat, is er een aanmeldlink naar het e-mailadres verzonden.'

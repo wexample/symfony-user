@@ -1,0 +1,7 @@
+field:
+  current_password:
+    label: 'Mevcut şifre'
+action:
+  submit: 'Uygulamayı kapat'
+error:
+  current_password: 'Mevcut şifre yanlış.'

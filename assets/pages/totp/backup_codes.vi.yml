@@ -1,0 +1,5 @@
+page_title: 'Mã sao lưu'
+page_icon: 'ph:bold/key'
+intro: 'Lưu những mã này ở nơi an toàn. Mỗi mã cho phép bạn đăng nhập một lần mà không cần ứng dụng. Chúng sẽ không được hiển thị lại.'
+action:
+  done: 'Tôi đã lưu chúng'

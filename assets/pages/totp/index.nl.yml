@@ -1,0 +1,13 @@
+page_title: Authenticatie-app
+page_icon: 'ph:bold/device-mobile'
+setup:
+  intro: 'Scan deze code met een authenticator-app en typ de code die je ziet. Deze zal dan gevraagd worden bij het inloggen, in plaats van de e-mailcode.'
+  qr_alt: 'QR-code om te scannen met de authenticator-app'
+  secret: 'Kun je niet scannen? Typ deze sleutel in de app:'
+enabled:
+  intro: 'Je authenticator-app wordt gevraagd bij het inloggen, op de apparaten die nog niet vertrouwd zijn.'
+  backup_codes: 'Overgebleven back-upcodes: %count%.'
+disable:
+  intro: 'Zet de app uit. De code zal opnieuw per e-mail worden verzonden.'
+action:
+  regenerate: 'Nieuwe back-upcodes'
