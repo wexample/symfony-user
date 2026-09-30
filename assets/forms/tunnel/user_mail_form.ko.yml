@@ -1,5 +1,0 @@
-field:
-  email:
-    label: '이메일 주소'
-error:
-  email: '유효하지 않은 이메일 주소입니다.'

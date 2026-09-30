@@ -1,8 +1,0 @@
-description: 'Receba um link por email que faz login sem precisar de senha.'
-field:
-  identifier:
-    label: 'Email ou nome de usuário'
-action:
-  submit: 'Envie-me um link'
-success:
-  message: 'Se esta conta existir, um link de login foi enviado para o endereço de email correspondente.'

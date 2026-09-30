@@ -1,0 +1,325 @@
+en:
+  field:
+    code:
+      label: Code
+      backup_label: Backup code
+    trusted:
+      label: Trust this device, do not ask again here
+
+  action:
+    submit: Sign in
+
+  error:
+    invalid: Wrong code.
+    expired: This code has expired, ask for a new one.
+    too_many_attempts: Too many wrong codes, ask for a new one or try again later.
+
+ar:
+  field:
+    code:
+      label: الشفرة
+      backup_label: 'شفرة النسخ الاحتياطي'
+    trusted:
+      label: 'ثق في هذا الجهاز، لا تسأل مرة أخرى هنا'
+  action:
+    submit: 'تسجيل الدخول'
+  error:
+    invalid: 'شفرة خاطئة.'
+    expired: 'هذه الشفرة قد انتهت صلاحيتها، اطلب واحدة جديدة.'
+    too_many_attempts: 'عدد كبير جداً من الشفرات الخاطئة، اطلب واحدة جديدة أو حاول مرة أخرى لاحقاً.'
+
+bn:
+  field:
+    code:
+      label: কোড
+      backup_label: 'ব্যাকআপ কোড'
+    trusted:
+      label: 'এই ডিভাইসটিকে বিশ্বাস করুন, এখানে আবার জিজ্ঞেস করবেন না'
+  action:
+    submit: 'সাইন ইন করুন'
+  error:
+    invalid: 'ভুল কোড।'
+    expired: 'এই কোডের মেয়াদ শেষ হয়ে গেছে, নতুন একটি কোডের জন্য অনুরোধ করুন।'
+    too_many_attempts: 'বহু ভুল কোড, নতুন একটি কোডের জন্য অনুরোধ করুন অথবা পরে আবার চেষ্টা করুন।'
+
+de:
+  field:
+    code:
+      label: Code
+      backup_label: Backup-Code
+    trusted:
+      label: 'Dieses Gerät vertrauen, hier nicht erneut fragen'
+  action:
+    submit: Anmelden
+  error:
+    invalid: 'Falscher Code.'
+    expired: 'Dieser Code ist abgelaufen, fordere einen neuen an.'
+    too_many_attempts: 'Zu viele falsche Codes, fordere einen neuen an oder versuche es später erneut.'
+
+es:
+  field:
+    code:
+      label: Código
+      backup_label: 'Código de respaldo'
+    trusted:
+      label: 'Confía en este dispositivo, no preguntes de nuevo aquí'
+  action:
+    submit: 'Iniciar sesión'
+  error:
+    invalid: 'Código incorrecto.'
+    expired: 'Este código ha expirado, solicita uno nuevo.'
+    too_many_attempts: 'Demasiados códigos incorrectos, solicita uno nuevo o intenta de nuevo más tarde.'
+
+fa:
+  field:
+    code:
+      label: کد
+      backup_label: 'کد پشتیبان'
+    trusted:
+      label: 'این دستگاه را اعتماد کنید، دیگر اینجا نپرسید'
+  action:
+    submit: ورود
+  error:
+    invalid: 'کد اشتباه است.'
+    expired: 'این کد منقضی شده است، درخواست کد جدید کنید.'
+    too_many_attempts: 'تعداد کدهای اشتباه زیاد است، درخواست کد جدید کنید یا بعداً دوباره تلاش کنید.'
+
+fi:
+  field:
+    code:
+      label: Koodi
+      backup_label: Varakoodi
+    trusted:
+      label: 'Luota tähän laitteeseen, älä kysy uudelleen täällä'
+  action:
+    submit: 'Kirjaudu sisään'
+  error:
+    invalid: 'Väärä koodi.'
+    expired: 'Tämä koodi on vanhentunut, pyydä uutta.'
+    too_many_attempts: 'Liian monta väärää koodia, pyydä uutta tai yritä myöhemmin uudelleen.'
+
+fr:
+  field:
+    code:
+      label: Code
+      backup_label: Code de secours
+    trusted:
+      label: Faire confiance à cet appareil, ne plus demander ici
+
+  action:
+    submit: Se connecter
+
+  error:
+    invalid: Code incorrect.
+    expired: Ce code a expiré, demandez-en un nouveau.
+    too_many_attempts: Trop de codes incorrects, demandez-en un nouveau ou réessayez plus tard.
+
+he:
+  field:
+    code:
+      label: קוד
+      backup_label: 'קוד גיבוי'
+    trusted:
+      label: 'סמוך על מכשיר זה, אל תשאל שוב כאן'
+  action:
+    submit: התחבר
+  error:
+    invalid: 'קוד שגוי.'
+    expired: 'הקוד הזה פג תוקף, בקש קוד חדש.'
+    too_many_attempts: 'יותר מדי קודים שגויים, בקש קוד חדש או נסה שוב מאוחר יותר.'
+
+hi:
+  field:
+    code:
+      label: कोड
+      backup_label: 'बैकअप कोड'
+    trusted:
+      label: 'इस डिवाइस पर भरोसा करें, यहां फिर से मत पूछें'
+  action:
+    submit: 'साइन इन करें'
+  error:
+    invalid: 'गलत कोड।'
+    expired: 'यह कोड समाप्त हो गया है, नया कोड मांगें।'
+    too_many_attempts: 'बहुत सारे गलत कोड, नया कोड मांगें या बाद में फिर से प्रयास करें।'
+
+id:
+  field:
+    code:
+      label: Kode
+      backup_label: 'Kode cadangan'
+    trusted:
+      label: 'Percayai perangkat ini, jangan tanya lagi di sini'
+  action:
+    submit: Masuk
+  error:
+    invalid: 'Kode salah.'
+    expired: 'Kode ini telah kedaluwarsa, minta yang baru.'
+    too_many_attempts: 'Terlalu banyak kode yang salah, minta yang baru atau coba lagi nanti.'
+
+it:
+  field:
+    code:
+      label: Codice
+      backup_label: 'Codice di backup'
+    trusted:
+      label: 'Fidati di questo dispositivo, non chiedere di nuovo qui'
+  action:
+    submit: Accedi
+  error:
+    invalid: 'Codice errato.'
+    expired: 'Questo codice è scaduto, richiedine uno nuovo.'
+    too_many_attempts: 'Troppi codici errati, richiedine uno nuovo o riprova più tardi.'
+
+ja:
+  field:
+    code:
+      label: コード
+      backup_label: バックアップコード
+    trusted:
+      label: このデバイスを信頼する、ここでは再度尋ねない
+  action:
+    submit: サインイン
+  error:
+    invalid: コードが間違っています。
+    expired: このコードは期限切れです。新しいものを請求してください。
+    too_many_attempts: 間違ったコードが多すぎます。新しいものを請求するか、後で再試行してください。
+
+ko:
+  field:
+    code:
+      label: 코드
+      backup_label: '백업 코드'
+    trusted:
+      label: '이 기기를 신뢰합니다. 여기서 다시 묻지 마세요.'
+  action:
+    submit: 로그인
+  error:
+    invalid: '잘못된 코드입니다.'
+    expired: '이 코드는 만료되었습니다. 새 코드를 요청하세요.'
+    too_many_attempts: '잘못된 코드가 너무 많습니다. 새 코드를 요청하거나 나중에 다시 시도하세요.'
+
+nl:
+  field:
+    code:
+      label: Code
+      backup_label: Back-upcode
+    trusted:
+      label: 'Vertrouw dit apparaat, vraag hier niet opnieuw'
+  action:
+    submit: Inloggen
+  error:
+    invalid: 'Foutieve code.'
+    expired: 'Deze code is verlopen, vraag een nieuwe aan.'
+    too_many_attempts: 'Te veel foutieve codes, vraag een nieuwe aan of probeer het later opnieuw.'
+
+pl:
+  field:
+    code:
+      label: Kod
+      backup_label: 'Kod zapasowy'
+    trusted:
+      label: 'Zaufaj temu urządzeniu, nie pytaj ponownie tutaj'
+  action:
+    submit: 'Zaloguj się'
+  error:
+    invalid: 'Zły kod.'
+    expired: 'Ten kod wygasł, poproś o nowy.'
+    too_many_attempts: 'Za dużo błędnych kodów, poproś o nowy lub spróbuj później.'
+
+pt_BR:
+  field:
+    code:
+      label: Código
+      backup_label: 'Código de backup'
+    trusted:
+      label: 'Confie neste dispositivo, não pergunte novamente aqui'
+  action:
+    submit: Entrar
+  error:
+    invalid: 'Código incorreto.'
+    expired: 'Esse código expirou, solicite um novo.'
+    too_many_attempts: 'Muitos códigos incorretos, solicite um novo ou tente novamente mais tarde.'
+
+ru:
+  field:
+    code:
+      label: Код
+      backup_label: 'Резервный код'
+    trusted:
+      label: 'Доверять этому устройству, больше не спрашивать здесь'
+  action:
+    submit: Войти
+  error:
+    invalid: 'Неправильный код.'
+    expired: 'Этот код устарел, запросите новый.'
+    too_many_attempts: 'Слишком много неверных кодов, запросите новый или попробуйте позже.'
+
+th:
+  field:
+    code:
+      label: รหัส
+      backup_label: รหัสสำรอง
+    trusted:
+      label: 'เชื่อถืออุปกรณ์นี้ ไม่ต้องถามอีกที่นี่'
+  action:
+    submit: ลงชื่อเข้าใช้
+  error:
+    invalid: รหัสผิดพลาด.
+    expired: 'รหัสนี้หมดอายุแล้ว กรุณาขอใหม่.'
+    too_many_attempts: 'รหัสผิดพลาดมากเกินไป กรุณาขอใหม่หรือลองอีกครั้งภายหลัง.'
+
+tr:
+  field:
+    code:
+      label: Kod
+      backup_label: 'Yedek kod'
+    trusted:
+      label: 'Bu cihazı güvenilir olarak işaretle, burada tekrar sorma'
+  action:
+    submit: 'Giriş yap'
+  error:
+    invalid: 'Yanlış kod.'
+    expired: 'Bu kodun süresi dolmuş, yenisini iste.'
+    too_many_attempts: 'Çok fazla yanlış kod denemesi, yenisini iste veya daha sonra tekrar dene.'
+
+ur:
+  field:
+    code:
+      label: کوڈ
+      backup_label: 'بیک اپ کوڈ'
+    trusted:
+      label: 'اس ڈیوائس پر اعتماد کریں، دوبارہ یہاں نہ پوچھیں'
+  action:
+    submit: 'لاگ ان کریں'
+  error:
+    invalid: 'غلط کوڈ۔'
+    expired: 'یہ کوڈ ختم ہو چکا ہے، نیا کوڈ مانگیں۔'
+    too_many_attempts: 'بہت زیادہ غلط کوڈ، نیا کوڈ مانگیں یا بعد میں دوبارہ کوشش کریں۔'
+
+vi:
+  field:
+    code:
+      label: Mã
+      backup_label: 'Mã dự phòng'
+    trusted:
+      label: 'Tin cậy thiết bị này, không hỏi lại ở đây'
+  action:
+    submit: 'Đăng nhập'
+  error:
+    invalid: 'Mã không đúng.'
+    expired: 'Mã này đã hết hạn, yêu cầu một mã mới.'
+    too_many_attempts: 'Quá nhiều mã sai, yêu cầu một mã mới hoặc thử lại sau.'
+
+zh:
+  field:
+    code:
+      label: 代码
+      backup_label: 备份代码
+    trusted:
+      label: 信任此设备，今后不再询问
+  action:
+    submit: 登录
+  error:
+    invalid: 错误的代码。
+    expired: 此代码已过期，请请求一个新的。
+    too_many_attempts: 错误代码过多，请请求一个新的或稍后再试。

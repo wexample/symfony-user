@@ -1,0 +1,440 @@
+en:
+  field:
+    identifier:
+      label: Email or username
+    password:
+      label: Password
+    remember_me:
+      label: Keep me signed in
+
+  action:
+    submit: Sign in
+
+  error:
+    invalid_credentials: Unknown user or wrong password.
+    too_many_attempts: Too many attempts, try again in a few minutes.
+    invalid_csrf: The form has expired, reload the page and try again.
+    account_status: This account cannot sign in.
+    account_locked: This account has been locked.
+    account_disabled: This account is not activated yet.
+    invalid_login_link: This sign-in link has expired or was already used, ask for a new one.
+
+ar:
+  field:
+    identifier:
+      label: 'البريد الإلكتروني أو اسم المستخدم'
+    password:
+      label: 'كلمة المرور'
+    remember_me:
+      label: 'ابقني مسجلاً للدخول'
+  action:
+    submit: 'تسجيل الدخول'
+  error:
+    invalid_credentials: 'مستخدم غير معروف أو كلمة مرور خاطئة.'
+    too_many_attempts: 'عدد المحاولات كبير جداً، حاول مرة أخرى بعد بضع دقائق.'
+    invalid_csrf: 'انتهت صلاحية النموذج، قم بإعادة تحميل الصفحة وحاول مرة أخرى.'
+    account_status: 'لا يمكن تسجيل الدخول إلى هذا الحساب.'
+    account_locked: 'تم قفل هذا الحساب.'
+    account_disabled: 'هذا الحساب لم يتم تفعيله بعد.'
+    invalid_login_link: 'رابط تسجيل الدخول هذا قد انتهت صلاحيته أو تم استخدامه بالفعل، يرجى طلب رابط جديد.'
+
+bn:
+  field:
+    identifier:
+      label: 'ইমেইল বা ব্যবহারকারীর নাম'
+    password:
+      label: পাসওয়ার্ড
+    remember_me:
+      label: 'আমাকে সাইন ইন করা অবস্থায় রাখুন'
+  action:
+    submit: 'সাইন ইন করুন'
+  error:
+    invalid_credentials: 'অজানা ব্যবহারকারী বা ভুল পাসওয়ার্ড।'
+    too_many_attempts: 'বেশি চেষ্টা হয়েছে, কয়েক মিনিট পরে আবার চেষ্টা করুন।'
+    invalid_csrf: 'ফর্মটির সময়সীমা শেষ হয়েছে, পৃষ্ঠা রিফ্রেশ করে আবার চেষ্টা করুন।'
+    account_status: 'এই অ্যাকাউন্টে সাইন ইন করা সম্ভব নয়।'
+    account_locked: 'এই অ্যাকাউন্টটি লক করা হয়েছে।'
+    account_disabled: 'এই অ্যাকাউন্টটি এখনও সক্রিয় হয়নি।'
+    invalid_login_link: 'এই সাইন ইন লিঙ্কটির সময়সীমা শেষ হয়েছে বা এটি ইতিমধ্যেই ব্যবহার করা হয়েছে, নতুন একটি অনুরোধ করুন।'
+
+de:
+  field:
+    identifier:
+      label: 'E-Mail oder Benutzername'
+    password:
+      label: Passwort
+    remember_me:
+      label: 'Angemeldet bleiben'
+  action:
+    submit: Anmelden
+  error:
+    invalid_credentials: 'Unbekannter Benutzer oder falsches Passwort.'
+    too_many_attempts: 'Zu viele Versuche, versuchen Sie es in ein paar Minuten erneut.'
+    invalid_csrf: 'Das Formular ist abgelaufen, laden Sie die Seite neu und versuchen Sie es erneut.'
+    account_status: 'Dieses Konto kann sich nicht anmelden.'
+    account_locked: 'Dieses Konto wurde gesperrt.'
+    account_disabled: 'Dieses Konto ist noch nicht aktiviert.'
+    invalid_login_link: 'Dieser Anmeldelink ist abgelaufen oder wurde bereits verwendet, fordern Sie einen neuen an.'
+
+es:
+  field:
+    identifier:
+      label: 'Correo electrónico o nombre de usuario'
+    password:
+      label: Contraseña
+    remember_me:
+      label: 'Mantenerme conectado'
+  action:
+    submit: 'Iniciar sesión'
+  error:
+    invalid_credentials: 'Usuario desconocido o contraseña incorrecta.'
+    too_many_attempts: 'Demasiados intentos, intenta de nuevo en unos minutos.'
+    invalid_csrf: 'El formulario ha expirado, recarga la página e intenta de nuevo.'
+    account_status: 'Esta cuenta no puede iniciar sesión.'
+    account_locked: 'Esta cuenta ha sido bloqueada.'
+    account_disabled: 'Esta cuenta aún no está activada.'
+    invalid_login_link: 'Este enlace para iniciar sesión ha expirado o ya se ha utilizado, solicita uno nuevo.'
+
+fa:
+  field:
+    identifier:
+      label: 'ایمیل یا نام کاربری'
+    password:
+      label: 'رمز عبور'
+    remember_me:
+      label: 'من را به خاطر بسپار'
+  action:
+    submit: ورود
+  error:
+    invalid_credentials: 'کاربر ناشناس یا رمز عبور نادرست است.'
+    too_many_attempts: 'تعداد تلاش‌ها بیش از حد است، چند دقیقه دیگر تلاش کنید.'
+    invalid_csrf: 'فرم منقضی شده است، صفحه را دوباره بارگذاری کنید و دوباره تلاش کنید.'
+    account_status: 'این حساب نمی‌تواند وارد شود.'
+    account_locked: 'این حساب قفل شده است.'
+    account_disabled: 'این حساب هنوز فعال نشده است.'
+    invalid_login_link: 'این لینک ورود منقضی شده است یا قبلاً استفاده شده است، درخواست لینک جدید کنید.'
+
+fi:
+  field:
+    identifier:
+      label: 'Sähköposti tai käyttäjätunnus'
+    password:
+      label: Salasana
+    remember_me:
+      label: 'Pidä minut sisäänkirjautuneena'
+  action:
+    submit: 'Kirjaudu sisään'
+  error:
+    invalid_credentials: 'Tuntematon käyttäjä tai väärä salasana.'
+    too_many_attempts: 'Liian monta yritystä, yritä uudelleen muutaman minuutin kuluttua.'
+    invalid_csrf: 'Lomake on vanhentunut, lataa sivu uudelleen ja yritä taas.'
+    account_status: 'Tälle tilille ei voi kirjautua sisään.'
+    account_locked: 'Tämä tili on lukittu.'
+    account_disabled: 'Tätä tiliä ei ole vielä aktivoitu.'
+    invalid_login_link: 'Tämä kirjautumislinkki on vanhentunut tai sitä on jo käytetty, pyydä uutta.'
+
+fr:
+  field:
+    identifier:
+      label: Email ou nom d'utilisateur
+    password:
+      label: Mot de passe
+    remember_me:
+      label: Rester connecté
+
+  action:
+    submit: Se connecter
+
+  error:
+    invalid_credentials: Utilisateur inconnu ou mot de passe incorrect.
+    too_many_attempts: Trop de tentatives, réessayez dans quelques minutes.
+    invalid_csrf: Le formulaire a expiré, rechargez la page et réessayez.
+    account_status: Ce compte ne peut pas se connecter.
+    account_locked: Ce compte a été bloqué.
+    account_disabled: Ce compte n'est pas encore activé.
+    invalid_login_link: Ce lien de connexion a expiré ou a déjà servi, demandez-en un nouveau.
+
+he:
+  field:
+    identifier:
+      label: 'אימייל או שם משתמש'
+    password:
+      label: סיסמה
+    remember_me:
+      label: 'שמור אותי מחובר'
+  action:
+    submit: התחבר
+  error:
+    invalid_credentials: 'משתמש לא מוכר או סיסמה שגויה.'
+    too_many_attempts: 'יותר מדי ניסיונות, נסה שוב בעוד כמה דקות.'
+    invalid_csrf: 'הטופס פג תוקף, רענן את הדף ונסה שוב.'
+    account_status: 'לא ניתן להתחבר לחשבון הזה.'
+    account_locked: 'החשבון הזה ננעל.'
+    account_disabled: 'החשבון הזה עדיין לא הופעל.'
+    invalid_login_link: 'קישור ההתחברות הזה פג תוקף או כבר שולם, בקש קישור חדש.'
+
+hi:
+  field:
+    identifier:
+      label: 'ईमेल या उपयोगकर्ता नाम'
+    password:
+      label: पासवर्ड
+    remember_me:
+      label: 'मुझे साइन इन किया हुआ रखें'
+  action:
+    submit: 'साइन इन करें'
+  error:
+    invalid_credentials: 'अज्ञात उपयोगकर्ता या गलत पासवर्ड।'
+    too_many_attempts: 'बहुत सारे प्रयास, कुछ मिनटों में फिर से कोशिश करें।'
+    invalid_csrf: 'फॉर्म की समय सीमा समाप्त हो गई है, पृष्ठ को फिर से लोड करें और फिर से प्रयास करें।'
+    account_status: 'यह खाता साइन इन नहीं कर सकता।'
+    account_locked: 'यह खाता लॉक कर दिया गया है।'
+    account_disabled: 'यह खाता अभी तक सक्रिय नहीं हुआ है।'
+    invalid_login_link: 'यह साइन-इन लिंक समाप्त हो गया है या पहले ही उपयोग हो चुका है, नया लिंक मांगें।'
+
+id:
+  field:
+    identifier:
+      label: 'Email atau nama pengguna'
+    password:
+      label: 'Kata sandi'
+    remember_me:
+      label: 'Ingat saya'
+  action:
+    submit: Masuk
+  error:
+    invalid_credentials: 'Pengguna tidak dikenal atau kata sandi salah.'
+    too_many_attempts: 'Terlalu banyak percobaan, coba lagi dalam beberapa menit.'
+    invalid_csrf: 'Formulir telah kedaluwarsa, muat ulang halaman dan coba lagi.'
+    account_status: 'Akun ini tidak dapat masuk.'
+    account_locked: 'Akun ini telah dikunci.'
+    account_disabled: 'Akun ini belum diaktifkan.'
+    invalid_login_link: 'Tautan masuk ini telah kedaluwarsa atau sudah digunakan, minta yang baru.'
+
+it:
+  field:
+    identifier:
+      label: 'Email o nome utente'
+    password:
+      label: Password
+    remember_me:
+      label: 'Resta connesso'
+  action:
+    submit: Accedi
+  error:
+    invalid_credentials: 'Utente sconosciuto o password errata.'
+    too_many_attempts: 'Troppi tentativi, riprova tra qualche minuto.'
+    invalid_csrf: 'Il modulo è scaduto, ricarica la pagina e riprova.'
+    account_status: 'Questo account non può accedere.'
+    account_locked: 'Questo account è stato bloccato.'
+    account_disabled: 'Questo account non è ancora attivato.'
+    invalid_login_link: 'Questo link di accesso è scaduto o è già stato utilizzato, richiedi un nuovo link.'
+
+ja:
+  field:
+    identifier:
+      label: メールアドレスまたはユーザー名
+    password:
+      label: パスワード
+    remember_me:
+      label: サインイン状態を維持
+  action:
+    submit: サインイン
+  error:
+    invalid_credentials: 不明なユーザーまたはパスワードが間違っています。
+    too_many_attempts: 試行回数が多すぎます。数分後に再試行してください。
+    invalid_csrf: フォームの有効期限が切れました。ページを再読み込みして再試行してください。
+    account_status: このアカウントではサインインできません。
+    account_locked: このアカウントはロックされています。
+    account_disabled: このアカウントはまだアクティベートされていません。
+    invalid_login_link: このサインインリンクは期限切れまたはすでに使用されています。新しいリンクを要求してください。
+
+ko:
+  field:
+    identifier:
+      label: '이메일 또는 사용자 이름'
+    password:
+      label: 비밀번호
+    remember_me:
+      label: '로그인 상태 유지'
+  action:
+    submit: 로그인
+  error:
+    invalid_credentials: '알 수 없는 사용자 또는 잘못된 비밀번호입니다.'
+    too_many_attempts: '시도가 너무 많습니다. 몇 분 후에 다시 시도하세요.'
+    invalid_csrf: '폼이 만료되었습니다. 페이지를 새로 고치고 다시 시도하세요.'
+    account_status: '이 계정으로 로그인할 수 없습니다.'
+    account_locked: '이 계정이 잠겼습니다.'
+    account_disabled: '이 계정은 아직 활성화되지 않았습니다.'
+    invalid_login_link: '이 로그인 링크는 만료되었거나 이미 사용되었습니다. 새 링크를 요청하세요.'
+
+nl:
+  field:
+    identifier:
+      label: 'E-mail of gebruikersnaam'
+    password:
+      label: Wachtwoord
+    remember_me:
+      label: 'Houd me ingelogd'
+  action:
+    submit: Inloggen
+  error:
+    invalid_credentials: 'Onbekende gebruiker of verkeerd wachtwoord.'
+    too_many_attempts: 'Te veel pogingen, probeer het over een paar minuten opnieuw.'
+    invalid_csrf: 'Het formulier is verlopen, herlaad de pagina en probeer het opnieuw.'
+    account_status: 'Dit account kan niet inloggen.'
+    account_locked: 'Dit account is vergrendeld.'
+    account_disabled: 'Dit account is nog niet geactiveerd.'
+    invalid_login_link: 'Deze inloglink is verlopen of al gebruikt, vraag een nieuwe aan.'
+
+pl:
+  field:
+    identifier:
+      label: 'Email lub nazwa użytkownika'
+    password:
+      label: Hasło
+    remember_me:
+      label: 'Pozostań zalogowany'
+  action:
+    submit: 'Zaloguj się'
+  error:
+    invalid_credentials: 'Nieznany użytkownik lub błędne hasło.'
+    too_many_attempts: 'Zbyt wiele prób, spróbuj ponownie za kilka minut.'
+    invalid_csrf: 'Formularz wygasł, odśwież stronę i spróbuj ponownie.'
+    account_status: 'To konto nie może się zalogować.'
+    account_locked: 'To konto zostało zablokowane.'
+    account_disabled: 'To konto nie zostało jeszcze aktywowane.'
+    invalid_login_link: 'Ten link do logowania wygasł lub został już użyty, poproś o nowy.'
+
+pt_BR:
+  field:
+    identifier:
+      label: 'Email ou nome de usuário'
+    password:
+      label: Senha
+    remember_me:
+      label: 'Manter-me conectado'
+  action:
+    submit: Entrar
+  error:
+    invalid_credentials: 'Usuário desconhecido ou senha incorreta.'
+    too_many_attempts: 'Muitas tentativas, tente novamente em alguns minutos.'
+    invalid_csrf: 'O formulário expirou, recarregue a página e tente novamente.'
+    account_status: 'Esta conta não pode ser acessada.'
+    account_locked: 'Esta conta foi bloqueada.'
+    account_disabled: 'Esta conta ainda não está ativada.'
+    invalid_login_link: 'Este link de acesso expirou ou já foi utilizado, solicite um novo.'
+
+ru:
+  field:
+    identifier:
+      label: 'Электронная почта или имя пользователя'
+    password:
+      label: Пароль
+    remember_me:
+      label: 'Запомнить меня'
+  action:
+    submit: Войти
+  error:
+    invalid_credentials: 'Неизвестный пользователь или неверный пароль.'
+    too_many_attempts: 'Слишком много попыток, попробуйте снова через несколько минут.'
+    invalid_csrf: 'Форма устарела, перезагрузите страницу и попробуйте снова.'
+    account_status: 'Эта учетная запись не может войти.'
+    account_locked: 'Эта учетная запись заблокирована.'
+    account_disabled: 'Эта учетная запись еще не активирована.'
+    invalid_login_link: 'Эта ссылка для входа устарела или уже использовалась, запросите новую.'
+
+th:
+  field:
+    identifier:
+      label: อีเมลหรือชื่อผู้ใช้
+    password:
+      label: รหัสผ่าน
+    remember_me:
+      label: จดจำการเข้าสู่ระบบ
+  action:
+    submit: เข้าสู่ระบบ
+  error:
+    invalid_credentials: ผู้ใช้ไม่รู้จักหรือรหัสผ่านผิด
+    too_many_attempts: 'พยายามเข้าสู่ระบบมากเกินไป กรุณาลองใหม่อีกครั้งในไม่กี่นาที'
+    invalid_csrf: 'แบบฟอร์มหมดอายุแล้ว กรุณาโหลดหน้าใหม่และลองอีกครั้ง'
+    account_status: บัญชีนี้ไม่สามารถเข้าสู่ระบบได้
+    account_locked: บัญชีนี้ถูกล็อคแล้ว
+    account_disabled: บัญชีนี้ยังไม่ได้เปิดใช้งาน
+    invalid_login_link: 'ลิงก์เข้าสู่ระบบนี้หมดอายุหรือถูกใช้ไปแล้ว กรุณาขอลิงก์ใหม่'
+
+tr:
+  field:
+    identifier:
+      label: 'E-posta veya kullanıcı adı'
+    password:
+      label: Şifre
+    remember_me:
+      label: 'Beni oturum açılmış olarak tut'
+  action:
+    submit: 'Oturum aç'
+  error:
+    invalid_credentials: 'Bilinmeyen kullanıcı veya yanlış şifre.'
+    too_many_attempts: 'Çok fazla deneme, lütfen birkaç dakika sonra tekrar deneyin.'
+    invalid_csrf: 'Formun süresi doldu, sayfayı yenileyin ve tekrar deneyin.'
+    account_status: 'Bu hesap oturum açamaz.'
+    account_locked: 'Bu hesap kilitlendi.'
+    account_disabled: 'Bu hesap henüz etkinleştirilmedi.'
+    invalid_login_link: 'Bu oturum açma bağlantısının süresi doldu veya zaten kullanıldı, yeni bir tane isteyin.'
+
+ur:
+  field:
+    identifier:
+      label: 'ای میل یا صارف نام'
+    password:
+      label: 'پاس ورڈ'
+    remember_me:
+      label: 'مجھے لاگ ان رکھیں'
+  action:
+    submit: 'لاگ ان کریں'
+  error:
+    invalid_credentials: 'نامعلوم صارف یا غلط پاس ورڈ۔'
+    too_many_attempts: 'بہت زیادہ کوششیں، چند منٹ بعد دوبارہ کوشش کریں۔'
+    invalid_csrf: 'فارم کی میعاد ختم ہو چکی ہے، صفحہ دوبارہ لوڈ کریں اور دوبارہ کوشش کریں۔'
+    account_status: 'یہ اکاؤنٹ لاگ ان نہیں کر سکتا۔'
+    account_locked: 'یہ اکاؤنٹ لاک ہو چکا ہے۔'
+    account_disabled: 'یہ اکاؤنٹ ابھی تک فعال نہیں ہوا۔'
+    invalid_login_link: 'یہ لاگ ان لنک کی میعاد ختم ہو چکی ہے یا پہلے ہی استعمال ہو چکا ہے، نیا لنک مانگیں۔'
+
+vi:
+  field:
+    identifier:
+      label: 'Email hoặc tên đăng nhập'
+    password:
+      label: 'Mật khẩu'
+    remember_me:
+      label: 'Giữ tôi đăng nhập'
+  action:
+    submit: 'Đăng nhập'
+  error:
+    invalid_credentials: 'Người dùng không xác định hoặc mật khẩu sai.'
+    too_many_attempts: 'Quá nhiều lần thử, hãy thử lại sau vài phút.'
+    invalid_csrf: 'Mẫu đã hết hạn, hãy tải lại trang và thử lại.'
+    account_status: 'Tài khoản này không thể đăng nhập.'
+    account_locked: 'Tài khoản này đã bị khóa.'
+    account_disabled: 'Tài khoản này chưa được kích hoạt.'
+    invalid_login_link: 'Liên kết đăng nhập này đã hết hạn hoặc đã được sử dụng, hãy yêu cầu một cái mới.'
+
+zh:
+  field:
+    identifier:
+      label: 电子邮件或用户名
+    password:
+      label: 密码
+    remember_me:
+      label: 保持我登录状态
+  action:
+    submit: 登录
+  error:
+    invalid_credentials: 用户未知或密码错误。
+    too_many_attempts: 尝试次数过多，请几分钟后再试。
+    invalid_csrf: 表单已过期，请重新加载页面并重试。
+    account_status: 此账户无法登录。
+    account_locked: 此账户已被锁定。
+    account_disabled: 此账户尚未激活。
+    invalid_login_link: 此登录链接已过期或已被使用，请请求新的链接。

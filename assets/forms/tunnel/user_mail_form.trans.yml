@@ -1,0 +1,162 @@
+en:
+  field:
+    email:
+      label: Your email
+
+  error:
+    email: This email address is not valid.
+
+ar:
+  field:
+    email:
+      label: 'بريدك الإلكتروني'
+  error:
+    email: 'عنوان البريد الإلكتروني هذا غير صالح.'
+
+bn:
+  field:
+    email:
+      label: 'আপনার ইমেইল'
+  error:
+    email: 'এই ইমেইল ঠিকানা বৈধ নয়।'
+
+de:
+  field:
+    email:
+      label: 'Ihre E-Mail-Adresse'
+  error:
+    email: 'Diese E-Mail-Adresse ist ungültig.'
+
+es:
+  field:
+    email:
+      label: 'Tu correo electrónico'
+  error:
+    email: 'Esta dirección de correo electrónico no es válida.'
+
+fa:
+  field:
+    email:
+      label: 'ایمیل شما'
+  error:
+    email: 'این آدرس ایمیل معتبر نیست.'
+
+fi:
+  field:
+    email:
+      label: Sähköpostiosoitteesi
+  error:
+    email: 'Tämä sähköpostiosoite ei ole voimassa.'
+
+fr:
+  field:
+    email:
+      label: Votre email
+
+  error:
+    email: Cette adresse email n'est pas valide.
+
+he:
+  field:
+    email:
+      label: 'האימייל שלך'
+  error:
+    email: 'כתובת האימייל הזו אינה תקפה.'
+
+hi:
+  field:
+    email:
+      label: 'आपका ईमेल'
+  error:
+    email: 'यह ईमेल पता मान्य नहीं है।'
+
+id:
+  field:
+    email:
+      label: 'Email Anda'
+  error:
+    email: 'Alamat email ini tidak valid.'
+
+it:
+  field:
+    email:
+      label: 'La tua email'
+  error:
+    email: 'Questo indirizzo email non è valido.'
+
+ja:
+  field:
+    email:
+      label: メールアドレス
+  error:
+    email: このメールアドレスは無効です。
+
+ko:
+  field:
+    email:
+      label: '이메일 주소'
+  error:
+    email: '유효하지 않은 이메일 주소입니다.'
+
+nl:
+  field:
+    email:
+      label: 'Je e-mailadres'
+  error:
+    email: 'Dit e-mailadres is ongeldig.'
+
+pl:
+  field:
+    email:
+      label: 'Twój adres e-mail'
+  error:
+    email: 'Ten adres e-mail jest nieprawidłowy.'
+
+pt_BR:
+  field:
+    email:
+      label: 'Seu e-mail'
+  error:
+    email: 'Este endereço de e-mail não é válido.'
+
+ru:
+  field:
+    email:
+      label: 'Ваш Email'
+  error:
+    email: 'Этот адрес электронной почты недействителен.'
+
+th:
+  field:
+    email:
+      label: อีเมลของคุณ
+  error:
+    email: ที่อยู่อีเมลนี้ไม่ถูกต้อง.
+
+tr:
+  field:
+    email:
+      label: 'E-posta adresiniz'
+  error:
+    email: 'Bu e-posta adresi geçerli değil.'
+
+ur:
+  field:
+    email:
+      label: 'آپ کا ای میل'
+  error:
+    email: 'یہ ای میل پتہ درست نہیں ہے۔'
+
+vi:
+  field:
+    email:
+      label: 'Email của bạn'
+  error:
+    email: 'Địa chỉ email này không hợp lệ.'
+
+zh:
+  field:
+    email:
+      label: 您的电子邮件
+  error:
+    email: 此电子邮件地址无效。

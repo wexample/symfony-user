@@ -1,7 +1,0 @@
-field:
-  current_password:
-    label: 'वर्तमान पासवर्ड'
-action:
-  submit: 'ऐप बंद करें'
-error:
-  current_password: 'वर्तमान पासवर्ड गलत है।'

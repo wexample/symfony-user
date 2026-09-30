@@ -1,8 +1,0 @@
-description: '비밀번호 없이 로그인할 수 있는 링크를 이메일로 받으세요.'
-field:
-  identifier:
-    label: '이메일 또는 사용자 이름'
-action:
-  submit: '링크 보내기'
-success:
-  message: '이 계정이 존재한다면, 로그인 링크가 해당 이메일 주소로 전송되었습니다.'

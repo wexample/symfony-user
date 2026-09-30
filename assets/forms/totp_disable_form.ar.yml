@@ -1,7 +1,0 @@
-field:
-  current_password:
-    label: 'كلمة المرور الحالية'
-action:
-  submit: 'إيقاف التطبيق'
-error:
-  current_password: 'كلمة المرور الحالية غير صحيحة.'

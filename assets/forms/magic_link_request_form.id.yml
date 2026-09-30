@@ -1,8 +1,0 @@
-description: 'Terima tautan melalui email yang memungkinkan Anda masuk tanpa kata sandi.'
-field:
-  identifier:
-    label: 'Email atau nama pengguna'
-action:
-  submit: 'Kirimkan saya tautan'
-success:
-  message: 'Jika akun ini ada, tautan masuk telah dikirim ke alamat emailnya.'

@@ -1,0 +1,210 @@
+en:
+  field:
+    code:
+      label: Code shown by the app
+
+  action:
+    submit: Turn the app on
+
+  error:
+    invalid: Wrong code, check the clock of your phone and try again.
+
+ar:
+  field:
+    code:
+      label: 'الكود المعروض من قبل التطبيق'
+  action:
+    submit: 'شغّل التطبيق'
+  error:
+    invalid: 'كود خاطئ، تحقق من ساعة هاتفك وحاول مرة أخرى.'
+
+bn:
+  field:
+    code:
+      label: 'অ্যাপ দ্বারা প্রদর্শিত কোড'
+  action:
+    submit: 'অ্যাপটি চালু করুন'
+  error:
+    invalid: 'ভুল কোড, আপনার ফোনের ঘড়ি চেক করুন এবং আবার চেষ্টা করুন।'
+
+de:
+  field:
+    code:
+      label: 'Vom App angezeigter Code'
+  action:
+    submit: 'App einschalten'
+  error:
+    invalid: 'Falscher Code, überprüfen Sie die Uhrzeit Ihres Telefons und versuchen Sie es erneut.'
+
+es:
+  field:
+    code:
+      label: 'Código mostrado por la aplicación'
+  action:
+    submit: 'Enciende la aplicación'
+  error:
+    invalid: 'Código incorrecto, verifica el reloj de tu teléfono y vuelve a intentarlo.'
+
+fa:
+  field:
+    code:
+      label: 'کدی که توسط اپ نمایش داده می‌شود'
+  action:
+    submit: 'اپ را روشن کن'
+  error:
+    invalid: 'کد نادرست است، ساعت گوشی خود را بررسی کرده و دوباره تلاش کنید.'
+
+fi:
+  field:
+    code:
+      label: 'Sovelluksen näyttämä koodi'
+  action:
+    submit: 'Käynnistä sovellus'
+  error:
+    invalid: 'Väärä koodi, tarkista puhelimesi kello ja yritä uudelleen.'
+
+fr:
+  field:
+    code:
+      label: Code affiché par l'application
+
+  action:
+    submit: Activer l'application
+
+  error:
+    invalid: Code incorrect, vérifiez l'heure de votre téléphone et réessayez.
+
+he:
+  field:
+    code:
+      label: 'קוד שמוצג על ידי האפליקציה'
+  action:
+    submit: 'הפעל את האפליקציה'
+  error:
+    invalid: 'קוד לא נכון, בדוק את השעה בטלפון שלך ונסה שוב.'
+
+hi:
+  field:
+    code:
+      label: 'ऐप द्वारा दिखाया गया कोड'
+  action:
+    submit: 'ऐप चालू करें'
+  error:
+    invalid: 'गलत कोड, अपने फोन का घड़ी चेक करें और फिर से कोशिश करें।'
+
+id:
+  field:
+    code:
+      label: 'Kode yang ditampilkan oleh aplikasi'
+  action:
+    submit: 'Nyalakan aplikasi'
+  error:
+    invalid: 'Kode salah, periksa jam di ponsel Anda dan coba lagi.'
+
+it:
+  field:
+    code:
+      label: "Codice mostrato dall'app"
+  action:
+    submit: "Accendi l'app"
+  error:
+    invalid: "Codice errato, controlla l'orologio del tuo telefono e riprova."
+
+ja:
+  field:
+    code:
+      label: アプリに表示されるコード
+  action:
+    submit: アプリを起動する
+  error:
+    invalid: コードが間違っています。電話の時計を確認して、再試行してください。
+
+ko:
+  field:
+    code:
+      label: '앱에서 표시된 코드'
+  action:
+    submit: '앱 켜기'
+  error:
+    invalid: '잘못된 코드입니다. 전화기의 시계를 확인하고 다시 시도하세요.'
+
+nl:
+  field:
+    code:
+      label: 'Code weergegeven door de app'
+  action:
+    submit: 'Zet de app aan'
+  error:
+    invalid: 'Verkeerde code, controleer de klok van je telefoon en probeer het opnieuw.'
+
+pl:
+  field:
+    code:
+      label: 'Kod wyświetlany przez aplikację'
+  action:
+    submit: 'Włącz aplikację'
+  error:
+    invalid: 'Niepoprawny kod, sprawdź zegar w swoim telefonie i spróbuj ponownie.'
+
+pt_BR:
+  field:
+    code:
+      label: 'Código exibido pelo aplicativo'
+  action:
+    submit: 'Ativar o aplicativo'
+  error:
+    invalid: 'Código incorreto, verifique o relógio do seu telefone e tente novamente.'
+
+ru:
+  field:
+    code:
+      label: 'Код, отображаемый приложением'
+  action:
+    submit: 'Включить приложение'
+  error:
+    invalid: 'Неверный код, проверьте время на вашем телефоне и попробуйте снова.'
+
+th:
+  field:
+    code:
+      label: รหัสที่แสดงโดยแอป
+  action:
+    submit: เปิดแอป
+  error:
+    invalid: 'รหัสไม่ถูกต้อง ตรวจสอบนาฬิกาของโทรศัพท์คุณและลองอีกครั้ง.'
+
+tr:
+  field:
+    code:
+      label: 'Uygulamanın gösterdiği kod'
+  action:
+    submit: 'Uygulamayı aç'
+  error:
+    invalid: 'Yanlış kod, telefonunun saatini kontrol et ve tekrar dene.'
+
+ur:
+  field:
+    code:
+      label: 'ایپ کی طرف سے دکھایا گیا کوڈ'
+  action:
+    submit: 'ایپ کو آن کریں'
+  error:
+    invalid: 'غلط کوڈ، اپنے فون کے گھڑی کو چیک کریں اور دوبارہ کوشش کریں۔'
+
+vi:
+  field:
+    code:
+      label: 'Mã được hiển thị bởi ứng dụng'
+  action:
+    submit: 'Bật ứng dụng'
+  error:
+    invalid: 'Mã không đúng, kiểm tra đồng hồ trên điện thoại của bạn và thử lại.'
+
+zh:
+  field:
+    code:
+      label: 应用程序显示的代码
+  action:
+    submit: 开启应用程序
+  error:
+    invalid: 错误的代码，请检查手机的时间并重试。

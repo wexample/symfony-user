@@ -1,7 +1,0 @@
-field:
-  code:
-    label: 'Code weergegeven door de app'
-action:
-  submit: 'Zet de app aan'
-error:
-  invalid: 'Verkeerde code, controleer de klok van je telefoon en probeer het opnieuw.'

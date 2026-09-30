@@ -1,7 +1,0 @@
-field:
-  code:
-    label: 'Sovelluksen näyttämä koodi'
-action:
-  submit: 'Käynnistä sovellus'
-error:
-  invalid: 'Väärä koodi, tarkista puhelimesi kello ja yritä uudelleen.'

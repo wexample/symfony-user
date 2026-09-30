@@ -1,7 +1,0 @@
-field:
-  code:
-    label: 'Vom App angezeigter Code'
-action:
-  submit: 'App einschalten'
-error:
-  invalid: 'Falscher Code, überprüfen Sie die Uhrzeit Ihres Telefons und versuchen Sie es erneut.'

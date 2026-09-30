@@ -1,0 +1,114 @@
+en:
+  page_title: Forgot your password?
+  page_icon: ph:bold/key
+  link_invalid: This link has expired or was already used. Ask for a new one below.
+
+ar:
+  page_title: 'نسيت كلمة المرور؟'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'هذا الرابط قد انتهت صلاحيته أو تم استخدامه بالفعل. اطلب رابطًا جديدًا أدناه.'
+
+bn:
+  page_title: 'পাসওয়ার্ড ভুলে গেছেন?'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'এই লিঙ্কটি সময়সীমা অতিক্রম করেছে অথবা এটি আগে থেকেই ব্যবহার করা হয়েছে। নিচে নতুন একটি লিঙ্কের জন্য অনুরোধ করুন।'
+
+de:
+  page_title: 'Passwort vergessen?'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'Dieser Link ist abgelaufen oder wurde bereits verwendet. Fordern Sie unten einen neuen an.'
+
+es:
+  page_title: '¿Olvidaste tu contraseña?'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'Este enlace ha expirado o ya fue utilizado. Pide uno nuevo a continuación.'
+
+fa:
+  page_title: 'رمز عبور خود را فراموش کرده‌اید؟'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'این لینک منقضی شده است یا قبلاً استفاده شده است. برای دریافت لینک جدید در زیر درخواست دهید.'
+
+fi:
+  page_title: 'Unohditko salasanasi?'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'Tämä linkki on vanhentunut tai sitä on jo käytetty. Pyydä uutta alla.'
+
+fr:
+  page_title: Mot de passe oublié ?
+  page_icon: ph:bold/key
+  link_invalid: Ce lien a expiré ou a déjà servi. Demandez-en un nouveau ci-dessous.
+
+he:
+  page_title: 'שכחת את הסיסמה שלך?'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'הקישור הזה פג תוקף או כבר שומש. בקש חדש למטה.'
+
+hi:
+  page_title: 'क्या आप अपना पासवर्ड भूल गए हैं?'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'यह लिंक समाप्त हो गया है या इसका पहले ही उपयोग किया जा चुका है। नीचे नए के लिए अनुरोध करें।'
+
+id:
+  page_title: 'Lupa kata sandi Anda?'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'Tautan ini telah kedaluwarsa atau sudah digunakan. Minta yang baru di bawah ini.'
+
+it:
+  page_title: 'Hai dimenticato la password?'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'Questo link è scaduto o è già stato utilizzato. Richiedi un nuovo link qui sotto.'
+
+ja:
+  page_title: パスワードをお忘れですか？
+  page_icon: 'ph:bold/key'
+  link_invalid: このリンクは無効になっているか、すでに使用されています。下で新しいリンクをリクエストしてください。
+
+ko:
+  page_title: '비밀번호를 잊으셨나요?'
+  page_icon: 'ph:bold/key'
+  link_invalid: '이 링크는 만료되었거나 이미 사용되었습니다. 아래에서 새 링크를 요청하세요.'
+
+nl:
+  page_title: 'Vergeten je wachtwoord?'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'Deze link is verlopen of al gebruikt. Vraag hieronder een nieuwe aan.'
+
+pl:
+  page_title: 'Zapomniałeś hasła?'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'Ten link wygasł lub został już użyty. Poproś o nowy poniżej.'
+
+pt_BR:
+  page_title: 'Esqueceu sua senha?'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'Este link expirou ou já foi utilizado. Solicite um novo abaixo.'
+
+ru:
+  page_title: 'Забыли пароль?'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'Эта ссылка устарела или уже была использована. Запросите новую ниже.'
+
+th:
+  page_title: 'ลืมรหัสผ่านใช่ไหม?'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'ลิงก์นี้หมดอายุหรือถูกใช้แล้ว ขอรับลิงก์ใหม่ด้านล่าง.'
+
+tr:
+  page_title: 'Şifrenizi mi unuttunuz?'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'Bu bağlantının süresi dolmuş veya zaten kullanılmış. Aşağıdan yenisini isteyin.'
+
+ur:
+  page_title: 'کیا آپ اپنا پاس ورڈ بھول گئے ہیں؟'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'یہ لنک ختم ہو چکا ہے یا پہلے ہی استعمال ہو چکا ہے۔ نیچے نئے کے لیے درخواست کریں.'
+
+vi:
+  page_title: 'Quên mật khẩu của bạn?'
+  page_icon: 'ph:bold/key'
+  link_invalid: 'Liên kết này đã hết hạn hoặc đã được sử dụng. Yêu cầu một liên kết mới bên dưới.'
+
+zh:
+  page_title: 忘记密码了吗？
+  page_icon: 'ph:bold/key'
+  link_invalid: 此链接已过期或已被使用。请在下面请求一个新的链接。

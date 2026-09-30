@@ -1,5 +1,0 @@
-field:
-  email:
-    label: Sähköpostiosoitteesi
-error:
-  email: 'Tämä sähköpostiosoite ei ole voimassa.'

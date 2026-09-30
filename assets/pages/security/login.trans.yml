@@ -1,0 +1,137 @@
+en:
+  page_title: Sign in
+  page_icon: ph:bold/sign-in
+  forgot_password: Forgot your password?
+  magic_link: Without a password
+
+ar:
+  page_title: 'تسجيل الدخول'
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'نسيت كلمة المرور؟'
+  magic_link: 'بدون كلمة مرور'
+
+bn:
+  page_title: 'সাইন ইন'
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'আপনার পাসওয়ার্ড ভুলে গেছেন?'
+  magic_link: 'পাসওয়ার্ড ছাড়াই'
+
+de:
+  page_title: Anmelden
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'Passwort vergessen?'
+  magic_link: 'Ohne Passwort'
+
+es:
+  page_title: 'Iniciar sesión'
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: '¿Olvidaste tu contraseña?'
+  magic_link: 'Sin contraseña'
+
+fa:
+  page_title: 'ورود به حساب'
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'رمز عبور خود را فراموش کرده‌اید؟'
+  magic_link: 'بدون رمز عبور'
+
+fi:
+  page_title: 'Kirjaudu sisään'
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'Unohditko salasanasi?'
+  magic_link: 'Ilman salasanaa'
+
+fr:
+  page_title: Connexion
+  page_icon: ph:bold/sign-in
+  forgot_password: Mot de passe oublié ?
+  magic_link: Sans mot de passe
+
+he:
+  page_title: התחברות
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'שכחת את הסיסמה שלך?'
+  magic_link: 'בלי סיסמה'
+
+hi:
+  page_title: 'साइन इन'
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'क्या आप अपना पासवर्ड भूल गए?'
+  magic_link: 'बिना पासवर्ड के'
+
+id:
+  page_title: Masuk
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'Lupa kata sandi Anda?'
+  magic_link: 'Tanpa kata sandi'
+
+it:
+  page_title: Accedi
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'Hai dimenticato la password?'
+  magic_link: 'Senza password'
+
+ja:
+  page_title: サインイン
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: パスワードをお忘れですか？
+  magic_link: パスワードなしで
+
+ko:
+  page_title: 로그인
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: '비밀번호를 잊으셨나요?'
+  magic_link: '비밀번호 없이'
+
+nl:
+  page_title: Aanmelden
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'Vergeten uw wachtwoord?'
+  magic_link: 'Zonder een wachtwoord'
+
+pl:
+  page_title: 'Zaloguj się'
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'Zapomniałeś hasła?'
+  magic_link: 'Bez hasła'
+
+pt_BR:
+  page_title: Entrar
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'Esqueceu sua senha?'
+  magic_link: 'Sem senha'
+
+ru:
+  page_title: Войти
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'Забыли пароль?'
+  magic_link: 'Без пароля'
+
+th:
+  page_title: เข้าสู่ระบบ
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'ลืมรหัสผ่านใช่ไหม?'
+  magic_link: ไม่ต้องใช้รหัสผ่าน
+
+tr:
+  page_title: 'Giriş yap'
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'Şifrenizi mi unuttunuz?'
+  magic_link: Şifresiz
+
+ur:
+  page_title: 'سائن ان کریں'
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'اپنا پاس ورڈ بھول گئے؟'
+  magic_link: 'بغیر پاس ورڈ کے'
+
+vi:
+  page_title: 'Đăng nhập'
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 'Quên mật khẩu?'
+  magic_link: 'Không cần mật khẩu'
+
+zh:
+  page_title: 登录
+  page_icon: 'ph:bold/sign-in'
+  forgot_password: 忘记密码了吗？
+  magic_link: 无需密码

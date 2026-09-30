@@ -1,0 +1,160 @@
+en:
+  page_title: Backup codes
+  page_icon: ph:bold/key
+  intro: Keep these codes somewhere safe. Each signs you in once without the app. They will not be shown again.
+  action:
+    done: I kept them
+
+ar:
+  page_title: 'رموز النسخ الاحتياطي'
+  page_icon: 'ph:bold/key'
+  intro: 'احتفظ بهذه الرموز في مكان آمن. كل رمز يسجل دخولك مرة واحدة دون الحاجة للتطبيق. لن تظهر مرة أخرى.'
+  action:
+    done: 'لقد احتفظت بها'
+
+bn:
+  page_title: 'ব্যাকআপ কোড'
+  page_icon: 'ph:bold/key'
+  intro: 'এই কোডগুলো নিরাপদ স্থানে রাখুন। প্রতিটি কোড আপনাকে অ্যাপ ছাড়া একবার সাইন ইন করতে সাহায্য করবে। এগুলো আবার দেখানো হবে না।'
+  action:
+    done: 'আমি সেগুলো রেখেছি'
+
+de:
+  page_title: Sicherungscodes
+  page_icon: 'ph:bold/key'
+  intro: 'Bewahre diese Codes an einem sicheren Ort auf. Jeder Code ermöglicht dir einmal den Zugriff ohne die App. Sie werden nicht wieder angezeigt.'
+  action:
+    done: 'Ich habe sie aufbewahrt'
+
+es:
+  page_title: 'Códigos de respaldo'
+  page_icon: 'ph:bold/key'
+  intro: 'Guarda estos códigos en un lugar seguro. Cada uno te permite iniciar sesión una vez sin la app. No se mostrarán de nuevo.'
+  action:
+    done: 'Los guardé'
+
+fa:
+  page_title: 'کدهای پشتیبان'
+  page_icon: 'ph:bold/key'
+  intro: 'این کدها را در مکانی امن نگهداری کنید. هر کدام یک بار شما را بدون اپ وارد می‌کند. دیگر نمایش داده نخواهند شد.'
+  action:
+    done: 'من آنها را نگه داشتم'
+
+fi:
+  page_title: Varmuuskopiot
+  page_icon: 'ph:bold/key'
+  intro: 'Pidä nämä koodit turvallisessa paikassa. Jokainen koodi kirjautuu sisään kerran ilman sovellusta. Niitä ei näytetä enää.'
+  action:
+    done: 'Olen tallentanut ne'
+
+fr:
+  page_title: Codes de secours
+  page_icon: ph:bold/key
+  intro: Gardez ces codes en lieu sûr. Chacun vous connecte une fois sans l'application. Ils ne seront plus affichés.
+  action:
+    done: Je les ai gardés
+
+he:
+  page_title: 'קודי גיבוי'
+  page_icon: 'ph:bold/key'
+  intro: 'שמור את הקודים האלה במקום בטוח. כל אחד מהם נכנס לחשבון שלך פעם אחת בלי האפליקציה. הם לא יופיעו שוב.'
+  action:
+    done: 'שמרתי אותם'
+
+hi:
+  page_title: 'बैकअप कोड'
+  page_icon: 'ph:bold/key'
+  intro: 'इन कोड्स को कहीं सुरक्षित रखें। हर बार जब आप बिना ऐप के साइन इन करते हैं। ये फिर से नहीं दिखेंगे।'
+  action:
+    done: 'मैंने इन्हें रख लिया'
+
+id:
+  page_title: 'Kode cadangan'
+  page_icon: 'ph:bold/key'
+  intro: 'Simpan kode-kode ini di tempat yang aman. Setiap kode digunakan untuk masuk sekali tanpa aplikasi. Kode ini tidak akan ditampilkan lagi.'
+  action:
+    done: 'Saya sudah menyimpannya'
+
+it:
+  page_title: 'Codici di backup'
+  page_icon: 'ph:bold/key'
+  intro: "Conserva questi codici in un luogo sicuro. Ognuno di essi ti consente di accedere una volta senza l'app. Non verranno mostrati di nuovo."
+  action:
+    done: 'Li ho conservati'
+
+ja:
+  page_title: バックアップコード
+  page_icon: 'ph:bold/key'
+  intro: これらのコードは安全な場所に保管してください。各コードはアプリなしで1回サインインするために使用します。再表示されることはありません。
+  action:
+    done: 保存しました
+
+ko:
+  page_title: '백업 코드'
+  page_icon: 'ph:bold/key'
+  intro: '이 코드를 안전한 곳에 보관하세요. 각 코드는 앱 없이 한 번 로그인할 수 있습니다. 다시는 표시되지 않습니다.'
+  action:
+    done: 저장했습니다
+
+nl:
+  page_title: Back-upcodes
+  page_icon: 'ph:bold/key'
+  intro: 'Bewaar deze codes op een veilige plek. Elke code logt je één keer in zonder de app. Ze worden niet opnieuw weergegeven.'
+  action:
+    done: 'Ik heb ze bewaard'
+
+pl:
+  page_title: 'Kody zapasowe'
+  page_icon: 'ph:bold/key'
+  intro: 'Zachowaj te kody w bezpiecznym miejscu. Każdy z nich loguje się raz bez aplikacji. Nie będą już pokazywane.'
+  action:
+    done: 'Zachowałem je'
+
+pt_BR:
+  page_title: 'Códigos de backup'
+  page_icon: 'ph:bold/key'
+  intro: 'Guarde esses códigos em um lugar seguro. Cada um faz login uma vez sem o aplicativo. Eles não serão exibidos novamente.'
+  action:
+    done: 'Eu os guardei'
+
+ru:
+  page_title: 'Коды резервного копирования'
+  page_icon: 'ph:bold/key'
+  intro: 'Храните эти коды в безопасном месте. Каждый код позволяет вам войти в систему один раз без приложения. Они больше не будут показаны.'
+  action:
+    done: 'Я сохранил их'
+
+th:
+  page_title: รหัสสำรอง
+  page_icon: 'ph:bold/key'
+  intro: 'เก็บรหัสเหล่านี้ไว้ในที่ปลอดภัย ทุกตัวจะช่วยให้คุณเข้าสู่ระบบได้โดยไม่ต้องใช้แอปอีกครั้ง พวกมันจะไม่ถูกแสดงอีกครั้ง'
+  action:
+    done: ฉันได้เก็บไว้แล้ว
+
+tr:
+  page_title: 'Yedek kodlar'
+  page_icon: 'ph:bold/key'
+  intro: 'Bu kodları güvende bir yerde saklayın. Her biri uygulama olmadan bir kez oturum açmanızı sağlar. Bir daha gösterilmeyecekler.'
+  action:
+    done: 'Onları sakladım'
+
+ur:
+  page_title: 'بیک اپ کوڈز'
+  page_icon: 'ph:bold/key'
+  intro: 'ان کوڈز کو کہیں محفوظ رکھیں۔ ہر ایک آپ کو ایپ کے بغیر ایک بار لاگ ان کرتا ہے۔ یہ دوبارہ نہیں دکھائے جائیں گے۔'
+  action:
+    done: 'میں نے انہیں محفوظ کر لیا'
+
+vi:
+  page_title: 'Mã sao lưu'
+  page_icon: 'ph:bold/key'
+  intro: 'Lưu những mã này ở nơi an toàn. Mỗi mã cho phép bạn đăng nhập một lần mà không cần ứng dụng. Chúng sẽ không được hiển thị lại.'
+  action:
+    done: 'Tôi đã lưu chúng'
+
+zh:
+  page_title: 备份代码
+  page_icon: 'ph:bold/key'
+  intro: 请将这些代码保存在安全的地方。每个代码可以让您在没有应用程序的情况下登录一次。它们不会再显示。
+  action:
+    done: 我保留了它们

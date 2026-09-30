@@ -1,8 +1,0 @@
-description: 'Erhalten Sie einen Link per E-Mail, der Sie ohne Passwort anmeldet.'
-field:
-  identifier:
-    label: 'E-Mail oder Benutzername'
-action:
-  submit: 'Senden Sie mir einen Link'
-success:
-  message: 'Wenn dieses Konto existiert, wurde ein Anmeldelink an die E-Mail-Adresse gesendet.'

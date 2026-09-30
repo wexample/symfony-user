@@ -1,5 +1,0 @@
-field:
-  email:
-    label: 'Je e-mailadres'
-error:
-  email: 'Dit e-mailadres is ongeldig.'

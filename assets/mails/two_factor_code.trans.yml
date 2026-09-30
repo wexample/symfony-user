@@ -1,0 +1,114 @@
+en:
+  subject: Your sign-in code
+  intro: "Your sign-in code:"
+  validity: It works until %date%. If you did not try to sign in, change your password, someone knows it.
+
+ar:
+  subject: 'رمز تسجيل الدخول الخاص بك'
+  intro: 'رمز تسجيل الدخول الخاص بك:'
+  validity: 'سوف يعمل حتى %date%. إذا لم تحاول تسجيل الدخول، قم بتغيير كلمة مرورك، شخص ما يعرفها.'
+
+bn:
+  subject: 'আপনার সাইন-ইন কোড'
+  intro: 'আপনার সাইন-ইন কোড:'
+  validity: 'এটি %date% পর্যন্ত কাজ করবে। যদি আপনি সাইন ইন করতে চেষ্টা না করেন, পাসওয়ার্ড পরিবর্তন করুন, কেউ এটি জানে।'
+
+de:
+  subject: 'Ihr Anmeldecode'
+  intro: 'Ihr Anmeldecode:'
+  validity: 'Er gilt bis %date%. Wenn Sie sich nicht angemeldet haben, ändern Sie Ihr Passwort, jemand kennt es.'
+
+es:
+  subject: 'Tu código de acceso'
+  intro: 'Tu código de acceso:'
+  validity: 'Funciona hasta %date%. Si no intentaste iniciar sesión, cambia tu contraseña, alguien lo conoce.'
+
+fa:
+  subject: 'کد ورود شما'
+  intro: 'کد ورود شما:'
+  validity: 'این کد تا %date% معتبر است. اگر شما سعی نکردید وارد شوید، رمز عبور خود را تغییر دهید، کسی آن را می‌داند.'
+
+fi:
+  subject: Kirjautumiskoodisi
+  intro: 'Kirjautumiskoodisi:'
+  validity: 'Se toimii %date% asti. Jos et yrittänyt kirjautua sisään, vaihda salasanasi, joku tietää sen.'
+
+fr:
+  subject: Votre code de connexion
+  intro: "Votre code de connexion :"
+  validity: Il fonctionne jusqu'au %date%. Si vous n'avez pas tenté de vous connecter, changez votre mot de passe, quelqu'un le connaît.
+
+he:
+  subject: 'קוד הכניסה שלך'
+  intro: 'קוד הכניסה שלך:'
+  validity: 'הוא תקף עד %date%. אם לא ניסית להיכנס, שנה את הסיסמה שלך, מישהו יודע אותה.'
+
+hi:
+  subject: 'आपका साइन-इन कोड'
+  intro: 'आपका साइन-इन कोड:'
+  validity: 'यह %date% तक काम करता है। अगर आपने साइन इन करने की कोशिश नहीं की, तो अपना पासवर्ड बदलें, कोई इसे जानता है।'
+
+id:
+  subject: 'Kode masuk Anda'
+  intro: 'Kode masuk Anda:'
+  validity: 'Kode ini berlaku hingga %date%. Jika Anda tidak mencoba untuk masuk, ganti kata sandi Anda, seseorang mengetahuinya.'
+
+it:
+  subject: 'Il tuo codice di accesso'
+  intro: 'Il tuo codice di accesso:'
+  validity: 'Funziona fino a %date%. Se non hai provato ad accedere, cambia la tua password, qualcuno lo sa.'
+
+ja:
+  subject: サインインコード
+  intro: サインインコード：
+  validity: '%date%まで有効です。サインインを試みていない場合は、パスワードを変更してください。誰かがそれを知っています。'
+
+ko:
+  subject: '로그인 코드'
+  intro: '로그인 코드:'
+  validity: '%date%까지 유효합니다. 로그인 시도를 하지 않았다면, 비밀번호를 변경하세요. 누군가가 알고 있을 수 있습니다.'
+
+nl:
+  subject: 'Uw aanmeldcode'
+  intro: 'Uw aanmeldcode:'
+  validity: 'Het werkt tot %date%. Als u niet hebt geprobeerd in te loggen, wijzig dan uw wachtwoord, iemand weet het.'
+
+pl:
+  subject: 'Twój kod logowania'
+  intro: 'Twój kod logowania:'
+  validity: 'Działa do %date%. Jeśli nie próbowałeś się zalogować, zmień swoje hasło, ktoś je zna.'
+
+pt_BR:
+  subject: 'Seu código de acesso'
+  intro: 'Seu código de acesso:'
+  validity: 'Ele funciona até %date%. Se você não tentou fazer login, altere sua senha, alguém sabe dela.'
+
+ru:
+  subject: 'Ваш код для входа'
+  intro: 'Ваш код для входа:'
+  validity: 'Он действителен до %date%. Если вы не пытались войти, смените пароль, кто-то его знает.'
+
+th:
+  subject: รหัสเข้าสู่ระบบของคุณ
+  intro: 'รหัสเข้าสู่ระบบของคุณ:'
+  validity: 'ใช้งานได้จนถึง %date%. ถ้าคุณไม่ได้พยายามเข้าสู่ระบบ เปลี่ยนรหัสผ่านของคุณ เผื่อมีใครรู้รหัสนี้.'
+
+tr:
+  subject: 'Giriş kodunuz'
+  intro: 'Giriş kodunuz:'
+  validity: '%date% tarihine kadar geçerlidir. Eğer giriş yapmaya çalışmadıysanız, şifrenizi değiştirin, birisi onu biliyor.'
+
+ur:
+  subject: 'آپ کا سائن ان کوڈ'
+  intro: 'آپ کا سائن ان کوڈ:'
+  validity: 'یہ %date% تک کام کرتا ہے۔ اگر آپ نے سائن ان کرنے کی کوشش نہیں کی، تو اپنا پاس ورڈ تبدیل کریں، کوئی اس کو جانتا ہے۔'
+
+vi:
+  subject: 'Mã đăng nhập của bạn'
+  intro: 'Mã đăng nhập của bạn:'
+  validity: 'Nó có hiệu lực đến %date%. Nếu bạn không cố gắng đăng nhập, hãy thay đổi mật khẩu của bạn, có ai đó biết mã này.'
+
+zh:
+  subject: 您的登录代码
+  intro: 您的登录代码：
+  validity: 该代码有效直到%date%。如果您没有尝试登录，请更改您的密码，有人知道它。

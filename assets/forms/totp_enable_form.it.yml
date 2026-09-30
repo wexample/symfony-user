@@ -1,7 +1,0 @@
-field:
-  code:
-    label: "Codice mostrato dall'app"
-action:
-  submit: "Accendi l'app"
-error:
-  invalid: "Codice errato, controlla l'orologio del tuo telefono e riprova."

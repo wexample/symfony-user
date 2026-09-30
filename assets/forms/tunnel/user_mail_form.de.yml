@@ -1,5 +1,0 @@
-field:
-  email:
-    label: 'Ihre E-Mail-Adresse'
-error:
-  email: 'Diese E-Mail-Adresse ist ungültig.'

@@ -1,7 +1,0 @@
-field:
-  code:
-    label: '앱에서 표시된 코드'
-action:
-  submit: '앱 켜기'
-error:
-  invalid: '잘못된 코드입니다. 전화기의 시계를 확인하고 다시 시도하세요.'

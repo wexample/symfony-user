@@ -1,7 +1,0 @@
-field:
-  current_password:
-    label: 'סיסמא נוכחית'
-action:
-  submit: 'כבה את האפליקציה'
-error:
-  current_password: 'הסיסמא הנוכחית שגויה.'

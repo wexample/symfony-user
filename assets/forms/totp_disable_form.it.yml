@@ -1,7 +1,0 @@
-field:
-  current_password:
-    label: 'Password attuale'
-action:
-  submit: "Spegni l'app"
-error:
-  current_password: 'La password attuale è errata.'

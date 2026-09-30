@@ -1,7 +1,0 @@
-field:
-  code:
-    label: 'Mã được hiển thị bởi ứng dụng'
-action:
-  submit: 'Bật ứng dụng'
-error:
-  invalid: 'Mã không đúng, kiểm tra đồng hồ trên điện thoại của bạn và thử lại.'

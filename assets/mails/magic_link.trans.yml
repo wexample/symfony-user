@@ -1,0 +1,114 @@
+en:
+  subject: Your sign-in link
+  intro: "Here is your sign-in link:"
+  validity: It works once, until %date%. If you did not ask for it, ignore this email.
+
+ar:
+  subject: 'رابط تسجيل الدخول الخاص بك'
+  intro: 'إليك رابط تسجيل الدخول الخاص بك:'
+  validity: 'يعمل مرة واحدة، حتى %date%. إذا لم تطلبه، تجاهل هذا البريد الإلكتروني.'
+
+bn:
+  subject: 'আপনার সাইন-ইন লিঙ্ক'
+  intro: 'এটি আপনার সাইন-ইন লিঙ্ক:'
+  validity: 'এটি একবার কাজ করে, %date% পর্যন্ত। যদি আপনি এটি না চেয়ে থাকেন, তবে এই ইমেইলটি উপেক্ষা করুন।'
+
+de:
+  subject: 'Ihr Anmeldelink'
+  intro: 'Hier ist Ihr Anmeldelink:'
+  validity: 'Er funktioniert einmal bis %date%. Wenn Sie ihn nicht angefordert haben, ignorieren Sie diese E-Mail.'
+
+es:
+  subject: 'Tu enlace de inicio de sesión'
+  intro: 'Aquí está tu enlace de inicio de sesión:'
+  validity: 'Funciona una vez, hasta %date%. Si no lo solicitaste, ignora este correo electrónico.'
+
+fa:
+  subject: 'لینک ورود شما'
+  intro: 'در اینجا لینک ورود شما است:'
+  validity: 'این لینک یک بار کار می‌کند، تا %date%. اگر درخواست آن را نکرده‌اید، این ایمیل را نادیده بگیرید.'
+
+fi:
+  subject: Kirjautumislinkkisi
+  intro: 'Tässä on kirjautumislinkkisi:'
+  validity: 'Se toimii kerran, kunnes %date%. Jos et ole pyytänyt sitä, voit jättää tämän sähköpostin huomiotta.'
+
+fr:
+  subject: Votre lien de connexion
+  intro: "Voici votre lien de connexion :"
+  validity: Il fonctionne une seule fois, jusqu'au %date%. Si vous ne l'avez pas demandé, ignorez cet email.
+
+he:
+  subject: 'קישור הכניסה שלך'
+  intro: 'הנה קישור הכניסה שלך:'
+  validity: 'הוא עובד פעם אחת, עד %date%. אם לא ביקשת אותו, התעלם מהמייל הזה.'
+
+hi:
+  subject: 'आपका साइन-इन लिंक'
+  intro: 'यहाँ आपका साइन-इन लिंक है:'
+  validity: 'यह एक बार काम करता है, %date% तक। यदि आपने इसके लिए अनुरोध नहीं किया है, तो इस ईमेल की अनदेखी करें।'
+
+id:
+  subject: 'Tautan masuk Anda'
+  intro: 'Berikut adalah tautan masuk Anda:'
+  validity: 'Tautan ini hanya berlaku sekali, hingga %date%. Jika Anda tidak memintanya, abaikan email ini.'
+
+it:
+  subject: 'Il tuo link di accesso'
+  intro: 'Ecco il tuo link di accesso:'
+  validity: 'Funziona una sola volta, fino a %date%. Se non lo hai richiesto, ignora questa email.'
+
+ja:
+  subject: サインインリンク
+  intro: こちらがあなたのサインインリンクです：
+  validity: これは一度だけ機能します。%date%までです。これを要求していない場合は、このメールを無視してください。
+
+ko:
+  subject: '로그인 링크'
+  intro: '여기 로그인 링크가 있습니다:'
+  validity: '이 링크는 %date%까지 한 번만 작동합니다. 요청하지 않으셨다면 이 이메일을 무시하세요.'
+
+nl:
+  subject: 'Je aanmeldlink'
+  intro: 'Hier is je aanmeldlink:'
+  validity: 'Het werkt één keer, tot %date%. Als je het niet hebt aangevraagd, negeer deze e-mail.'
+
+pl:
+  subject: 'Twój link do logowania'
+  intro: 'Oto twój link do logowania:'
+  validity: 'Działa jednorazowo, do %date%. Jeśli go nie zamawiałeś, zignoruj ten e-mail.'
+
+pt_BR:
+  subject: 'Seu link de acesso'
+  intro: 'Aqui está seu link de acesso:'
+  validity: 'Ele funciona uma vez, até %date%. Se você não o solicitou, ignore este e-mail.'
+
+ru:
+  subject: 'Ссылка для входа'
+  intro: 'Вот ваша ссылка для входа:'
+  validity: 'Она работает один раз, до %date%. Если вы не запрашивали её, проигнорируйте это письмо.'
+
+th:
+  subject: ลิงก์เข้าสู่ระบบของคุณ
+  intro: 'นี่คือลิงก์เข้าสู่ระบบของคุณ:'
+  validity: 'ใช้งานได้เพียงครั้งเดียว จนถึง %date% หากคุณไม่ได้ขอลิงก์นี้ กรุณาเพิกเฉยต่ออีเมลนี้.'
+
+tr:
+  subject: 'Giriş bağlantınız'
+  intro: 'İşte giriş bağlantınız:'
+  validity: 'Bir kez çalışır, %date% tarihine kadar. Eğer bunu istemediyseniz, bu e-postayı dikkate almayın.'
+
+ur:
+  subject: 'آپ کا سائن ان لنک'
+  intro: 'یہ رہا آپ کا سائن ان لنک:'
+  validity: 'یہ ایک بار کام کرتا ہے، جب تک کہ %date%۔ اگر آپ نے اس کی درخواست نہیں کی، تو اس ای میل کو نظر انداز کریں۔'
+
+vi:
+  subject: 'Liên kết đăng nhập của bạn'
+  intro: 'Đây là liên kết đăng nhập của bạn:'
+  validity: 'Nó chỉ hoạt động một lần, cho đến %date%. Nếu bạn không yêu cầu điều này, hãy bỏ qua email này.'
+
+zh:
+  subject: 您的登录链接
+  intro: 这是您的登录链接：
+  validity: 它只有效一次，直到%date%。如果您没有请求，请忽略此电子邮件。

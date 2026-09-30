@@ -1,8 +1,0 @@
-description: 通过电子邮件接收一个链接，无需密码即可登录。
-field:
-  identifier:
-    label: 电子邮件或用户名
-action:
-  submit: 给我发送链接
-success:
-  message: 如果该账户存在，登录链接已发送至其电子邮件地址。

@@ -1,5 +1,0 @@
-field:
-  email:
-    label: 您的电子邮件
-error:
-  email: 此电子邮件地址无效。

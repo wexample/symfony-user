@@ -1,7 +1,0 @@
-field:
-  code:
-    label: 'Código exibido pelo aplicativo'
-action:
-  submit: 'Ativar o aplicativo'
-error:
-  invalid: 'Código incorreto, verifique o relógio do seu telefone e tente novamente.'

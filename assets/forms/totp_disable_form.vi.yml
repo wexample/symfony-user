@@ -1,7 +1,0 @@
-field:
-  current_password:
-    label: 'Mật khẩu hiện tại'
-action:
-  submit: 'Tắt ứng dụng'
-error:
-  current_password: 'Mật khẩu hiện tại không đúng.'

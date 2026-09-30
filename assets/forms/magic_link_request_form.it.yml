@@ -1,8 +1,0 @@
-description: 'Ricevi un link via email che ti permette di accedere senza password.'
-field:
-  identifier:
-    label: 'Email o nome utente'
-action:
-  submit: 'Inviami un link'
-success:
-  message: "Se questo account esiste, un link per l'accesso è stato inviato al suo indirizzo email."

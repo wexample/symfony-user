@@ -1,0 +1,210 @@
+en:
+  field:
+    current_password:
+      label: Current password
+
+  action:
+    submit: Turn the app off
+
+  error:
+    current_password: The current password is wrong.
+
+ar:
+  field:
+    current_password:
+      label: 'كلمة المرور الحالية'
+  action:
+    submit: 'إيقاف التطبيق'
+  error:
+    current_password: 'كلمة المرور الحالية غير صحيحة.'
+
+bn:
+  field:
+    current_password:
+      label: 'বর্তমান পাসওয়ার্ড'
+  action:
+    submit: 'অ্যাপটি বন্ধ করুন'
+  error:
+    current_password: 'বর্তমান পাসওয়ার্ডটি ভুল।'
+
+de:
+  field:
+    current_password:
+      label: 'Aktuelles Passwort'
+  action:
+    submit: 'App ausschalten'
+  error:
+    current_password: 'Das aktuelle Passwort ist falsch.'
+
+es:
+  field:
+    current_password:
+      label: 'Contraseña actual'
+  action:
+    submit: 'Apagar la aplicación'
+  error:
+    current_password: 'La contraseña actual es incorrecta.'
+
+fa:
+  field:
+    current_password:
+      label: 'رمز عبور فعلی'
+  action:
+    submit: 'برنامه را خاموش کنید'
+  error:
+    current_password: 'رمز عبور فعلی اشتباه است.'
+
+fi:
+  field:
+    current_password:
+      label: 'Nykyinen salasana'
+  action:
+    submit: 'Sulje sovellus'
+  error:
+    current_password: 'Nykyinen salasana on väärin.'
+
+fr:
+  field:
+    current_password:
+      label: Mot de passe actuel
+
+  action:
+    submit: Désactiver l'application
+
+  error:
+    current_password: Le mot de passe actuel est incorrect.
+
+he:
+  field:
+    current_password:
+      label: 'סיסמא נוכחית'
+  action:
+    submit: 'כבה את האפליקציה'
+  error:
+    current_password: 'הסיסמא הנוכחית שגויה.'
+
+hi:
+  field:
+    current_password:
+      label: 'वर्तमान पासवर्ड'
+  action:
+    submit: 'ऐप बंद करें'
+  error:
+    current_password: 'वर्तमान पासवर्ड गलत है।'
+
+id:
+  field:
+    current_password:
+      label: 'Kata sandi saat ini'
+  action:
+    submit: 'Matikan aplikasi'
+  error:
+    current_password: 'Kata sandi saat ini salah.'
+
+it:
+  field:
+    current_password:
+      label: 'Password attuale'
+  action:
+    submit: "Spegni l'app"
+  error:
+    current_password: 'La password attuale è errata.'
+
+ja:
+  field:
+    current_password:
+      label: 現在のパスワード
+  action:
+    submit: アプリを終了する
+  error:
+    current_password: 現在のパスワードが間違っています。
+
+ko:
+  field:
+    current_password:
+      label: '현재 비밀번호'
+  action:
+    submit: '앱 종료'
+  error:
+    current_password: '현재 비밀번호가 잘못되었습니다.'
+
+nl:
+  field:
+    current_password:
+      label: 'Huidig wachtwoord'
+  action:
+    submit: 'Zet de app uit'
+  error:
+    current_password: 'Het huidige wachtwoord is onjuist.'
+
+pl:
+  field:
+    current_password:
+      label: 'Aktualne hasło'
+  action:
+    submit: 'Wyłącz aplikację'
+  error:
+    current_password: 'Aktualne hasło jest błędne.'
+
+pt_BR:
+  field:
+    current_password:
+      label: 'Senha atual'
+  action:
+    submit: 'Desligar o aplicativo'
+  error:
+    current_password: 'A senha atual está incorreta.'
+
+ru:
+  field:
+    current_password:
+      label: 'Текущий пароль'
+  action:
+    submit: 'Выключить приложение'
+  error:
+    current_password: 'Текущий пароль неверен.'
+
+th:
+  field:
+    current_password:
+      label: รหัสผ่านปัจจุบัน
+  action:
+    submit: ปิดแอป
+  error:
+    current_password: รหัสผ่านปัจจุบันไม่ถูกต้อง.
+
+tr:
+  field:
+    current_password:
+      label: 'Mevcut şifre'
+  action:
+    submit: 'Uygulamayı kapat'
+  error:
+    current_password: 'Mevcut şifre yanlış.'
+
+ur:
+  field:
+    current_password:
+      label: 'موجودہ پاس ورڈ'
+  action:
+    submit: 'ایپ بند کریں'
+  error:
+    current_password: 'موجودہ پاس ورڈ غلط ہے۔'
+
+vi:
+  field:
+    current_password:
+      label: 'Mật khẩu hiện tại'
+  action:
+    submit: 'Tắt ứng dụng'
+  error:
+    current_password: 'Mật khẩu hiện tại không đúng.'
+
+zh:
+  field:
+    current_password:
+      label: 当前密码
+  action:
+    submit: 关闭应用程序
+  error:
+    current_password: 当前密码错误。

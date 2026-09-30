@@ -1,0 +1,235 @@
+en:
+  description: Receive a link by email that signs you in without a password.
+
+  field:
+    identifier:
+      label: Email or username
+
+  action:
+    submit: Send me a link
+
+  success:
+    message: If this account exists, a sign-in link has been sent to its email address.
+
+ar:
+  description: 'استلم رابطًا عبر البريد الإلكتروني يتيح لك تسجيل الدخول بدون كلمة مرور.'
+  field:
+    identifier:
+      label: 'البريد الإلكتروني أو اسم المستخدم'
+  action:
+    submit: 'أرسل لي رابطًا'
+  success:
+    message: 'إذا كان هذا الحساب موجودًا، فقد تم إرسال رابط تسجيل الدخول إلى عنوان بريده الإلكتروني.'
+
+bn:
+  description: 'একটি লিঙ্ক ইমেইলে গ্রহণ করুন যা আপনাকে পাসওয়ার্ড ছাড়াই সাইন ইন করতে দেয়।'
+  field:
+    identifier:
+      label: 'ইমেইল বা ব্যবহারকারীর নাম'
+  action:
+    submit: 'আমাকে একটি লিঙ্ক পাঠান'
+  success:
+    message: 'যদি এই অ্যাকাউন্টটি বিদ্যমান থাকে, তবে একটি সাইন-ইন লিঙ্ক এর ইমেইল ঠিকানায় পাঠানো হয়েছে।'
+
+de:
+  description: 'Erhalten Sie einen Link per E-Mail, der Sie ohne Passwort anmeldet.'
+  field:
+    identifier:
+      label: 'E-Mail oder Benutzername'
+  action:
+    submit: 'Senden Sie mir einen Link'
+  success:
+    message: 'Wenn dieses Konto existiert, wurde ein Anmeldelink an die E-Mail-Adresse gesendet.'
+
+es:
+  description: 'Recibe un enlace por correo electrónico que te inicia sesión sin necesidad de contraseña.'
+  field:
+    identifier:
+      label: 'Correo electrónico o nombre de usuario'
+  action:
+    submit: 'Envíame un enlace'
+  success:
+    message: 'Si esta cuenta existe, se ha enviado un enlace de inicio de sesión a su dirección de correo electrónico.'
+
+fa:
+  description: 'یک لینک از طریق ایمیل دریافت کنید که بدون نیاز به رمز عبور شما را وارد می‌کند.'
+  field:
+    identifier:
+      label: 'ایمیل یا نام کاربری'
+  action:
+    submit: 'برای من لینک ارسال کن'
+  success:
+    message: 'اگر این حساب وجود داشته باشد، یک لینک ورود به ایمیل آن ارسال شده است.'
+
+fi:
+  description: 'Saat sähköpostitse linkin, joka kirjautuu sisään ilman salasanaa.'
+  field:
+    identifier:
+      label: 'Sähköposti tai käyttäjätunnus'
+  action:
+    submit: 'Lähetä minulle linkki'
+  success:
+    message: 'Jos tämä tili on olemassa, kirjautumislinkki on lähetetty sen sähköpostiosoitteeseen.'
+
+fr:
+  description: Recevez par email un lien qui vous connecte sans mot de passe.
+
+  field:
+    identifier:
+      label: Email ou nom d'utilisateur
+
+  action:
+    submit: M'envoyer un lien
+
+  success:
+    message: Si ce compte existe, un lien de connexion a été envoyé à son adresse email.
+
+he:
+  description: 'קבל קישור בדוא"ל שמכניס אותך ללא סיסמה.'
+  field:
+    identifier:
+      label: 'דוא"ל או שם משתמש'
+  action:
+    submit: 'שלח לי קישור'
+  success:
+    message: 'אם החשבון הזה קיים, קישור כניסה נשלח לכתובת הדוא"ל שלו.'
+
+hi:
+  description: 'ईमेल द्वारा एक लिंक प्राप्त करें जो आपको पासवर्ड के बिना साइन इन करता है।'
+  field:
+    identifier:
+      label: 'ईमेल या उपयोगकर्ता नाम'
+  action:
+    submit: 'मुझे एक लिंक भेजें'
+  success:
+    message: 'यदि यह खाता अस्तित्व में है, तो साइन-इन लिंक इसके ईमेल पते पर भेजा गया है।'
+
+id:
+  description: 'Terima tautan melalui email yang memungkinkan Anda masuk tanpa kata sandi.'
+  field:
+    identifier:
+      label: 'Email atau nama pengguna'
+  action:
+    submit: 'Kirimkan saya tautan'
+  success:
+    message: 'Jika akun ini ada, tautan masuk telah dikirim ke alamat emailnya.'
+
+it:
+  description: 'Ricevi un link via email che ti permette di accedere senza password.'
+  field:
+    identifier:
+      label: 'Email o nome utente'
+  action:
+    submit: 'Inviami un link'
+  success:
+    message: "Se questo account esiste, un link per l'accesso è stato inviato al suo indirizzo email."
+
+ja:
+  description: パスワードなしでサインインできるリンクをメールで受け取ります。
+  field:
+    identifier:
+      label: メールアドレスまたはユーザー名
+  action:
+    submit: リンクを送信
+  success:
+    message: このアカウントが存在する場合、サインインリンクがそのメールアドレスに送信されました。
+
+ko:
+  description: '비밀번호 없이 로그인할 수 있는 링크를 이메일로 받으세요.'
+  field:
+    identifier:
+      label: '이메일 또는 사용자 이름'
+  action:
+    submit: '링크 보내기'
+  success:
+    message: '이 계정이 존재한다면, 로그인 링크가 해당 이메일 주소로 전송되었습니다.'
+
+nl:
+  description: 'Ontvang een link per e-mail waarmee je je zonder wachtwoord kunt aanmelden.'
+  field:
+    identifier:
+      label: 'E-mail of gebruikersnaam'
+  action:
+    submit: 'Stuur me een link'
+  success:
+    message: 'Als dit account bestaat, is er een aanmeldlink naar het e-mailadres verzonden.'
+
+pl:
+  description: 'Otrzymaj link na email, który zaloguje Cię bez hasła.'
+  field:
+    identifier:
+      label: 'Email lub nazwa użytkownika'
+  action:
+    submit: 'Wyślij mi link'
+  success:
+    message: 'Jeśli to konto istnieje, link do logowania został wysłany na jego adres email.'
+
+pt_BR:
+  description: 'Receba um link por email que faz login sem precisar de senha.'
+  field:
+    identifier:
+      label: 'Email ou nome de usuário'
+  action:
+    submit: 'Envie-me um link'
+  success:
+    message: 'Se esta conta existir, um link de login foi enviado para o endereço de email correspondente.'
+
+ru:
+  description: 'Получите ссылку на электронную почту, которая позволит вам войти без пароля.'
+  field:
+    identifier:
+      label: 'Электронная почта или имя пользователя'
+  action:
+    submit: 'Отправьте мне ссылку'
+  success:
+    message: 'Если эта учетная запись существует, на ее адрес электронной почты отправлена ссылка для входа.'
+
+th:
+  description: รับลิงก์ทางอีเมลที่ช่วยให้คุณเข้าสู่ระบบโดยไม่ต้องใช้รหัสผ่าน
+  field:
+    identifier:
+      label: อีเมลหรือชื่อผู้ใช้
+  action:
+    submit: ส่งลิงก์ให้ฉัน
+  success:
+    message: 'หากบัญชีนี้มีอยู่ ลิงก์เข้าสู่ระบบได้ถูกส่งไปยังที่อยู่อีเมลของบัญชีแล้ว'
+
+tr:
+  description: 'Şifresiz giriş yapmanızı sağlayan bir bağlantıyı e-posta ile alın.'
+  field:
+    identifier:
+      label: 'E-posta veya kullanıcı adı'
+  action:
+    submit: 'Bana bir bağlantı gönder'
+  success:
+    message: 'Eğer bu hesap varsa, giriş bağlantısı e-posta adresine gönderilmiştir.'
+
+ur:
+  description: 'ای میل کے ذریعے ایک لنک موصول کریں جو آپ کو بغیر پاس ورڈ کے سائن ان کرتا ہے۔'
+  field:
+    identifier:
+      label: 'ای میل یا صارف نام'
+  action:
+    submit: 'مجھے لنک بھیجیں'
+  success:
+    message: 'اگر یہ اکاؤنٹ موجود ہے، تو اس کی ای میل ایڈریس پر سائن ان لنک بھیج دیا گیا ہے۔'
+
+vi:
+  description: 'Nhận liên kết qua email để đăng nhập mà không cần mật khẩu.'
+  field:
+    identifier:
+      label: 'Email hoặc tên người dùng'
+  action:
+    submit: 'Gửi cho tôi một liên kết'
+  success:
+    message: 'Nếu tài khoản này tồn tại, một liên kết đăng nhập đã được gửi đến địa chỉ email của nó.'
+
+zh:
+  description: 通过电子邮件接收一个链接，无需密码即可登录。
+  field:
+    identifier:
+      label: 电子邮件或用户名
+  action:
+    submit: 给我发送链接
+  success:
+    message: 如果该账户存在，登录链接已发送至其电子邮件地址。

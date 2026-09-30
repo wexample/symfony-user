@@ -1,7 +1,0 @@
-field:
-  current_password:
-    label: 'موجودہ پاس ورڈ'
-action:
-  submit: 'ایپ بند کریں'
-error:
-  current_password: 'موجودہ پاس ورڈ غلط ہے۔'

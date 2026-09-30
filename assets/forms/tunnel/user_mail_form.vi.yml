@@ -1,5 +1,0 @@
-field:
-  email:
-    label: 'Email của bạn'
-error:
-  email: 'Địa chỉ email này không hợp lệ.'
