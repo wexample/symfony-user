@@ -1,6 +1,6 @@
 # symfony-user
 
-Version: 7.0.0
+Version: 7.0.1
 
 ## Pages and routes
 
@@ -168,11 +168,11 @@ Visit the [Wexample Suite documentation](https://docs.wexample.com) for the comp
 - php: >=8.5
 - doctrine/orm: ^3.0
 - symfony/security-bundle: ^7.4
-- wexample/symfony-helpers: >=11.0.0
-- wexample/symfony-translations: >=4.0.0
+- wexample/symfony-helpers: >=12.0.0
+- wexample/symfony-translations: >=6.0.0
 - symfony/validator: ^7.4
 - wexample/symfony-forms: >=8.0.0
-- wexample/symfony-loader: >=14.0.0
+- wexample/symfony-loader: >=15.0.0
 - symfony/form: ^7.4
 - symfony/rate-limiter: ^7.4
 - symfony/mailer: ^7.4
