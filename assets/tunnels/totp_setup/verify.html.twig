@@ -1,0 +1,6 @@
+{%- extends '@WexampleSymfonyUserBundle/tunnels/totp_setup/_step.html.twig' -%}
+
+{%- block step_body -%}
+    <p class="lead">{{ '@page::intro' | trans }}</p>
+    {{ form_load(render_pass, form, '@WexampleSymfonyUserBundle/forms/totp_enable_form_step.html.twig') }}
+{%- endblock -%}

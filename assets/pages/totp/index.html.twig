@@ -1,45 +1,27 @@
 {%- extends '@front/layouts/private/layout.html.twig' -%}
 
-{#- Held here until the app is set up: nothing else to do meanwhile. -#}
-{%- set page_focus = required and not enabled -%}
-
 {%- set page_show_title = true -%}
 
-{#- Off: the QR code to scan, the secret to type when scanning is not an
-    option, and the first code that proves the app holds it. On: the backup
-    codes left, and the way out. -#}
+{#- The app set up: the backup codes left, and the way out. Setting it up is
+    the setup tunnel's (tunnels/totp_setup). -#}
 {%- block page_body -%}
-    {%- if enabled -%}
-        <section class="block block--card">
-            <div class="block--body stack--vertical">
-                <p class="lead">{{ '@page::enabled.intro' | trans }}</p>
-                <p>{{ '@page::enabled.backup_codes' | trans({'%count%': backup_codes_count}) }}</p>
-                <form method="post" action="{{ path('user_totp_regenerate') }}">
-                    {{ button('ph:bold/arrow-clockwise', '@page::action.regenerate' | trans, { type: 'submit' }) }}
-                </form>
-            </div>
-        </section>
-        <section class="block block--card">
-            <div class="block--body stack--vertical">
-                {%- if required -%}
-                    <p class="text-secondary">{{ '@page::disable.required' | trans }}</p>
-                {%- else -%}
-                    <p>{{ '@page::disable.intro' | trans }}</p>
-                    {{ form_load(render_pass, totp_disable_form, '@WexampleSymfonyUserBundle/forms/totp_disable_form.html.twig') }}
-                {%- endif -%}
-            </div>
-        </section>
-    {%- else -%}
-        <section class="block block--card">
-            <div class="block--body stack--vertical">
-                {%- if required -%}
-                    <p class="lead">{{ '@page::setup.required' | trans }}</p>
-                {%- endif -%}
-                <p class="{{ required ? 'text-secondary' : 'lead' }}">{{ '@page::setup.intro' | trans }}</p>
-                <p><img src="{{ qr_code }}" alt="{{ '@page::setup.qr_alt' | trans }}" width="240" height="240"></p>
-                <p class="text-secondary">{{ '@page::setup.secret' | trans }} <code>{{ secret }}</code></p>
-                {{ form_load(render_pass, totp_enable_form, '@WexampleSymfonyUserBundle/forms/totp_enable_form.html.twig') }}
-            </div>
-        </section>
-    {%- endif -%}
+    <section class="block block--card">
+        <div class="block--body stack--vertical">
+            <p class="lead">{{ '@page::enabled.intro' | trans }}</p>
+            <p>{{ '@page::enabled.backup_codes' | trans({'%count%': backup_codes_count}) }}</p>
+            <form method="post" action="{{ path('user_totp_regenerate') }}">
+                {{ button('ph:bold/arrow-clockwise', '@page::action.regenerate' | trans, { type: 'submit' }) }}
+            </form>
+        </div>
+    </section>
+    <section class="block block--card">
+        <div class="block--body stack--vertical">
+            {%- if required -%}
+                <p class="text-secondary">{{ '@page::disable.required' | trans }}</p>
+            {%- else -%}
+                <p>{{ '@page::disable.intro' | trans }}</p>
+                {{ form_load(render_pass, totp_disable_form, '@WexampleSymfonyUserBundle/forms/totp_disable_form.html.twig') }}
+            {%- endif -%}
+        </div>
+    </section>
 {%- endblock -%}

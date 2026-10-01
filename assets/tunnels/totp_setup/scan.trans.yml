@@ -1,0 +1,11 @@
+en:
+  required: "Your role requires an authenticator app: set it up to go on."
+  intro: Scan this code with an authenticator app. It will then be asked at sign-in, instead of the email code.
+  qr_alt: QR code to scan with the authenticator app
+  secret: "Cannot scan? Type this key in the app:"
+
+fr:
+  required: "Votre rôle exige une application d'authentification : configurez-la pour continuer."
+  intro: Scannez ce code avec une application d'authentification. Elle sera ensuite demandée à la connexion, à la place du code par e-mail.
+  qr_alt: QR code à scanner avec l'application d'authentification
+  secret: "Impossible de scanner ? Saisissez cette clé dans l'application :"

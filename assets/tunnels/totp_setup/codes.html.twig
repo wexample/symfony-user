@@ -1,0 +1,21 @@
+{%- extends '@WexampleSymfonyUserBundle/tunnels/totp_setup/_step.html.twig' -%}
+
+{#- The only time the codes are shown: nothing keeps them in clear. Done is
+    the authenticator's page, not a step back. -#}
+{%- block step_body -%}
+    {%- if codes -%}
+        <p class="lead">{{ '@page::intro' | trans }}</p>
+        <ul>
+            {%- for code in codes -%}
+                <li><code>{{ code }}</code></li>
+            {%- endfor -%}
+        </ul>
+    {%- else -%}
+        <p class="lead">{{ '@page::shown' | trans }}</p>
+    {%- endif -%}
+{%- endblock -%}
+
+{%- block step_footer -%}
+    <span></span>
+    {{ button_link('ph:bold/check', '@page::done' | trans, path('user_totp_index'), { class: 'button--invert' }) }}
+{%- endblock -%}

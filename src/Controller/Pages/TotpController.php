@@ -9,14 +9,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Wexample\SymfonyLoader\Controller\AbstractPagesController;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Service\FormProcessor\TotpDisableFormProcessor;
-use Wexample\SymfonyUser\Service\FormProcessor\TotpEnableFormProcessor;
 use Wexample\SymfonyUser\Service\TotpService;
 use Wexample\SymfonyUser\Service\TwoFactorPolicyService;
 use Wexample\SymfonyUser\Traits\SymfonyUserBundleClassTrait;
 
 /**
- * The authenticator app of the signed-in user: set it up, get backup codes,
- * turn it off.
+ * The authenticator app of the signed-in user: get backup codes, turn it off.
+ * Setting it up is a tunnel of its own (TotpSetupTunnelController).
  */
 #[Route(path: '/account/authenticator', name: 'user_totp_')]
 #[IsGranted('IS_AUTHENTICATED_FULLY')]
@@ -30,9 +29,7 @@ final class TotpController extends AbstractPagesController
 
     #[Route(path: '', name: 'index')]
     public function index(
-        TotpService $totpService,
         TwoFactorPolicyService $policy,
-        TotpEnableFormProcessor $enableFormProcessor,
         TotpDisableFormProcessor $disableFormProcessor
     ): Response {
         $user = $this->getAbstractUser();
@@ -47,13 +44,8 @@ final class TotpController extends AbstractPagesController
             ]);
         }
 
-        return $this->renderPage('index', [
-            'enabled' => false,
-            'required' => $required,
-            'qr_code' => $totpService->getPendingQrCodeDataUri($user),
-            'secret' => $totpService->getPendingSecret(),
-            'totp_enable_form' => $enableFormProcessor->createForm()->createView(),
-        ]);
+        // Not set up yet: the setup tunnel, step by step.
+        return $this->redirectToRoute(TotpSetupTunnelController::ROUTE_INDEX);
     }
 
     /**
