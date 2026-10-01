@@ -4,6 +4,9 @@ en:
   link_invalid: This link has expired or was already used. Ask for a new one below.
   action:
     mailbox: Open the mailbox
+  dev_mailbox:
+    title: Development only
+    body: No mail leaves this machine — the link was dropped in the development mailbox. Neither this box nor that mailbox exists in production.
 
 ar:
   page_title: 'نسيت كلمة المرور؟'
@@ -41,6 +44,9 @@ fr:
   link_invalid: Ce lien a expiré ou a déjà servi. Demandez-en un nouveau ci-dessous.
   action:
     mailbox: 'Ouvrir la boîte mail'
+  dev_mailbox:
+    title: Environnement de développement
+    body: Aucun e-mail ne quitte cette machine — le lien a été déposé dans la boîte mail de développement. Ni cet encart ni cette boîte n'existent en production.
 
 he:
   page_title: 'שכחת את הסיסמה שלך?'

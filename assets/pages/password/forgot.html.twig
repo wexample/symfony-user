@@ -12,13 +12,15 @@
         <div class="block--body">
             {{ form_load(render_pass, password_reset_request_form, '@WexampleSymfonyUserBundle/forms/password_reset_request_form.html.twig') }}
         </div>
-        {#- In development, the link is read in symfony-mail's mailbox. -#}
-        {%- set mailbox = mailbox_url() -%}
-        {%- if mailbox -%}
-            <div class="block--footer">
-                <span></span>
-                {{ button_link('ph:bold/envelope-simple', '@page::action.mailbox' | trans, mailbox, { class: 'button--flat' }) }}
-            </div>
-        {%- endif -%}
     </section>
+
+    {#- In development, the link is read in symfony-mail's mailbox — said
+        apart and loud, so nobody takes it for part of the product. -#}
+    {%- set mailbox = mailbox_url() -%}
+    {%- if mailbox -%}
+        {{ message_warning('@page::dev_mailbox.title', '@page::dev_mailbox.body', {
+            icon: 'ph:bold/code',
+            action: { icon: 'ph:bold/envelope-simple', label: '@page::action.mailbox', href: mailbox },
+        }) }}
+    {%- endif -%}
 {%- endblock -%}

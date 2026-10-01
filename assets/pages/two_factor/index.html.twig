@@ -13,11 +13,6 @@
         </div>
         <div class="block--footer">
             {%- if method == 'email_code' -%}
-                {#- In development, the code is read in symfony-mail's mailbox. -#}
-                {%- set mailbox = mailbox_url(email) -%}
-                {%- if mailbox -%}
-                    {{ button_link('ph:bold/envelope-simple', '@page::action.mailbox' | trans, mailbox, { class: 'button--flat' }) }}
-                {%- endif -%}
                 <form method="post" action="{{ path('user_security_two_factor_resend') }}">
                     {%- if can_resend -%}
                         {{ button('ph:bold/arrow-clockwise', '@page::action.resend' | trans, { type: 'submit', class: 'button--flat' }) }}
@@ -33,4 +28,14 @@
             {{ button_link('ph:bold/sign-out', '@page::action.cancel' | trans, path('user_security_logout'), { class: 'button--flat' }) }}
         </div>
     </section>
+
+    {#- In development, the code is read in symfony-mail's mailbox — said
+        apart and loud, so nobody takes it for part of the product. -#}
+    {%- set mailbox = method == 'email_code' ? mailbox_url(email) : null -%}
+    {%- if mailbox -%}
+        {{ message_warning('@page::dev_mailbox.title', '@page::dev_mailbox.body', {
+            icon: 'ph:bold/code',
+            action: { icon: 'ph:bold/envelope-simple', label: '@page::action.mailbox', href: mailbox },
+        }) }}
+    {%- endif -%}
 {%- endblock -%}

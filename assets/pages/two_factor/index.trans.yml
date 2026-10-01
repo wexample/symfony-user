@@ -12,6 +12,9 @@ en:
     use_app: Use the app
     cancel: Use another account
     mailbox: Open the mailbox
+  dev_mailbox:
+    title: Development only
+    body: No mail leaves this machine — the code was dropped in the development mailbox. Neither this box nor that mailbox exists in production.
 
 ar:
   page_title: 'تأكيد أنه أنت'
@@ -111,6 +114,9 @@ fr:
     use_app: Utiliser l'application
     cancel: Utiliser un autre compte
     mailbox: 'Ouvrir la boîte mail'
+  dev_mailbox:
+    title: Environnement de développement
+    body: Aucun e-mail ne quitte cette machine — le code a été déposé dans la boîte mail de développement. Ni cet encart ni cette boîte n'existent en production.
 
 he:
   page_title: 'אשר שזה אתה'
