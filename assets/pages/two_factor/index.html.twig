@@ -9,6 +9,7 @@
     authenticator app, or a backup code —, then what to do without it: ask for
     another email, once a minute, switch to a backup code, or leave. -#}
 {%- block page_body -%}
+    {%- include '@WexampleSymfonyUserBundle/partials/activation_steps.html.twig' -%}
     <section class="block block--card">
         <div class="block--body stack--vertical">
             <p class="lead">{{ ('@page::intro.' ~ method) | trans({'%email%': email}) }}</p>

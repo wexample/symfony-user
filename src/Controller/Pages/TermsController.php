@@ -8,6 +8,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Wexample\SymfonyLoader\Controller\AbstractPagesController;
 use Wexample\SymfonyUser\Form\TermsAcceptForm;
 use Wexample\SymfonyUser\Service\FormProcessor\TermsAcceptFormProcessor;
+use Wexample\SymfonyUser\Service\ActivationProgressService;
 use Wexample\SymfonyUser\Service\TermsService;
 use Wexample\SymfonyUser\Traits\SymfonyUserBundleClassTrait;
 
@@ -25,7 +26,8 @@ final class TermsController extends AbstractPagesController
     #[Route(path: '', name: 'index')]
     public function index(
         TermsService $termsService,
-        TermsAcceptFormProcessor $formProcessor
+        TermsAcceptFormProcessor $formProcessor,
+        ActivationProgressService $activationProgress
     ): Response {
         if (! $version = $termsService->getVersion()) {
             throw $this->createNotFoundException();
@@ -35,6 +37,7 @@ final class TermsController extends AbstractPagesController
             'version' => $version,
             'text_route' => $termsService->getTextRoute(),
             'text_template' => $termsService->getTextTemplate(),
+            'activation_steps' => $activationProgress->steps(ActivationProgressService::STEP_TERMS),
             'terms_accept_form' => $formProcessor
                 ->createForm([TermsAcceptForm::FIELD_VERSION => $version])
                 ->createView(),

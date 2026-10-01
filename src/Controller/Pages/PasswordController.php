@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Wexample\SymfonyLoader\Controller\AbstractPagesController;
 use Wexample\SymfonyUser\Service\FormProcessor\PasswordResetRequestFormProcessor;
 use Wexample\SymfonyUser\Service\FormProcessor\SetPasswordFormProcessor;
+use Wexample\SymfonyUser\Service\ActivationProgressService;
 use Wexample\SymfonyUser\Service\PasswordResetService;
 use Wexample\SymfonyUser\Traits\SymfonyUserBundleClassTrait;
 
@@ -62,13 +63,16 @@ final class PasswordController extends AbstractPagesController
     #[Route(path: 'activate', name: 'activate')]
     public function activate(
         Request $request,
-        PasswordResetService $passwordResetService
+        PasswordResetService $passwordResetService,
+        ActivationProgressService $activationProgress
     ): Response {
         if ($passwordResetService->consumeActivationLink(
             (string) $request->query->get('user'),
             $request->query->getInt('expires'),
             (string) $request->query->get('hash')
         )) {
+            $activationProgress->start();
+
             return $this->redirectToRoute(self::ROUTE_NEW);
         }
 
@@ -78,7 +82,8 @@ final class PasswordController extends AbstractPagesController
     #[Route(path: 'new', name: 'new')]
     public function new(
         PasswordResetService $passwordResetService,
-        SetPasswordFormProcessor $processor
+        SetPasswordFormProcessor $processor,
+        ActivationProgressService $activationProgress
     ): Response {
         if (! $user = $passwordResetService->getProofUser()) {
             return $this->redirectToRoute(self::ROUTE_FORGOT);
@@ -86,6 +91,7 @@ final class PasswordController extends AbstractPagesController
 
         return $this->renderPage('new', [
             'user' => $user,
+            'activation_steps' => $activationProgress->steps(ActivationProgressService::STEP_PASSWORD),
             'set_password_form' => $processor->createForm()->createView(),
         ]);
     }

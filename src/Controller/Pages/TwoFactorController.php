@@ -12,6 +12,7 @@ use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Enum\SecurityEventType;
 use Wexample\SymfonyUser\Form\TwoFactorCodeForm;
 use Wexample\SymfonyUser\Service\FormProcessor\TwoFactorCodeFormProcessor;
+use Wexample\SymfonyUser\Service\ActivationProgressService;
 use Wexample\SymfonyUser\Service\SecurityJournalService;
 use Wexample\SymfonyUser\Service\TwoFactorCodeService;
 use Wexample\SymfonyUser\Traits\SymfonyUserBundleClassTrait;
@@ -32,7 +33,8 @@ final class TwoFactorController extends AbstractPagesController
         Request $request,
         TokenStorageInterface $tokenStorage,
         TwoFactorCodeFormProcessor $formProcessor,
-        TwoFactorCodeService $codeService
+        TwoFactorCodeService $codeService,
+        ActivationProgressService $activationProgress
     ): Response {
         if (! $user = $this->getPendingUser($tokenStorage)) {
             return $this->redirectToRoute(SecurityController::ROUTE_LOGIN);
@@ -51,6 +53,7 @@ final class TwoFactorController extends AbstractPagesController
             'has_backup_codes' => $user->countBackupCodes() > 0,
             'can_resend' => $codeService->canResend(),
             'two_factor_code_form' => $form->createView(),
+            'activation_steps' => $activationProgress->steps(ActivationProgressService::STEP_CODE),
         ]);
     }
 

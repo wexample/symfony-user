@@ -1,0 +1,6 @@
+{#- The steps of an account's activation above the screen it stands on, when
+    it is one (ActivationProgressService): `activation_steps` or nothing. -#}
+{%- if activation_steps|default(null) -%}
+    {#- The design system draws it; an application without it shows none. -#}
+    {%- include '@WexampleSymfonyDesignSystemBundle/components/stepper/stepper.html.twig' ignore missing with activation_steps only -%}
+{%- endif -%}

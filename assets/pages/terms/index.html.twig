@@ -7,6 +7,7 @@
 
 {#- The terms in force: read them, accept them, or leave. -#}
 {%- block page_body -%}
+    {%- include '@WexampleSymfonyUserBundle/partials/activation_steps.html.twig' -%}
     <section class="block block--card">
         <div class="block--body stack--vertical">
             <p class="lead">{{ '@page::intro' | trans({'%version%': version}) }}</p>

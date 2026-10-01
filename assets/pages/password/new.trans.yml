@@ -2,6 +2,11 @@ en:
   page_title: Choose a new password
   page_icon: ph:bold/key
   intro: New password for %email%.
+  activation:
+    steps:
+      password: Password
+      code: Code
+      terms: Terms of use
 
 ar:
   page_title: 'اختر كلمة مرور جديدة'
@@ -37,6 +42,11 @@ fr:
   page_title: Choisir un nouveau mot de passe
   page_icon: ph:bold/key
   intro: Nouveau mot de passe pour %email%.
+  activation:
+    steps:
+      password: Mot de passe
+      code: Code
+      terms: CGU
 
 he:
   page_title: 'בחר סיסמה חדשה'

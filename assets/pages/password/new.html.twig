@@ -6,6 +6,7 @@
 {%- set page_show_title = true -%}
 
 {%- block page_body -%}
+    {%- include '@WexampleSymfonyUserBundle/partials/activation_steps.html.twig' -%}
     <section class="block block--card">
         <div class="block--body stack--vertical">
             <p class="lead">{{ '@page::intro' | trans({'%email%': user.email}) }}</p>
