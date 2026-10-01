@@ -120,6 +120,13 @@ wexample_symfony_user:
         version: ~                 # set: every signed-in user accepts this version before anything else; changing it asks everyone again
         text_route: ~              # the route of the page holding the text, owned by the application
     magic_link_login: true         # false: no magic link form on the login page; MagicLinkService still sends the application's own links
+    request_limit:                 # reset and magic link mails, per hour; past it, the same answer and no mail
+        per_identifier: 3
+        per_ip: 20
+    administration:                # the rules of AccountAdministrationService and AccountRulesService
+        protected_roles: []        # never left without an active holder
+        role_email_domains: {}     # ROLE_X: [example.com] — held only by an address of these domains
+        exclusive_roles: {}        # ROLE_X: [ROLE_A, ROLE_B] — never given together
     two_factor:
         pending_lifetime: 600      # seconds a correct password waits for its second factor; past it, back to the password
         required: false            # true: every sign-in — magic link, login after a reset — asks a second factor, no account exempt

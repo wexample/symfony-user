@@ -13,6 +13,7 @@ use Wexample\SymfonyHelpers\Helper\RoleHelper;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Enum\SecurityEventType;
 use Wexample\SymfonyUser\Form\PasswordResetRequestForm;
+use Wexample\SymfonyUser\Service\MailRequestLimiterService;
 use Wexample\SymfonyUser\Service\SecurityJournalService;
 use Wexample\SymfonyUser\Service\PasswordResetService;
 
@@ -28,6 +29,7 @@ class PasswordResetRequestFormProcessor extends AbstractFormProcessor
         private readonly UserProviderInterface $userProvider,
         private readonly PasswordResetService $passwordResetService,
         private readonly SecurityJournalService $journal,
+        private readonly MailRequestLimiterService $limiter,
     ) {
         parent::__construct($formFactory, $requestStack, $urlGenerator);
     }
@@ -47,16 +49,18 @@ class PasswordResetRequestFormProcessor extends AbstractFormProcessor
             $user = null;
         }
 
+        $limited = ! $this->limiter->consume($user?->getUserIdentifier() ?? $identifier);
+
         // What the answer hides, the journal keeps: an unknown address as a
         // fingerprint, an account that gets nothing with why.
         $this->journal->record(
             SecurityEventType::PASSWORD_RESET_REQUESTED,
             $user,
-            $this->getRefusalCause($user),
+            $limited ? 'rate_limited' : $this->getRefusalCause($user),
             extra: $user ? [] : ['identifier_fingerprint' => $this->journal->fingerprint($identifier)]
         );
 
-        if ($user instanceof AbstractUser) {
+        if (! $limited && $user instanceof AbstractUser) {
             $this->passwordResetService->sendResetLink($user);
         }
 

@@ -29,6 +29,8 @@ class PasswordResetTest extends WebTestCase
         $this->client->disableReboot();
         $this->entityManager = $this->createDatabaseSchema();
         self::getContainer()->get('cache.rate_limiter')->clear();
+        // The mail requests are limited in a cache that outlives the test.
+        self::getContainer()->get('cache.app')->clear();
 
         $this->entityManager->persist(
             (new User())

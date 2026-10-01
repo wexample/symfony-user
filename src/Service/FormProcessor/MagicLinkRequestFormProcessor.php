@@ -14,6 +14,7 @@ use Wexample\SymfonyHelpers\Helper\RoleHelper;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Enum\SecurityEventType;
 use Wexample\SymfonyUser\Form\MagicLinkRequestForm;
+use Wexample\SymfonyUser\Service\MailRequestLimiterService;
 use Wexample\SymfonyUser\Service\SecurityJournalService;
 use Wexample\SymfonyUser\Service\MagicLinkService;
 
@@ -32,6 +33,7 @@ class MagicLinkRequestFormProcessor extends AbstractFormProcessor
         private readonly UserProviderInterface $userProvider,
         private readonly MagicLinkService $magicLinkService,
         private readonly SecurityJournalService $journal,
+        private readonly MailRequestLimiterService $limiter,
         #[Autowire(param: 'wexample_symfony_user.magic_link_login')]
         private readonly bool $enabled = true,
     ) {
@@ -62,16 +64,22 @@ class MagicLinkRequestFormProcessor extends AbstractFormProcessor
             $user = null;
         }
 
+        $cause = match (true) {
+            ! $this->enabled => 'magic_link_login_disabled',
+            ! $this->limiter->consume($user?->getUserIdentifier() ?? $identifier) => 'rate_limited',
+            default => $this->getRefusalCause($user),
+        };
+
         // What the answer hides, the journal keeps: an unknown address as a
         // fingerprint, an account that gets nothing with why.
         $this->journal->record(
             SecurityEventType::MAGIC_LINK_REQUESTED,
             $user,
-            $this->enabled ? $this->getRefusalCause($user) : 'magic_link_login_disabled',
+            $cause,
             extra: $user ? [] : ['identifier_fingerprint' => $this->journal->fingerprint($identifier)]
         );
 
-        if ($this->enabled && $user instanceof AbstractUser) {
+        if ($this->enabled && $cause !== 'rate_limited' && $user instanceof AbstractUser) {
             $this->magicLinkService->sendLink($user);
         }
 

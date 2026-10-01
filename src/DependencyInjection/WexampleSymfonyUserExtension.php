@@ -17,6 +17,11 @@ class WexampleSymfonyUserExtension extends AbstractWexampleSymfonyExtension
         $container->setParameter('wexample_symfony_user.password_reset', $config['password_reset']);
         $container->setParameter('wexample_symfony_user.reveal_account_status', $config['reveal_account_status']);
         $container->setParameter('wexample_symfony_user.magic_link_login', $config['magic_link_login']);
+        $container->setParameter('wexample_symfony_user.request_limit.per_identifier', $config['request_limit']['per_identifier']);
+        $container->setParameter('wexample_symfony_user.request_limit.per_ip', $config['request_limit']['per_ip']);
+        $container->setParameter('wexample_symfony_user.administration.protected_roles', $config['administration']['protected_roles']);
+        $container->setParameter('wexample_symfony_user.administration.role_email_domains', $config['administration']['role_email_domains']);
+        $container->setParameter('wexample_symfony_user.administration.exclusive_roles', $config['administration']['exclusive_roles']);
         $container->setParameter('wexample_symfony_user.terms.version', $config['terms']['version']);
         $container->setParameter('wexample_symfony_user.terms.text_route', $config['terms']['text_route']);
         $container->setParameter('wexample_symfony_user.two_factor.required', $config['two_factor']['required']);

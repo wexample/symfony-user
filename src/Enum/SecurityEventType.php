@@ -33,12 +33,19 @@ enum SecurityEventType: string
     case ACCOUNT_IMPERSONATION_STARTED = 'account.impersonation_started';
     case ACCOUNT_IMPERSONATION_ENDED = 'account.impersonation_ended';
 
+    case ACCOUNT_DEACTIVATED = 'account.deactivated';
+    case ACCOUNT_REACTIVATED = 'account.reactivated';
+    case ACCOUNT_LOCKED = 'account.locked';
+    case ACCOUNT_UNLOCKED = 'account.unlocked';
+    case ACCOUNT_ROLES_CHANGED = 'account.roles_changed';
+    case ACCOUNT_CHANGE_REFUSED = 'account.change_refused';
+
     case TERMS_ACCEPTED = 'terms.accepted';
 
     case LOGOUT = 'logout';
 
     public function isFailure(): bool
     {
-        return in_array($this, [self::LOGIN_FAILED, self::SECOND_FACTOR_FAILED], true);
+        return in_array($this, [self::LOGIN_FAILED, self::SECOND_FACTOR_FAILED, self::ACCOUNT_CHANGE_REFUSED], true);
     }
 }

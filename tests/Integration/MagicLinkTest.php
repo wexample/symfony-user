@@ -29,6 +29,8 @@ class MagicLinkTest extends WebTestCase
         $this->entityManager = $this->createDatabaseSchema();
         // A refused link counts as a failed login for the throttling.
         self::getContainer()->get('cache.rate_limiter')->clear();
+        // The mail requests are limited in a cache that outlives the test.
+        self::getContainer()->get('cache.app')->clear();
 
         $this->user = $this->createUser('jane');
         $this->createUser('locked')->setLocked(true);

@@ -1,0 +1,20 @@
+# symfony-testing's TestKernel sets this parameter itself, over
+# `security.role_hierarchy`: it is set again here.
+parameters:
+  security.role_hierarchy.roles:
+    ROLE_OWNER: [ROLE_MANAGER]
+    ROLE_MANAGER: [ROLE_SUPPORT, ROLE_CUSTOMER]
+
+wexample_symfony_user:
+  administration:
+    protected_roles: [ROLE_MANAGER]
+    role_email_domains:
+      ROLE_MANAGER: [example.com]
+    exclusive_roles:
+      ROLE_MANAGER: [ROLE_CUSTOMER]
+
+services:
+  # No controller of the fixture application uses it: kept for the tests.
+  test.account_administration:
+    alias: Wexample\SymfonyUser\Service\AccountAdministrationService
+    public: true
