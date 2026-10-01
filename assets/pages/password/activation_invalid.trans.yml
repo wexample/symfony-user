@@ -3,3 +3,9 @@ en:
   page_icon: ph:bold/link-break
   intro: It has expired, or your account is already activated. Sign in, or ask the person who created your account to send you a new link.
   login: Sign in
+
+fr:
+  page_title: Ce lien ne fonctionne plus
+  page_icon: ph:bold/link-break
+  intro: Il a expiré, ou votre compte est déjà activé. Connectez-vous, ou demandez un nouveau lien à la personne qui a créé votre compte.
+  login: Se connecter

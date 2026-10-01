@@ -5,3 +5,11 @@ en:
   action:
     read: Read the terms of use
     decline: Decline and sign out
+
+fr:
+  page_title: Conditions d'utilisation
+  page_icon: ph:bold/file-text
+  intro: "Pour continuer, acceptez les conditions d'utilisation en vigueur (version %version%)."
+  action:
+    read: Lire les conditions d'utilisation
+    decline: Refuser et se déconnecter
