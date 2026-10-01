@@ -53,4 +53,18 @@ trait UserWithNameTrait
 
         return $this->getUsername() ?? $this->getUserIdentifier();
     }
+
+    /**
+     * What stands for the person where a face would: the first letters of
+     * the first and the last name, or of what the display name falls back
+     * to — « Jane Doe » JD, « jane » J.
+     */
+    public function getInitials(): string
+    {
+        $words = $this->firstName
+            ? array_filter([$this->firstName, $this->lastName])
+            : [$this->getDisplayName()];
+
+        return mb_strtoupper(implode('', array_map(fn (string $word) => mb_substr($word, 0, 1), $words)));
+    }
 }

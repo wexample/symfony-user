@@ -68,6 +68,15 @@ class AbstractUserTest extends TestCase
         $this->assertSame('Jane', $user->getDisplayName(short: true));
     }
 
+    public function testInitialsStandForTheNamesThenWhatTheDisplayNameFallsBackTo(): void
+    {
+        $user = (new User())->setEmail('jane@example.com');
+        $this->assertSame('J', $user->getInitials());
+
+        $user->setFirstName('élodie')->setLastName('Durand');
+        $this->assertSame('ÉD', $user->getInitials());
+    }
+
     /**
      * @return array{User, User}
      */

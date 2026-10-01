@@ -1,0 +1,11 @@
+en:
+  label: My account
+  authenticator: Authenticator app
+  language: Language
+  logout: Sign out
+
+fr:
+  label: Mon compte
+  authenticator: Application d'authentification
+  language: Langue
+  logout: Se déconnecter
