@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Wexample\SymfonyHelpers\Entity\AbstractEntity;
+use Wexample\SymfonySecurity\Helper\RequestIdHelper;
 use Wexample\SymfonyUser\Enum\SecurityEventType;
 use Wexample\SymfonyUser\Event\SecurityEvent;
 
@@ -19,9 +20,7 @@ use Wexample\SymfonyUser\Event\SecurityEvent;
  */
 class SecurityJournalService
 {
-    public const string REQUEST_ID_HEADER = 'X-Request-Id';
-
-    private const string REQUEST_ID_ATTRIBUTE = '_wexample_user_request_id';
+    public const string REQUEST_ID_HEADER = RequestIdHelper::HEADER;
 
     public function __construct(
         private readonly EventDispatcherInterface $eventDispatcher,
@@ -53,7 +52,7 @@ class SecurityJournalService
             firewall: $request ? $this->security->getFirewallConfig($request)?->getName() : null,
             ip: $request?->getClientIp(),
             userAgent: $request?->headers->get('User-Agent'),
-            requestId: $this->getRequestId(),
+            requestId: RequestIdHelper::resolve($request),
             extra: $extra,
         ));
     }
@@ -75,27 +74,5 @@ class SecurityJournalService
         }
 
         return $user?->getUserIdentifier();
-    }
-
-    /**
-     * The one a proxy gave, or one of our own, the same for every event of the
-     * request.
-     */
-    private function getRequestId(): ?string
-    {
-        $request = $this->requestStack->getMainRequest();
-
-        if (! $request) {
-            return null;
-        }
-
-        if (! $request->attributes->has(self::REQUEST_ID_ATTRIBUTE)) {
-            $request->attributes->set(
-                self::REQUEST_ID_ATTRIBUTE,
-                $request->headers->get(self::REQUEST_ID_HEADER) ?? bin2hex(random_bytes(8))
-            );
-        }
-
-        return $request->attributes->get(self::REQUEST_ID_ATTRIBUTE);
     }
 }

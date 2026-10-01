@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b76fea7970840ea7ba576faa4b2ae12",
+    "content-hash": "ccfb7a52abac0ab4dc7f1b0b3e885d26",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -9014,7 +9014,7 @@
             "dist": {
                 "type": "path",
                 "url": "../php-api",
-                "reference": "65af336081c13017eb98a75d98b810dafe750bfe"
+                "reference": "a4bf3a48e2c6ded1c69f5f46a51caa6135048143"
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.8",
@@ -9055,7 +9055,7 @@
             "dist": {
                 "type": "path",
                 "url": "../php-api-entity",
-                "reference": "803dd8382dcc1f9f4c271077023061cc3681086b"
+                "reference": "c59165e48764a0d7c6cc5471fd193b345ccaf905"
             },
             "require": {
                 "php": ">=8.5",
@@ -9097,7 +9097,7 @@
             "dist": {
                 "type": "path",
                 "url": "../php-date",
-                "reference": "2236402541970bc1cf8c9d1d45146abb9c8ed515"
+                "reference": "55013740b0fc6d0fce199ae9c10d8efe26136464"
             },
             "require": {
                 "ext-intl": "*",
@@ -9138,7 +9138,7 @@
             "dist": {
                 "type": "path",
                 "url": "../php-file",
-                "reference": "5bf73a86fcd6e0b538adda1b0345a839dfa94397"
+                "reference": "607cd74943b38e7493aa22665472834f852287b7"
             },
             "require": {
                 "php": ">=8.5"
@@ -9178,7 +9178,7 @@
             "dist": {
                 "type": "path",
                 "url": "../php-helpers",
-                "reference": "108524c7df05c527ddfb5e49db8c056dceb4ed76"
+                "reference": "a1351338fd3a38df797b28c8011ecf749be76466"
             },
             "require": {
                 "php": ">=8.5",
@@ -9214,7 +9214,7 @@
             "dist": {
                 "type": "path",
                 "url": "../php-html",
-                "reference": "b35960d27d5ac90b7ba298db9e362a71487da44c"
+                "reference": "b896bec4facbc22b63eb081b16858c411784c20a"
             },
             "require": {
                 "php": ">=8.5",
@@ -9255,7 +9255,7 @@
             "dist": {
                 "type": "path",
                 "url": "../php-pseudocode",
-                "reference": "ad3843227ccbad1a73b01cfb158d219ffc03285f"
+                "reference": "ac382e4541950a17b4e487e0c13f95db2d5ebb11"
             },
             "require": {
                 "nikic/php-parser": "^5.0",
@@ -9293,7 +9293,7 @@
             "dist": {
                 "type": "path",
                 "url": "../php-yaml",
-                "reference": "b15266d5e4cb72f50bc7f62b2dead35d5725600f"
+                "reference": "d36ed2cf1c20eb3a6bcbb1ee8851f712bd592331"
             },
             "require": {
                 "php": ">=8.5",
@@ -9329,7 +9329,7 @@
             "dist": {
                 "type": "path",
                 "url": "../symfony-design-system",
-                "reference": "84a4cc4ce3c5d783823811a9dbe47b2b2bb32a0b"
+                "reference": "85e05238fab1c9059a7bd8cfd5b106daf5c29506"
             },
             "require": {
                 "php": ">=8.5",
@@ -9372,7 +9372,7 @@
             "dist": {
                 "type": "path",
                 "url": "../symfony-dev",
-                "reference": "9bf17b5396bc1f5861ae7d7eb3c7c5bd50b48b20"
+                "reference": "aaa81a87dc90b5c4c99c97a03db149b2d694b404"
             },
             "require": {
                 "php": ">=8.5",
@@ -9415,13 +9415,21 @@
             "dist": {
                 "type": "path",
                 "url": "../symfony-forms",
-                "reference": "8b5ef88d0c5b37d89422ec641c2ea37f291dad46"
+                "reference": "826b3d9722bb6f2a3383b64ceb4cc0e12ce0989a"
             },
             "require": {
                 "doctrine/orm": "^3.0",
                 "php": ">=8.5",
+                "symfony/form": "^7.4 || ^8.0",
                 "syrtis/php-semantic-schema-web": ">=0.0.19",
                 "wexample/symfony-design-system": ">=23.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*",
+                "symfony/browser-kit": "^7.4",
+                "symfony/css-selector": "^7.4",
+                "symfony/security-core": "^7.4 || ^8.0",
+                "wexample/symfony-testing": ">=2.0.0"
             },
             "type": "library",
             "extra": {
@@ -9432,6 +9440,11 @@
             "autoload": {
                 "psr-4": {
                     "Wexample\\SymfonyForms\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Wexample\\SymfonyForms\\Tests\\": "tests/"
                 }
             },
             "license": [
@@ -9455,7 +9468,7 @@
             "dist": {
                 "type": "path",
                 "url": "../symfony-helpers",
-                "reference": "9fc43e98e6fa25a9650805c6836da1556f6b596e"
+                "reference": "7a3e4d3ef0f264198d7ebaae31d8ded0f1e21e48"
             },
             "require": {
                 "doctrine/common": "^3.4",
@@ -9504,7 +9517,7 @@
             "dist": {
                 "type": "path",
                 "url": "../symfony-loader",
-                "reference": "fe8f29d6fafca754e1402dd0068684ca54b3f9b4"
+                "reference": "ea8f73679542751b38d895675915fa876c15e293"
             },
             "require": {
                 "fortawesome/font-awesome": "^6.7",
@@ -9519,6 +9532,8 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "*",
+                "symfony/browser-kit": "^7.4 || ^8.0",
+                "symfony/css-selector": "^7.4 || ^8.0",
                 "wexample/symfony-testing": ">=1.0.86"
             },
             "type": "library",
@@ -9561,7 +9576,7 @@
             "dist": {
                 "type": "path",
                 "url": "../symfony-pseudocode",
-                "reference": "f8187cf1b8dd5756cc09f9fb29c1c5a5ec5aa372"
+                "reference": "f5e710cdc337df5f0df7e03758b4b8fc98ccebdf"
             },
             "require": {
                 "php": ">=8.5",
@@ -9606,7 +9621,7 @@
             "dist": {
                 "type": "path",
                 "url": "../symfony-routing",
-                "reference": "f90dffe2ca07aebe0485c7def8aa1166b88e074b"
+                "reference": "3cd6ec7e447a59006526ed0e995fd04e43aa0952"
             },
             "require": {
                 "php": ">=8.5",
@@ -9640,12 +9655,59 @@
             }
         },
         {
+            "name": "wexample/symfony-security",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "../symfony-security",
+                "reference": "febccc68beb879c98bcb84975dead38e4c4e14a3"
+            },
+            "require": {
+                "php": ">=8.5",
+                "psr/log": "^3.0",
+                "symfony/event-dispatcher": "^7.4 || ^8.0",
+                "symfony/http-foundation": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "monolog/monolog": "^3.5",
+                "phpunit/phpunit": "*"
+            },
+            "suggest": {
+                "monolog/monolog": "Required by AbstractSecretRedactionProcessor, which masks secrets in every log record"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wexample\\SymfonySecurity\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Wexample\\SymfonySecurity\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "weeger",
+                    "email": "romain.weeger@wexample.com"
+                }
+            ],
+            "description": "Security contracts shared by the Symfony packages: secret redaction in logs, security events",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
             "name": "wexample/symfony-seo",
             "version": "4.0.1",
             "dist": {
                 "type": "path",
                 "url": "../symfony-seo",
-                "reference": "7912d91c8579f4a57a05a252d7d0404ff22695cc"
+                "reference": "a87cbac43c362439bd50d07461faed572720934c"
             },
             "require": {
                 "php": ">=8.5",
@@ -9693,7 +9755,7 @@
             "dist": {
                 "type": "path",
                 "url": "../symfony-template",
-                "reference": "ec2aa7da2bc71a3dd89f186a7054a1e69dcd0f11"
+                "reference": "7ecdd81b5505a422461f4dfc7cb6cb2f2efa6461"
             },
             "require": {
                 "ext-dom": "*",
@@ -9742,7 +9804,7 @@
             "dist": {
                 "type": "path",
                 "url": "../symfony-testing",
-                "reference": "ac864389bb6eb00c3f89c124d008a4dc8aff9b9a"
+                "reference": "5838360e86796ec8f0f28dba7d20ebe88c0ca65a"
             },
             "require": {
                 "php": ">=8.5",
@@ -9782,7 +9844,7 @@
             "dist": {
                 "type": "path",
                 "url": "../symfony-translations",
-                "reference": "6e299afb9e3d03588fe81f9e7f8e1319a57da248"
+                "reference": "df3352ff7298860d915c9893dfa11945b7008f21"
             },
             "require": {
                 "php": ">=8.5",
@@ -9840,7 +9902,7 @@
             "dist": {
                 "type": "path",
                 "url": "../symfony-tunnels",
-                "reference": "0d62a691ab3fd6f72a090c267a7899c1abaee361"
+                "reference": "58a1ed98fab5c00b598de12e73a53d1b2338b0ed"
             },
             "require": {
                 "doctrine/orm": "^3.0",

@@ -2,11 +2,13 @@
 
 namespace Wexample\SymfonyUser\Enum;
 
+use Wexample\SymfonySecurity\Interface\SecurityEventTypeInterface;
+
 /**
  * Every security fact the package records: the stable codes an audit or a
  * support reads. Failures carry their real cause, in SecurityEvent::$cause.
  */
-enum SecurityEventType: string
+enum SecurityEventType: string implements SecurityEventTypeInterface
 {
     case LOGIN_SUCCEEDED = 'login.succeeded';
     case LOGIN_FAILED = 'login.failed';

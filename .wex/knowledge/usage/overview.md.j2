@@ -126,7 +126,7 @@ Each change is journaled — `account.created`, `account.activation_sent`, `acco
 
 ## Security journal
 
-Every security fact is dispatched as a `Wexample\SymfonyUser\Event\SecurityEvent`: its `type` (`Enum\SecurityEventType` — `login.failed`, `second_factor.backup_code_used`, `password.set_by_admin`…), the real `cause` of a failure (`unknown_user`, `bad_password`, `disabled`, `locked`, `throttled`, `invalid_csrf`, `invalid_login_link`, `invalid`, `expired`, `too_many_attempts`, `rate_limited`), the `method` of a sign-in (`password`, `magic_link`, `password_reset`, `second_factor`), the user id, IP, user agent, firewall, request id (`X-Request-Id`, or one of its own) and UTC time.
+Every security fact is dispatched as a `Wexample\SymfonyUser\Event\SecurityEvent`: its `type` (`Enum\SecurityEventType` — `login.failed`, `second_factor.backup_code_used`, `password.set_by_admin`…), the real `cause` of a failure (`unknown_user`, `bad_password`, `disabled`, `locked`, `throttled`, `invalid_csrf`, `invalid_login_link`, `invalid`, `expired`, `too_many_attempts`, `rate_limited`), the `method` of a sign-in (`password`, `magic_link`, `password_reset`, `second_factor`), the user id, IP, user agent, firewall, request id (`X-Request-Id`, or one generated per request — the same for every package of the suite, see `symfony-security`) and UTC time. Its shape is `symfony-security`'s `AbstractSecurityEvent`, shared with the machine token journal of `symfony-api`.
 
 Every security mail handed to the sender is journaled as `security_message.sent`, or `security_message.failed` with the exception class, with `extra.message_type` — never its link, code or body.
 
@@ -134,7 +134,7 @@ It never carries a secret. An identifier typed for an unknown account is kept as
 
 The package writes them to the `user_security` Monolog channel, warnings for failures: give that channel its own handler and retention. An audit package listens to `SecurityEvent` to store them. Facts of the application itself go through `SecurityJournalService::record()`.
 
-`Log\SecretRedactionProcessor` masks the signature of magic and reset links in every log record, the exceptions it carries included: the router logs each request URI, and a 404 quotes the referer. Keep `doctrine.dbal.logging` off outside development: the SQL log carries query parameters.
+`Log\SecretRedactionProcessor` masks the signature of magic and reset links in every log record, the exceptions it carries included: the router logs each request URI, and a 404 quotes the referer. The walk of the record is `symfony-security`'s `AbstractSecretRedactionProcessor`, which an application extends to mask secrets of its own. Keep `doctrine.dbal.logging` off outside development: the SQL log carries query parameters.
 
 ## Account gates
 

@@ -2,54 +2,24 @@
 
 namespace Wexample\SymfonyUser\Event;
 
-use DateTimeImmutable;
-use Symfony\Contracts\EventDispatcher\Event;
+use Wexample\SymfonySecurity\Event\AbstractSecurityEvent;
 use Wexample\SymfonyUser\Enum\SecurityEventType;
 
 /**
  * A security fact, dispatched by SecurityJournalService for whoever records
- * it: the package's own log subscriber, an audit package.
+ * it: the package's own log subscriber, an audit package. Its fields are
+ * those of AbstractSecurityEvent.
  *
  * It never holds a secret — password, code, backup code, TOTP secret, link,
  * token, session id. An identifier typed for an unknown account is kept as a
  * fingerprint only, in `extra.identifier_fingerprint`.
+ *
+ * @property-read SecurityEventType $type
  */
-class SecurityEvent extends Event
+class SecurityEvent extends AbstractSecurityEvent
 {
-    /**
-     * @param array<string, scalar|null> $extra
-     */
-    public function __construct(
-        public readonly SecurityEventType $type,
-        public readonly DateTimeImmutable $occurredAt,
-        public readonly ?string $userId = null,
-        public readonly ?string $cause = null,
-        public readonly ?string $method = null,
-        public readonly ?string $firewall = null,
-        public readonly ?string $ip = null,
-        public readonly ?string $userAgent = null,
-        public readonly ?string $requestId = null,
-        public readonly array $extra = [],
-    ) {
-    }
-
-    /**
-     * @return array<string, scalar|array|null>
-     */
-    public function toArray(): array
+    public function __construct(SecurityEventType $type, mixed ...$arguments)
     {
-        return [
-            'type' => $this->type->value,
-            'outcome' => $this->type->isFailure() ? 'failure' : 'success',
-            'cause' => $this->cause,
-            'user_id' => $this->userId,
-            'method' => $this->method,
-            'firewall' => $this->firewall,
-            'ip' => $this->ip,
-            'user_agent' => $this->userAgent,
-            'request_id' => $this->requestId,
-            'occurred_at' => $this->occurredAt->format(DATE_ATOM),
-            'extra' => $this->extra,
-        ];
+        parent::__construct($type, ...$arguments);
     }
 }
