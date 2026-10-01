@@ -7,7 +7,13 @@
     <section class="block block--card">
         <div class="block--body stack--vertical">
             <p class="lead">{{ '@page::intro' | trans({'%version%': version}) }}</p>
-            {%- if text_route -%}
+            {#- The text itself, read through in place before accepting: a box of
+                its own height that scrolls, as a document and not as the page. -#}
+            {%- if text_template -%}
+                <div class="terms--text" tabindex="0" role="document">
+                    {{- include(text_template) -}}
+                </div>
+            {%- elseif text_route -%}
                 <p>{{ button_link('ph:bold/file-text', '@page::action.read' | trans, path(text_route), { class: 'button--flat', attr: { target: '_blank', rel: 'noopener' } }) }}</p>
             {%- endif -%}
             {{ form_load(render_pass, terms_accept_form, '@WexampleSymfonyUserBundle/forms/terms_accept_form.html.twig') }}

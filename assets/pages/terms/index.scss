@@ -1,1 +1,16 @@
 @use '../user';
+
+// The terms, read in place: a sheet of fixed height that scrolls on its own,
+// framed as a document, reachable with the keyboard to be scrolled.
+.terms--text {
+  max-height: 20rem;
+  overflow-y: auto;
+  padding: var(--space-4);
+  border: var(--border-discreet);
+  border-radius: var(--radius-box);
+  background: var(--surface-1);
+
+  > :first-child {
+    margin-top: 0;
+  }
+}

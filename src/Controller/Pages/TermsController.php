@@ -34,6 +34,7 @@ final class TermsController extends AbstractPagesController
         return $this->renderPage('index', [
             'version' => $version,
             'text_route' => $termsService->getTextRoute(),
+            'text_template' => $termsService->getTextTemplate(),
             'terms_accept_form' => $formProcessor
                 ->createForm([TermsAcceptForm::FIELD_VERSION => $version])
                 ->createView(),

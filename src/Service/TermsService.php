@@ -32,6 +32,8 @@ class TermsService
         private readonly ?string $version = null,
         #[Autowire(param: 'wexample_symfony_user.terms.text_route')]
         private readonly ?string $textRoute = null,
+        #[Autowire(param: 'wexample_symfony_user.terms.text_template')]
+        private readonly ?string $textTemplate = null,
     ) {
     }
 
@@ -43,6 +45,11 @@ class TermsService
     public function getTextRoute(): ?string
     {
         return $this->textRoute;
+    }
+
+    public function getTextTemplate(): ?string
+    {
+        return $this->textTemplate;
     }
 
     public function mustAccept(AbstractUser $user): bool

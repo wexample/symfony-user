@@ -30,6 +30,7 @@ class WexampleSymfonyUserExtension extends AbstractWexampleSymfonyExtension
         $container->setParameter('wexample_symfony_user.administration.exclusive_roles', $config['administration']['exclusive_roles']);
         $container->setParameter('wexample_symfony_user.terms.version', $config['terms']['version']);
         $container->setParameter('wexample_symfony_user.terms.text_route', $config['terms']['text_route']);
+        $container->setParameter('wexample_symfony_user.terms.text_template', $config['terms']['text_template']);
         $container->setParameter('wexample_symfony_user.two_factor.required', $config['two_factor']['required']);
         $container->setParameter('wexample_symfony_user.two_factor.pending_lifetime', $config['two_factor']['pending_lifetime']);
         $container->setParameter('wexample_symfony_user.two_factor.app_required_roles', $config['two_factor']['app_required_roles']);
