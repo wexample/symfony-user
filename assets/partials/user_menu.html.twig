@@ -1,6 +1,7 @@
 {#- The account's own menu, opened from its initials: who is signed in — and,
     when the application says it, as what (`role_label`) —, the application's
-    own entries (`items`), the authenticator app, the language, and leaving.
+    own entries (`items`), the authenticator app, the language, the
+    application's closing entries (`items_end`: terms, policies), and leaving.
     Drawn by the design system's button_menu. -#}
 {%- set user = app.user -%}
 {%- set language_items = locale_menu_items() -%}
@@ -12,6 +13,9 @@
     {%- set entries = entries
         |merge([{ separator: true, label: 'WexampleSymfonyUserBundle.common.menu::language' | trans }])
         |merge(language_items) -%}
+{%- endif -%}
+{%- if items_end|default([]) is not empty -%}
+    {%- set entries = entries|merge([{ separator: true }])|merge(items_end) -%}
 {%- endif -%}
 {%- set entries = entries|merge([
     { separator: true },
