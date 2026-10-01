@@ -1,0 +1,21 @@
+# symfony-testing's TestKernel sets this parameter itself, over
+# `security.role_hierarchy`: it is set again here. No administrator
+# inherits the rights of the members.
+parameters:
+  security.role_hierarchy.roles:
+    ROLE_PLATFORM_ADMIN: [ROLE_SUPPORT]
+
+wexample_symfony_user:
+  administration:
+    protected_roles: [ROLE_PLATFORM_ADMIN]
+    manages:
+      ROLE_PLATFORM_ADMIN: [ROLE_PLATFORM_ADMIN, ROLE_TEAM_ADMIN]
+      ROLE_TEAM_ADMIN: [ROLE_TEAM_ADMIN, ROLE_MEMBER]
+
+services:
+  test.account_administration:
+    alias: Wexample\SymfonyUser\Service\AccountAdministrationService
+    public: true
+
+  Wexample\SymfonyUser\Tests\Fixtures\App\Security\OutsiderAdministrationGuard:
+    autoconfigure: true

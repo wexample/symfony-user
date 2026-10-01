@@ -3,6 +3,7 @@
 namespace Wexample\SymfonyUser\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Wexample\SymfonyUser\Interface\AccountAdministrationGuardInterface;
 use Wexample\SymfonyUser\Interface\AccountGateInterface;
 use Wexample\SymfonyHelpers\DependencyInjection\AbstractWexampleSymfonyExtension;
 
@@ -20,6 +21,7 @@ class WexampleSymfonyUserExtension extends AbstractWexampleSymfonyExtension
         $container->setParameter('wexample_symfony_user.request_limit.per_identifier', $config['request_limit']['per_identifier']);
         $container->setParameter('wexample_symfony_user.request_limit.per_ip', $config['request_limit']['per_ip']);
         $container->setParameter('wexample_symfony_user.administration.protected_roles', $config['administration']['protected_roles']);
+        $container->setParameter('wexample_symfony_user.administration.manages', $config['administration']['manages']);
         $container->setParameter('wexample_symfony_user.administration.role_email_domains', $config['administration']['role_email_domains']);
         $container->setParameter('wexample_symfony_user.administration.exclusive_roles', $config['administration']['exclusive_roles']);
         $container->setParameter('wexample_symfony_user.terms.version', $config['terms']['version']);
@@ -31,6 +33,9 @@ class WexampleSymfonyUserExtension extends AbstractWexampleSymfonyExtension
         $container
             ->registerForAutoconfiguration(AccountGateInterface::class)
             ->addTag(AccountGateInterface::TAG);
+        $container
+            ->registerForAutoconfiguration(AccountAdministrationGuardInterface::class)
+            ->addTag(AccountAdministrationGuardInterface::TAG);
 
         $this->loadConfig(
             __DIR__,

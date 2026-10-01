@@ -23,6 +23,9 @@ enum AccountAdministrationRefusal: string
     /** Two roles that are never held together. */
     case EXCLUSIVE_ROLES = 'exclusive_roles';
 
-    /** A role above the actor's own, granted, removed, or held by the target. */
+    /** A role the actor does not administer, granted, removed, or held by the target. */
     case ROLE_NOT_ASSIGNABLE = 'role_not_assignable';
+
+    /** An AccountAdministrationGuardInterface of the application refused the pair. */
+    case TARGET_OUT_OF_SCOPE = 'target_out_of_scope';
 }

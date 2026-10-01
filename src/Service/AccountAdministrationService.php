@@ -5,6 +5,7 @@ namespace Wexample\SymfonyUser\Service;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 use Throwable;
 use Wexample\SymfonyHelpers\Helper\RoleHelper;
@@ -12,6 +13,7 @@ use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Enum\AccountAdministrationRefusal;
 use Wexample\SymfonyUser\Enum\SecurityEventType;
 use Wexample\SymfonyUser\Exception\AccountAdministrationException;
+use Wexample\SymfonyUser\Interface\AccountAdministrationGuardInterface;
 use Wexample\SymfonyUser\Repository\AbstractUserRepository;
 
 /**
@@ -20,23 +22,28 @@ use Wexample\SymfonyUser\Repository\AbstractUserRepository;
  * and journals the change — or the refusal, before throwing it.
  *
  * Who may administer at all is the application's access control; here, the
- * actor only reaches accounts and roles up to their own, never deactivates,
- * locks or demotes themselves, and never leaves a protected role without an
- * active holder.
+ * actor only touches the accounts and roles AssignableRolesService gives
+ * them, and the pairs every AccountAdministrationGuardInterface allows; never
+ * deactivates, locks or demotes themselves; never leaves a protected role
+ * without an active holder.
  *
  * The entity setters stay for fixtures and migrations.
  */
 class AccountAdministrationService
 {
     /**
+     * @param iterable<AccountAdministrationGuardInterface> $guards
      * @param list<string> $protectedRoles
      */
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly RoleHierarchyInterface $roleHierarchy,
         private readonly ReversedRoleHierarchyService $reversedRoleHierarchy,
+        private readonly AssignableRolesService $assignableRoles,
         private readonly AccountRulesService $accountRules,
         private readonly SecurityJournalService $journal,
+        #[AutowireIterator(AccountAdministrationGuardInterface::TAG)]
+        private readonly iterable $guards = [],
         #[Autowire(param: 'wexample_symfony_user.administration.protected_roles')]
         private readonly array $protectedRoles = [],
     ) {
@@ -160,14 +167,9 @@ class AccountAdministrationService
         array $rolesAfter,
         bool $activeAfter,
     ): void {
-        $actorReach = $this->roleHierarchy->getReachableRoleNames($actor->getRoles());
+        $assignable = $this->assignableRoles->getAssignableRoles($actor);
         $removed = array_values(array_diff($rolesBefore, $rolesAfter));
         $added = array_values(array_diff($rolesAfter, $rolesBefore));
-
-        // Neither an account above the actor, nor a role above them.
-        if ($outOfReach = array_values(array_diff([...$rolesBefore, ...$added], $actorReach))) {
-            throw new AccountAdministrationException(AccountAdministrationRefusal::ROLE_NOT_ASSIGNABLE, $outOfReach);
-        }
 
         if ($actor->getId()->equals($target->getId())) {
             if (! $activeAfter) {
@@ -176,6 +178,18 @@ class AccountAdministrationService
 
             if ($removed) {
                 throw new AccountAdministrationException(AccountAdministrationRefusal::SELF_DEMOTION, $removed);
+            }
+        }
+
+        // Neither an account holding a role the actor does not administer,
+        // nor such a role given.
+        if ($outOfReach = array_values(array_diff([...$rolesBefore, ...$added], $assignable))) {
+            throw new AccountAdministrationException(AccountAdministrationRefusal::ROLE_NOT_ASSIGNABLE, $outOfReach);
+        }
+
+        foreach ($this->guards as $guard) {
+            if (! $guard->allows($actor, $target)) {
+                throw new AccountAdministrationException(AccountAdministrationRefusal::TARGET_OUT_OF_SCOPE);
             }
         }
 

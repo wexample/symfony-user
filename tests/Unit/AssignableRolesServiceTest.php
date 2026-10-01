@@ -24,4 +24,18 @@ class AssignableRolesServiceTest extends TestCase
         $this->assertTrue($service->canAssign($admin, ['ROLE_MANAGER']));
         $this->assertFalse($service->canAssign($admin, ['ROLE_MANAGER', 'ROLE_SUPER_ADMIN']));
     }
+
+    public function testWithManagesAnEditorAssignsWhatTheirRolesManageOnly(): void
+    {
+        $service = new AssignableRolesService(
+            new RoleHierarchy(['ROLE_SUPER_ADMIN' => ['ROLE_ADMIN']]),
+            ['ROLE_ADMIN' => ['ROLE_MEMBER']]
+        );
+
+        // Through the hierarchy, the super administrator holds ROLE_ADMIN, and manages what it manages.
+        $superAdmin = (new User())->setRoles(['ROLE_SUPER_ADMIN']);
+
+        $this->assertSame(['ROLE_MEMBER'], $service->getAssignableRoles($superAdmin));
+        $this->assertFalse($service->canAssign($superAdmin, ['ROLE_ADMIN']));
+    }
 }

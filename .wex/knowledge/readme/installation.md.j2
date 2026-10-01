@@ -125,6 +125,7 @@ wexample_symfony_user:
         per_ip: 20
     administration:                # the rules of AccountAdministrationService and AccountRulesService
         protected_roles: []        # never left without an active holder
+        manages: {}                # ROLE_X: [ROLE_A] — the roles ROLE_X administers, with no right over their pages; unset, the roles reached
         role_email_domains: {}     # ROLE_X: [example.com] — held only by an address of these domains
         exclusive_roles: {}        # ROLE_X: [ROLE_A, ROLE_B] — never given together
     two_factor:

@@ -107,9 +107,12 @@ try {
 }
 ```
 
-Who may administer is the application's access control. The service refuses:
+Who may administer is the application's access control. The roles an actor administers are those they reach through the hierarchy — or, with `administration.manages`, those their roles manage: a relation apart from the hierarchy, not transitive, granting no security right, for an administrator who must not open the pages of the accounts they manage. An application narrows it further — the accounts of one organization — with an `AccountAdministrationGuardInterface`, asked before every change.
 
-- `role_not_assignable`: a role the actor does not reach, given or removed, or an account holding one;
+The service refuses:
+
+- `role_not_assignable`: a role the actor does not administer, given or removed, or an account holding one;
+- `target_out_of_scope`: an `AccountAdministrationGuardInterface` refused the pair;
 - `self_deactivation`, `self_demotion`: the actor deactivating, locking, or removing a role from themselves;
 - `last_protected_role_holder`: leaving a role of `administration.protected_roles` with no active holder. The holders are counted under a row lock: of two administrators deactivating each other at once, the second is refused;
 - `email_domain_not_allowed`, `exclusive_roles`: the rules of `AccountRulesService`.

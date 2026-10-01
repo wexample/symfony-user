@@ -2,17 +2,28 @@
 
 namespace Wexample\SymfonyUser\Service;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * The roles an editor may grant: only those they hold, directly or through
- * the hierarchy. An administrator cannot make someone a super administrator.
+ * The roles an editor may grant, remove, and administer the holders of.
+ *
+ * By default, those they hold, directly or through the hierarchy: an
+ * administrator cannot make someone a super administrator. With
+ * `administration.manages`, those their roles manage instead — a relation
+ * apart from the hierarchy, granting no security right: an administrator
+ * may manage the accounts of a role whose pages they must not open.
  */
 class AssignableRolesService
 {
+    /**
+     * @param array<string, list<string>> $manages
+     */
     public function __construct(
-        private readonly RoleHierarchyInterface $roleHierarchy
+        private readonly RoleHierarchyInterface $roleHierarchy,
+        #[Autowire(param: 'wexample_symfony_user.administration.manages')]
+        private readonly array $manages = [],
     ) {
     }
 
@@ -21,9 +32,18 @@ class AssignableRolesService
      */
     public function getAssignableRoles(UserInterface $editor): array
     {
-        return array_values(array_unique(
-            $this->roleHierarchy->getReachableRoleNames($editor->getRoles())
-        ));
+        $held = $this->roleHierarchy->getReachableRoleNames($editor->getRoles());
+
+        if (! $this->manages) {
+            return array_values(array_unique($held));
+        }
+
+        $managed = [];
+        foreach ($held as $role) {
+            array_push($managed, ...($this->manages[$role] ?? []));
+        }
+
+        return array_values(array_unique($managed));
     }
 
     /**
