@@ -10,7 +10,12 @@ use Wexample\SymfonyUser\Entity\AbstractUser;
 
 /**
  * Refuses locked and not yet activated accounts. The check runs after the
- * credentials, so the account state is only revealed to its owner.
+ * credentials, so the account state is only revealed to its owner — and only
+ * when `reveal_account_status` is on.
+ *
+ * It runs twice: AccountStatusSubscriber calls it right after the credentials,
+ * before a second factor is asked; Symfony calls checkPostAuth() once the
+ * authentication succeeds, which scheb/2fa-bundle postpones to the code.
  */
 class UserChecker implements UserCheckerInterface
 {
@@ -22,6 +27,11 @@ class UserChecker implements UserCheckerInterface
     }
 
     public function checkPostAuth(UserInterface $user, ?TokenInterface $token = null): void
+    {
+        $this->checkAccountStatus($user);
+    }
+
+    public function checkAccountStatus(UserInterface $user): void
     {
         if (! $user instanceof AbstractUser) {
             return;

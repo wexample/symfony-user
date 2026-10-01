@@ -54,6 +54,19 @@ class TwoFactorTest extends WebTestCase
         $this->assertResponseStatusCodeSame(401);
     }
 
+    public function testALockedAccountGetsNoCode(): void
+    {
+        $user = self::getContainer()->get('doctrine')->getManager()->find(User::class, $this->user->getId());
+        $user->setLocked(true);
+        self::getContainer()->get('doctrine')->getManager()->flush();
+
+        $payload = $this->login();
+
+        $this->assertFalse($payload['ok']);
+        $this->assertSame(['@form::error.invalid_credentials'], $payload['form']['errors']['form']);
+        $this->assertEmailCount(0);
+    }
+
     public function testAWrongCodeThenTheRightOne(): void
     {
         $this->login();

@@ -4,12 +4,18 @@ namespace Wexample\SymfonyUser\Security\Authenticator;
 
 use Scheb\TwoFactorBundle\Security\Authentication\Token\TwoFactorTokenInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
+use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
@@ -38,10 +44,14 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
+    private ?string $timingShieldHash = null;
+
     public function __construct(
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly LoginFormProcessor $loginFormProcessor,
         private readonly FormResponsePayloadBuilder $payloadBuilder,
+        private readonly UserProviderInterface $userProvider,
+        private readonly PasswordHasherFactoryInterface $passwordHasherFactory,
     ) {
     }
 
@@ -65,6 +75,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         $formName = ClassHelper::getTableizedName(LoginForm::class);
         $data = $request->request->all($formName);
         $identifier = trim((string) ($data[LoginForm::FIELD_IDENTIFIER] ?? ''));
+        $password = (string) ($data[LoginForm::FIELD_PASSWORD] ?? '');
 
         $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $identifier);
 
@@ -85,10 +96,42 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         return new Passport(
-            new UserBadge($identifier),
-            new PasswordCredentials((string) ($data[LoginForm::FIELD_PASSWORD] ?? '')),
+            new UserBadge($identifier, fn (string $identifier): UserInterface => $this->loadUser($identifier, $password)),
+            new PasswordCredentials($password),
             $badges
         );
+    }
+
+    /**
+     * An unknown address costs a password check too: without one, it would
+     * answer faster than a wrong password, and the timing would tell which
+     * accounts exist.
+     */
+    private function loadUser(string $identifier, string $password): UserInterface
+    {
+        try {
+            return $this->userProvider->loadUserByIdentifier($identifier);
+        } catch (UserNotFoundException $exception) {
+            if ($hasher = $this->getTimingShieldHasher()) {
+                $this->timingShieldHash ??= $hasher->hash('wexample-user-timing-shield');
+                $hasher->verify($this->timingShieldHash, $password);
+            }
+
+            throw $exception;
+        }
+    }
+
+    /**
+     * The hasher of the users, configured on the interface as the Symfony
+     * recipe does; an application hashing per class only gets no shield.
+     */
+    private function getTimingShieldHasher(): ?PasswordHasherInterface
+    {
+        try {
+            return $this->passwordHasherFactory->getPasswordHasher(PasswordAuthenticatedUserInterface::class);
+        } catch (\RuntimeException) {
+            return null;
+        }
     }
 
     public function onAuthenticationSuccess(

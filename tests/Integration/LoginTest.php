@@ -5,7 +5,6 @@ namespace Wexample\SymfonyUser\Tests\Integration;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Wexample\SymfonyUser\Security\UserChecker;
 use Wexample\SymfonyUser\Service\FormProcessor\LoginFormProcessor;
 use Wexample\SymfonyUser\Tests\Fixtures\App\Entity\User;
 use Wexample\SymfonyUser\Tests\Traits\DatabaseTestTrait;
@@ -72,15 +71,18 @@ class LoginTest extends WebTestCase
         $this->assertNotLoggedIn();
     }
 
-    public function testLockedAndInactiveAccountsAreRefused(): void
+    public function testEveryFailureGetsTheSameResponse(): void
     {
+        $responses = [];
+        foreach ([['john', 'secret'], ['jane', 'wrong'], ['locked', 'secret'], ['inactive', 'secret']] as [$identifier, $password]) {
+            $payload = $this->submitJson($identifier, $password);
+            $responses[$identifier . '/' . $password] = [$this->client->getResponse()->getStatusCode(), $payload];
+        }
+
+        $this->assertCount(1, array_unique(array_map('serialize', $responses)), json_encode($responses));
         $this->assertSame(
-            ['@form::' . UserChecker::ERROR_ACCOUNT_LOCKED],
-            $this->submitJson('locked', 'secret')['form']['errors']['form']
-        );
-        $this->assertSame(
-            ['@form::' . UserChecker::ERROR_ACCOUNT_DISABLED],
-            $this->submitJson('inactive', 'secret')['form']['errors']['form']
+            ['@form::' . LoginFormProcessor::ERROR_INVALID_CREDENTIALS],
+            $responses['locked/secret'][1]['form']['errors']['form']
         );
         $this->assertNotLoggedIn();
     }

@@ -19,6 +19,10 @@ class Configuration implements ConfigurationInterface
                     ->values(array_map(static fn (PasswordResetMode $mode) => $mode->value, PasswordResetMode::cases()))
                     ->defaultValue(PasswordResetMode::TOKEN->value)
                 ->end()
+                ->booleanNode('reveal_account_status')
+                    ->info('Tell a disabled or locked account why it cannot sign in, once its password is right. Off, every failure reads the same.')
+                    ->defaultFalse()
+                ->end()
             ->end();
 
         return $treeBuilder;
