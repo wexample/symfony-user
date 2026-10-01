@@ -11,6 +11,7 @@ en:
     use_backup: Use a backup code
     use_app: Use the app
     cancel: Use another account
+    mailbox: Open the mailbox
 
 ar:
   page_title: 'تأكيد أنه أنت'
@@ -109,6 +110,7 @@ fr:
     use_backup: Utiliser un code de secours
     use_app: Utiliser l'application
     cancel: Utiliser un autre compte
+    mailbox: 'Ouvrir la boîte mail'
 
 he:
   page_title: 'אשר שזה אתה'

@@ -13,6 +13,11 @@
         </div>
         <div class="block--footer">
             {%- if method == 'email_code' -%}
+                {#- In development, the code is read in symfony-mail's mailbox. -#}
+                {%- set mailbox = mailbox_url(email) -%}
+                {%- if mailbox -%}
+                    {{ button_link('ph:bold/envelope-simple', '@page::action.mailbox' | trans, mailbox, { class: 'button--flat' }) }}
+                {%- endif -%}
                 <form method="post" action="{{ path('user_security_two_factor_resend') }}">
                     {%- if can_resend -%}
                         {{ button('ph:bold/arrow-clockwise', '@page::action.resend' | trans, { type: 'submit', class: 'button--flat' }) }}

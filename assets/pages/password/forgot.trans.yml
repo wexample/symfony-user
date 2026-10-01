@@ -2,6 +2,8 @@ en:
   page_title: Forgot your password?
   page_icon: ph:bold/key
   link_invalid: This link has expired or was already used. Ask for a new one below.
+  action:
+    mailbox: Open the mailbox
 
 ar:
   page_title: 'نسيت كلمة المرور؟'
@@ -37,6 +39,8 @@ fr:
   page_title: Mot de passe oublié ?
   page_icon: ph:bold/key
   link_invalid: Ce lien a expiré ou a déjà servi. Demandez-en un nouveau ci-dessous.
+  action:
+    mailbox: 'Ouvrir la boîte mail'
 
 he:
   page_title: 'שכחת את הסיסמה שלך?'
