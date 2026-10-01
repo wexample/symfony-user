@@ -60,6 +60,40 @@ class RememberLocaleSubscriberTest extends TestCase
         $this->assertNull($user->getLocale());
     }
 
+    public function testABrowserWithoutTheAccountsLanguageIsHandedIt(): void
+    {
+        $user = (new User())->setLocale('en');
+
+        $cookies = $this->respond($user, new Request(cookies: ['_locale' => 'fr']))->headers->getCookies();
+
+        $this->assertCount(1, $cookies);
+        $this->assertSame('en', $cookies[0]->getValue());
+        $this->assertSame([], $this->respond($user, new Request(cookies: ['_locale' => 'en']))->headers->getCookies());
+        $this->assertSame([], $this->respond(new User(), new Request())->headers->getCookies());
+    }
+
+    private function respond(User $user, Request $request): \Symfony\Component\HttpFoundation\Response
+    {
+        $tokenStorage = new TokenStorage();
+        $tokenStorage->setToken(new UsernamePasswordToken($user, 'main', $user->getRoles()));
+
+        $subscriber = new RememberLocaleSubscriber(
+            $tokenStorage,
+            $this->createStub(EntityManagerInterface::class),
+            new LocaleService('fr', ['fr', 'en'], true, []),
+            true
+        );
+        $event = new \Symfony\Component\HttpKernel\Event\ResponseEvent(
+            $this->createStub(HttpKernelInterface::class),
+            $request,
+            HttpKernelInterface::MAIN_REQUEST,
+            new \Symfony\Component\HttpFoundation\Response()
+        );
+        $subscriber->onKernelResponse($event);
+
+        return $event->getResponse();
+    }
+
     /**
      * @param array<string, string> $attributes the request's, as the router set them
      */
