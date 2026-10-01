@@ -24,17 +24,21 @@ class PasswordUpdaterService
      * Every other session of the account ends at its next request, and every
      * magic link sent before dies: both are signed with the old hash.
      *
-     * Recorded as a reset when $reset, as set by an administrator when the
-     * signed-in user is someone else, as changed otherwise.
+     * Recorded as an activation when the account had no password yet, as a
+     * reset when $reset, as set by an administrator when the signed-in user
+     * is someone else, as changed otherwise.
      */
     public function update(AbstractUser $user, string $plainPassword, bool $reset = false): void
     {
+        $activation = $user->getPassword() === null;
         $user->setPassword($this->passwordHasher->hashPassword($user, $plainPassword));
         $this->entityManager->flush();
 
         $actor = $this->tokenStorage->getToken()?->getUser();
 
-        if ($reset) {
+        if ($activation) {
+            $this->journal->record(SecurityEventType::ACCOUNT_ACTIVATED, $user);
+        } elseif ($reset) {
             $this->journal->record(SecurityEventType::PASSWORD_RESET, $user);
         } elseif ($actor && $actor !== $user) {
             $this->journal->record(SecurityEventType::PASSWORD_SET_BY_ADMIN, $user, extra: ['actor' => $actor->getUserIdentifier()]);

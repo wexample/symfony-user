@@ -19,6 +19,7 @@ final class PasswordController extends AbstractPagesController
     public const string ROUTE_FORGOT = 'user_password_forgot';
     public const string ROUTE_RESET = 'user_password_reset';
     public const string ROUTE_NEW = 'user_password_new';
+    public const string ROUTE_ACTIVATE = 'user_password_activate';
 
     public const string LINK_INVALID = 'invalid';
 
@@ -51,6 +52,27 @@ final class PasswordController extends AbstractPagesController
         }
 
         return $this->redirectToRoute(self::ROUTE_FORGOT, ['link' => self::LINK_INVALID]);
+    }
+
+    /**
+     * The link of the activation mail: the first password of an account an
+     * administrator created. A dead link explains itself, instead of offering
+     * a reset the account cannot ask for yet.
+     */
+    #[Route(path: 'activate', name: 'activate')]
+    public function activate(
+        Request $request,
+        PasswordResetService $passwordResetService
+    ): Response {
+        if ($passwordResetService->consumeActivationLink(
+            (string) $request->query->get('user'),
+            $request->query->getInt('expires'),
+            (string) $request->query->get('hash')
+        )) {
+            return $this->redirectToRoute(self::ROUTE_NEW);
+        }
+
+        return $this->renderPage('activation_invalid');
     }
 
     #[Route(path: 'new', name: 'new')]

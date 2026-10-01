@@ -33,6 +33,10 @@ enum SecurityEventType: string
     case ACCOUNT_IMPERSONATION_STARTED = 'account.impersonation_started';
     case ACCOUNT_IMPERSONATION_ENDED = 'account.impersonation_ended';
 
+    case ACCOUNT_CREATED = 'account.created';
+    case ACCOUNT_ACTIVATION_SENT = 'account.activation_sent';
+    case ACCOUNT_ACTIVATED = 'account.activated';
+    case ACCOUNT_PASSWORD_MAIL_SENT = 'account.password_mail_sent';
     case ACCOUNT_DEACTIVATED = 'account.deactivated';
     case ACCOUNT_REACTIVATED = 'account.reactivated';
     case ACCOUNT_LOCKED = 'account.locked';
@@ -42,10 +46,14 @@ enum SecurityEventType: string
 
     case TERMS_ACCEPTED = 'terms.accepted';
 
+    /** A security mail handed to the transport; never its link, code or body. */
+    case SECURITY_MESSAGE_SENT = 'security_message.sent';
+    case SECURITY_MESSAGE_FAILED = 'security_message.failed';
+
     case LOGOUT = 'logout';
 
     public function isFailure(): bool
     {
-        return in_array($this, [self::LOGIN_FAILED, self::SECOND_FACTOR_FAILED, self::ACCOUNT_CHANGE_REFUSED], true);
+        return in_array($this, [self::LOGIN_FAILED, self::SECOND_FACTOR_FAILED, self::ACCOUNT_CHANGE_REFUSED, self::SECURITY_MESSAGE_FAILED], true);
     }
 }

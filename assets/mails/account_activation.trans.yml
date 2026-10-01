@@ -1,0 +1,4 @@
+en:
+  subject: Your account is ready
+  intro: "An account was created for you. Follow this link to choose your password:"
+  validity: It works once, until %date%. Past that date, ask the person who created your account for a new one.

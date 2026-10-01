@@ -19,6 +19,7 @@ use Wexample\SymfonyForms\Service\FormProcessor\FormResponsePayloadBuilder;
 use Wexample\SymfonyUser\Security\Authenticator\LoginFormAuthenticator;
 use Wexample\SymfonyUser\Security\UserChecker;
 use Wexample\SymfonyUser\Service\FormProcessor\LoginFormProcessor;
+use Wexample\SymfonyUser\Tests\Fixtures\App\Entity\User;
 
 class LoginFailureTest extends TestCase
 {
@@ -54,6 +55,32 @@ class LoginFailureTest extends TestCase
         $request->setSession(new Session(new MockArraySessionStorage()));
 
         $this->expectException(UserNotFoundException::class);
+        $authenticator->authenticate($request)->getUser();
+    }
+
+    public function testAnAccountWaitingForItsFirstPasswordCostsAPasswordCheck(): void
+    {
+        $provider = $this->createStub(UserProviderInterface::class);
+        $provider->method('loadUserByIdentifier')->willReturn((new User())->setEmail('jane@example.com'));
+
+        $hasher = $this->createMock(PasswordHasherInterface::class);
+        $hasher->method('hash')->willReturn('shield-hash');
+        $hasher->expects($this->once())->method('verify')->with('shield-hash', 'typed password');
+
+        $hasherFactory = $this->createStub(PasswordHasherFactoryInterface::class);
+        $hasherFactory->method('getPasswordHasher')->willReturn($hasher);
+
+        $authenticator = new LoginFormAuthenticator(
+            $this->createStub(UrlGeneratorInterface::class),
+            $this->createProcessor(false),
+            $this->createStub(FormResponsePayloadBuilder::class),
+            $provider,
+            $hasherFactory,
+        );
+
+        $request = new Request(request: ['login_form' => ['identifier' => 'jane@example.com', 'password' => 'typed password']]);
+        $request->setSession(new Session(new MockArraySessionStorage()));
+
         $authenticator->authenticate($request)->getUser();
     }
 

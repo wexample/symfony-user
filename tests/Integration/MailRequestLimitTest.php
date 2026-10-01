@@ -41,7 +41,11 @@ class MailRequestLimitTest extends WebTestCase
 
         self::getContainer()->get('event_dispatcher')->addListener(
             SecurityEvent::class,
-            fn (SecurityEvent $event) => $this->causes[] = $event->cause
+            function (SecurityEvent $event): void {
+                if (in_array($event->type->value, ['password.reset_requested', 'magic_link.requested'], true)) {
+                    $this->causes[] = $event->cause;
+                }
+            }
         );
     }
 

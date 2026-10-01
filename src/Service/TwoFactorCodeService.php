@@ -12,7 +12,6 @@ use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Enum\SecurityEventType;
 use Wexample\SymfonyUser\Enum\SecurityMessageType;
 use Wexample\SymfonyUser\Enum\TwoFactorCodeFailure;
-use Wexample\SymfonyUser\Interface\SecurityMessageSenderInterface;
 
 /**
  * The codes of the email second factor. A code lives in the session of the
@@ -33,7 +32,7 @@ class TwoFactorCodeService
     private readonly RateLimiterFactory $failureLimiter;
 
     public function __construct(
-        private readonly SecurityMessageSenderInterface $sender,
+        private readonly SecurityMessageService $securityMessageService,
         private readonly RequestStack $requestStack,
         #[Autowire(service: 'cache.app')]
         CacheItemPoolInterface $cache,
@@ -65,7 +64,7 @@ class TwoFactorCodeService
             'sent' => time(),
         ]);
 
-        $this->sender->send($user, SecurityMessageType::TWO_FACTOR_CODE, $code, $expiresAt);
+        $this->securityMessageService->send($user, SecurityMessageType::TWO_FACTOR_CODE, $code, $expiresAt);
         $this->journal->record(SecurityEventType::SECOND_FACTOR_CODE_SENT, $user, extra: ['provider' => 'email_code']);
     }
 

@@ -18,6 +18,7 @@ class WexampleSymfonyUserExtension extends AbstractWexampleSymfonyExtension
         $container->setParameter('wexample_symfony_user.password_reset', $config['password_reset']);
         $container->setParameter('wexample_symfony_user.reveal_account_status', $config['reveal_account_status']);
         $container->setParameter('wexample_symfony_user.magic_link_login', $config['magic_link_login']);
+        $container->setParameter('wexample_symfony_user.activation.link_lifetime', $config['activation']['link_lifetime']);
         $container->setParameter('wexample_symfony_user.request_limit.per_identifier', $config['request_limit']['per_identifier']);
         $container->setParameter('wexample_symfony_user.request_limit.per_ip', $config['request_limit']['per_ip']);
         $container->setParameter('wexample_symfony_user.administration.protected_roles', $config['administration']['protected_roles']);

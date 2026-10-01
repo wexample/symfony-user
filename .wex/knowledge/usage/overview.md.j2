@@ -97,6 +97,8 @@ $assignableRoles->canAssign($editor, ['ROLE_ADMIN']);                           
 
 ## Administering accounts
 
+An administrator creates an account with `createAccount()`: built by the application — email, roles, its own fields —, it is written enabled with no password, and its holder gets an activation mail to choose one (`/password/activate`, then `/password/new`, signed in afterwards; the second factor and the account gates apply as on any sign-in). With no password, nothing signs in with it. A dead activation link — expired, or the account already activated — shows a page telling to ask for a new one. `sendPasswordMail()` sends the activation mail again to an account waiting for it, a mail to choose a new password to an activated one; an earlier link keeps working until it expires, the password is chosen, or the address changes.
+
 Deactivate, reactivate, lock, unlock and change roles through `AccountAdministrationService`, not the entity setters — those stay for fixtures and migrations:
 
 ```php
@@ -113,17 +115,20 @@ The service refuses:
 
 - `role_not_assignable`: a role the actor does not administer, given or removed, or an account holding one;
 - `target_out_of_scope`: an `AccountAdministrationGuardInterface` refused the pair;
+- `account_inactive`: a password mail asked for a disabled or locked account;
 - `self_deactivation`, `self_demotion`: the actor deactivating, locking, or removing a role from themselves;
 - `last_protected_role_holder`: leaving a role of `administration.protected_roles` with no active holder. The holders are counted under a row lock: of two administrators deactivating each other at once, the second is refused;
 - `email_domain_not_allowed`, `exclusive_roles`: the rules of `AccountRulesService`.
 
 `AccountRulesService` holds what an account must always be, whoever writes it: a role of `administration.role_email_domains` held — directly or through the hierarchy — by an address of its domains, compared whole; the roles of `administration.exclusive_roles` never given together. Only given roles count there, so an administrator can reach the roles of the accounts they administer. A Doctrine listener applies these rules on every flush; a profile form changing the address calls `assertValid()` first, to show the refusal. A database `CHECK` constraint, in the application's schema, is the last line.
 
-Each change is journaled — `account.deactivated`, `.reactivated`, `.locked`, `.unlocked`, `account.roles_changed` with `roles_before` / `roles_after` —, each refusal as `account.change_refused` with its code; `extra.actor_id` names the actor.
+Each change is journaled — `account.created`, `account.activation_sent`, `account.activated`, `account.password_mail_sent`, `account.deactivated`, `.reactivated`, `.locked`, `.unlocked`, `account.roles_changed` with `roles_before` / `roles_after` —, each refusal as `account.change_refused` with its code; `extra.actor_id` names the actor.
 
 ## Security journal
 
 Every security fact is dispatched as a `Wexample\SymfonyUser\Event\SecurityEvent`: its `type` (`Enum\SecurityEventType` — `login.failed`, `second_factor.backup_code_used`, `password.set_by_admin`…), the real `cause` of a failure (`unknown_user`, `bad_password`, `disabled`, `locked`, `throttled`, `invalid_csrf`, `invalid_login_link`, `invalid`, `expired`, `too_many_attempts`, `rate_limited`), the `method` of a sign-in (`password`, `magic_link`, `password_reset`, `second_factor`), the user id, IP, user agent, firewall, request id (`X-Request-Id`, or one of its own) and UTC time.
+
+Every security mail handed to the sender is journaled as `security_message.sent`, or `security_message.failed` with the exception class, with `extra.message_type` — never its link, code or body.
 
 It never carries a secret. An identifier typed for an unknown account is kept as `extra.identifier_fingerprint`, an HMAC that groups the attempts without the text.
 

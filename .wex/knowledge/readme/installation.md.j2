@@ -107,7 +107,28 @@ framework:
             From: 'no-reply@example.com'
 ```
 
-To deliver them another way, alias `Wexample\SymfonyUser\Interface\SecurityMessageSenderInterface` to your own service.
+To deliver them another way, alias `Wexample\SymfonyUser\Interface\SecurityMessageSenderInterface` to your own service. The templates are `@WexampleSymfonyUserBundle/mails/<type>.html.twig` — `magic_link`, `password_reset`, `account_activation`, `two_factor_code` —, overridden under `templates/bundles/WexampleSymfonyUserBundle/mails/`.
+
+Link mails leave through Messenger, as `Wexample\SymfonyUser\Message\SendSecurityMessage`: the message names the account and the kind of link, and the handler builds the link when it sends, so neither the transport nor the failed queue ever holds one. Route it to an asynchronous transport, so a request never waits on the mail provider:
+
+```yaml
+framework:
+    messenger:
+        failure_transport: failed
+        transports:
+            async:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                retry_strategy: { max_retries: 3, multiplier: 2 }
+            failed: 'doctrine://default?queue_name=failed'
+        routing:
+            Wexample\SymfonyUser\Message\SendSecurityMessage: async
+    router:
+        default_uri: '%env(APP_URL)%'   # the worker has no request: the links take their host from here
+```
+
+Unrouted, the mails are sent within the request. Codes of the second factor are always sent at once. The mails are handed to the mailer transport directly, never to `MailerInterface`: with `SendEmailMessage` routed to a transport, as the Flex recipe does, the rendered mail would be queued with its link.
+
+In development, keep the mails on the machine: `MAILER_DSN=null://null` drops them (the profiler still shows them), a Mailpit container (`MAILER_DSN=smtp://mailpit:1025`) shows them in its web interface.
 
 ### Bundle options
 
@@ -120,6 +141,8 @@ wexample_symfony_user:
         version: ~                 # set: every signed-in user accepts this version before anything else; changing it asks everyone again
         text_route: ~              # the route of the page holding the text, owned by the application
     magic_link_login: true         # false: no magic link form on the login page; MagicLinkService still sends the application's own links
+    activation:
+        link_lifetime: 604800      # seconds the link of an activation mail works
     request_limit:                 # reset and magic link mails, per hour; past it, the same answer and no mail
         per_identifier: 3
         per_ip: 20

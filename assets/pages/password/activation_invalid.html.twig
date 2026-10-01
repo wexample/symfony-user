@@ -1,0 +1,12 @@
+{%- extends '@front/layouts/private/layout.html.twig' -%}
+
+{%- set page_show_title = true -%}
+
+{%- block page_body -%}
+    <section class="block block--card">
+        <div class="block--body stack--vertical">
+            <p class="lead">{{ '@page::intro' | trans }}</p>
+            <p><a href="{{ path('user_security_login') }}">{{ '@page::login' | trans }}</a></p>
+        </div>
+    </section>
+{%- endblock -%}

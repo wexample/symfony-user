@@ -1,0 +1,10 @@
+# Link mails on an asynchronous transport, serialized as a real one would.
+framework:
+  messenger:
+    transports:
+      async: 'in-memory://?serialize=true'
+    routing:
+      Wexample\SymfonyUser\Message\SendSecurityMessage: async
+      # As the Flex recipe does: a mail handed to the mailer would be queued
+      # rendered, link included.
+      Symfony\Component\Mailer\Messenger\SendEmailMessage: async

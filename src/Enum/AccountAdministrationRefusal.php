@@ -26,6 +26,9 @@ enum AccountAdministrationRefusal: string
     /** A role the actor does not administer, granted, removed, or held by the target. */
     case ROLE_NOT_ASSIGNABLE = 'role_not_assignable';
 
+    /** A mail asked for a disabled or locked account. */
+    case ACCOUNT_INACTIVE = 'account_inactive';
+
     /** An AccountAdministrationGuardInterface of the application refused the pair. */
     case TARGET_OUT_OF_SCOPE = 'target_out_of_scope';
 }

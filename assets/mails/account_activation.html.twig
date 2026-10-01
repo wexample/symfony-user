@@ -1,0 +1,3 @@
+<p>{{ '@mail::intro' | trans }}</p>
+<p><a href="{{ value }}">{{ value }}</a></p>
+<p>{{ '@mail::validity' | trans({'%date%': expires_at | date('Y-m-d H:i')}) }}</p>

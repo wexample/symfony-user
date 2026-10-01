@@ -16,16 +16,17 @@ use Wexample\SymfonyUser\Controller\Pages\PasswordController;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Enum\PasswordResetMode;
 use Wexample\SymfonyUser\Enum\SecurityMessageType;
-use Wexample\SymfonyUser\Interface\SecurityMessageSenderInterface;
 
 /**
- * Lets a user who forgot their password choose a new one.
+ * Lets a user who forgot their password choose a new one, and the holder of
+ * an account an administrator created choose its first one.
  *
  * Whatever the mode, it ends on a proof kept in session for a quarter of an
  * hour: this user may set a password without typing the current one. A
  * signed reset link grants it, or a sign-in through a magic link. Nothing is
  * stored in database: the reset link is signed with the password hash, so
- * the new password kills it.
+ * the new password kills it. An activation link is the same signed link,
+ * living longer, for an account with no password yet.
  */
 class PasswordResetService
 {
@@ -37,7 +38,7 @@ class PasswordResetService
     private readonly SignatureHasher $signatureHasher;
 
     public function __construct(
-        private readonly SecurityMessageSenderInterface $sender,
+        private readonly SecurityMessageService $securityMessageService,
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly RequestStack $requestStack,
         private readonly UserProviderInterface $userProvider,
@@ -46,6 +47,8 @@ class PasswordResetService
         private readonly string $mode,
         #[Autowire(param: 'kernel.secret')]
         string $secret,
+        #[Autowire(param: 'wexample_symfony_user.activation.link_lifetime')]
+        private readonly int $activationLifetime = 604800,
     ) {
         $this->signatureHasher = new SignatureHasher(
             PropertyAccess::createPropertyAccessor(),
@@ -76,24 +79,39 @@ class PasswordResetService
             );
         }
 
-        $expires = time() + self::LINK_LIFETIME;
-
-        $this->sender->send(
-            $user,
-            SecurityMessageType::PASSWORD_RESET,
-            $this->urlGenerator->generate(
-                PasswordController::ROUTE_RESET,
-                [
-                    'user' => $user->getUserIdentifier(),
-                    'expires' => $expires,
-                    'hash' => $this->signatureHasher->computeSignatureHash($user, $expires),
-                ],
-                UrlGeneratorInterface::ABSOLUTE_URL
-            ),
-            new DateTimeImmutable('@' . $expires)
-        );
+        $this->securityMessageService->queue($user, SecurityMessageType::PASSWORD_RESET);
 
         return true;
+    }
+
+    /**
+     * Only an enabled account with no password yet gets one.
+     */
+    public function sendActivationLink(AbstractUser $user): bool
+    {
+        if (! $user->isEnabled() || $user->isLocked() || $user->getPassword() !== null) {
+            return false;
+        }
+
+        $this->securityMessageService->queue($user, SecurityMessageType::ACCOUNT_ACTIVATION);
+
+        return true;
+    }
+
+    /**
+     * @return array{0: string, 1: DateTimeImmutable}
+     */
+    public function createResetLink(AbstractUser $user): array
+    {
+        return $this->createSignedLink($user, PasswordController::ROUTE_RESET, self::LINK_LIFETIME);
+    }
+
+    /**
+     * @return array{0: string, 1: DateTimeImmutable}
+     */
+    public function createActivationLink(AbstractUser $user, ?int $lifetime = null): array
+    {
+        return $this->createSignedLink($user, PasswordController::ROUTE_ACTIVATE, $lifetime ?? $this->activationLifetime);
     }
 
     /**
@@ -101,9 +119,45 @@ class PasswordResetService
      */
     public function consumeResetLink(string $identifier, int $expires, string $hash): bool
     {
+        return $this->consumeSignedLink($identifier, $expires, $hash, false);
+    }
+
+    /**
+     * Checks an activation link: only an account still waiting for its first
+     * password takes it.
+     */
+    public function consumeActivationLink(string $identifier, int $expires, string $hash): bool
+    {
+        return $this->consumeSignedLink($identifier, $expires, $hash, true);
+    }
+
+    /**
+     * @return array{0: string, 1: DateTimeImmutable}
+     */
+    private function createSignedLink(AbstractUser $user, string $route, int $lifetime): array
+    {
+        $expires = time() + $lifetime;
+
+        return [
+            $this->urlGenerator->generate(
+                $route,
+                [
+                    'user' => $user->getUserIdentifier(),
+                    'expires' => $expires,
+                    'hash' => $this->signatureHasher->computeSignatureHash($user, $expires),
+                ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            ),
+            new DateTimeImmutable('@' . $expires),
+        ];
+    }
+
+    private function consumeSignedLink(string $identifier, int $expires, string $hash, bool $activation): bool
+    {
         $user = $this->loadUser($identifier);
 
-        if (! $user || ! $user->isEnabled() || $user->isLocked()) {
+        if (! $user || ! $user->isEnabled() || $user->isLocked()
+            || ($activation && $user->getPassword() !== null)) {
             return false;
         }
 

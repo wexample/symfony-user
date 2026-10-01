@@ -105,22 +105,34 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     /**
      * An unknown address costs a password check too: without one, it would
      * answer faster than a wrong password, and the timing would tell which
-     * accounts exist.
+     * accounts exist. So does an account waiting for its first password,
+     * which Symfony refuses without hashing anything.
      */
     private function loadUser(string $identifier, string $password): UserInterface
     {
         try {
-            return $this->userProvider->loadUserByIdentifier($identifier);
+            $user = $this->userProvider->loadUserByIdentifier($identifier);
         } catch (UserNotFoundException) {
-            if ($hasher = $this->getTimingShieldHasher()) {
-                $this->timingShieldHash ??= $hasher->hash('wexample-user-timing-shield');
-                $hasher->verify($this->timingShieldHash, $password);
-            }
+            $this->spendPasswordCheck($password);
 
             // Without the identifier: the firewall logs this exception, and
             // users type their password in the identifier field now and then.
             // The journal keeps a fingerprint of it instead.
             throw new UserNotFoundException();
+        }
+
+        if ($user instanceof PasswordAuthenticatedUserInterface && $user->getPassword() === null) {
+            $this->spendPasswordCheck($password);
+        }
+
+        return $user;
+    }
+
+    private function spendPasswordCheck(string $password): void
+    {
+        if ($hasher = $this->getTimingShieldHasher()) {
+            $this->timingShieldHash ??= $hasher->hash('wexample-user-timing-shield');
+            $hasher->verify($this->timingShieldHash, $password);
         }
     }
 

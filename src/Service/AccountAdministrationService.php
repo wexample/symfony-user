@@ -17,9 +17,10 @@ use Wexample\SymfonyUser\Interface\AccountAdministrationGuardInterface;
 use Wexample\SymfonyUser\Repository\AbstractUserRepository;
 
 /**
- * The way an administrator changes an account: deactivate, reactivate, lock,
- * unlock, change its roles. Every call checks the rules, applies and flushes,
- * and journals the change — or the refusal, before throwing it.
+ * The way an administrator changes an account: create it, send it a password
+ * mail, deactivate, reactivate, lock, unlock, change its roles. Every call
+ * checks the rules, applies and flushes, and journals the change — or the
+ * refusal, before throwing it.
  *
  * Who may administer at all is the application's access control; here, the
  * actor only touches the accounts and roles AssignableRolesService gives
@@ -42,11 +43,65 @@ class AccountAdministrationService
         private readonly AssignableRolesService $assignableRoles,
         private readonly AccountRulesService $accountRules,
         private readonly SecurityJournalService $journal,
+        private readonly PasswordResetService $passwordResetService,
         #[AutowireIterator(AccountAdministrationGuardInterface::TAG)]
         private readonly iterable $guards = [],
         #[Autowire(param: 'wexample_symfony_user.administration.protected_roles')]
         private readonly array $protectedRoles = [],
     ) {
+    }
+
+    /**
+     * Writes $account — built by the application, with its email and roles —
+     * as an account waiting for its holder: enabled, with no password, so
+     * that nobody signs in with it until they chose one through the
+     * activation mail it is sent.
+     *
+     * @throws AccountAdministrationException
+     */
+    public function createAccount(AbstractUser $actor, AbstractUser $account): void
+    {
+        $roles = $this->getStoredRoles($account->getRoles());
+
+        $this->guard($actor, $account, SecurityEventType::ACCOUNT_CREATED, [], $roles, true, function () use ($account) {
+            $account
+                ->setPassword(null)
+                ->setEnabled(true)
+                ->setLocked(false);
+            $this->entityManager->persist($account);
+        });
+        $this->journal->record(SecurityEventType::ACCOUNT_CREATED, $account, extra: [
+            'actor_id' => (string) $actor->getId(),
+            'roles_after' => implode(',', $roles),
+        ]);
+
+        // Once written: a worker may handle the mail before this request ends.
+        $this->passwordResetService->sendActivationLink($account);
+        $this->journal->record(SecurityEventType::ACCOUNT_ACTIVATION_SENT, $account, extra: ['actor_id' => (string) $actor->getId()]);
+    }
+
+    /**
+     * Sends again the activation mail of an account waiting for its first
+     * password, or a mail to choose a new one to an activated account.
+     *
+     * @throws AccountAdministrationException
+     */
+    public function sendPasswordMail(AbstractUser $actor, AbstractUser $target): void
+    {
+        $roles = $this->getStoredRoles($target->getRoles());
+        $pending = $target->getPassword() === null;
+        $type = $pending ? SecurityEventType::ACCOUNT_ACTIVATION_SENT : SecurityEventType::ACCOUNT_PASSWORD_MAIL_SENT;
+
+        $this->guard($actor, $target, $type, $roles, $roles, $this->isActive($target), function () use ($target) {
+            if (! $this->isActive($target)) {
+                throw new AccountAdministrationException(AccountAdministrationRefusal::ACCOUNT_INACTIVE);
+            }
+        });
+
+        $pending
+            ? $this->passwordResetService->sendActivationLink($target)
+            : $this->passwordResetService->sendResetLink($target);
+        $this->journal->record($type, $target, extra: ['actor_id' => (string) $actor->getId()]);
     }
 
     /**
@@ -111,16 +166,46 @@ class AccountAdministrationService
             return;
         }
 
-        $connection = $this->entityManager->getConnection();
-        $connection->beginTransaction();
-
-        try {
-            $this->assertAllowed($actor, $target, $rolesBefore, $rolesAfter, $enabled && ! $locked);
-
+        $this->guard($actor, $target, $type, $rolesBefore, $rolesAfter, $enabled && ! $locked, function () use ($target, $rolesAfter, $enabled, $locked) {
             $target
                 ->setRoles($rolesAfter)
                 ->setEnabled($enabled)
                 ->setLocked($locked);
+        });
+
+        $this->journal->record($type, $target, extra: [
+            'actor_id' => (string) $actor->getId(),
+            ...($type === SecurityEventType::ACCOUNT_ROLES_CHANGED ? [
+                'roles_before' => implode(',', $rolesBefore),
+                'roles_after' => implode(',', $rolesAfter),
+            ] : []),
+        ]);
+    }
+
+    /**
+     * Checks the rules, then applies and flushes, in one transaction; a
+     * refusal is journaled before it is thrown. $type names the action.
+     *
+     * @param list<string> $rolesBefore
+     * @param list<string> $rolesAfter
+     *
+     * @throws AccountAdministrationException
+     */
+    private function guard(
+        AbstractUser $actor,
+        AbstractUser $target,
+        SecurityEventType $type,
+        array $rolesBefore,
+        array $rolesAfter,
+        bool $activeAfter,
+        callable $apply,
+    ): void {
+        $connection = $this->entityManager->getConnection();
+        $connection->beginTransaction();
+
+        try {
+            $this->assertAllowed($actor, $target, $rolesBefore, $rolesAfter, $activeAfter);
+            $apply();
             $this->entityManager->flush();
 
             $connection->commit();
@@ -144,14 +229,6 @@ class AccountAdministrationService
 
             throw $exception;
         }
-
-        $this->journal->record($type, $target, extra: [
-            'actor_id' => (string) $actor->getId(),
-            ...($type === SecurityEventType::ACCOUNT_ROLES_CHANGED ? [
-                'roles_before' => implode(',', $rolesBefore),
-                'roles_after' => implode(',', $rolesAfter),
-            ] : []),
-        ]);
     }
 
     /**

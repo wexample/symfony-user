@@ -19,6 +19,12 @@ enum SecurityMessageType: string
     case PASSWORD_RESET = 'password_reset';
 
     /**
+     * Carries a link to choose the first password of an account an
+     * administrator created.
+     */
+    case ACCOUNT_ACTIVATION = 'account_activation';
+
+    /**
      * Carries the code of the second factor.
      */
     case TWO_FACTOR_CODE = 'two_factor_code';

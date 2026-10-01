@@ -2,6 +2,7 @@
 
 namespace Wexample\SymfonyUser\Service;
 
+use DateTimeImmutable;
 use LogicException;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -9,7 +10,6 @@ use Symfony\Component\Security\Http\LoginLink\LoginLinkDetails;
 use Symfony\Component\Security\Http\LoginLink\LoginLinkHandlerInterface;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Enum\SecurityMessageType;
-use Wexample\SymfonyUser\Interface\SecurityMessageSenderInterface;
 
 /**
  * Creates the links of the `login_link` key of the firewall. Their signature
@@ -21,7 +21,7 @@ class MagicLinkService
     public const string TARGET_PATH_PARAMETER = '_target_path';
 
     public function __construct(
-        private readonly SecurityMessageSenderInterface $sender,
+        private readonly SecurityMessageService $securityMessageService,
         private readonly RequestStack $requestStack,
         // Both absent when no firewall declares `login_link`. The first one
         // picks the firewall of the current request; the second one serves
@@ -66,7 +66,18 @@ class MagicLinkService
     }
 
     /**
-     * Only an account allowed to sign in gets a link.
+     * @return array{0: string, 1: DateTimeImmutable}
+     */
+    public function createLinkUrl(AbstractUser $user, ?string $targetPath = null): array
+    {
+        $link = $this->createLink($user, $targetPath);
+
+        return [$link->getUrl(), $link->getExpiresAt()];
+    }
+
+    /**
+     * Only an account allowed to sign in gets a link. It is queued: the link
+     * is created when the mail leaves.
      */
     public function sendLink(AbstractUser $user, ?string $targetPath = null): bool
     {
@@ -74,8 +85,7 @@ class MagicLinkService
             return false;
         }
 
-        $link = $this->createLink($user, $targetPath);
-        $this->sender->send($user, SecurityMessageType::MAGIC_LINK, $link->getUrl(), $link->getExpiresAt());
+        $this->securityMessageService->queue($user, SecurityMessageType::MAGIC_LINK, $targetPath);
 
         return true;
     }
