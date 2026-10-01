@@ -83,9 +83,14 @@ class SecurityJournalTest extends WebTestCase
         ]);
         $this->get('/logout');
 
-        // A magic link, asked for and followed.
+        // A magic link, asked for and followed — after a page missing on the
+        // way, whose 404 quotes the link as its referer.
         $this->post('form-magic_link_request_form', 'magic_link_request_form', ['identifier' => 'jane']);
-        $this->get($this->getLastLink());
+        $magicLink = $this->getLastLink();
+        $this->client->request('GET', '/missing-page', server: ['HTTP_REFERER' => $magicLink]);
+        $this->assertResponseStatusCodeSame(404);
+        $this->gatherRecords();
+        $this->get($magicLink);
 
         $this->assertJournal([
             ['login.failed', 'unknown_user', 'password'],

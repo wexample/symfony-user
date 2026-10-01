@@ -2,13 +2,21 @@
 
 namespace Wexample\SymfonyUser\Log;
 
+use Error;
+use Exception;
 use Monolog\Attribute\AsMonologProcessor;
 use Monolog\LogRecord;
+use ReflectionProperty;
+use Throwable;
 
 /**
  * Masks the signature of the links the package mails — magic links, reset
  * links — wherever a log record holds their URL: the router logs every
  * request URI, and that signature is enough to sign in.
+ *
+ * An exception carried by a record is rewritten in place, with its previous
+ * ones: the formatter reads its message after this processor, and a 404
+ * quotes the referer — a link the visitor came from.
  */
 #[AsMonologProcessor]
 class SecretRedactionProcessor
@@ -41,6 +49,17 @@ class SecretRedactionProcessor
 
         if (is_array($value)) {
             return array_map($this->redact(...), $value);
+        }
+
+        if ($value instanceof Throwable) {
+            for ($exception = $value; null !== $exception; $exception = $exception->getPrevious()) {
+                $message = $this->redact($exception->getMessage());
+
+                if ($message !== $exception->getMessage()) {
+                    $property = new ReflectionProperty($exception instanceof Exception ? Exception::class : Error::class, 'message');
+                    $property->setValue($exception, $message);
+                }
+            }
         }
 
         return $value;

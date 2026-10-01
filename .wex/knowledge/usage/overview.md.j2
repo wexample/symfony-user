@@ -129,7 +129,7 @@ It never carries a secret. An identifier typed for an unknown account is kept as
 
 The package writes them to the `user_security` Monolog channel, warnings for failures: give that channel its own handler and retention. An audit package listens to `SecurityEvent` to store them. Facts of the application itself go through `SecurityJournalService::record()`.
 
-`Log\SecretRedactionProcessor` masks the signature of magic and reset links in every log record: the router logs each request URI. Keep `doctrine.dbal.logging` off outside development: the SQL log carries query parameters.
+`Log\SecretRedactionProcessor` masks the signature of magic and reset links in every log record, the exceptions it carries included: the router logs each request URI, and a 404 quotes the referer. Keep `doctrine.dbal.logging` off outside development: the SQL log carries query parameters.
 
 ## Account gates
 
