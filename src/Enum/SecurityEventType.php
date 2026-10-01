@@ -11,6 +11,7 @@ enum SecurityEventType: string
     case LOGIN_SUCCEEDED = 'login.succeeded';
     case LOGIN_FAILED = 'login.failed';
     case LOGIN_SECOND_FACTOR_REQUIRED = 'login.second_factor_required';
+    case LOGIN_SECOND_FACTOR_EXPIRED = 'login.second_factor_expired';
 
     case SECOND_FACTOR_CODE_SENT = 'second_factor.code_sent';
     case SECOND_FACTOR_CODE_RESENT = 'second_factor.code_resent';

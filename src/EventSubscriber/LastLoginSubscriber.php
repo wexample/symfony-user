@@ -4,6 +4,7 @@ namespace Wexample\SymfonyUser\EventSubscriber;
 
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use Scheb\TwoFactorBundle\Security\Authentication\Token\TwoFactorTokenInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 use Wexample\SymfonyUser\Entity\AbstractUser;
@@ -24,7 +25,10 @@ class LastLoginSubscriber implements EventSubscriberInterface
     {
         $user = $event->getUser();
 
-        if (! $user instanceof AbstractUser) {
+        // A password still waiting for its second factor is no login: the
+        // event comes again once the code is checked.
+        if (! $user instanceof AbstractUser
+            || $event->getAuthenticatedToken() instanceof TwoFactorTokenInterface) {
             return;
         }
 

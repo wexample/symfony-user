@@ -46,6 +46,10 @@ security:
       user_checker: Wexample\SymfonyUser\Security\UserChecker
       logout:
         path: user_security_logout
+      remember_me:
+        secret: '%kernel.secret%'
+        signature_properties: [password]
+      switch_user: true
       login_throttling:
         max_attempts: 3
       login_link:

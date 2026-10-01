@@ -83,6 +83,7 @@ The link signs the user in and lands on the given local path. It dies with the n
 - `two_factor.app_required_roles` makes an authenticator app mandatory for some roles: the email code lets them in once, `TotpSetupHoldSubscriber` then holds them on `/account/authenticator` until it is set up, and it cannot be turned off.
 - `AbstractUser::revokeTrustedDevices()` makes every trusted device ask for a code again.
 - Only password logins ask for the code; magic links and the login after a reset do not.
+- A correct password waiting for its second factor opens nothing: no protected page (an ajax call gets a `401`), no last login date, no remember-me cookie, no impersonation, no reset proof. It waits `two_factor.pending_lifetime` seconds; past it, the session is dropped and the sign-in starts over from the password. Listeners of `LoginSuccessEvent` in the application should skip a `TwoFactorTokenInterface` token the same way: the event comes again once the code is checked.
 - An authenticator app, once set up on `/account/authenticator`, replaces the email code. Its ten backup codes are shown once; each signs in once, on `/login/2fa?backup=1`.
 
 ## Roles
