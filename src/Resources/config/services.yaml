@@ -5,10 +5,16 @@ services:
         public: false
 
     Wexample\SymfonyUser\:
-        resource: '../../{EventSubscriber,Form,Log,MessageHandler,Repository,Security,Service}'
+        resource: '../../{EventSubscriber,Form,MessageHandler,Repository,Security,Service}'
         exclude:
             - '../../Service/Tunnel/Step/Abstract*.php'
             - '../../Repository/AbstractUserRepository.php'
+
+    # The signature of magic and reset links, wherever a log record holds their
+    # URL: the router logs every request URI, and a 404 quotes the referer.
+    wexample_symfony_user.log_masker.link_signature:
+        class: Wexample\SymfonySecurity\Log\Masker\QueryParameterLogMasker
+        arguments: [['hash']]
 
     Wexample\SymfonyUser\Interface\SecurityMessageSenderInterface:
         alias: Wexample\SymfonyUser\Service\SecurityMessageMailerSenderService

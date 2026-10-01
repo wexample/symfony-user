@@ -12,6 +12,7 @@ use Wexample\SymfonyTesting\Tests\Fixtures\AbstractFixtureKernel;
 use Wexample\SymfonyTranslations\WexampleSymfonyTranslationsBundle;
 use Wexample\SymfonyTunnels\WexampleSymfonyTunnelsBundle;
 use Wexample\SymfonyUser\WexampleSymfonyUserBundle;
+use Wexample\SymfonySecurity\WexampleSymfonySecurityBundle;
 
 class AppKernel extends AbstractFixtureKernel
 {
@@ -25,6 +26,7 @@ class AppKernel extends AbstractFixtureKernel
         return [
             new SecurityBundle(),
             new MonologBundle(),
+            new WexampleSymfonySecurityBundle(),
             new SchebTwoFactorBundle(),
             new WexampleSymfonyLoaderBundle(),
             new WexampleSymfonyTranslationsBundle(),

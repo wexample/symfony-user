@@ -6,8 +6,11 @@
 // config/bundles.php
 Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
 Scheb\TwoFactorBundle\SchebTwoFactorBundle::class => ['all' => true],
+Wexample\SymfonySecurity\WexampleSymfonySecurityBundle::class => ['all' => true],
 Wexample\SymfonyUser\WexampleSymfonyUserBundle::class => ['all' => true],
 ```
+
+`WexampleSymfonySecurityBundle` masks the package's secrets in the logs: without it, the container refuses to build.
 
 The scheb recipe also adds `config/routes/scheb_2fa.yaml`: delete it, the code form is served by this package on `/login/2fa`.
 
