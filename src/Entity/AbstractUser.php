@@ -19,6 +19,7 @@ use Wexample\SymfonyHelpers\Entity\AbstractEntity;
 use Wexample\SymfonyHelpers\Entity\Interfaces\UserEntityInterface;
 use Wexample\SymfonyHelpers\Entity\Traits\HasDateCreatedTrait;
 use Wexample\SymfonyHelpers\Helper\RoleHelper;
+use Wexample\SymfonyMail\Interface\MailRecipientInterface;
 use Wexample\SymfonyTranslations\Entity\Traits\HasLocaleTrait;
 use Wexample\SymfonyTranslations\Interface\HasLocaleInterface;
 
@@ -37,7 +38,8 @@ abstract class AbstractUser extends AbstractEntity implements
     TrustedDeviceInterface,
     TotpTwoFactorInterface,
     BackupCodeInterface,
-    HasLocaleInterface
+    HasLocaleInterface,
+    MailRecipientInterface
 {
     use HasDateCreatedTrait;
     // The account's language, for what reaches it outside a request of its

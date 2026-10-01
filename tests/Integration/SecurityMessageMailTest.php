@@ -12,7 +12,8 @@ use Wexample\SymfonyUser\Service\SecurityMessageMailerSenderService;
 use Wexample\SymfonyUser\Tests\Fixtures\App\Entity\User;
 
 /**
- * Every text of the security mails comes from the yml next to their template.
+ * Every text of the security mails comes from the yml next to their template,
+ * in the account's language whatever the current one.
  */
 class SecurityMessageMailTest extends KernelTestCase
 {
@@ -36,12 +37,24 @@ class SecurityMessageMailTest extends KernelTestCase
         }
     }
 
-    private function send(SecurityMessageType $type, string $locale): Email
+    public function testTheLinkKeepsItsAddressInTheTextPart(): void
+    {
+        $email = $this->send(SecurityMessageType::MAGIC_LINK, 'en', 'https://example.com/login/link?user=jane&hash=abc');
+
+        $this->assertStringContainsString('https://example.com/login/link?user=jane&hash=abc', (string) $email->getTextBody());
+    }
+
+    private function send(
+        SecurityMessageType $type,
+        string $locale,
+        string $value = '123456'
+    ): Email
     {
         self::ensureKernelShutdown();
         self::bootKernel();
         $container = self::getContainer();
-        $container->get(Translator::class)->setLocale($locale);
+        // The request's language is another one: the account's wins.
+        $container->get(Translator::class)->setLocale('en' === $locale ? 'fr' : 'en');
 
         $sent = null;
         $container->get('event_dispatcher')->addListener(
@@ -53,13 +66,14 @@ class SecurityMessageMailTest extends KernelTestCase
         );
 
         $container->get(SecurityMessageMailerSenderService::class)->send(
-            (new User())->setEmail('jane@example.com'),
+            (new User())->setEmail('jane@example.com')->setLocale($locale),
             $type,
-            '123456',
+            $value,
             new DateTimeImmutable('+10 minutes')
         );
 
         $this->assertInstanceOf(Email::class, $sent);
+        $this->assertSame(['jane@example.com'], array_map(fn ($address) => $address->getAddress(), $sent->getTo()));
 
         return $sent;
     }

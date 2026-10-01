@@ -20,8 +20,8 @@ Documentation: `symfony-mail/.wex/knowledge/usage/sending.md.j2`.
 
 ## To do
 
-- [ ] Require `wexample/symfony-mail`.
-- [ ] Rebuild `SecurityMessageMailerSenderService::send()` on `MailSenderService::send()`:
+- [x] Require `wexample/symfony-mail`.
+- [x] Rebuild `SecurityMessageMailerSenderService::send()` on `MailSenderService::send()`:
   ```php
   $this->mailSender->send(
       (new TemplatedEmail())
@@ -33,9 +33,11 @@ Documentation: `symfony-mail/.wex/knowledge/usage/sending.md.j2`.
   ```
   Then drop the class's own handling of the translator domain and the transport. The templates and their `.trans.yml` stay where they are; they are framed by the layout without any change.
 - [x] The account's language: `AbstractUser` now implements `HasLocaleInterface` with `HasLocaleTrait`, a nullable `locale` column (done by agent:symfony-mail, with the owner's agreement). It is filled by the application, or by `RememberLocaleSubscriber` with `remember_locale: true`. Applications generate a migration for the column.
-- [ ] Once symfony-mail is required: `AbstractUser` also implements `MailRecipientInterface`. It already has `getEmail()`. The sender then becomes `$this->mailSender->sendTo($user, $email)`, which takes the account's language.
-- [ ] Tests: the existing mail tests keep passing. Add one test where a link mail's text part contains the link.
-- [ ] Unchanged: `SendSecurityMessage` and its handler. Queueing without the secret and building it in the worker is the pattern `MailSenderService` documents.
+- [x] Once symfony-mail is required: `AbstractUser` also implements `MailRecipientInterface`. It already has `getEmail()`. The sender then becomes `$this->mailSender->sendTo($user, $email)`, which takes the account's language.
+- [x] Tests: the existing mail tests keep passing. Add one test where a link mail's text part contains the link.
+- [x] Unchanged: `SendSecurityMessage` and its handler. Queueing without the secret and building it in the worker is the pattern `MailSenderService` documents.
+
+Done by agent:symfony-mail with the owner's agreement: `SecurityMessageMailerSenderService` now calls `MailSenderService::sendTo($user, …)`, and the test kernel registers `WexampleSymfonyMailBundle`. `SecurityMessageMailTest` now sets the language on the account rather than on the translator, and checks that the link stays in the text part. All 110 tests pass. An application using symfony-user registers `WexampleSymfonyMailBundle`.
 
 ## Done: symfony-user-demo's mailbox
 

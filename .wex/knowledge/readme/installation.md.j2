@@ -102,7 +102,7 @@ scheb_two_factor:
 
 ### Mails
 
-Links and codes are sent with `symfony/mailer`. The sender comes from the mailer configuration:
+Links and codes are sent through symfony-mail's `MailSenderService`, which requires `WexampleSymfonyMailBundle` to be registered. They are framed by the application's mail layout (`wexample_symfony_mail.layout`), their text part keeps the link's address, and they are written in the account's language (`AbstractUser::getLocale()`), or the default locale. The sender comes from the mailer configuration:
 
 ```yaml
 framework:

@@ -8,6 +8,7 @@ use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Wexample\SymfonyForms\WexampleSymfonyFormsBundle;
 use Wexample\SymfonyLoader\WexampleSymfonyLoaderBundle;
+use Wexample\SymfonyMail\WexampleSymfonyMailBundle;
 use Wexample\SymfonyTesting\Tests\Fixtures\AbstractFixtureKernel;
 use Wexample\SymfonyTranslations\WexampleSymfonyTranslationsBundle;
 use Wexample\SymfonyTunnels\WexampleSymfonyTunnelsBundle;
@@ -30,6 +31,7 @@ class AppKernel extends AbstractFixtureKernel
             new SchebTwoFactorBundle(),
             new WexampleSymfonyLoaderBundle(),
             new WexampleSymfonyTranslationsBundle(),
+            new WexampleSymfonyMailBundle(),
             new WexampleSymfonyFormsBundle(),
             new WexampleSymfonyTunnelsBundle(),
             new WexampleSymfonyUserBundle(),
