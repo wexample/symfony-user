@@ -125,6 +125,9 @@ class Configuration implements ConfigurationInterface
                         ->end()
                         ->arrayNode('app_required_roles')
                             ->info('Roles that must use an authenticator app: signed in by email code until it is set up, held on its setup page meanwhile, never allowed to turn it off.')
+                            // Replaced, not merged: an environment emptying the list
+                            // (`[]` under when@test) must empty it.
+                            ->performNoDeepMerging()
                             ->scalarPrototype()->end()
                             ->defaultValue([])
                         ->end()
