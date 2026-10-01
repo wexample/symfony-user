@@ -7,6 +7,7 @@ en:
     submit: Turn the app off
 
   error:
+    required: "Your role requires an authenticator app: it cannot be turned off."
     current_password: The current password is wrong.
 
 ar:

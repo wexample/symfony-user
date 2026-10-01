@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Security\Authenticator\LoginFormAuthenticator;
 use Wexample\SymfonyUser\Service\TwoFactorCodeService;
+use Wexample\SymfonyUser\Service\TwoFactorPolicyService;
 
 /**
  * The email code second factor, plugged into scheb/2fa-bundle under the
@@ -21,23 +22,25 @@ class EmailCodeTwoFactorProvider implements TwoFactorProviderInterface, TwoFacto
     public const string NAME = 'email_code';
 
     public function __construct(
-        private readonly TwoFactorCodeService $codeService
+        private readonly TwoFactorCodeService $codeService,
+        private readonly TwoFactorPolicyService $policy,
     ) {
     }
 
     /**
-     * Only a password login asks for it: a magic link, or the login that
-     * follows a password reset, already proved the mailbox is theirs.
+     * By default only a password login asks for it: a magic link, or the
+     * login that follows a password reset, proved the mailbox already. Under
+     * `two_factor.required`, every sign-in does — see TwoFactorPolicyService.
      */
     public function beginAuthentication(AuthenticationContextInterface $context): bool
     {
         $user = $context->getUser();
 
-        // An authenticator app, once set up, replaces the email code.
+        // An authenticator app, once set up, replaces the email code; until
+        // then it is how a user who must set one up signs in.
         return $user instanceof AbstractUser
-            && $user->isEmailTwoFactorEnabled()
             && ! $user->isTotpAuthenticationEnabled()
-            && LoginFormAuthenticator::isLoginRequest($context->getRequest());
+            && $this->policy->asksSecondFactor($user, LoginFormAuthenticator::isLoginRequest($context->getRequest()));
     }
 
     public function prepareAuthentication(object $user): void

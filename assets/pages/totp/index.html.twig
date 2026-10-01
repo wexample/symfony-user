@@ -18,14 +18,21 @@
         </section>
         <section class="block block--card">
             <div class="block--body stack--vertical">
-                <p>{{ '@page::disable.intro' | trans }}</p>
-                {{ form_load(render_pass, totp_disable_form, '@WexampleSymfonyUserBundle/forms/totp_disable_form.html.twig') }}
+                {%- if required -%}
+                    <p class="text-secondary">{{ '@page::disable.required' | trans }}</p>
+                {%- else -%}
+                    <p>{{ '@page::disable.intro' | trans }}</p>
+                    {{ form_load(render_pass, totp_disable_form, '@WexampleSymfonyUserBundle/forms/totp_disable_form.html.twig') }}
+                {%- endif -%}
             </div>
         </section>
     {%- else -%}
         <section class="block block--card">
             <div class="block--body stack--vertical">
-                <p class="lead">{{ '@page::setup.intro' | trans }}</p>
+                {%- if required -%}
+                    <p class="lead">{{ '@page::setup.required' | trans }}</p>
+                {%- endif -%}
+                <p class="{{ required ? 'text-secondary' : 'lead' }}">{{ '@page::setup.intro' | trans }}</p>
                 <p><img src="{{ qr_code }}" alt="{{ '@page::setup.qr_alt' | trans }}" width="240" height="240"></p>
                 <p class="text-secondary">{{ '@page::setup.secret' | trans }} <code>{{ secret }}</code></p>
                 {{ form_load(render_pass, totp_enable_form, '@WexampleSymfonyUserBundle/forms/totp_enable_form.html.twig') }}

@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
+use Wexample\SymfonyUser\Service\MagicLinkService;
 use Wexample\SymfonyUser\Service\TotpSecretCipherService;
 use Wexample\SymfonyUser\Service\TotpService;
 use Wexample\SymfonyUser\Tests\Fixtures\App\Entity\User;
@@ -87,6 +88,18 @@ class TotpTest extends WebTestCase
 
         $this->client->request('GET', '/protected');
         $this->assertResponseIsSuccessful();
+    }
+
+    public function testTheAppIsAskedAfterAMagicLinkToo(): void
+    {
+        $this->enable();
+        $link = self::getContainer()->get(MagicLinkService::class)
+            ->createLink($this->entityManager->find(User::class, $this->user->getId()));
+
+        $this->client->request('GET', $link->getUrl());
+        $this->client->request('GET', '/protected');
+
+        $this->assertResponseRedirects('/login/2fa');
     }
 
     public function testABackupCodeWorksOnce(): void

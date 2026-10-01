@@ -11,6 +11,7 @@ use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Service\FormProcessor\TotpDisableFormProcessor;
 use Wexample\SymfonyUser\Service\FormProcessor\TotpEnableFormProcessor;
 use Wexample\SymfonyUser\Service\TotpService;
+use Wexample\SymfonyUser\Service\TwoFactorPolicyService;
 use Wexample\SymfonyUser\Traits\SymfonyUserBundleClassTrait;
 
 /**
@@ -30,21 +31,25 @@ final class TotpController extends AbstractPagesController
     #[Route(path: '', name: 'index')]
     public function index(
         TotpService $totpService,
+        TwoFactorPolicyService $policy,
         TotpEnableFormProcessor $enableFormProcessor,
         TotpDisableFormProcessor $disableFormProcessor
     ): Response {
         $user = $this->getAbstractUser();
+        $required = $policy->requiresApp($user);
 
         if ($user->isTotpAuthenticationEnabled()) {
             return $this->renderPage('index', [
                 'enabled' => true,
+                'required' => $required,
                 'backup_codes_count' => $user->countBackupCodes(),
-                'totp_disable_form' => $disableFormProcessor->createForm()->createView(),
+                'totp_disable_form' => $required ? null : $disableFormProcessor->createForm()->createView(),
             ]);
         }
 
         return $this->renderPage('index', [
             'enabled' => false,
+            'required' => $required,
             'qr_code' => $totpService->getPendingQrCodeDataUri($user),
             'secret' => $totpService->getPendingSecret(),
             'totp_enable_form' => $enableFormProcessor->createForm()->createView(),

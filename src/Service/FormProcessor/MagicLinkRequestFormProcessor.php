@@ -2,6 +2,7 @@
 
 namespace Wexample\SymfonyUser\Service\FormProcessor;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -28,6 +29,8 @@ class MagicLinkRequestFormProcessor extends AbstractFormProcessor
         UrlGeneratorInterface $urlGenerator,
         private readonly UserProviderInterface $userProvider,
         private readonly MagicLinkService $magicLinkService,
+        #[Autowire(param: 'wexample_symfony_user.magic_link_login')]
+        private readonly bool $enabled = true,
     ) {
         parent::__construct($formFactory, $requestStack, $urlGenerator);
     }
@@ -35,6 +38,15 @@ class MagicLinkRequestFormProcessor extends AbstractFormProcessor
     public function getRequiredRoles(): array
     {
         return [RoleHelper::PUBLIC_ACCESS];
+    }
+
+    /**
+     * Off by `magic_link_login`, the form is not shown, and a submission
+     * crafted anyway sends nothing.
+     */
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
     }
 
     public function onValid(FormInterface $form)
@@ -47,7 +59,7 @@ class MagicLinkRequestFormProcessor extends AbstractFormProcessor
             $user = null;
         }
 
-        if ($user instanceof AbstractUser) {
+        if ($this->enabled && $user instanceof AbstractUser) {
             $this->magicLinkService->sendLink($user);
         }
 

@@ -116,6 +116,10 @@ To deliver them another way, alias `Wexample\SymfonyUser\Interface\SecurityMessa
 wexample_symfony_user:
     password_reset: token          # or magic_link
     reveal_account_status: false   # true: a disabled or locked account is told so, once its password is right
+    magic_link_login: true         # false: no magic link form on the login page; MagicLinkService still sends the application's own links
+    two_factor:
+        required: false            # true: every sign-in — magic link, login after a reset — asks a second factor, no account exempt
+        app_required_roles: []     # roles that must use an authenticator app: held on its setup page until it is there, never allowed to turn it off
 ```
 
 Off — the default —, unknown address, wrong password, disabled and locked account all get the same response; an unknown address also costs a password check, so the timing tells nothing either. That shield needs the password hasher configured on `PasswordAuthenticatedUserInterface`, as the Symfony recipe does.

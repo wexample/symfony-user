@@ -1,0 +1,5 @@
+wexample_symfony_user:
+  magic_link_login: false
+  two_factor:
+    required: true
+    app_required_roles: [ROLE_ADMIN]

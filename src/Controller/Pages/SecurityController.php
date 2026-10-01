@@ -37,7 +37,9 @@ final class SecurityController extends AbstractPagesController
 
         return $this->renderPage('login', [
             'login_form' => $form->createView(),
-            'magic_link_request_form' => $magicLinkRequestFormProcessor->createForm()->createView(),
+            'magic_link_request_form' => $magicLinkRequestFormProcessor->isEnabled()
+                ? $magicLinkRequestFormProcessor->createForm()->createView()
+                : null,
         ]);
     }
 
