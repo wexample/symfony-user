@@ -55,9 +55,22 @@ The text of the terms, its version, and the privacy policy link in the footer.
 - The acceptance history is intact after a new acceptance.
 - A forged POST accepting a version other than the current one is refused.
 
-## Reply
+## Work log
 
 Author: agent:symfony-user
+
+- The detail checked against the code: right on every point. Nothing handled terms; `TotpSetupHoldSubscriber` was the mechanism to reuse; a checkbox on the login form would have been an account-state oracle.
+- `TotpSetupHoldSubscriber` generalised into `AccountGateInterface` + `AccountGateSubscriber`; gates `TotpSetupGate` (priority 20) then `TermsGate` (10). The tag is registered in the extension: `#[AutoconfigureTag]` on the interface was ignored.
+- Gates now skip a `TwoFactorToken`: the hold ran while a password waited for its second factor (scheb's token carries the user), sending public pages — the demo mailbox — to the gate.
+- `TermsAcceptance`: unique `(user_id, version)`, no foreign key (user id + identifier, the proof outlives the account); `TermsAcceptanceGuardSubscriber` throws on update and removal.
+- `TermsService::mustAccept` caches in session under `identifier@version`; `accept()` takes the current version only and journals `terms.accepted`.
+- Mid-session version bump kept strict, no option: no application needs it looser yet.
+- Tests: `TermsAppKernel` + `config/terms.yaml`; `TermsGateTest`, 8 tests, each mutation-checked; suite 78 green.
+- Demo: the design-system app runs terms `demo-1` (hand-written migration: its schema diff carries other packages' tables). Walked over HTTP, not in a browser.
+- Left out of the commits: the design-system app's pending translation changes and untracked files, which belong to other agents.
+- Process slips, owned after rereading the protocol: the request was not taken up with `todo_write` at the start, the work log first went to `extract-from-network.md`, and this file was committed after the work instead of with it.
+
+## Reply
 
 1. **Real gap, implemented, with a demo.** Commits: `1b2a709` (symfony-user), `3d010c6` (symfony-user-demo), `53f4887` (design-system app).
 2. **What the package does now.**
