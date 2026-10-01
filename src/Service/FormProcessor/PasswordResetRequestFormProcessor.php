@@ -11,7 +11,9 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
 use Wexample\SymfonyHelpers\Helper\RoleHelper;
 use Wexample\SymfonyUser\Entity\AbstractUser;
+use Wexample\SymfonyUser\Enum\SecurityEventType;
 use Wexample\SymfonyUser\Form\PasswordResetRequestForm;
+use Wexample\SymfonyUser\Service\SecurityJournalService;
 use Wexample\SymfonyUser\Service\PasswordResetService;
 
 /**
@@ -25,6 +27,7 @@ class PasswordResetRequestFormProcessor extends AbstractFormProcessor
         UrlGeneratorInterface $urlGenerator,
         private readonly UserProviderInterface $userProvider,
         private readonly PasswordResetService $passwordResetService,
+        private readonly SecurityJournalService $journal,
     ) {
         parent::__construct($formFactory, $requestStack, $urlGenerator);
     }
@@ -36,18 +39,37 @@ class PasswordResetRequestFormProcessor extends AbstractFormProcessor
 
     public function onValid(FormInterface $form)
     {
+        $identifier = (string) $form->get(PasswordResetRequestForm::FIELD_IDENTIFIER)->getData();
+
         try {
-            $user = $this->userProvider->loadUserByIdentifier(
-                (string) $form->get(PasswordResetRequestForm::FIELD_IDENTIFIER)->getData()
-            );
+            $user = $this->userProvider->loadUserByIdentifier($identifier);
         } catch (UserNotFoundException) {
             $user = null;
         }
+
+        // What the answer hides, the journal keeps: an unknown address as a
+        // fingerprint, an account that gets nothing with why.
+        $this->journal->record(
+            SecurityEventType::PASSWORD_RESET_REQUESTED,
+            $user,
+            $this->getRefusalCause($user),
+            extra: $user ? [] : ['identifier_fingerprint' => $this->journal->fingerprint($identifier)]
+        );
 
         if ($user instanceof AbstractUser) {
             $this->passwordResetService->sendResetLink($user);
         }
 
         $this->setNotification('@form::success.message');
+    }
+
+    private function getRefusalCause(mixed $user): ?string
+    {
+        return match (true) {
+            ! $user instanceof AbstractUser => 'unknown_user',
+            $user->isLocked() => 'locked',
+            ! $user->isEnabled() => 'disabled',
+            default => null,
+        };
     }
 }

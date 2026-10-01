@@ -11,6 +11,7 @@ use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Totp\TotpFactory;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Wexample\SymfonyUser\Entity\AbstractUser;
+use Wexample\SymfonyUser\Enum\SecurityEventType;
 
 /**
  * Sets an authenticator app up for a user. The secret waits in session until
@@ -27,6 +28,7 @@ class TotpService
         private readonly TotpSecretCipherService $cipher,
         private readonly EntityManagerInterface $entityManager,
         private readonly RequestStack $requestStack,
+        private readonly SecurityJournalService $journal,
         // Both absent when `scheb_two_factor.totp.enabled` is false.
         private readonly ?TotpAuthenticatorInterface $totpAuthenticator = null,
         #[Autowire(service: 'scheb_two_factor.security.totp_factory')]
@@ -82,6 +84,7 @@ class TotpService
         $user->setTotpSecret($secret, $this->cipher->encrypt($secret));
         $this->requestStack->getSession()->remove(self::SESSION_PENDING);
         $this->regenerateBackupCodes($user);
+        $this->journal->record(SecurityEventType::ACCOUNT_TOTP_ENABLED, $user);
 
         return true;
     }
@@ -90,6 +93,7 @@ class TotpService
     {
         $user->setTotpSecret(null, null)->setBackupCodes([]);
         $this->entityManager->flush();
+        $this->journal->record(SecurityEventType::ACCOUNT_TOTP_DISABLED, $user);
     }
 
     /**
@@ -107,6 +111,7 @@ class TotpService
 
         $user->setBackupCodes($codes);
         $this->entityManager->flush();
+        $this->journal->record(SecurityEventType::ACCOUNT_BACKUP_CODES_REGENERATED, $user, extra: ['count' => count($codes)]);
         $this->requestStack->getSession()->set(self::SESSION_BACKUP_CODES, $codes);
 
         return $codes;

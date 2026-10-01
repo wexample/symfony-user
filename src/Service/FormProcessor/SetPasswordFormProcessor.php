@@ -56,7 +56,8 @@ class SetPasswordFormProcessor extends AbstractFormProcessor
 
         $this->passwordUpdater->update(
             $user,
-            (string) $form->get(SetPasswordForm::FIELD_NEW_PASSWORD)->getData()
+            (string) $form->get(SetPasswordForm::FIELD_NEW_PASSWORD)->getData(),
+            reset: true
         );
         $this->passwordResetService->clearProof();
 

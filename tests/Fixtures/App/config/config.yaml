@@ -16,6 +16,10 @@ framework:
       From: 'no-reply@example.com'
 
 doctrine:
+  # As in production: the SQL debug log carries the query parameters, a typed
+  # address or — with the plaintext hasher of the tests — a password.
+  dbal:
+    logging: false
   orm:
     enable_native_lazy_objects: true
     mappings:
@@ -102,3 +106,10 @@ services:
   # reference, which only YAML turns into the kernel service.
   Wexample\SymfonyHelpers\Service\BundleService:
     arguments: ['@kernel']
+
+# Every record of every channel, kept for the tests to read.
+monolog:
+  handlers:
+    test:
+      type: test
+      level: debug

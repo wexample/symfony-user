@@ -9,8 +9,10 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wexample\SymfonyLoader\Controller\AbstractPagesController;
 use Wexample\SymfonyUser\Entity\AbstractUser;
+use Wexample\SymfonyUser\Enum\SecurityEventType;
 use Wexample\SymfonyUser\Form\TwoFactorCodeForm;
 use Wexample\SymfonyUser\Service\FormProcessor\TwoFactorCodeFormProcessor;
+use Wexample\SymfonyUser\Service\SecurityJournalService;
 use Wexample\SymfonyUser\Service\TwoFactorCodeService;
 use Wexample\SymfonyUser\Traits\SymfonyUserBundleClassTrait;
 
@@ -55,9 +57,11 @@ final class TwoFactorController extends AbstractPagesController
     #[Route(path: '/resend', name: '_resend', methods: [Request::METHOD_POST])]
     public function resend(
         TokenStorageInterface $tokenStorage,
-        TwoFactorCodeService $codeService
+        TwoFactorCodeService $codeService,
+        SecurityJournalService $journal
     ): Response {
         if (($user = $this->getPendingUser($tokenStorage)) && $codeService->canResend()) {
+            $journal->record(SecurityEventType::SECOND_FACTOR_CODE_RESENT, $user);
             $codeService->send($user);
         }
 

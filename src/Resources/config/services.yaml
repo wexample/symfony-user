@@ -5,7 +5,7 @@ services:
         public: false
 
     Wexample\SymfonyUser\:
-        resource: '../../{EventSubscriber,Form,Security,Service}'
+        resource: '../../{EventSubscriber,Form,Log,Security,Service}'
         exclude: '../../Service/Tunnel/Step/Abstract*.php'
 
     Wexample\SymfonyUser\Interface\SecurityMessageSenderInterface:

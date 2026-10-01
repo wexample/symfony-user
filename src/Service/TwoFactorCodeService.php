@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\RateLimiter\Storage\CacheStorage;
 use Wexample\SymfonyUser\Entity\AbstractUser;
+use Wexample\SymfonyUser\Enum\SecurityEventType;
 use Wexample\SymfonyUser\Enum\SecurityMessageType;
 use Wexample\SymfonyUser\Enum\TwoFactorCodeFailure;
 use Wexample\SymfonyUser\Interface\SecurityMessageSenderInterface;
@@ -38,6 +39,7 @@ class TwoFactorCodeService
         CacheItemPoolInterface $cache,
         #[Autowire(param: 'kernel.secret')]
         private readonly string $secret,
+        private readonly SecurityJournalService $journal,
     ) {
         $this->failureLimiter = new RateLimiterFactory(
             [
@@ -64,6 +66,7 @@ class TwoFactorCodeService
         ]);
 
         $this->sender->send($user, SecurityMessageType::TWO_FACTOR_CODE, $code, $expiresAt);
+        $this->journal->record(SecurityEventType::SECOND_FACTOR_CODE_SENT, $user, extra: ['provider' => 'email_code']);
     }
 
     public function canResend(): bool

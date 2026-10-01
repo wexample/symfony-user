@@ -3,6 +3,7 @@
 namespace Wexample\SymfonyUser\Tests\Fixtures\App;
 
 use Scheb\TwoFactorBundle\SchebTwoFactorBundle;
+use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Wexample\SymfonyForms\WexampleSymfonyFormsBundle;
@@ -23,6 +24,7 @@ class AppKernel extends AbstractFixtureKernel
     {
         return [
             new SecurityBundle(),
+            new MonologBundle(),
             new SchebTwoFactorBundle(),
             new WexampleSymfonyLoaderBundle(),
             new WexampleSymfonyTranslationsBundle(),

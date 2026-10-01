@@ -111,13 +111,16 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     {
         try {
             return $this->userProvider->loadUserByIdentifier($identifier);
-        } catch (UserNotFoundException $exception) {
+        } catch (UserNotFoundException) {
             if ($hasher = $this->getTimingShieldHasher()) {
                 $this->timingShieldHash ??= $hasher->hash('wexample-user-timing-shield');
                 $hasher->verify($this->timingShieldHash, $password);
             }
 
-            throw $exception;
+            // Without the identifier: the firewall logs this exception, and
+            // users type their password in the identifier field now and then.
+            // The journal keeps a fingerprint of it instead.
+            throw new UserNotFoundException();
         }
     }
 

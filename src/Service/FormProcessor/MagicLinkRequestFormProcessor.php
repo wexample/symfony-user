@@ -12,7 +12,9 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
 use Wexample\SymfonyHelpers\Helper\RoleHelper;
 use Wexample\SymfonyUser\Entity\AbstractUser;
+use Wexample\SymfonyUser\Enum\SecurityEventType;
 use Wexample\SymfonyUser\Form\MagicLinkRequestForm;
+use Wexample\SymfonyUser\Service\SecurityJournalService;
 use Wexample\SymfonyUser\Service\MagicLinkService;
 
 /**
@@ -29,6 +31,7 @@ class MagicLinkRequestFormProcessor extends AbstractFormProcessor
         UrlGeneratorInterface $urlGenerator,
         private readonly UserProviderInterface $userProvider,
         private readonly MagicLinkService $magicLinkService,
+        private readonly SecurityJournalService $journal,
         #[Autowire(param: 'wexample_symfony_user.magic_link_login')]
         private readonly bool $enabled = true,
     ) {
@@ -51,18 +54,37 @@ class MagicLinkRequestFormProcessor extends AbstractFormProcessor
 
     public function onValid(FormInterface $form)
     {
+        $identifier = (string) $form->get(MagicLinkRequestForm::FIELD_IDENTIFIER)->getData();
+
         try {
-            $user = $this->userProvider->loadUserByIdentifier(
-                (string) $form->get(MagicLinkRequestForm::FIELD_IDENTIFIER)->getData()
-            );
+            $user = $this->userProvider->loadUserByIdentifier($identifier);
         } catch (UserNotFoundException) {
             $user = null;
         }
+
+        // What the answer hides, the journal keeps: an unknown address as a
+        // fingerprint, an account that gets nothing with why.
+        $this->journal->record(
+            SecurityEventType::MAGIC_LINK_REQUESTED,
+            $user,
+            $this->enabled ? $this->getRefusalCause($user) : 'magic_link_login_disabled',
+            extra: $user ? [] : ['identifier_fingerprint' => $this->journal->fingerprint($identifier)]
+        );
 
         if ($this->enabled && $user instanceof AbstractUser) {
             $this->magicLinkService->sendLink($user);
         }
 
         $this->setNotification(self::MESSAGE_SENT);
+    }
+
+    private function getRefusalCause(mixed $user): ?string
+    {
+        return match (true) {
+            ! $user instanceof AbstractUser => 'unknown_user',
+            $user->isLocked() => 'locked',
+            ! $user->isEnabled() => 'disabled',
+            default => null,
+        };
     }
 }

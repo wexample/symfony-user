@@ -93,3 +93,13 @@ $assignableRoles->canAssign($editor, ['ROLE_ADMIN']);                           
 ```
 
 `findByRoles()` matches whole roles: `ROLE_ADMIN` does not match `ROLE_SUPER_ADMIN`. For impersonation, enable `switch_user` on the firewall and test `is_granted('IS_IMPERSONATOR')` in templates.
+
+## Security journal
+
+Every security fact is dispatched as a `Wexample\SymfonyUser\Event\SecurityEvent`: its `type` (`Enum\SecurityEventType` — `login.failed`, `second_factor.backup_code_used`, `password.set_by_admin`…), the real `cause` of a failure (`unknown_user`, `bad_password`, `disabled`, `locked`, `throttled`, `invalid_csrf`, `invalid_login_link`, `invalid`, `expired`, `too_many_attempts`), the `method` of a sign-in (`password`, `magic_link`, `password_reset`, `second_factor`), the user id, IP, user agent, firewall, request id (`X-Request-Id`, or one of its own) and UTC time.
+
+It never carries a secret. An identifier typed for an unknown account is kept as `extra.identifier_fingerprint`, an HMAC that groups the attempts without the text.
+
+The package writes them to the `user_security` Monolog channel, warnings for failures: give that channel its own handler and retention. An audit package listens to `SecurityEvent` to store them. Facts of the application itself go through `SecurityJournalService::record()`.
+
+`Log\SecretRedactionProcessor` masks the signature of magic and reset links in every log record: the router logs each request URI. Keep `doctrine.dbal.logging` off outside development: the SQL log carries query parameters.
