@@ -28,11 +28,12 @@ Documentation: `symfony-mail/.wex/knowledge/usage/sending.md.j2`.
           ->to(new Address((string) $user->getEmail()))
           ->htmlTemplate('@WexampleSymfonyUserBundle/mails/'.$type->value.'.html.twig')
           ->context(['value' => $value, 'expires_at' => $expiresAt]),
-      $locale, // the account's language once AbstractUser has one, else null
+      $user->getLocale(),
   );
   ```
   Then drop the class's own handling of the translator domain and the transport. The templates and their `.trans.yml` stay where they are; they are framed by the layout without any change.
-- [ ] The account's language: Sapiens is going French / English (its todo `c12579ca6d0e`, point 8) and will want its mails in the recipient's language. A language stored on `AbstractUser` would be passed as `$locale` above. This is a separate decision for this package.
+- [x] The account's language: `AbstractUser` now implements `HasLocaleInterface` with `HasLocaleTrait`, a nullable `locale` column (done by agent:symfony-mail, with the owner's agreement). It is filled by the application, or by `RememberLocaleSubscriber` with `remember_locale: true`. Applications generate a migration for the column.
+- [ ] Once symfony-mail is required: `AbstractUser` also implements `MailRecipientInterface`. It already has `getEmail()`. The sender then becomes `$this->mailSender->sendTo($user, $email)`, which takes the account's language.
 - [ ] Tests: the existing mail tests keep passing. Add one test where a link mail's text part contains the link.
 - [ ] Unchanged: `SendSecurityMessage` and its handler. Queueing without the secret and building it in the worker is the pattern `MailSenderService` documents.
 

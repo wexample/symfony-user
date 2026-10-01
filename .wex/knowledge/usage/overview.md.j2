@@ -71,6 +71,12 @@ $link = $magicLinkService->createLink($user, '/invitations/42');
 
 The link signs the user in and lands on the given local path. It dies with the next login or password change of the user. `MagicLinkService::createLink()` also works outside a request (commands, workers).
 
+## The account's language
+
+`AbstractUser` implements `HasLocaleInterface` (symfony-translations) and carries a nullable `locale` column, so the mails of an account can be written in its language even when they leave outside its requests (a worker, a webhook). An application adding this version generates a migration for the column.
+
+The application fills it. With `remember_locale: true` and the URL prefixes of symfony-translations, an account reading a page whose URL names a language keeps that language. Otherwise the application calls `setLocale()` where the language is chosen (sign-up, a settings page), or leaves it empty, and mails go out in the default locale.
+
 ## Passwords
 
 - `ChangePasswordForm`: the signed-in user, current password required.

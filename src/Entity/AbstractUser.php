@@ -19,6 +19,8 @@ use Wexample\SymfonyHelpers\Entity\AbstractEntity;
 use Wexample\SymfonyHelpers\Entity\Interfaces\UserEntityInterface;
 use Wexample\SymfonyHelpers\Entity\Traits\HasDateCreatedTrait;
 use Wexample\SymfonyHelpers\Helper\RoleHelper;
+use Wexample\SymfonyTranslations\Entity\Traits\HasLocaleTrait;
+use Wexample\SymfonyTranslations\Interface\HasLocaleInterface;
 
 /**
  * The security part of a user account. Business fields (name, profile,
@@ -34,9 +36,13 @@ abstract class AbstractUser extends AbstractEntity implements
     EquatableInterface,
     TrustedDeviceInterface,
     TotpTwoFactorInterface,
-    BackupCodeInterface
+    BackupCodeInterface,
+    HasLocaleInterface
 {
     use HasDateCreatedTrait;
+    // The account's language, for what reaches it outside a request of its
+    // own: its mails. Set by the application, or by RememberLocaleSubscriber.
+    use HasLocaleTrait;
 
     public const string USERNAME_PATTERN = '/^[a-z0-9][a-z0-9_-]{2,28}[a-z0-9]$/';
 
