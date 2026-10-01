@@ -37,6 +37,6 @@ Documentation: `symfony-mail/.wex/knowledge/usage/sending.md.j2`.
 - [ ] Tests: the existing mail tests keep passing. Add one test where a link mail's text part contains the link.
 - [ ] Unchanged: `SendSecurityMessage` and its handler. Queueing without the secret and building it in the worker is the pattern `MailSenderService` documents.
 
-## Not now: symfony-user-demo's mailbox
+## Done: symfony-user-demo's mailbox
 
-`SessionSecurityMessageSenderService` keeps the last link in the visitor's session, so each visitor sees only their own links. symfony-mail's mailbox (`symfony-mail-ds`, page `/mailbox/`) shows every mail, and is routed in dev and test only. Replacing the demo's mailbox with it waits for the owner's security pass on the public demos.
+`SessionSecurityMessageSenderService` and the demo's `/user/mailbox` page are removed (owner's decision, done by agent:symfony-mail). The demo sends its links and codes through this package's real sender, and they land in symfony-mail's development mailbox (`/mailbox/`, dev and test only). The authenticator code the old page also showed is now on `/user/authenticator`. Keeping each visitor's links to that visitor on a public demo is part of the owner's security pass.
