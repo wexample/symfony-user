@@ -5,6 +5,7 @@ namespace Wexample\SymfonyUser\Security\Authenticator;
 use Scheb\TwoFactorBundle\Security\Authentication\Token\TwoFactorTokenInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
+use Wexample\SymfonyUser\Service\PostLoginTargetService;
 use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +24,6 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\SecurityRequestAttributes;
-use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Wexample\Helpers\Helper\ClassHelper;
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
 use Wexample\SymfonyForms\Service\FormProcessor\FormResponsePayloadBuilder;
@@ -42,8 +42,6 @@ use Wexample\SymfonyUser\Service\FormProcessor\LoginFormProcessor;
  */
 class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
-    use TargetPathTrait;
-
     private ?string $timingShieldHash = null;
 
     public function __construct(
@@ -52,6 +50,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         private readonly FormResponsePayloadBuilder $payloadBuilder,
         private readonly UserProviderInterface $userProvider,
         private readonly PasswordHasherFactoryInterface $passwordHasherFactory,
+        private readonly PostLoginTargetService $postLoginTarget,
     ) {
     }
 
@@ -161,8 +160,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         if ($token instanceof TwoFactorTokenInterface) {
             $url = $this->urlGenerator->generate(TwoFactorController::ROUTE_FORM);
         } else {
-            $url = $this->getTargetPath($session, $firewallName) ?: $request->getBasePath() . '/';
-            $this->removeTargetPath($session, $firewallName);
+            $url = $this->postLoginTarget->getTargetUrl($request, $token, $firewallName);
         }
 
         if (! RequestHelper::isJsonRequest($request)) {

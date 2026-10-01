@@ -124,9 +124,15 @@ The service refuses:
 
 Each change is journaled — `account.created`, `account.activation_sent`, `account.activated`, `account.password_mail_sent`, `account.deactivated`, `.reactivated`, `.locked`, `.unlocked`, `account.roles_changed` with `roles_before` / `roles_after` —, each refusal as `account.change_refused` with its code; `extra.actor_id` names the actor.
 
+## After signing in
+
+A user lands on the page they were sent away from, when `access_control` lets them in; otherwise on the route of the first role of `post_login.routes` they hold, through the hierarchy; otherwise on `post_login.default_route`, or the home page. Every way in ends there — password, second factor, reset, activation, terms accepted, magic link (`LoginLinkSuccessHandler`, the `success_handler` of `login_link`). A page refused by its controller rather than by `access_control` is not foreseen: it answers 403.
+
 ## Security journal
 
 Every security fact is dispatched as a `Wexample\SymfonyUser\Event\SecurityEvent`: its `type` (`Enum\SecurityEventType` — `login.failed`, `second_factor.backup_code_used`, `password.set_by_admin`…), the real `cause` of a failure (`unknown_user`, `bad_password`, `disabled`, `locked`, `throttled`, `invalid_csrf`, `invalid_login_link`, `invalid`, `expired`, `too_many_attempts`, `rate_limited`), the `method` of a sign-in (`password`, `magic_link`, `password_reset`, `second_factor`), the user id, IP, user agent, firewall, request id (`X-Request-Id`, or one generated per request — the same for every package of the suite, see `symfony-security`) and UTC time. Its shape is `symfony-security`'s `AbstractSecurityEvent`, shared with the machine token journal of `symfony-api`.
+
+Every access refused to a fully signed-in user — `access_control`, `#[IsGranted]`, a voter — is journaled as `access.denied`, with `extra.route`, `path` (without its query), `http_method`, `roles`, `attributes` and `reasons`: what the voters gave to `Vote::addReason()`, where an application names the scope it refused (`organization=42`). A visitor sent to the login page is not denied. The same denial — user, route, attributes — is journaled once a minute, the next entry carrying in `suppressed` the count held back. The response stays the application's.
 
 Every security mail handed to the sender is journaled as `security_message.sent`, or `security_message.failed` with the exception class, with `extra.message_type` — never its link, code or body.
 

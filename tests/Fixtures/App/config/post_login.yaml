@@ -1,0 +1,10 @@
+wexample_symfony_user:
+  post_login:
+    routes:
+      ROLE_MANAGER: manager_home
+      ROLE_MEMBER: public
+    default_route: protected
+
+services:
+  Wexample\SymfonyUser\Tests\Fixtures\App\Security\OrganizationVoter:
+    autoconfigure: true

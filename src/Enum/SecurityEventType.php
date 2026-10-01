@@ -48,6 +48,9 @@ enum SecurityEventType: string implements SecurityEventTypeInterface
 
     case TERMS_ACCEPTED = 'terms.accepted';
 
+    /** A fully signed-in user refused a page or an action. */
+    case ACCESS_DENIED = 'access.denied';
+
     /** A security mail handed to the transport; never its link, code or body. */
     case SECURITY_MESSAGE_SENT = 'security_message.sent';
     case SECURITY_MESSAGE_FAILED = 'security_message.failed';
@@ -56,6 +59,6 @@ enum SecurityEventType: string implements SecurityEventTypeInterface
 
     public function isFailure(): bool
     {
-        return in_array($this, [self::LOGIN_FAILED, self::SECOND_FACTOR_FAILED, self::ACCOUNT_CHANGE_REFUSED, self::SECURITY_MESSAGE_FAILED], true);
+        return in_array($this, [self::LOGIN_FAILED, self::SECOND_FACTOR_FAILED, self::ACCOUNT_CHANGE_REFUSED, self::SECURITY_MESSAGE_FAILED, self::ACCESS_DENIED], true);
     }
 }

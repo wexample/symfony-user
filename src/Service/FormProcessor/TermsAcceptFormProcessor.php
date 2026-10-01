@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\Authentication\Token\SwitchUserToken;
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Form\TermsAcceptForm;
+use Wexample\SymfonyUser\Service\PostLoginTargetService;
 use Wexample\SymfonyUser\Service\TermsService;
 
 class TermsAcceptFormProcessor extends AbstractFormProcessor
@@ -25,6 +26,7 @@ class TermsAcceptFormProcessor extends AbstractFormProcessor
         UrlGeneratorInterface $urlGenerator,
         private readonly Security $security,
         private readonly TermsService $termsService,
+        private readonly PostLoginTargetService $postLoginTarget,
     ) {
         parent::__construct($formFactory, $requestStack, $urlGenerator);
     }
@@ -55,6 +57,10 @@ class TermsAcceptFormProcessor extends AbstractFormProcessor
     {
         $this->termsService->accept($this->security->getUser(), $this->termsService->getVersion());
 
-        $this->redirect($this->request?->getBasePath() . '/');
+        $this->redirect($this->postLoginTarget->getTargetUrl(
+            $this->request,
+            $this->security->getToken(),
+            $this->security->getFirewallConfig($this->request)->getName()
+        ));
     }
 }

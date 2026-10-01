@@ -59,6 +59,7 @@ security:
                 check_route: user_security_login_link
                 signature_properties: [password, dateLastLogin]
                 lifetime: 600
+                success_handler: Wexample\SymfonyUser\Security\Handler\LoginLinkSuccessHandler
             two_factor:
                 auth_form_path: user_security_two_factor
                 prepare_on_login: true
@@ -143,6 +144,9 @@ wexample_symfony_user:
     magic_link_login: true         # false: no magic link form on the login page; MagicLinkService still sends the application's own links
     activation:
         link_lifetime: 604800      # seconds the link of an activation mail works
+    post_login:
+        routes: {}                 # ROLE_X: route, in order — where a user lands when the page they came from is not theirs to open
+        default_route: ~           # for a user holding none of them; unset, the home page
     request_limit:                 # reset and magic link mails, per hour; past it, the same answer and no mail
         per_identifier: 3
         per_ip: 20

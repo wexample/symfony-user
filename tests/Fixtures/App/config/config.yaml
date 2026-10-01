@@ -56,6 +56,7 @@ security:
         check_route: user_security_login_link
         signature_properties: [password, dateLastLogin]
         lifetime: 600
+        success_handler: Wexample\SymfonyUser\Security\Handler\LoginLinkSuccessHandler
       two_factor:
         auth_form_path: user_security_two_factor
         # The code leaves with the password check, the form may be a modal.
@@ -73,6 +74,7 @@ security:
     - { path: ^/login/2fa, roles: IS_AUTHENTICATED_2FA_IN_PROGRESS }
     - { path: ^/public, roles: PUBLIC_ACCESS }
     - { path: ^/protected, roles: ROLE_USER }
+    - { path: ^/manager, roles: ROLE_MANAGER }
 
 scheb_two_factor:
   security_tokens:

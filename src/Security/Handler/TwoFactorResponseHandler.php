@@ -14,13 +14,13 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\TooManyLoginAttemptsAuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
-use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
 use Wexample\SymfonyForms\Service\FormProcessor\FormResponsePayloadBuilder;
 use Wexample\SymfonyHelpers\Helper\RequestHelper;
 use Wexample\SymfonyUser\Controller\Pages\TwoFactorController;
 use Wexample\SymfonyUser\Enum\TwoFactorCodeFailure;
 use Wexample\SymfonyUser\Service\FormProcessor\TwoFactorCodeFormProcessor;
+use Wexample\SymfonyUser\Service\PostLoginTargetService;
 use Wexample\SymfonyUser\Service\TwoFactorCodeService;
 
 /**
@@ -33,22 +33,19 @@ class TwoFactorResponseHandler implements
     AuthenticationFailureHandlerInterface,
     AuthenticationRequiredHandlerInterface
 {
-    use TargetPathTrait;
-
     public function __construct(
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly TwoFactorCodeFormProcessor $formProcessor,
         private readonly FormResponsePayloadBuilder $payloadBuilder,
         private readonly TwoFactorCodeService $codeService,
+        private readonly PostLoginTargetService $postLoginTarget,
     ) {
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token): Response
     {
-        $session = $request->getSession();
         $firewallName = method_exists($token, 'getFirewallName') ? $token->getFirewallName() : 'main';
-        $url = $this->getTargetPath($session, $firewallName) ?: $request->getBasePath() . '/';
-        $this->removeTargetPath($session, $firewallName);
+        $url = $this->postLoginTarget->getTargetUrl($request, $token, $firewallName);
 
         if (! RequestHelper::isJsonRequest($request)) {
             return new RedirectResponse($url);

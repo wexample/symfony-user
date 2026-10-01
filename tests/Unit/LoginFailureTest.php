@@ -19,6 +19,7 @@ use Wexample\SymfonyForms\Service\FormProcessor\FormResponsePayloadBuilder;
 use Wexample\SymfonyUser\Security\Authenticator\LoginFormAuthenticator;
 use Wexample\SymfonyUser\Security\UserChecker;
 use Wexample\SymfonyUser\Service\FormProcessor\LoginFormProcessor;
+use Wexample\SymfonyUser\Service\PostLoginTargetService;
 use Wexample\SymfonyUser\Tests\Fixtures\App\Entity\User;
 
 class LoginFailureTest extends TestCase
@@ -49,6 +50,7 @@ class LoginFailureTest extends TestCase
             $this->createStub(FormResponsePayloadBuilder::class),
             $provider,
             $hasherFactory,
+            $this->createStub(PostLoginTargetService::class),
         );
 
         $request = new Request(request: ['login_form' => ['identifier' => 'nobody', 'password' => 'typed password']]);
@@ -76,6 +78,7 @@ class LoginFailureTest extends TestCase
             $this->createStub(FormResponsePayloadBuilder::class),
             $provider,
             $hasherFactory,
+            $this->createStub(PostLoginTargetService::class),
         );
 
         $request = new Request(request: ['login_form' => ['identifier' => 'jane@example.com', 'password' => 'typed password']]);

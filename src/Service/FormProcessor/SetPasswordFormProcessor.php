@@ -2,6 +2,7 @@
 
 namespace Wexample\SymfonyUser\Service\FormProcessor;
 
+use Scheb\TwoFactorBundle\Security\Authentication\Token\TwoFactorTokenInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -14,6 +15,7 @@ use Wexample\SymfonyUser\Form\SetPasswordForm;
 use Wexample\SymfonyUser\Security\Authenticator\LoginFormAuthenticator;
 use Wexample\SymfonyUser\Service\PasswordResetService;
 use Wexample\SymfonyUser\Service\PasswordUpdaterService;
+use Wexample\SymfonyUser\Service\PostLoginTargetService;
 
 /**
  * Sets the password of the user the session holds a reset proof for, then
@@ -30,6 +32,7 @@ class SetPasswordFormProcessor extends AbstractFormProcessor
         private readonly PasswordResetService $passwordResetService,
         private readonly PasswordUpdaterService $passwordUpdater,
         private readonly Security $security,
+        private readonly PostLoginTargetService $postLoginTarget,
     ) {
         parent::__construct($formFactory, $requestStack, $urlGenerator);
     }
@@ -66,6 +69,19 @@ class SetPasswordFormProcessor extends AbstractFormProcessor
         }
 
         $this->setNotification('@form::success.message');
-        $this->redirect($this->request?->getBasePath() . '/');
+        $this->redirect($this->getTargetUrl());
+    }
+
+    /**
+     * Signed in by the reset, or still to pass a second factor: scheb holds
+     * any page until it is passed.
+     */
+    private function getTargetUrl(): string
+    {
+        $token = $this->security->getToken();
+
+        return $token instanceof TwoFactorTokenInterface
+            ? $this->request->getBasePath() . '/'
+            : $this->postLoginTarget->getTargetUrl($this->request, $token, $this->security->getFirewallConfig($this->request)->getName());
     }
 }
