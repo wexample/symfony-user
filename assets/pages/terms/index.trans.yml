@@ -1,0 +1,7 @@
+en:
+  page_title: Terms of use
+  page_icon: ph:bold/file-text
+  intro: "To go on, accept the terms of use in force (version %version%)."
+  action:
+    read: Read the terms of use
+    decline: Decline and sign out

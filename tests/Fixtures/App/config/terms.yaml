@@ -1,0 +1,4 @@
+wexample_symfony_user:
+  terms:
+    version: v2
+    text_route: terms_text

@@ -116,6 +116,9 @@ To deliver them another way, alias `Wexample\SymfonyUser\Interface\SecurityMessa
 wexample_symfony_user:
     password_reset: token          # or magic_link
     reveal_account_status: false   # true: a disabled or locked account is told so, once its password is right
+    terms:
+        version: ~                 # set: every signed-in user accepts this version before anything else; changing it asks everyone again
+        text_route: ~              # the route of the page holding the text, owned by the application
     magic_link_login: true         # false: no magic link form on the login page; MagicLinkService still sends the application's own links
     two_factor:
         pending_lifetime: 600      # seconds a correct password waits for its second factor; past it, back to the password

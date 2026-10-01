@@ -5,8 +5,10 @@ services:
         public: false
 
     Wexample\SymfonyUser\:
-        resource: '../../{EventSubscriber,Form,Log,Security,Service}'
-        exclude: '../../Service/Tunnel/Step/Abstract*.php'
+        resource: '../../{EventSubscriber,Form,Log,Repository,Security,Service}'
+        exclude:
+            - '../../Service/Tunnel/Step/Abstract*.php'
+            - '../../Repository/AbstractUserRepository.php'
 
     Wexample\SymfonyUser\Interface\SecurityMessageSenderInterface:
         alias: Wexample\SymfonyUser\Service\SecurityMessageMailerSenderService

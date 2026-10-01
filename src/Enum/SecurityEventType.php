@@ -33,6 +33,8 @@ enum SecurityEventType: string
     case ACCOUNT_IMPERSONATION_STARTED = 'account.impersonation_started';
     case ACCOUNT_IMPERSONATION_ENDED = 'account.impersonation_ended';
 
+    case TERMS_ACCEPTED = 'terms.accepted';
+
     case LOGOUT = 'logout';
 
     public function isFailure(): bool

@@ -12,4 +12,19 @@ class ProtectedController
     {
         return new Response('protected');
     }
+
+    #[Route(path: '/public', name: 'public')]
+    public function public(): Response
+    {
+        return new Response('public');
+    }
+
+    /**
+     * The text of the terms, owned by the application.
+     */
+    #[Route(path: '/terms-text', name: 'terms_text')]
+    public function termsText(): Response
+    {
+        return new Response('terms text');
+    }
 }

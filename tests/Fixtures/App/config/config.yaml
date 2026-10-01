@@ -71,6 +71,7 @@ security:
         csrf_token_id: submit
   access_control:
     - { path: ^/login/2fa, roles: IS_AUTHENTICATED_2FA_IN_PROGRESS }
+    - { path: ^/public, roles: PUBLIC_ACCESS }
     - { path: ^/protected, roles: ROLE_USER }
 
 scheb_two_factor:

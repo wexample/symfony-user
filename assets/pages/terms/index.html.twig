@@ -1,0 +1,19 @@
+{%- extends '@front/layouts/private/layout.html.twig' -%}
+
+{%- set page_show_title = true -%}
+
+{#- The terms in force: read them, accept them, or leave. -#}
+{%- block page_body -%}
+    <section class="block block--card">
+        <div class="block--body stack--vertical">
+            <p class="lead">{{ '@page::intro' | trans({'%version%': version}) }}</p>
+            {%- if text_route -%}
+                <p>{{ button_link('ph:bold/file-text', '@page::action.read' | trans, path(text_route), { class: 'button--flat', attr: { target: '_blank', rel: 'noopener' } }) }}</p>
+            {%- endif -%}
+            {{ form_load(render_pass, terms_accept_form, '@WexampleSymfonyUserBundle/forms/terms_accept_form.html.twig') }}
+        </div>
+        <div class="block--footer">
+            {{ button_link('ph:bold/sign-out', '@page::action.decline' | trans, path('user_security_logout'), { class: 'button--flat' }) }}
+        </div>
+    </section>
+{%- endblock -%}

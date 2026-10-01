@@ -1,0 +1,7 @@
+en:
+  action:
+    submit: I have read and accept the terms of use
+
+  error:
+    outdated: These terms have been replaced in the meantime, reload the page to read the new ones.
+    impersonation: Only the user can accept the terms, not an administrator in their place.

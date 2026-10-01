@@ -80,7 +80,7 @@ The link signs the user in and lands on the given local path. It dies with the n
 ## Second factor
 
 - `AbstractUser::setEmailTwoFactorEnabled(false)` spares an account the code — unless `two_factor.required` is on, which makes every sign-in ask a second factor, magic link and login after a reset included.
-- `two_factor.app_required_roles` makes an authenticator app mandatory for some roles: the email code lets them in once, `TotpSetupHoldSubscriber` then holds them on `/account/authenticator` until it is set up, and it cannot be turned off.
+- `two_factor.app_required_roles` makes an authenticator app mandatory for some roles: the email code lets them in once, the authenticator gate then holds them on `/account/authenticator` until it is set up, and it cannot be turned off.
 - `AbstractUser::revokeTrustedDevices()` makes every trusted device ask for a code again.
 - Only password logins ask for the code; magic links and the login after a reset do not.
 - A correct password waiting for its second factor opens nothing: no protected page (an ajax call gets a `401`), no last login date, no remember-me cookie, no impersonation, no reset proof. It waits `two_factor.pending_lifetime` seconds; past it, the session is dropped and the sign-in starts over from the password. Listeners of `LoginSuccessEvent` in the application should skip a `TwoFactorTokenInterface` token the same way: the event comes again once the code is checked.
@@ -104,3 +104,12 @@ It never carries a secret. An identifier typed for an unknown account is kept as
 The package writes them to the `user_security` Monolog channel, warnings for failures: give that channel its own handler and retention. An audit package listens to `SecurityEvent` to store them. Facts of the application itself go through `SecurityJournalService::record()`.
 
 `Log\SecretRedactionProcessor` masks the signature of magic and reset links in every log record: the router logs each request URI. Keep `doctrine.dbal.logging` off outside development: the SQL log carries query parameters.
+
+## Account gates
+
+What a signed-in user must do before reaching anything else, once the second factor is checked — whatever the way they signed in. `AccountGateSubscriber` holds them on the page of the first gate still blocking (an ajax call gets a `403` naming it); logout stays open. The package ships two, in this order:
+
+- the authenticator app setup, for `two_factor.app_required_roles`;
+- the terms of use, when `terms.version` is set: `/account/terms` shows a link to `terms.text_route`, an accept button, and a way out (sign out). Each acceptance is a `TermsAcceptance` row — user id and identifier, version, UTC time, IP, user agent — never changed nor removed, one per version, journaled as `terms.accepted`. Changing the version asks everyone again at their next request. An administrator impersonating a user is not held, and cannot accept in their name.
+
+An application adds a gate by implementing `Interface\AccountGateInterface`.
