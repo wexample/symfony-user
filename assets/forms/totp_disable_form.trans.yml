@@ -73,6 +73,7 @@ fr:
     submit: Désactiver l'application
 
   error:
+    required: "Votre rôle impose une application d'authentification : elle ne peut pas être désactivée."
     current_password: Le mot de passe actuel est incorrect.
 
 he:

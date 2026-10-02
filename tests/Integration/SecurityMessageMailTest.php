@@ -48,8 +48,7 @@ class SecurityMessageMailTest extends KernelTestCase
         SecurityMessageType $type,
         string $locale,
         string $value = '123456'
-    ): Email
-    {
+    ): Email {
         self::ensureKernelShutdown();
         self::bootKernel();
         $container = self::getContainer();

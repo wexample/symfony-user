@@ -3,9 +3,9 @@
 namespace Wexample\SymfonyUser\Tests\Integration;
 
 use Doctrine\ORM\EntityManagerInterface;
+use OTPHP\TOTP;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use OTPHP\TOTP;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;

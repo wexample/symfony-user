@@ -9,11 +9,11 @@ use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Wexample\SymfonyForms\WexampleSymfonyFormsBundle;
 use Wexample\SymfonyLoader\WexampleSymfonyLoaderBundle;
 use Wexample\SymfonyMail\WexampleSymfonyMailBundle;
+use Wexample\SymfonySecurity\WexampleSymfonySecurityBundle;
 use Wexample\SymfonyTesting\Tests\Fixtures\AbstractFixtureKernel;
 use Wexample\SymfonyTranslations\WexampleSymfonyTranslationsBundle;
 use Wexample\SymfonyTunnels\WexampleSymfonyTunnelsBundle;
 use Wexample\SymfonyUser\WexampleSymfonyUserBundle;
-use Wexample\SymfonySecurity\WexampleSymfonySecurityBundle;
 
 class AppKernel extends AbstractFixtureKernel
 {

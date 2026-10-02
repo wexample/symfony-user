@@ -14,8 +14,8 @@ use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Enum\SecurityEventType;
 use Wexample\SymfonyUser\Form\PasswordResetRequestForm;
 use Wexample\SymfonyUser\Service\MailRequestLimiterService;
-use Wexample\SymfonyUser\Service\SecurityJournalService;
 use Wexample\SymfonyUser\Service\PasswordResetService;
+use Wexample\SymfonyUser\Service\SecurityJournalService;
 
 /**
  * Answers the same whether the account exists or not.

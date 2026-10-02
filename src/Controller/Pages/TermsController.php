@@ -7,8 +7,8 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Wexample\SymfonyLoader\Controller\AbstractPagesController;
 use Wexample\SymfonyUser\Form\TermsAcceptForm;
-use Wexample\SymfonyUser\Service\FormProcessor\TermsAcceptFormProcessor;
 use Wexample\SymfonyUser\Service\ActivationProgressService;
+use Wexample\SymfonyUser\Service\FormProcessor\TermsAcceptFormProcessor;
 use Wexample\SymfonyUser\Service\TermsService;
 use Wexample\SymfonyUser\Traits\SymfonyUserBundleClassTrait;
 

@@ -6,8 +6,11 @@
 // config/bundles.php
 Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
 Scheb\TwoFactorBundle\SchebTwoFactorBundle::class => ['all' => true],
+Wexample\SymfonySecurity\WexampleSymfonySecurityBundle::class => ['all' => true],
 Wexample\SymfonyUser\WexampleSymfonyUserBundle::class => ['all' => true],
 ```
+
+`WexampleSymfonySecurityBundle` masks the package's secrets in the logs: without it, the container refuses to build.
 
 The scheb recipe also adds `config/routes/scheb_2fa.yaml`: delete it, the code form is served by this package on `/login/2fa`.
 
@@ -59,6 +62,7 @@ security:
                 check_route: user_security_login_link
                 signature_properties: [password, dateLastLogin]
                 lifetime: 600
+                success_handler: Wexample\SymfonyUser\Security\Handler\LoginLinkSuccessHandler
             two_factor:
                 auth_form_path: user_security_two_factor
                 prepare_on_login: true
@@ -98,7 +102,7 @@ scheb_two_factor:
 
 ### Mails
 
-Links and codes are sent with `symfony/mailer`. The sender comes from the mailer configuration:
+Links and codes are sent through symfony-mail's `MailSenderService`, which requires `WexampleSymfonyMailBundle` to be registered. They are framed by the application's mail layout (`wexample_symfony_mail.layout`), their text part keeps the link's address, and they are written in the account's language (`AbstractUser::getLocale()`), or the default locale. The sender comes from the mailer configuration:
 
 ```yaml
 framework:
@@ -107,12 +111,57 @@ framework:
             From: 'no-reply@example.com'
 ```
 
-To deliver them another way, alias `Wexample\SymfonyUser\Interface\SecurityMessageSenderInterface` to your own service.
+To deliver them another way, alias `Wexample\SymfonyUser\Interface\SecurityMessageSenderInterface` to your own service. The templates are `@WexampleSymfonyUserBundle/mails/<type>.html.twig` — `magic_link`, `password_reset`, `account_activation`, `two_factor_code` —, overridden under `templates/bundles/WexampleSymfonyUserBundle/mails/`.
 
-### Password reset
+Link mails leave through Messenger, as `Wexample\SymfonyUser\Message\SendSecurityMessage`: the message names the account and the kind of link, and the handler builds the link when it sends, so neither the transport nor the failed queue ever holds one. Route it to an asynchronous transport, so a request never waits on the mail provider:
+
+```yaml
+framework:
+    messenger:
+        failure_transport: failed
+        transports:
+            async:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                retry_strategy: { max_retries: 3, multiplier: 2 }
+            failed: 'doctrine://default?queue_name=failed'
+        routing:
+            Wexample\SymfonyUser\Message\SendSecurityMessage: async
+    router:
+        default_uri: '%env(APP_URL)%'   # the worker has no request: the links take their host from here
+```
+
+Unrouted, the mails are sent within the request. Codes of the second factor are always sent at once. The mails are handed to the mailer transport directly, never to `MailerInterface`: with `SendEmailMessage` routed to a transport, as the Flex recipe does, the rendered mail would be queued with its link.
+
+In development, keep the mails on the machine: `MAILER_DSN=null://null` drops them (the profiler still shows them), a Mailpit container (`MAILER_DSN=smtp://mailpit:1025`) shows them in its web interface.
+
+### Bundle options
 
 ```yaml
 # config/packages/wexample_symfony_user.yaml
 wexample_symfony_user:
-    password_reset: token   # or magic_link
+    password_reset: token          # or magic_link
+    reveal_account_status: false   # true: a disabled or locked account is told so, once its password is right
+    terms:
+        version: ~                 # set: every signed-in user accepts this version before anything else; changing it asks everyone again
+        text_route: ~              # the route of the page holding the text, owned by the application
+    magic_link_login: true         # false: no magic link form on the login page; MagicLinkService still sends the application's own links
+    activation:
+        link_lifetime: 604800      # seconds the link of an activation mail works
+    post_login:
+        routes: {}                 # ROLE_X: route, in order — where a user lands when the page they came from is not theirs to open
+        default_route: ~           # for a user holding none of them; unset, the home page
+    request_limit:                 # reset and magic link mails, per hour; past it, the same answer and no mail
+        per_identifier: 3
+        per_ip: 20
+    administration:                # the rules of AccountAdministrationService and AccountRulesService
+        protected_roles: []        # never left without an active holder
+        manages: {}                # ROLE_X: [ROLE_A] — the roles ROLE_X administers, with no right over their pages; unset, the roles reached
+        role_email_domains: {}     # ROLE_X: [example.com] — held only by an address of these domains
+        exclusive_roles: {}        # ROLE_X: [ROLE_A, ROLE_B] — never given together
+    two_factor:
+        pending_lifetime: 600      # seconds a correct password waits for its second factor; past it, back to the password
+        required: false            # true: every sign-in — magic link, login after a reset — asks a second factor, no account exempt
+        app_required_roles: []     # roles that must use an authenticator app: held on its setup page until it is there, never allowed to turn it off
 ```
+
+Off — the default —, unknown address, wrong password, disabled and locked account all get the same response; an unknown address also costs a password check, so the timing tells nothing either. That shield needs the password hasher configured on `PasswordAuthenticatedUserInterface`, as the Symfony recipe does.

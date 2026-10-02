@@ -6,9 +6,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Wexample\SymfonyLoader\Controller\AbstractPagesController;
+use Wexample\SymfonyUser\Service\ActivationProgressService;
 use Wexample\SymfonyUser\Service\FormProcessor\PasswordResetRequestFormProcessor;
 use Wexample\SymfonyUser\Service\FormProcessor\SetPasswordFormProcessor;
-use Wexample\SymfonyUser\Service\ActivationProgressService;
 use Wexample\SymfonyUser\Service\PasswordResetService;
 use Wexample\SymfonyUser\Traits\SymfonyUserBundleClassTrait;
 

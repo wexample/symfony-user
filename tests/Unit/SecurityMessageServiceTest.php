@@ -27,7 +27,7 @@ class SecurityMessageServiceTest extends TestCase
             $events[] = $event;
         });
 
-        $sender = new class implements SecurityMessageSenderInterface {
+        $sender = new class () implements SecurityMessageSenderInterface {
             public function send($user, SecurityMessageType $type, string $value, DateTimeImmutable $expiresAt): void
             {
                 throw new RuntimeException('Rejected jane@example.com: https://example.com/?hash=secret');

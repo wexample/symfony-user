@@ -4,12 +4,11 @@ namespace Wexample\SymfonyUser\Security\Authenticator;
 
 use Scheb\TwoFactorBundle\Security\Authentication\Token\TwoFactorTokenInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
-use Wexample\SymfonyUser\Service\PostLoginTargetService;
-use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
+use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -32,6 +31,7 @@ use Wexample\SymfonyUser\Controller\Pages\SecurityController;
 use Wexample\SymfonyUser\Controller\Pages\TwoFactorController;
 use Wexample\SymfonyUser\Form\LoginForm;
 use Wexample\SymfonyUser\Service\FormProcessor\LoginFormProcessor;
+use Wexample\SymfonyUser\Service\PostLoginTargetService;
 
 /**
  * Logs in from LoginForm, wherever the form is shown: its submission goes

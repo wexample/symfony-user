@@ -3,9 +3,9 @@
 namespace Wexample\SymfonyUser\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Wexample\SymfonyHelpers\DependencyInjection\AbstractWexampleSymfonyExtension;
 use Wexample\SymfonyUser\Interface\AccountAdministrationGuardInterface;
 use Wexample\SymfonyUser\Interface\AccountGateInterface;
-use Wexample\SymfonyHelpers\DependencyInjection\AbstractWexampleSymfonyExtension;
 
 class WexampleSymfonyUserExtension extends AbstractWexampleSymfonyExtension
 {
