@@ -1,12 +1,13 @@
-{#- The account's own menu, opened from its initials: who is signed in — and,
-    when the application says it, as what (`role_label`) —, the application's
+{#- The account's own menu, opened from its initials: who is signed in at its
+    head — and, when the application says it, as what (`role_labels`, one line
+    each; `role_label` for a single one) —, the application's
     own entries (`items`), the authenticator app, the language, the
     application's closing entries (`items_end`: terms, policies), and leaving.
     Drawn by the design system's button_menu. -#}
 {%- set user = app.user -%}
 {%- set language_items = locale_menu_items() -%}
-{%- set heading = user.displayName ~ (role_label|default(null) ? ' · ' ~ role_label : '') -%}
-{%- set entries = [{ separator: true, label: heading }]
+{%- set roles = role_labels|default(role_label|default(null) ? [role_label] : []) -%}
+{%- set entries = [{ heading: user.displayName, lines: roles }]
     |merge(items|default([]))
     |merge([{ icon: 'ph:bold/shield-check', label: 'WexampleSymfonyUserBundle.common.menu::authenticator' | trans, href: path('user_totp_index') }]) -%}
 {%- if language_items|length > 1 -%}
