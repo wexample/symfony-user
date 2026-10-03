@@ -37,8 +37,7 @@
         apart and loud, so nobody takes it for part of the product. -#}
     {%- set mailbox = method == 'email_code' ? mailbox_url(email) : null -%}
     {%- if mailbox -%}
-        {{ message_warning('@page::dev_mailbox.title', '@page::dev_mailbox.body', {
-            icon: 'ph:bold/code',
+        {{ message_dev('@page::dev_mailbox.title', '@page::dev_mailbox.body', {
             action: { icon: 'ph:bold/envelope-simple', label: '@page::action.mailbox', href: mailbox, new_window: true },
         }) }}
     {%- endif -%}

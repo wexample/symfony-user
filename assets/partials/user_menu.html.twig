@@ -22,8 +22,8 @@
 {%- set mailbox = mailbox_url() -%}
 {%- if mailbox -%}
     {%- set entries = entries
-        |merge([{ separator: true, label: 'WexampleSymfonyUserBundle.common.menu::development' | trans }])
-        |merge([{ icon: 'ph:bold/envelope-simple', label: 'WexampleSymfonyUserBundle.common.menu::mailbox' | trans, href: mailbox, new_window: true }]) -%}
+        |merge([{ separator: true, label: 'WexampleSymfonyUserBundle.common.menu::development' | trans, tone: 'dev' }])
+        |merge([{ icon: 'ph:bold/envelope-simple', label: 'WexampleSymfonyUserBundle.common.menu::mailbox' | trans, href: mailbox, new_window: true, tone: 'dev' }]) -%}
 {%- endif -%}
 {%- if items_end|default([]) is not empty -%}
     {%- set entries = entries|merge([{ separator: true }])|merge(items_end) -%}
