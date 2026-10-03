@@ -36,7 +36,7 @@ final class ImpersonationSearchController extends AbstractController
         return new JsonResponse([
             'targets' => array_map(
                 $impersonation->describe(...),
-                $impersonation->searchTargets($this->getUser(), (string) $request->query->get('q'))
+                $impersonation->searchTargets($impersonation->getActor(), (string) $request->query->get('q'))
             ),
         ]);
     }

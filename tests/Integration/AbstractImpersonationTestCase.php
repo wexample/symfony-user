@@ -5,6 +5,7 @@ namespace Wexample\SymfonyUser\Tests\Integration;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Wexample\SymfonyUser\Event\SecurityEvent;
 use Wexample\SymfonyUser\Service\ImpersonationService;
 use Wexample\SymfonyUser\Tests\Fixtures\App\Entity\User;
@@ -54,6 +55,11 @@ abstract class AbstractImpersonationTestCase extends WebTestCase
             SecurityEvent::class,
             fn (SecurityEvent $event) => $this->events[] = $event
         );
+    }
+
+    protected function getToken(): ?TokenInterface
+    {
+        return self::getContainer()->get('security.token_storage')->getToken();
     }
 
     protected function getService(): ImpersonationService

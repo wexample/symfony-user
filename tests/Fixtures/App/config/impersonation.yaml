@@ -14,6 +14,8 @@ parameters:
 wexample_symfony_user:
   impersonation:
     list_threshold: 3
+  post_login:
+    default_route: protected
 
 services:
   Wexample\SymfonyUser\Tests\Fixtures\App\Security\OutsiderAdministrationGuard:

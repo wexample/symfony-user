@@ -8,6 +8,15 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ProtectedController
 {
+    /**
+     * The home page, where a user without a role route lands.
+     */
+    #[Route(path: '/', name: 'home')]
+    public function home(): Response
+    {
+        return new Response('home');
+    }
+
     #[Route(path: '/protected', name: 'protected')]
     public function index(): Response
     {

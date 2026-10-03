@@ -42,19 +42,35 @@ class ImpersonationTest extends AbstractImpersonationTestCase
     {
         $this->login('manager');
 
+        // The switch happens where the account lands once signed in.
         $payload = $this->chooseAccount('support-a@example.com');
         $this->assertTrue($payload['ok']);
-        $this->assertSame('/account/impersonate?_switch_user=support-a@example.com', $payload['action']['url']);
+        $this->assertSame('/protected?_switch_user=support-a%40example.com', $payload['action']['url']);
 
         $this->client->request('GET', $payload['action']['url']);
-        $this->assertResponseRedirects('/account/impersonate');
-        $this->assertSame('support-a@example.com', self::getContainer()->get('security.token_storage')->getToken()->getUserIdentifier());
-
-        // Now the page tells the way back.
-        $this->client->request('GET', '/account/impersonate');
-        $this->assertResponseIsSuccessful();
-        $this->assertStringContainsString('_switch_user=_exit', $this->client->getResponse()->getContent());
+        $this->assertResponseRedirects('/protected');
+        $this->assertSame('support-a@example.com', $this->getToken()->getUserIdentifier());
         $this->assertContains('account.impersonation_started', $this->types());
+    }
+
+    public function testFromOneImpersonationToTheNextWithTheOriginalRights(): void
+    {
+        $this->login('manager');
+        $this->client->request('GET', $this->chooseAccount('support-a@example.com')['action']['url']);
+
+        // Support cannot impersonate; the manager behind them chooses.
+        $payload = $this->chooseAccount('support-b@example.com');
+        $this->assertTrue($payload['ok']);
+        $this->client->request('GET', $payload['action']['url']);
+
+        $this->assertSame('support-b@example.com', $this->getToken()->getUserIdentifier());
+        $this->assertSame('manager@example.com', $this->getToken()->getOriginalToken()->getUserIdentifier());
+
+        // Still the manager's rule: the owner stays out of reach.
+        $this->assertFalse($this->chooseAccount('owner@example.com')['ok']);
+
+        $this->client->request('GET', '/protected?_switch_user=_exit');
+        $this->assertSame('manager@example.com', $this->getToken()->getUserIdentifier());
     }
 
     public function testASwitchNotChosenThroughTheFormIsRefused(): void

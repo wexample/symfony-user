@@ -11,6 +11,9 @@ use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\RateLimiter\Storage\CacheStorage;
+use Symfony\Component\Security\Core\Authentication\Token\SwitchUserToken;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Wexample\SymfonyHelpers\Helper\RoleHelper;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Interface\AccountAdministrationGuardInterface;
@@ -54,6 +57,7 @@ class ImpersonationService
      */
     public function __construct(
         private readonly Security $security,
+        private readonly AccessDecisionManagerInterface $accessDecisionManager,
         private readonly RequestStack $requestStack,
         private readonly EntityManagerInterface $entityManager,
         private readonly AssignableRolesService $assignableRoles,
@@ -93,10 +97,30 @@ class ImpersonationService
     public function canImpersonate(): bool
     {
         $config = $this->getSwitchUserConfig();
+        $token = $this->getActorToken();
 
         return $config !== null
-            && $this->security->getUser() instanceof AbstractUser
-            && $this->security->isGranted($config['role']);
+            && $token?->getUser() instanceof AbstractUser
+            && $this->accessDecisionManager->decide($token, [$config['role']]);
+    }
+
+    /**
+     * Who impersonates: the signed-in user, or — while impersonating — the
+     * one behind. Symfony switches from an impersonation by leaving it first,
+     * so the rights are always the original account's.
+     */
+    public function getActor(): ?AbstractUser
+    {
+        $user = $this->getActorToken()?->getUser();
+
+        return $user instanceof AbstractUser ? $user : null;
+    }
+
+    private function getActorToken(): ?TokenInterface
+    {
+        $token = $this->security->getToken();
+
+        return $token instanceof SwitchUserToken ? $token->getOriginalToken() : $token;
     }
 
     /**

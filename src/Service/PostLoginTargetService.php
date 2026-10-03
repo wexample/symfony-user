@@ -60,7 +60,17 @@ class PostLoginTargetService
 
     public function getRoleUrl(Request $request, TokenInterface $token): string
     {
-        $held = $this->roleHierarchy->getReachableRoleNames($token->getRoleNames());
+        return $this->getRolesUrl($request, $token->getRoleNames());
+    }
+
+    /**
+     * Where an account holding $roles lands: the impersonation lands there too.
+     *
+     * @param list<string> $roles
+     */
+    public function getRolesUrl(Request $request, array $roles): string
+    {
+        $held = $this->roleHierarchy->getReachableRoleNames($roles);
 
         foreach ($this->routes as $role => $route) {
             if (in_array($role, $held, true)) {
