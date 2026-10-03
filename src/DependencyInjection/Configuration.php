@@ -53,7 +53,7 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->enumNode('targets')
-                            ->info('administered: the accounts whose roles the actor administers (the hierarchy, or `administration.manages`); any: every account. Never oneself, a disabled or a locked account; the AccountAdministrationGuardInterface of the application are asked too.')
+                            ->info('administered: the accounts whose roles the actor administers (the hierarchy, or `administration.manages`); any: every account, a development setting. Never oneself, a disabled or a locked account; with administered, the AccountAdministrationGuardInterface of the application are asked too.')
                             ->values(['administered', 'any'])
                             ->defaultValue('administered')
                         ->end()

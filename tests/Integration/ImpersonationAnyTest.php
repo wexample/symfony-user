@@ -5,9 +5,8 @@ namespace Wexample\SymfonyUser\Tests\Integration;
 use Wexample\SymfonyUser\Tests\Fixtures\App\ImpersonationAnyAppKernel;
 
 /**
- * `targets: any`, as in development: every account, above the actor
- * included — never oneself, a disabled one, or one an application guard
- * keeps out.
+ * `targets: any`, as in development: every account, above the actor or out
+ * of the application's scope included — never oneself or a disabled one.
  */
 class ImpersonationAnyTest extends AbstractImpersonationTestCase
 {
@@ -19,8 +18,9 @@ class ImpersonationAnyTest extends AbstractImpersonationTestCase
     public function testEveryActiveAccountIsATarget(): void
     {
         $this->assertSame(
-            ['owner@example.com', 'support-a@example.com', 'support-b@example.com'],
-            $this->identifiers($this->getService()->listTargets($this->find('manager')))
+            ['outsider-support@example.com', 'owner@example.com', 'support-a@example.com', 'support-b@example.com'],
+            // Four, past the threshold of three: found by a search.
+            $this->identifiers($this->getService()->searchTargets($this->find('manager'), 'example'))
         );
 
         $this->login('manager');

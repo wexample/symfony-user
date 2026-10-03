@@ -112,8 +112,12 @@ class ImpersonationService
             return self::REFUSAL_INACTIVE;
         }
 
-        if ($this->targets === self::TARGETS_ADMINISTERED
-            && ! $this->assignableRoles->canAssign($actor, array_values(array_diff($target->getRoles(), [RoleHelper::ROLE_USER])))) {
+        // Any account: a development setting, where every account is walked.
+        if ($this->targets === self::TARGETS_ANY) {
+            return null;
+        }
+
+        if (! $this->assignableRoles->canAssign($actor, array_values(array_diff($target->getRoles(), [RoleHelper::ROLE_USER])))) {
             return self::REFUSAL_NOT_ADMINISTERED;
         }
 
