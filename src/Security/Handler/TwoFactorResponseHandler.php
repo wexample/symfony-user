@@ -17,8 +17,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerI
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
 use Wexample\SymfonyForms\Service\FormProcessor\FormResponsePayloadBuilder;
 use Wexample\SymfonyHelpers\Helper\RequestHelper;
-use Wexample\SymfonyUser\Controller\Pages\TwoFactorController;
 use Wexample\SymfonyUser\Enum\TwoFactorCodeFailure;
+use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Service\FormProcessor\TwoFactorCodeFormProcessor;
 use Wexample\SymfonyUser\Service\PostLoginTargetService;
 use Wexample\SymfonyUser\Service\TwoFactorCodeService;
@@ -62,7 +62,7 @@ class TwoFactorResponseHandler implements
     {
         if (! RequestHelper::isJsonRequest($request)) {
             return new RedirectResponse(
-                $this->urlGenerator->generate(TwoFactorController::ROUTE_FORM, ['failed' => 1])
+                $this->urlGenerator->generate(UserRoute::TWO_FACTOR, ['failed' => 1])
             );
         }
 
@@ -87,7 +87,7 @@ class TwoFactorResponseHandler implements
 
     public function onAuthenticationRequired(Request $request, TokenInterface $token): Response
     {
-        $url = $this->urlGenerator->generate(TwoFactorController::ROUTE_FORM);
+        $url = $this->urlGenerator->generate(UserRoute::TWO_FACTOR);
 
         if (! RequestHelper::isJsonRequest($request)) {
             return new RedirectResponse($url);

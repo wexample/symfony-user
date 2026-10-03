@@ -12,9 +12,9 @@ use Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
-use Wexample\SymfonyUser\Controller\Pages\SecurityController;
 use Wexample\SymfonyUser\Enum\PasswordResetMode;
 use Wexample\SymfonyUser\EventSubscriber\PasswordResetProofSubscriber;
+use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Service\PasswordResetService;
 use Wexample\SymfonyUser\Tests\Fixtures\App\Entity\User;
 
@@ -39,7 +39,7 @@ class PasswordResetProofSubscriberTest extends TestCase
         });
 
         // The magic link, its second factor still to come: nothing yet.
-        $subscriber->onLoginSuccess($this->event($user, $session, SecurityController::ROUTE_LOGIN_LINK, $this->createStub(TwoFactorTokenInterface::class)));
+        $subscriber->onLoginSuccess($this->event($user, $session, UserRoute::LOGIN_LINK, $this->createStub(TwoFactorTokenInterface::class)));
         $this->assertSame(0, $granted);
 
         // The code checked: now.

@@ -9,8 +9,8 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
-use Wexample\SymfonyUser\Controller\Pages\TotpController;
 use Wexample\SymfonyUser\Entity\AbstractUser;
+use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Service\TotpService;
 use Wexample\SymfonyUser\Service\TwoFactorPolicyService;
 
@@ -51,6 +51,6 @@ class TotpDisableFormProcessor extends AbstractFormProcessor
             $this->totpService->disable($user);
         }
 
-        $this->redirectToRoute(TotpController::ROUTE_INDEX);
+        $this->redirectToRoute(UserRoute::TOTP);
     }
 }

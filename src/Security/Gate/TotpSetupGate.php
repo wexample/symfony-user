@@ -6,10 +6,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Wexample\Helpers\Helper\ClassHelper;
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
-use Wexample\SymfonyUser\Controller\Pages\TotpController;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Form\TotpEnableForm;
 use Wexample\SymfonyUser\Interface\AccountGateInterface;
+use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Service\TwoFactorPolicyService;
 
 /**
@@ -44,6 +44,6 @@ class TotpSetupGate implements AccountGateInterface
 
     public function getRoute(): string
     {
-        return TotpController::ROUTE_INDEX;
+        return UserRoute::TOTP;
     }
 }

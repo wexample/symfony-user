@@ -8,8 +8,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wexample\SymfonyTunnels\Class\TunnelCursor;
 use Wexample\SymfonyTunnels\Service\Step\AbstractTunnelStep;
-use Wexample\SymfonyUser\Controller\Pages\TotpController;
 use Wexample\SymfonyUser\Entity\AbstractUser;
+use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Service\TotpService;
 use Wexample\SymfonyUser\Service\TwoFactorPolicyService;
 
@@ -48,7 +48,7 @@ class TotpScanStep extends AbstractTunnelStep
         }
 
         if ($this->getUser()->isTotpAuthenticationEnabled()) {
-            return new RedirectResponse($this->urlGenerator->generate(TotpController::ROUTE_INDEX));
+            return new RedirectResponse($this->urlGenerator->generate(UserRoute::TOTP));
         }
 
         return null;

@@ -22,11 +22,11 @@ use Symfony\Component\Security\Http\LoginLink\Exception\InvalidLoginLinkAuthenti
 use Throwable;
 use Wexample\Helpers\Helper\ClassHelper;
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
-use Wexample\SymfonyUser\Controller\Pages\SecurityController;
 use Wexample\SymfonyUser\Enum\SecurityEventType;
 use Wexample\SymfonyUser\Form\LoginForm;
 use Wexample\SymfonyUser\Form\SetPasswordForm;
 use Wexample\SymfonyUser\Form\TwoFactorCodeForm;
+use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Security\TwoFactor\EmailCodeTwoFactorProvider;
 use Wexample\SymfonyUser\Security\UserChecker;
 use Wexample\SymfonyUser\Service\SecurityJournalService;
@@ -145,7 +145,7 @@ class SecurityJournalSubscriber implements EventSubscriberInterface
     {
         $route = $request->attributes->get('_route');
 
-        if ($route === SecurityController::ROUTE_LOGIN_LINK) {
+        if ($route === UserRoute::LOGIN_LINK) {
             return self::METHOD_MAGIC_LINK;
         }
 

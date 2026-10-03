@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-use Wexample\SymfonyUser\Controller\Pages\TwoFactorController;
+use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Service\MagicLinkService;
 use Wexample\SymfonyUser\Service\PostLoginTargetService;
 
@@ -40,7 +40,7 @@ class LoginLinkSuccessHandler implements AuthenticationSuccessHandlerInterface
         }
 
         if ($token instanceof TwoFactorTokenInterface) {
-            return new RedirectResponse($this->urlGenerator->generate(TwoFactorController::ROUTE_FORM));
+            return new RedirectResponse($this->urlGenerator->generate(UserRoute::TWO_FACTOR));
         }
 
         return new RedirectResponse($this->postLoginTarget->getTargetUrl($request, $token, $firewallName));

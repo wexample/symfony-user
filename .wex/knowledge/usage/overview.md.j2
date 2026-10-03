@@ -1,18 +1,17 @@
-## Pages and routes
+## Routes
+
+`Routing\UserRoute` names every route the package sends users to. Its endpoints:
 
 | Route | Path | What |
 |---|---|---|
-| `user_security_login` | `/login` | password form, magic link form, link to the reset |
-| `user_security_logout` | `/logout` | handled by the firewall |
 | `user_security_login_link` | `/login/link` | check route of the magic links |
-| `user_security_two_factor` | `/login/2fa` | code form, resend, cancel |
-| `user_password_forgot` | `/password/forgot` | reset request |
+| `user_security_logout` | `/logout` | handled by the firewall |
 | `user_password_reset` | `/password/reset` | target of the reset mail |
-| `user_password_new` | `/password/new` | new password, once the reset is proven |
-| `user_totp_index` | `/account/authenticator` | set the authenticator app up, or turn it off |
-| `user_totp_backup_codes` | `/account/authenticator/backup-codes` | the new backup codes, shown once |
+| `user_password_activate` | `/password/activate` | target of the activation mail |
+| `user_security_two_factor_resend` | `/login/2fa/resend` | sends the code again (POST) |
+| `user_totp_regenerate` | `/account/authenticator/backup-codes/regenerate` | new backup codes (POST) |
 
-Templates live under the bundle `assets/` and are overridden like any `symfony-loader` template.
+The pages — `LOGIN`, `TWO_FACTOR`, `PASSWORD_FORGOT`, `PASSWORD_NEW`, `PASSWORD_ACTIVATION_INVALID`, `TERMS`, `TOTP`, `TOTP_BACKUP_CODES`, `TOTP_SETUP` — are `symfony-user-ds`'s. The texts of the forms and the mails stay here, under `assets/forms/` and `assets/mails/`: a form reads its labels and errors from the domain of its class.
 
 ## Showing the login form elsewhere
 
@@ -29,7 +28,7 @@ return $this->renderPage('login_step', [
 ```
 
 {% raw %}```twig
-{{ form_load(render_pass, login_form, '@WexampleSymfonyUserBundle/forms/login_form.html.twig') }}
+{{ form_load(render_pass, login_form, '@WexampleSymfonyUserDsBundle/forms/login_form.html.twig') }}
 ```{% endraw %}
 
 An ajax call reaching a protected URL gets a `401` JSON payload whose action redirects to `/login`, instead of an HTML redirect.
@@ -61,7 +60,7 @@ class CheckoutUserMailStep extends AbstractUserMailStep
 }
 ```
 
-The later steps read the account with `getTunnelUser($cursor)`. The tunnel templates of the application include the bodies the package ships: `@WexampleSymfonyUserBundle/tunnels/partials/user_mail.html.twig` and `login.html.twig`.
+The later steps read the account with `getTunnelUser($cursor)`. The tunnel templates of the application include the bodies `symfony-user-ds` ships: `@WexampleSymfonyUserDsBundle/tunnels/partials/user_mail.html.twig` and `login.html.twig`.
 
 ## Magic links in application mails
 

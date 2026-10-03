@@ -47,7 +47,8 @@
     "wexample/symfony-testing": ">=2.0.0",
     "symfony/browser-kit": "^7.4",
     "symfony/css-selector": "^7.4",
-    "symfony/monolog-bundle": "^3.10"
+    "symfony/monolog-bundle": "^3.10",
+    "wexample/symfony-user-ds": "*"
   },
   "repositories": [
     {

@@ -15,8 +15,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
 use Wexample\SymfonyHelpers\Helper\RequestHelper;
-use Wexample\SymfonyUser\Controller\Pages\SecurityController;
 use Wexample\SymfonyUser\Enum\SecurityEventType;
+use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Service\SecurityJournalService;
 
 /**
@@ -89,7 +89,7 @@ class TwoFactorPendingSubscriber implements EventSubscriberInterface
         $this->tokenStorage->setToken(null);
         $session->invalidate();
 
-        $url = $this->urlGenerator->generate(SecurityController::ROUTE_LOGIN);
+        $url = $this->urlGenerator->generate(UserRoute::LOGIN);
 
         $event->setResponse(
             RequestHelper::isJsonRequest($request)

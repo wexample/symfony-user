@@ -14,6 +14,7 @@ use Wexample\SymfonyTesting\Tests\Fixtures\AbstractFixtureKernel;
 use Wexample\SymfonyTranslations\WexampleSymfonyTranslationsBundle;
 use Wexample\SymfonyTunnels\WexampleSymfonyTunnelsBundle;
 use Wexample\SymfonyUser\WexampleSymfonyUserBundle;
+use Wexample\SymfonyUserDs\WexampleSymfonyUserDsBundle;
 
 class AppKernel extends AbstractFixtureKernel
 {
@@ -35,6 +36,8 @@ class AppKernel extends AbstractFixtureKernel
             new WexampleSymfonyFormsBundle(),
             new WexampleSymfonyTunnelsBundle(),
             new WexampleSymfonyUserBundle(),
+            // The screens, so the walks reach real pages.
+            new WexampleSymfonyUserDsBundle(),
         ];
     }
 
@@ -50,6 +53,7 @@ class AppKernel extends AbstractFixtureKernel
         $routes->import('@WexampleSymfonyFormsBundle/Resources/config/routes.yaml');
         $routes->import('@WexampleSymfonyTunnelsBundle/Resources/config/routes.yaml');
         $routes->import(__DIR__ . '/../../../src/Controller/', 'attribute');
+        $routes->import(dirname((new \ReflectionClass(WexampleSymfonyUserDsBundle::class))->getFileName()) . '/Controller/', 'attribute');
         $routes->import(__DIR__ . '/Controller/', 'attribute');
     }
 }

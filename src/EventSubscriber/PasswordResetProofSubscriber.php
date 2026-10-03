@@ -5,9 +5,9 @@ namespace Wexample\SymfonyUser\EventSubscriber;
 use Scheb\TwoFactorBundle\Security\Authentication\Token\TwoFactorTokenInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
-use Wexample\SymfonyUser\Controller\Pages\SecurityController;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Enum\PasswordResetMode;
+use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Service\PasswordResetService;
 
 /**
@@ -46,7 +46,7 @@ class PasswordResetProofSubscriber implements EventSubscriberInterface
 
         // The route rather than the authenticator class: in debug, the
         // authenticator reaches the event wrapped in a traceable one.
-        if ($event->getRequest()->attributes->get('_route') === SecurityController::ROUTE_LOGIN_LINK) {
+        if ($event->getRequest()->attributes->get('_route') === UserRoute::LOGIN_LINK) {
             if ($secondFactorPending) {
                 $session->set(self::SESSION_PENDING, $user->getUserIdentifier());
 

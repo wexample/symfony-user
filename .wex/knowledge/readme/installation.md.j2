@@ -12,7 +12,9 @@ Wexample\SymfonyUser\WexampleSymfonyUserBundle::class => ['all' => true],
 
 `WexampleSymfonySecurityBundle` masks the package's secrets in the logs: without it, the container refuses to build.
 
-The scheb recipe also adds `config/routes/scheb_2fa.yaml`: delete it, the code form is served by this package on `/login/2fa`.
+The screens — login, second factor, password, terms, authenticator app — are `symfony-user-ds`'s: install it with `Wexample\SymfonyUserDs\WexampleSymfonyUserDsBundle`. An application drawing its own serves pages under the names of `Routing\UserRoute`: the package redirects to them. Its own endpoints — `/login/link`, `/logout`, the reset and activation links, the code resend, new backup codes — stay here.
+
+The scheb recipe also adds `config/routes/scheb_2fa.yaml`: delete it, the code form is served on `/login/2fa`.
 
 ### The user entity
 

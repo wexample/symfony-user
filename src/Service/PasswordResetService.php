@@ -12,10 +12,10 @@ use Symfony\Component\Security\Core\Signature\Exception\ExpiredSignatureExceptio
 use Symfony\Component\Security\Core\Signature\Exception\InvalidSignatureException;
 use Symfony\Component\Security\Core\Signature\SignatureHasher;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Wexample\SymfonyUser\Controller\Pages\PasswordController;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Enum\PasswordResetMode;
 use Wexample\SymfonyUser\Enum\SecurityMessageType;
+use Wexample\SymfonyUser\Routing\UserRoute;
 
 /**
  * Lets a user who forgot their password choose a new one, and the holder of
@@ -75,7 +75,7 @@ class PasswordResetService
             // The link signs in, then lands where the new password is chosen.
             return $this->magicLinkService->sendLink(
                 $user,
-                $this->urlGenerator->generate(PasswordController::ROUTE_NEW)
+                $this->urlGenerator->generate(UserRoute::PASSWORD_NEW)
             );
         }
 
@@ -103,7 +103,7 @@ class PasswordResetService
      */
     public function createResetLink(AbstractUser $user): array
     {
-        return $this->createSignedLink($user, PasswordController::ROUTE_RESET, self::LINK_LIFETIME);
+        return $this->createSignedLink($user, UserRoute::PASSWORD_RESET, self::LINK_LIFETIME);
     }
 
     /**
@@ -111,7 +111,7 @@ class PasswordResetService
      */
     public function createActivationLink(AbstractUser $user, ?int $lifetime = null): array
     {
-        return $this->createSignedLink($user, PasswordController::ROUTE_ACTIVATE, $lifetime ?? $this->activationLifetime);
+        return $this->createSignedLink($user, UserRoute::PASSWORD_ACTIVATE, $lifetime ?? $this->activationLifetime);
     }
 
     /**

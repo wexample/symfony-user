@@ -7,10 +7,10 @@ use Symfony\Component\Security\Core\Authentication\Token\SwitchUserToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Wexample\Helpers\Helper\ClassHelper;
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
-use Wexample\SymfonyUser\Controller\Pages\TermsController;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Form\TermsAcceptForm;
 use Wexample\SymfonyUser\Interface\AccountGateInterface;
+use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Service\TermsService;
 
 /**
@@ -49,6 +49,6 @@ class TermsGate implements AccountGateInterface
 
     public function getRoute(): string
     {
-        return TermsController::ROUTE_INDEX;
+        return UserRoute::TERMS;
     }
 }

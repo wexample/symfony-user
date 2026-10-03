@@ -55,7 +55,7 @@ class AccountActivationTest extends WebTestCase
         // symfony-loader declares its Twig globals at the first page it
         // renders: a mail rendered before it, in the same process, would
         // make every page fail. A page first.
-        $this->client->request('GET', '/password/activate');
+        $this->client->request('GET', '/password/activation-invalid');
 
         $this->teamAdmin = (new User())
             ->setEmail('team-admin@example.com')
@@ -96,7 +96,7 @@ class AccountActivationTest extends WebTestCase
         // Activated: the link is dead.
         $this->client->request('GET', '/logout');
         $this->client->request('GET', $link);
-        $this->assertResponseIsSuccessful();
+        $this->assertResponseRedirects('/password/activation-invalid');
         $this->client->request('GET', '/password/new');
         $this->assertResponseRedirects('/password/forgot');
 
@@ -112,6 +112,8 @@ class AccountActivationTest extends WebTestCase
         [$expired] = self::getContainer()->get(PasswordResetService::class)->createActivationLink($member, -60);
 
         $this->client->request('GET', $expired);
+        $this->assertResponseRedirects('/password/activation-invalid');
+        $this->client->followRedirect();
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('.page');
 
@@ -151,7 +153,7 @@ class AccountActivationTest extends WebTestCase
 
         // The password set killed the activation links.
         $this->client->request('GET', $firstLink);
-        $this->assertResponseIsSuccessful();
+        $this->assertResponseRedirects('/password/activation-invalid');
         $this->client->request('GET', '/password/new');
         $this->assertResponseRedirects('/password/forgot');
 

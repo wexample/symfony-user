@@ -1,8 +1,0 @@
-{%- extends '@WexampleSymfonyLoaderBundle/bases/form.html.twig' -%}
-
-{#- The enabling form inside the setup tunnel: the tunnel's own next button
-    submits it, from the foot of the step. -#}
-{% block form_body %}
-    {{ form_row(form.code) }}
-    {%- do form.submit.setRendered() -%}
-{% endblock %}

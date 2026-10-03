@@ -27,9 +27,8 @@ use Wexample\Helpers\Helper\ClassHelper;
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
 use Wexample\SymfonyForms\Service\FormProcessor\FormResponsePayloadBuilder;
 use Wexample\SymfonyHelpers\Helper\RequestHelper;
-use Wexample\SymfonyUser\Controller\Pages\SecurityController;
-use Wexample\SymfonyUser\Controller\Pages\TwoFactorController;
 use Wexample\SymfonyUser\Form\LoginForm;
+use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Service\FormProcessor\LoginFormProcessor;
 use Wexample\SymfonyUser\Service\PostLoginTargetService;
 
@@ -158,7 +157,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         // The password was right, the second factor is still to come: the
         // target path waits in session for the code to be checked.
         if ($token instanceof TwoFactorTokenInterface) {
-            $url = $this->urlGenerator->generate(TwoFactorController::ROUTE_FORM);
+            $url = $this->urlGenerator->generate(UserRoute::TWO_FACTOR);
         } else {
             $url = $this->postLoginTarget->getTargetUrl($request, $token, $firewallName);
         }
@@ -221,7 +220,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     protected function getLoginUrl(Request $request): string
     {
-        return $this->urlGenerator->generate(SecurityController::ROUTE_LOGIN);
+        return $this->urlGenerator->generate(UserRoute::LOGIN);
     }
 
     /**

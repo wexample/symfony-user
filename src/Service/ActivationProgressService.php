@@ -22,7 +22,7 @@ class ActivationProgressService
 
     private const string SESSION_KEY = 'wexample_user_activation';
 
-    private const string TRANSLATION_DOMAIN = 'WexampleSymfonyUserBundle.pages.password.new::activation.steps.';
+    private const string TRANSLATION_DOMAIN = 'WexampleSymfonyUserDsBundle.pages.password.new::activation.steps.';
 
     public function __construct(
         private readonly RequestStack $requestStack,

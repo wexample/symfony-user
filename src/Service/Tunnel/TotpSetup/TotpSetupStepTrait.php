@@ -10,7 +10,7 @@ use Wexample\SymfonyTunnels\Class\TunnelCursor;
  */
 trait TotpSetupStepTrait
 {
-    public const string TRANSLATION_DOMAIN = 'WexampleSymfonyUserBundle.pages.totp.index::';
+    public const string TRANSLATION_DOMAIN = 'WexampleSymfonyUserDsBundle.pages.totp.index::';
 
     public function buildLabel(TunnelCursor $cursor): string
     {

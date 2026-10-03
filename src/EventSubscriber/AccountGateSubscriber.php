@@ -14,9 +14,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
 use Wexample\SymfonyHelpers\Helper\RequestHelper;
-use Wexample\SymfonyUser\Controller\Pages\SecurityController;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Interface\AccountGateInterface;
+use Wexample\SymfonyUser\Routing\UserRoute;
 
 /**
  * Holds a signed-in user on the page of the first gate still blocking them,
@@ -90,6 +90,6 @@ class AccountGateSubscriber implements EventSubscriberInterface
      */
     private function isAlwaysAllowed(string $route): bool
     {
-        return $route === SecurityController::ROUTE_LOGOUT || str_starts_with($route, '_');
+        return $route === UserRoute::LOGOUT || str_starts_with($route, '_');
     }
 }

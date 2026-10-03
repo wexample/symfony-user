@@ -9,9 +9,9 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
-use Wexample\SymfonyUser\Controller\Pages\TotpController;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Form\TotpEnableForm;
+use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Service\TotpService;
 
 class TotpEnableFormProcessor extends AbstractFormProcessor
@@ -47,6 +47,6 @@ class TotpEnableFormProcessor extends AbstractFormProcessor
     public function onValid(FormInterface $form)
     {
         // The backup codes were just made: shown once, on their own page.
-        $this->redirectToRoute(TotpController::ROUTE_BACKUP_CODES);
+        $this->redirectToRoute(UserRoute::TOTP_BACKUP_CODES);
     }
 }
