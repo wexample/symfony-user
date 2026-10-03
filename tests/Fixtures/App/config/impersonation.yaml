@@ -1,0 +1,20 @@
+# symfony-testing's TestKernel sets this parameter itself, over
+# `security.role_hierarchy`: it is set again here. The security key is still
+# needed, or Symfony registers no voter reading the hierarchy. Managers may
+# impersonate.
+security:
+  role_hierarchy:
+    ROLE_MANAGER: [ROLE_SUPPORT, ROLE_ALLOWED_TO_SWITCH]
+
+parameters:
+  security.role_hierarchy.roles:
+    ROLE_OWNER: [ROLE_MANAGER]
+    ROLE_MANAGER: [ROLE_SUPPORT, ROLE_ALLOWED_TO_SWITCH]
+
+wexample_symfony_user:
+  impersonation:
+    list_threshold: 3
+
+services:
+  Wexample\SymfonyUser\Tests\Fixtures\App\Security\OutsiderAdministrationGuard:
+    autoconfigure: true

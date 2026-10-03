@@ -145,7 +145,9 @@ class TermsGateTest extends WebTestCase
         $this->entityManager->flush();
 
         $this->post('form-login_form', 'login_form', ['identifier' => 'admin', 'password' => 'secret']);
-        $this->client->request('GET', '/protected?_switch_user=jane@example.com');
+        // Through the impersonation form: a bare switch link is refused.
+        $switch = $this->post('form-impersonate_form', 'impersonate_form', ['account' => 'jane@example.com']);
+        $this->client->request('GET', $switch['action']['url']);
         $this->client->request('GET', '/protected');
         $this->assertResponseIsSuccessful();
 

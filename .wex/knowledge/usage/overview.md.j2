@@ -129,6 +129,24 @@ The service refuses:
 
 Each change is journaled — `account.created`, `account.activation_sent`, `account.activated`, `account.password_mail_sent`, `account.deactivated`, `.reactivated`, `.locked`, `.unlocked`, `account.roles_changed` with `roles_before` / `roles_after` —, each refusal as `account.change_refused` with its code; `extra.actor_id` names the actor.
 
+## Impersonation
+
+Who may impersonate is the firewall's: its `switch_user` key, and the role it names. Without the key, nobody can, the impersonation page and search answer 404 — declare it under `when@dev` alone for an application impersonating in development only:
+
+```yaml
+when@dev:
+    security:
+        firewalls:
+            main:
+                switch_user: { role: IS_AUTHENTICATED_FULLY }   # everyone, in development
+```
+
+Who may be impersonated is `impersonation.targets`: `administered`, the accounts whose roles the actor administers — the hierarchy, or `administration.manages`, read at each request —, or `any`. Never oneself, a disabled or a locked account; an `AccountAdministrationGuardInterface` of the application is asked too (a scope). `ImpersonationService` applies the rule to the list, the search and — through `ImpersonationGuardSubscriber`, on `SwitchUserEvent` — the switch itself: an account absent from the list cannot be reached by its URL. A voter could not refuse it: with the default strategy, the role voter's grant wins.
+
+A switch must come from `ImpersonateForm` (`require_intent`): a bare `?_switch_user=` link sent to an administrator switches nobody. A refusal is journaled as `access.denied`, the rule in `extra.reasons` (`impersonation=not_administered`, `no_intent`…).
+
+`GET /account/impersonate/search?q=` (`UserRoute::IMPERSONATE_SEARCH`) answers the accounts matching by email, username or name: 2 characters at least, 20 results, 30 searches a minute per actor. The page is symfony-user-ds's.
+
 ## After signing in
 
 A user lands on the page they were sent away from, when `access_control` lets them in; otherwise on the route of the first role of `post_login.routes` they hold, through the hierarchy; otherwise on `post_login.default_route`, or the home page. Every way in ends there — password, second factor, reset, activation, terms accepted, magic link (`LoginLinkSuccessHandler`, the `success_handler` of `login_link`). A page refused by its controller rather than by `access_control` is not foreseen: it answers 403.

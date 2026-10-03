@@ -21,6 +21,9 @@ class WexampleSymfonyUserExtension extends AbstractWexampleSymfonyExtension
         $container->setParameter('wexample_symfony_user.remember_locale', $config['remember_locale']);
         $container->setParameter('wexample_symfony_user.post_login.routes', $config['post_login']['routes']);
         $container->setParameter('wexample_symfony_user.post_login.default_route', $config['post_login']['default_route']);
+        $container->setParameter('wexample_symfony_user.impersonation.targets', $config['impersonation']['targets']);
+        $container->setParameter('wexample_symfony_user.impersonation.list_threshold', $config['impersonation']['list_threshold']);
+        $container->setParameter('wexample_symfony_user.impersonation.require_intent', $config['impersonation']['require_intent']);
         $container->setParameter('wexample_symfony_user.activation.link_lifetime', $config['activation']['link_lifetime']);
         $container->setParameter('wexample_symfony_user.request_limit.per_identifier', $config['request_limit']['per_identifier']);
         $container->setParameter('wexample_symfony_user.request_limit.per_ip', $config['request_limit']['per_ip']);

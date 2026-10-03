@@ -1,0 +1,10 @@
+en:
+  field:
+    account:
+      label: Account
+
+  action:
+    submit: Impersonate
+
+  error:
+    not_allowed: This account cannot be impersonated.

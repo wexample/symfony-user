@@ -149,6 +149,10 @@ wexample_symfony_user:
     magic_link_login: true         # false: no magic link form on the login page; MagicLinkService still sends the application's own links
     activation:
         link_lifetime: 604800      # seconds the link of an activation mail works
+    impersonation:
+        targets: administered      # or any: who may be impersonated; who may impersonate is the firewall's switch_user
+        list_threshold: 50         # up to this many, the page lists them all; above, it searches
+        require_intent: true       # a switch must come from the impersonation form, not a bare ?_switch_user= link
     post_login:
         routes: {}                 # ROLE_X: route, in order — where a user lands when the page they came from is not theirs to open
         default_route: ~           # for a user holding none of them; unset, the home page

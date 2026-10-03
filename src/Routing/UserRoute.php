@@ -16,6 +16,7 @@ final class UserRoute
     public const string PASSWORD_ACTIVATE = 'user_password_activate';
     public const string TWO_FACTOR_RESEND = 'user_security_two_factor_resend';
     public const string TOTP_REGENERATE = 'user_totp_regenerate';
+    public const string IMPERSONATE_SEARCH = 'user_impersonate_search';
 
     // Pages.
     public const string LOGIN = 'user_security_login';
@@ -27,6 +28,7 @@ final class UserRoute
     public const string TOTP = 'user_totp_index';
     public const string TOTP_BACKUP_CODES = 'user_totp_backup_codes';
     public const string TOTP_SETUP = 'user_totp_setup_index';
+    public const string IMPERSONATE = 'user_impersonate_index';
 
     /** The query parameter telling the forgot page it was reached by a dead link. */
     public const string PARAMETER_LINK = 'link';
