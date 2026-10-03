@@ -23,7 +23,7 @@
     {%- if mailbox -%}
         {{ message_warning('@page::dev_mailbox.title', '@page::dev_mailbox.body', {
             icon: 'ph:bold/code',
-            action: { icon: 'ph:bold/envelope-simple', label: '@page::action.mailbox', href: mailbox },
+            action: { icon: 'ph:bold/envelope-simple', label: '@page::action.mailbox', href: mailbox, new_window: true },
         }) }}
     {%- endif -%}
 {%- endblock -%}

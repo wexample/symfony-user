@@ -1,11 +1,15 @@
 en:
   label: My account
-  authenticator: Authenticator app
+  authenticator: Security
   language: Language
   logout: Sign out
+  development: Development
+  mailbox: Mailbox
 
 fr:
   label: Mon compte
-  authenticator: Application d'authentification
+  authenticator: Sécurité
   language: Langue
   logout: Se déconnecter
+  development: Développement
+  mailbox: Boîte mail
