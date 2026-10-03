@@ -1,0 +1,7 @@
+# The firewall lists the account picker: choosing an account signs in.
+security:
+  firewalls:
+    main:
+      custom_authenticators:
+        - Wexample\SymfonyUser\Security\Authenticator\LoginFormAuthenticator
+        - Wexample\SymfonyUser\Security\Authenticator\AccountPickerAuthenticator

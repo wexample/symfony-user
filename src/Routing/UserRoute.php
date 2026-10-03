@@ -29,6 +29,7 @@ final class UserRoute
     public const string TOTP_BACKUP_CODES = 'user_totp_backup_codes';
     public const string TOTP_SETUP = 'user_totp_setup_index';
     public const string IMPERSONATE = 'user_impersonate_index';
+    public const string ACCOUNT_PICKER = 'user_account_picker';
 
     /** The query parameter telling the forgot page it was reached by a dead link. */
     public const string PARAMETER_LINK = 'link';

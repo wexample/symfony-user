@@ -149,6 +149,21 @@ A switch must come from `ImpersonateForm` (`require_intent`): a bare `?_switch_u
 
 `GET /account/impersonate/search?q=` (`UserRoute::IMPERSONATE_SEARCH`) answers the accounts matching by email, username or name: 2 characters at least, 20 results, 30 searches a minute per actor. The page is symfony-user-ds's.
 
+## Account picker
+
+Signing in by choosing an account, with no password and no second factor: for an application whose users trust each other, or a demonstration. It is turned on by the firewall alone — no option:
+
+```yaml
+security:
+    firewalls:
+        main:
+            custom_authenticators:
+                - Wexample\SymfonyUser\Security\Authenticator\LoginFormAuthenticator
+                - Wexample\SymfonyUser\Security\Authenticator\AccountPickerAuthenticator
+```
+
+Without it, the page (`/login/accounts`, `UserRoute::ACCOUNT_PICKER`, symfony-user-ds) answers 404 and a crafted submission signs nobody in. Every active account can be chosen: all listed up to `impersonation.list_threshold`, searched above (30 searches a minute per IP). The session opens as an `AccountPickerToken`, a class scheb's `security_tokens` does not list, hence no second factor; the account gates still apply, and the journal records `login.succeeded` with the method `account_picker`. Whoever reaches the page signs in as anyone: list it only where that is the intent, or under `when@<env>` for one environment.
+
 ## After signing in
 
 A user lands on the page they were sent away from, when `access_control` lets them in; otherwise on the route of the first role of `post_login.routes` they hold, through the hierarchy; otherwise on `post_login.default_route`, or the home page. Every way in ends there — password, second factor, reset, activation, terms accepted, magic link (`LoginLinkSuccessHandler`, the `success_handler` of `login_link`). A page refused by its controller rather than by `access_control` is not foreseen: it answers 403.

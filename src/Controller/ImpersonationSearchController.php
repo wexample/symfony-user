@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Wexample\SymfonyUser\EventSubscriber\ImpersonationGuardSubscriber;
 use Wexample\SymfonyUser\Routing\UserRoute;
+use Wexample\SymfonyUser\Service\AccountDirectoryService;
 use Wexample\SymfonyUser\Service\ImpersonationService;
 
 /**
@@ -20,7 +21,7 @@ use Wexample\SymfonyUser\Service\ImpersonationService;
 final class ImpersonationSearchController extends AbstractController
 {
     #[Route(path: '/account/impersonate/search', name: UserRoute::IMPERSONATE_SEARCH, methods: [Request::METHOD_GET])]
-    public function search(Request $request, ImpersonationService $impersonation): JsonResponse
+    public function search(Request $request, ImpersonationService $impersonation, AccountDirectoryService $directory): JsonResponse
     {
         if (! $impersonation->getSwitchUserConfig()) {
             throw $this->createNotFoundException();
@@ -35,7 +36,7 @@ final class ImpersonationSearchController extends AbstractController
 
         return new JsonResponse([
             'targets' => array_map(
-                $impersonation->describe(...),
+                $directory->describe(...),
                 $impersonation->searchTargets($impersonation->getActor(), (string) $request->query->get('q'))
             ),
         ]);

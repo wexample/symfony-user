@@ -1,0 +1,11 @@
+en:
+  field:
+    account:
+      label: Account
+
+  action:
+    submit: Sign in
+
+  error:
+    not_allowed: This account cannot be signed in to.
+    invalid_csrf: The form has expired, reload the page and try again.

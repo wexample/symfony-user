@@ -23,6 +23,7 @@ use Throwable;
 use Wexample\Helpers\Helper\ClassHelper;
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
 use Wexample\SymfonyUser\Enum\SecurityEventType;
+use Wexample\SymfonyUser\Form\AccountPickerForm;
 use Wexample\SymfonyUser\Form\LoginForm;
 use Wexample\SymfonyUser\Form\SetPasswordForm;
 use Wexample\SymfonyUser\Form\TwoFactorCodeForm;
@@ -42,6 +43,7 @@ class SecurityJournalSubscriber implements EventSubscriberInterface
     public const string METHOD_PASSWORD = 'password';
     public const string METHOD_MAGIC_LINK = 'magic_link';
     public const string METHOD_PASSWORD_RESET = 'password_reset';
+    public const string METHOD_ACCOUNT_PICKER = 'account_picker';
     public const string METHOD_SECOND_FACTOR = 'second_factor';
     public const string METHOD_OTHER = 'other';
 
@@ -157,6 +159,7 @@ class SecurityJournalSubscriber implements EventSubscriberInterface
             ClassHelper::longTableized(LoginForm::class) => self::METHOD_PASSWORD,
             ClassHelper::longTableized(TwoFactorCodeForm::class) => self::METHOD_SECOND_FACTOR,
             ClassHelper::longTableized(SetPasswordForm::class) => self::METHOD_PASSWORD_RESET,
+            ClassHelper::longTableized(AccountPickerForm::class) => self::METHOD_ACCOUNT_PICKER,
             default => self::METHOD_OTHER,
         };
     }

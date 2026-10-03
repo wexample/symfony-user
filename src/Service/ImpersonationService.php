@@ -3,7 +3,6 @@
 namespace Wexample\SymfonyUser\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\QueryBuilder;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -37,12 +36,9 @@ class ImpersonationService
     public const string REFUSAL_NOT_ADMINISTERED = 'not_administered';
     public const string REFUSAL_OUT_OF_SCOPE = 'out_of_scope';
 
-    public const int SEARCH_MIN_LENGTH = 2;
+    public const int SEARCH_MIN_LENGTH = AccountDirectoryService::SEARCH_MIN_LENGTH;
     public const int SEARCH_LIMIT = 20;
     public const int SEARCHES_PER_MINUTE = 30;
-
-    /** Accounts read per query while filtering. */
-    private const int BATCH = 200;
 
     /** At most this many accounts read for one search. */
     private const int SEARCH_SCAN = 1000;
@@ -60,6 +56,7 @@ class ImpersonationService
         private readonly AccessDecisionManagerInterface $accessDecisionManager,
         private readonly RequestStack $requestStack,
         private readonly EntityManagerInterface $entityManager,
+        private readonly AccountDirectoryService $directory,
         private readonly AssignableRolesService $assignableRoles,
         #[Autowire(service: 'cache.app')]
         CacheItemPoolInterface $cache,
@@ -162,7 +159,7 @@ class ImpersonationService
      */
     public function listTargets(AbstractUser $actor): ?array
     {
-        $targets = $this->collect($actor, $this->createQuery($actor), $this->listThreshold + 1, PHP_INT_MAX);
+        $targets = $this->directory->collect($this->directory->createActiveQuery($actor), $this->accepts($actor), $this->listThreshold + 1);
 
         return count($targets) > $this->listThreshold ? null : $targets;
     }
@@ -176,48 +173,24 @@ class ImpersonationService
      */
     public function searchTargets(AbstractUser $actor, string $query): array
     {
-        $query = mb_strtolower(trim($query));
+        $builder = $this->directory->createActiveQuery($actor);
 
-        if (mb_strlen($query) < self::SEARCH_MIN_LENGTH
+        if (! $this->directory->applySearch($builder, $query)
             || ! $this->searchLimiter->create($actor->getUserIdentifier())->consume()->isAccepted()) {
             return [];
         }
 
-        $builder = $this->createQuery($actor);
-        $alias = $builder->getRootAliases()[0];
-        $fields = array_filter(
-            ['email', 'username', 'firstName', 'lastName'],
-            fn (string $field) => $this->entityManager->getClassMetadata($actor::class)->hasField($field)
-        );
-
-        $builder
-            ->andWhere($builder->expr()->orX(...array_map(
-                static fn (string $field) => sprintf("LOWER(%s.%s) LIKE :query ESCAPE '!'", $alias, $field),
-                $fields
-            )))
-            ->setParameter('query', '%' . str_replace(['!', '%', '_'], ['!!', '!%', '!_'], $query) . '%');
-
-        return $this->collect($actor, $builder, self::SEARCH_LIMIT, self::SEARCH_SCAN);
+        return $this->directory->collect($builder, $this->accepts($actor), self::SEARCH_LIMIT, self::SEARCH_SCAN);
     }
 
     /**
-     * What tells an account apart in a list: its name when it has one, its
-     * email, its roles.
-     *
-     * @return array{identifier: string, label: string, email: string, roles: list<string>}
+     * @return callable(AbstractUser): bool
      */
-    public function describe(AbstractUser $user): array
+    private function accepts(AbstractUser $actor): callable
     {
-        $email = (string) $user->getEmail();
-        $name = method_exists($user, 'getDisplayName') ? trim((string) $user->getDisplayName()) : '';
-
-        return [
-            'identifier' => $user->getUserIdentifier(),
-            'label' => $name !== '' && $name !== $email ? $name . ' — ' . $email : $email,
-            'email' => $email,
-            'roles' => array_values(array_diff($user->getRoles(), [RoleHelper::ROLE_USER])),
-        ];
+        return fn (AbstractUser $target): bool => $this->getRefusal($actor, $target) === null;
     }
+
 
     public function findTarget(AbstractUser $actor, string $identifier): ?AbstractUser
     {
@@ -259,47 +232,5 @@ class ImpersonationService
             && $intent['until'] >= time();
     }
 
-    private function createQuery(AbstractUser $actor): QueryBuilder
-    {
-        /** @var AbstractUserRepository $repository */
-        $repository = $this->entityManager->getRepository($actor::class);
 
-        return $repository->createQueryBuilder('user')
-            ->andWhere('user.enabled = true')
-            ->andWhere('user.locked = false')
-            ->andWhere('user.id != :actor')
-            ->setParameter('actor', $actor->getId(), 'uuid')
-            ->orderBy('user.email');
-    }
-
-    /**
-     * Reads the query by batches, keeping the accounts the rules allow, up to
-     * $limit of them or $scan read.
-     *
-     * @return list<AbstractUser>
-     */
-    private function collect(AbstractUser $actor, QueryBuilder $builder, int $limit, int $scan): array
-    {
-        $kept = [];
-
-        for ($offset = 0; $offset < $scan; $offset += self::BATCH) {
-            $batch = (clone $builder)->setFirstResult($offset)->setMaxResults(self::BATCH)->getQuery()->getResult();
-
-            foreach ($batch as $user) {
-                if ($this->getRefusal($actor, $user) === null) {
-                    $kept[] = $user;
-
-                    if (count($kept) >= $limit) {
-                        return $kept;
-                    }
-                }
-            }
-
-            if (count($batch) < self::BATCH) {
-                break;
-            }
-        }
-
-        return $kept;
-    }
 }
