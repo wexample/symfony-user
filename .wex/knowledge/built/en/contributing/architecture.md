@@ -14,7 +14,7 @@ Symfony then runs its own listeners: login throttling, password check, src/Secur
 
 scheb/2fa-bundle turns the token of a password login into a `TwoFactorToken` when src/Security/TwoFactor/EmailCodeTwoFactorProvider.php begins, which it does only for the login form route. `prepare_on_login` makes src/Service/TwoFactorCodeService.php send the code with the password check: the code is kept hmac-hashed in session, with its expiry and attempts, and failures are also counted per account in `cache.app`.
 
-`LoginFormAuthenticator` sees the `TwoFactorToken` and answers with the code page, src/Controller/Pages/TwoFactorController.php. The code form posts to the forms bundle route too, which the firewall declares as scheb's `check_path`; src/Security/Handler/TwoFactorResponseHandler.php answers success, failure and "code required" the same way the login does. Trusted devices are scheb's signed cookie, versioned by `AbstractUser::getTrustedTokenVersion()`.
+`LoginFormAuthenticator` sees the `TwoFactorToken` and answers with the code page, `UserRoute::TWO_FACTOR` (served by symfony-user-ds). The code form posts to the forms bundle route too, which the firewall declares as scheb's `check_path`; src/Security/Handler/TwoFactorResponseHandler.php answers success, failure and "code required" the same way the login does. Trusted devices are scheb's signed cookie, versioned by `AbstractUser::getTrustedTokenVersion()`.
 
 An authenticator app uses scheb's own `totp` provider, and the email provider steps aside for a user who has one. src/Service/TotpService.php keeps the secret being set up in session until a first code proves the app holds it, then stores it encrypted by src/Service/TotpSecretCipherService.php; src/EventSubscriber/TotpSecretSubscriber.php decrypts it on load, in memory only. Backup codes are stored as hashes on the user and checked by scheb before the provider.
 
@@ -30,7 +30,7 @@ src/Service/Tunnel/Step/LoginStep.php is a plain step: it saves its own URL as t
 
 ### Tests
 
-The fixture kernel (tests/Fixtures/App/AppKernel.php) boots the security, forms, loader and scheb bundles on SQLite in memory, with the stateless CSRF of the Flex recipe. Integration tests walk the flows over HTTP with `disableReboot()`; two traps:
+The fixture kernel (tests/Fixtures/App/AppKernel.php) boots the security, forms, loader and scheb bundles, and symfony-user-ds (a dev dependency) so the walks reach real pages, on SQLite in memory, with the stateless CSRF of the Flex recipe. Integration tests walk the flows over HTTP with `disableReboot()`; two traps:
 
 - The test client resets services between requests: the entity manager forgets the entities a test holds, and an array cache is emptied. Reload entities before changing them, and clear `cache.rate_limiter` / `cache.app` in `setUp()` rather than using an array cache.
 - Loader pages cannot be rendered twice by the same fixture kernel: controllers redirect with a query flag rather than render an error page, and tests assert the redirect.

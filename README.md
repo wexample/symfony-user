@@ -1,22 +1,21 @@
 # symfony-user
 
-Version: 8.0.1
+Version: 9.0.0
 
-## Pages and routes
+## Routes
+
+`Routing\UserRoute` names every route the package sends users to. Its endpoints:
 
 | Route | Path | What |
 |---|---|---|
-| `user_security_login` | `/login` | password form, magic link form, link to the reset |
-| `user_security_logout` | `/logout` | handled by the firewall |
 | `user_security_login_link` | `/login/link` | check route of the magic links |
-| `user_security_two_factor` | `/login/2fa` | code form, resend, cancel |
-| `user_password_forgot` | `/password/forgot` | reset request |
+| `user_security_logout` | `/logout` | handled by the firewall |
 | `user_password_reset` | `/password/reset` | target of the reset mail |
-| `user_password_new` | `/password/new` | new password, once the reset is proven |
-| `user_totp_index` | `/account/authenticator` | set the authenticator app up, or turn it off |
-| `user_totp_backup_codes` | `/account/authenticator/backup-codes` | the new backup codes, shown once |
+| `user_password_activate` | `/password/activate` | target of the activation mail |
+| `user_security_two_factor_resend` | `/login/2fa/resend` | sends the code again (POST) |
+| `user_totp_regenerate` | `/account/authenticator/backup-codes/regenerate` | new backup codes (POST) |
 
-Templates live under the bundle `assets/` and are overridden like any `symfony-loader` template.
+The pages — `LOGIN`, `TWO_FACTOR`, `PASSWORD_FORGOT`, `PASSWORD_NEW`, `PASSWORD_ACTIVATION_INVALID`, `TERMS`, `TOTP`, `TOTP_BACKUP_CODES`, `TOTP_SETUP` — are `symfony-user-ds`'s. The texts of the forms and the mails stay here, under `assets/forms/` and `assets/mails/`: a form reads its labels and errors from the domain of its class.
 
 ## Showing the login form elsewhere
 
@@ -33,7 +32,7 @@ return $this->renderPage('login_step', [
 ```
 
 ```twig
-{{ form_load(render_pass, login_form, '@WexampleSymfonyUserBundle/forms/login_form.html.twig') }}
+{{ form_load(render_pass, login_form, '@WexampleSymfonyUserDsBundle/forms/login_form.html.twig') }}
 ```
 
 An ajax call reaching a protected URL gets a `401` JSON payload whose action redirects to `/login`, instead of an HTML redirect.
@@ -65,7 +64,7 @@ class CheckoutUserMailStep extends AbstractUserMailStep
 }
 ```
 
-The later steps read the account with `getTunnelUser($cursor)`. The tunnel templates of the application include the bodies the package ships: `@WexampleSymfonyUserBundle/tunnels/partials/user_mail.html.twig` and `login.html.twig`.
+The later steps read the account with `getTunnelUser($cursor)`. The tunnel templates of the application include the bodies `symfony-user-ds` ships: `@WexampleSymfonyUserDsBundle/tunnels/partials/user_mail.html.twig` and `login.html.twig`.
 
 ## Magic links in application mails
 
@@ -134,6 +133,26 @@ The service refuses:
 
 Each change is journaled — `account.created`, `account.activation_sent`, `account.activated`, `account.password_mail_sent`, `account.deactivated`, `.reactivated`, `.locked`, `.unlocked`, `account.roles_changed` with `roles_before` / `roles_after` —, each refusal as `account.change_refused` with its code; `extra.actor_id` names the actor.
 
+## Impersonation
+
+Who may impersonate is the firewall's: its `switch_user` key, and the role it names. Without the key, nobody can, the impersonation page and search answer 404 — declare it under `when@dev` alone for an application impersonating in development only:
+
+```yaml
+when@dev:
+    security:
+        firewalls:
+            main:
+                switch_user: { role: IS_AUTHENTICATED_FULLY }   # everyone, in development
+```
+
+Who may be impersonated is `impersonation.targets`: `administered`, the accounts whose roles the actor administers — the hierarchy, or `administration.manages`, read at each request —, or `any`, every account — a development setting, where the scope of the application's `AccountAdministrationGuardInterface` is not asked either. Never oneself, a disabled or a locked account. `ImpersonationService` applies the rule to the list, the search and — through `ImpersonationGuardSubscriber`, on `SwitchUserEvent` — the switch itself: an account absent from the list cannot be reached by its URL. A voter could not refuse it: with the default strategy, the role voter's grant wins.
+
+The switch happens on the page the chosen account lands on once signed in (`post_login`), so it opens where that account starts. From an impersonation, the page offers the next account and the way back: Symfony leaves the current account before taking the next, so the rights and the rule are always the original account's.
+
+A switch must come from `ImpersonateForm` (`require_intent`): a bare `?_switch_user=` link sent to an administrator switches nobody. A refusal is journaled as `access.denied`, the rule in `extra.reasons` (`impersonation=not_administered`, `no_intent`…).
+
+`GET /account/impersonate/search?q=` (`UserRoute::IMPERSONATE_SEARCH`) answers the accounts matching by email, username or name: 2 characters at least, 20 results, 30 searches a minute per actor. The page is symfony-user-ds's.
+
 ## After signing in
 
 A user lands on the page they were sent away from, when `access_control` lets them in; otherwise on the route of the first role of `post_login.routes` they hold, through the hierarchy; otherwise on `post_login.default_route`, or the home page. Every way in ends there — password, second factor, reset, activation, terms accepted, magic link (`LoginLinkSuccessHandler`, the `success_handler` of `login_link`). A page refused by its controller rather than by `access_control` is not foreseen: it answers 403.
@@ -163,7 +182,7 @@ An application adds a gate by implementing `Interface\AccountGateInterface`.
 
 ## Table of Contents
 
-- [Pages and routes](#pages-and-routes)
+- [Routes](#routes)
 - [Showing the login form elsewhere](#showing-the-login-form-elsewhere)
 - [Tunnel steps](#tunnel-steps)
 - [Magic links in application mails](#magic-links-in-application-mails)
@@ -172,6 +191,7 @@ An application adds a gate by implementing `Interface\AccountGateInterface`.
 - [Second factor](#second-factor)
 - [Roles](#roles)
 - [Administering accounts](#administering-accounts)
+- [Impersonation](#impersonation)
 - [After signing in](#after-signing-in)
 - [Security journal](#security-journal)
 - [Account gates](#account-gates)
@@ -199,7 +219,7 @@ Symfony then runs its own listeners: login throttling, password check, src/Secur
 
 scheb/2fa-bundle turns the token of a password login into a `TwoFactorToken` when src/Security/TwoFactor/EmailCodeTwoFactorProvider.php begins, which it does only for the login form route. `prepare_on_login` makes src/Service/TwoFactorCodeService.php send the code with the password check: the code is kept hmac-hashed in session, with its expiry and attempts, and failures are also counted per account in `cache.app`.
 
-`LoginFormAuthenticator` sees the `TwoFactorToken` and answers with the code page, src/Controller/Pages/TwoFactorController.php. The code form posts to the forms bundle route too, which the firewall declares as scheb's `check_path`; src/Security/Handler/TwoFactorResponseHandler.php answers success, failure and "code required" the same way the login does. Trusted devices are scheb's signed cookie, versioned by `AbstractUser::getTrustedTokenVersion()`.
+`LoginFormAuthenticator` sees the `TwoFactorToken` and answers with the code page, `UserRoute::TWO_FACTOR` (served by symfony-user-ds). The code form posts to the forms bundle route too, which the firewall declares as scheb's `check_path`; src/Security/Handler/TwoFactorResponseHandler.php answers success, failure and "code required" the same way the login does. Trusted devices are scheb's signed cookie, versioned by `AbstractUser::getTrustedTokenVersion()`.
 
 An authenticator app uses scheb's own `totp` provider, and the email provider steps aside for a user who has one. src/Service/TotpService.php keeps the secret being set up in session until a first code proves the app holds it, then stores it encrypted by src/Service/TotpSecretCipherService.php; src/EventSubscriber/TotpSecretSubscriber.php decrypts it on load, in memory only. Backup codes are stored as hashes on the user and checked by scheb before the provider.
 
@@ -215,7 +235,7 @@ src/Service/Tunnel/Step/LoginStep.php is a plain step: it saves its own URL as t
 
 ### Tests
 
-The fixture kernel (tests/Fixtures/App/AppKernel.php) boots the security, forms, loader and scheb bundles on SQLite in memory, with the stateless CSRF of the Flex recipe. Integration tests walk the flows over HTTP with `disableReboot()`; two traps:
+The fixture kernel (tests/Fixtures/App/AppKernel.php) boots the security, forms, loader and scheb bundles, and symfony-user-ds (a dev dependency) so the walks reach real pages, on SQLite in memory, with the stateless CSRF of the Flex recipe. Integration tests walk the flows over HTTP with `disableReboot()`; two traps:
 
 - The test client resets services between requests: the entity manager forgets the entities a test holds, and an array cache is emptied. Reload entities before changing them, and clear `cache.rate_limiter` / `cache.app` in `setUp()` rather than using an array cache.
 - Loader pages cannot be rendered twice by the same fixture kernel: controllers redirect with a query flag rather than render an error page, and tests assert the redirect.

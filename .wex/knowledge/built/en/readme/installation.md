@@ -12,7 +12,9 @@ Wexample\SymfonyUser\WexampleSymfonyUserBundle::class => ['all' => true],
 
 `WexampleSymfonySecurityBundle` masks the package's secrets in the logs: without it, the container refuses to build.
 
-The scheb recipe also adds `config/routes/scheb_2fa.yaml`: delete it, the code form is served by this package on `/login/2fa`.
+The screens — login, second factor, password, terms, authenticator app — are `symfony-user-ds`'s: install it with `Wexample\SymfonyUserDs\WexampleSymfonyUserDsBundle`. An application drawing its own serves pages under the names of `Routing\UserRoute`: the package redirects to them. Its own endpoints — `/login/link`, `/logout`, the reset and activation links, the code resend, new backup codes — stay here.
+
+The scheb recipe also adds `config/routes/scheb_2fa.yaml`: delete it, the code form is served on `/login/2fa`.
 
 ### The user entity
 
@@ -147,6 +149,10 @@ wexample_symfony_user:
     magic_link_login: true         # false: no magic link form on the login page; MagicLinkService still sends the application's own links
     activation:
         link_lifetime: 604800      # seconds the link of an activation mail works
+    impersonation:
+        targets: administered      # or any: who may be impersonated; who may impersonate is the firewall's switch_user
+        list_threshold: 50         # up to this many, the page lists them all; above, it searches
+        require_intent: true       # a switch must come from the impersonation form, not a bare ?_switch_user= link
     post_login:
         routes: {}                 # ROLE_X: route, in order — where a user lands when the page they came from is not theirs to open
         default_route: ~           # for a user holding none of them; unset, the home page
