@@ -70,9 +70,18 @@ class TwoFactorCodeService
 
     public function canResend(): bool
     {
+        return 0 === $this->getResendWait();
+    }
+
+    /**
+     * The seconds left before another code may be sent, 0 once it may: the
+     * page offers the button at once and lets it go when they are over.
+     */
+    public function getResendWait(): int
+    {
         $state = $this->getState();
 
-        return ! $state || $state['sent'] + self::RESEND_DELAY <= time();
+        return $state ? max(0, $state['sent'] + self::RESEND_DELAY - time()) : 0;
     }
 
     public function validate(AbstractUser $user, string $code): bool
