@@ -57,7 +57,7 @@ class AccountGateSubscriber implements EventSubscriberInterface
         if (! $event->isMainRequest()
             || ! $user instanceof AbstractUser
             || $token instanceof TwoFactorTokenInterface
-            || $this->isAlwaysAllowed((string) $request->attributes->get('_route'))) {
+            || $this->isAlwaysAllowed((string) $request->attributes->get('_route'), $request->getPathInfo())) {
             return;
         }
 
@@ -86,10 +86,17 @@ class AccountGateSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Leaving, and the toolbar of the debug mode.
+     * Leaving, the toolbar of the debug mode, and what serves the pages rather
+     * than being one — under `/_`: a component rendered on demand, the state
+     * the interface remembers. Held there, they would answer the gate's page
+     * where the script waits for data.
      */
-    private function isAlwaysAllowed(string $route): bool
-    {
-        return $route === UserRoute::LOGOUT || str_starts_with($route, '_');
+    private function isAlwaysAllowed(
+        string $route,
+        string $path
+    ): bool {
+        return $route === UserRoute::LOGOUT
+            || str_starts_with($route, '_')
+            || str_starts_with($path, '/_');
     }
 }
