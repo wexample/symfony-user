@@ -7,7 +7,7 @@ en:
     submit: Turn the app on
 
   error:
-    invalid: Wrong code, check the clock of your phone and try again.
+    invalid: Wrong code.
 
 ar:
   field:
@@ -16,7 +16,7 @@ ar:
   action:
     submit: 'شغّل التطبيق'
   error:
-    invalid: 'كود خاطئ، تحقق من ساعة هاتفك وحاول مرة أخرى.'
+    invalid: 'كود خاطئ.'
 
 bn:
   field:
@@ -25,7 +25,7 @@ bn:
   action:
     submit: 'অ্যাপটি চালু করুন'
   error:
-    invalid: 'ভুল কোড, আপনার ফোনের ঘড়ি চেক করুন এবং আবার চেষ্টা করুন।'
+    invalid: 'ভুল কোড।'
 
 de:
   field:
@@ -34,7 +34,7 @@ de:
   action:
     submit: 'App einschalten'
   error:
-    invalid: 'Falscher Code, überprüfen Sie die Uhrzeit Ihres Telefons und versuchen Sie es erneut.'
+    invalid: 'Falscher Code.'
 
 es:
   field:
@@ -43,7 +43,7 @@ es:
   action:
     submit: 'Enciende la aplicación'
   error:
-    invalid: 'Código incorrecto, verifica el reloj de tu teléfono y vuelve a intentarlo.'
+    invalid: 'Código incorrecto.'
 
 fa:
   field:
@@ -52,7 +52,7 @@ fa:
   action:
     submit: 'اپ را روشن کن'
   error:
-    invalid: 'کد نادرست است، ساعت گوشی خود را بررسی کرده و دوباره تلاش کنید.'
+    invalid: 'کد نادرست است.'
 
 fi:
   field:
@@ -61,7 +61,7 @@ fi:
   action:
     submit: 'Käynnistä sovellus'
   error:
-    invalid: 'Väärä koodi, tarkista puhelimesi kello ja yritä uudelleen.'
+    invalid: 'Väärä koodi.'
 
 fr:
   field:
@@ -72,7 +72,7 @@ fr:
     submit: Activer l'application
 
   error:
-    invalid: Code incorrect, vérifiez l'heure de votre téléphone et réessayez.
+    invalid: Code incorrect.
 
 he:
   field:
@@ -81,7 +81,7 @@ he:
   action:
     submit: 'הפעל את האפליקציה'
   error:
-    invalid: 'קוד לא נכון, בדוק את השעה בטלפון שלך ונסה שוב.'
+    invalid: 'קוד לא נכון.'
 
 hi:
   field:
@@ -90,7 +90,7 @@ hi:
   action:
     submit: 'ऐप चालू करें'
   error:
-    invalid: 'गलत कोड, अपने फोन का घड़ी चेक करें और फिर से कोशिश करें।'
+    invalid: 'गलत कोड।'
 
 id:
   field:
@@ -99,7 +99,7 @@ id:
   action:
     submit: 'Nyalakan aplikasi'
   error:
-    invalid: 'Kode salah, periksa jam di ponsel Anda dan coba lagi.'
+    invalid: 'Kode salah.'
 
 it:
   field:
@@ -108,7 +108,7 @@ it:
   action:
     submit: "Accendi l'app"
   error:
-    invalid: "Codice errato, controlla l'orologio del tuo telefono e riprova."
+    invalid: 'Codice errato.'
 
 ja:
   field:
@@ -117,7 +117,7 @@ ja:
   action:
     submit: アプリを起動する
   error:
-    invalid: コードが間違っています。電話の時計を確認して、再試行してください。
+    invalid: コードが間違っています。
 
 ko:
   field:
@@ -126,7 +126,7 @@ ko:
   action:
     submit: '앱 켜기'
   error:
-    invalid: '잘못된 코드입니다. 전화기의 시계를 확인하고 다시 시도하세요.'
+    invalid: '잘못된 코드입니다.'
 
 nl:
   field:
@@ -135,7 +135,7 @@ nl:
   action:
     submit: 'Zet de app aan'
   error:
-    invalid: 'Verkeerde code, controleer de klok van je telefoon en probeer het opnieuw.'
+    invalid: 'Verkeerde code.'
 
 pl:
   field:
@@ -144,7 +144,7 @@ pl:
   action:
     submit: 'Włącz aplikację'
   error:
-    invalid: 'Niepoprawny kod, sprawdź zegar w swoim telefonie i spróbuj ponownie.'
+    invalid: 'Niepoprawny kod.'
 
 pt_BR:
   field:
@@ -153,7 +153,7 @@ pt_BR:
   action:
     submit: 'Ativar o aplicativo'
   error:
-    invalid: 'Código incorreto, verifique o relógio do seu telefone e tente novamente.'
+    invalid: 'Código incorreto.'
 
 ru:
   field:
@@ -162,7 +162,7 @@ ru:
   action:
     submit: 'Включить приложение'
   error:
-    invalid: 'Неверный код, проверьте время на вашем телефоне и попробуйте снова.'
+    invalid: 'Неверный код.'
 
 th:
   field:
@@ -171,7 +171,7 @@ th:
   action:
     submit: เปิดแอป
   error:
-    invalid: 'รหัสไม่ถูกต้อง ตรวจสอบนาฬิกาของโทรศัพท์คุณและลองอีกครั้ง.'
+    invalid: 'รหัสไม่ถูกต้อง'
 
 tr:
   field:
@@ -180,7 +180,7 @@ tr:
   action:
     submit: 'Uygulamayı aç'
   error:
-    invalid: 'Yanlış kod, telefonunun saatini kontrol et ve tekrar dene.'
+    invalid: 'Yanlış kod.'
 
 ur:
   field:
@@ -189,7 +189,7 @@ ur:
   action:
     submit: 'ایپ کو آن کریں'
   error:
-    invalid: 'غلط کوڈ، اپنے فون کے گھڑی کو چیک کریں اور دوبارہ کوشش کریں۔'
+    invalid: 'غلط کوڈ۔'
 
 vi:
   field:
@@ -198,7 +198,7 @@ vi:
   action:
     submit: 'Bật ứng dụng'
   error:
-    invalid: 'Mã không đúng, kiểm tra đồng hồ trên điện thoại của bạn và thử lại.'
+    invalid: 'Mã không đúng.'
 
 zh:
   field:
@@ -207,4 +207,4 @@ zh:
   action:
     submit: 开启应用程序
   error:
-    invalid: 错误的代码，请检查手机的时间并重试。
+    invalid: 错误的代码。
