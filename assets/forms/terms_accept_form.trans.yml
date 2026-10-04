@@ -1,14 +1,22 @@
 en:
+  field:
+    accepted:
+      label: I have read and accept the terms of use
+
   action:
-    submit: I have read and accept the terms of use
+    submit: Continue
 
   error:
     outdated: These terms have been replaced in the meantime, reload the page to read the new ones.
     impersonation: Only the user can accept the terms, not an administrator in their place.
 
 fr:
+  field:
+    accepted:
+      label: J'ai lu et j'accepte les conditions d'utilisation
+
   action:
-    submit: J'ai lu et j'accepte les conditions d'utilisation
+    submit: Continuer
 
   error:
     outdated: Ces conditions ont été remplacées entre-temps, rechargez la page pour lire les nouvelles.

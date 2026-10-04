@@ -78,6 +78,14 @@ class TermsGateTest extends WebTestCase
         $this->assertNotEmpty($acceptance->getIp());
     }
 
+    public function testNothingIsAcceptedUnticked(): void
+    {
+        $this->login();
+
+        $this->assertFalse($this->accept('v2', false)['ok']);
+        $this->assertSame([], $this->findHistory());
+    }
+
     public function testANewVersionAsksAgainAndKeepsTheHistory(): void
     {
         // Accepted `v1` before `v2` was published.
@@ -188,9 +196,12 @@ class TermsGateTest extends WebTestCase
         $this->post('form-login_form', 'login_form', ['identifier' => 'jane', 'password' => 'secret']);
     }
 
-    private function accept(string $version): array
+    private function accept(string $version, bool $ticked = true): array
     {
-        return $this->post('form-terms_accept_form', 'terms_accept_form', ['version' => $version]);
+        return $this->post('form-terms_accept_form', 'terms_accept_form', array_filter([
+            'version' => $version,
+            'accepted' => $ticked ? '1' : null,
+        ]));
     }
 
     private function post(string $name, string $formName, array $data): array
