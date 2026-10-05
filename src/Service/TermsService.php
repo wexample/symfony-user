@@ -59,7 +59,10 @@ class TermsService
         }
 
         $session = $this->requestStack->getSession();
-        $cacheKey = $user->getUserIdentifier() . '@' . $this->version;
+        // The account's id, not its address: a session outliving its account —
+        // deleted, then created again under the same address — would carry
+        // an acceptance the new account never gave.
+        $cacheKey = $user->getId() . '@' . $this->version;
 
         if ($session->get(self::SESSION_ACCEPTED) === $cacheKey) {
             return false;

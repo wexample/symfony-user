@@ -79,6 +79,9 @@ security:
                 csrf_token_id: submit   # the form CSRF token id of the app
     access_control:
         - { path: ^/login/2fa, roles: IS_AUTHENTICATED_2FA_IN_PROGRESS }
+        # What serves the pages rather than being one: symfony-loader's
+        # components rendered on demand, symfony-design-system's ui state.
+        - { path: ^/_(system|ui-state)/, roles: PUBLIC_ACCESS }
 ```
 
 ```yaml
@@ -99,7 +102,7 @@ scheb_two_factor:
 ```
 
 - `APP_SECRET` must be 32 bytes at least: the trusted device cookie is a JWT signed with it. The authenticator secrets are encrypted with a key derived from it too: changing it makes users set their app up again.
-- While a login waits for its code, scheb only lets through the paths `access_control` opens to `PUBLIC_ACCESS` or `IS_AUTHENTICATED_2FA_IN_PROGRESS`.
+- While a login waits for its code, scheb only lets through the paths `access_control` opens to `PUBLIC_ACCESS` or `IS_AUTHENTICATED_2FA_IN_PROGRESS`, and sends every other request to the code's page. That includes the `/_system/` and `/_ui-state/` calls the page's scripts make — the debug toolbar, a component loaded later —: left out, they receive the code's page instead of their JSON, and the browser reports `Unexpected token '<'`. They are already open to anyone without a rule, so naming them `PUBLIC_ACCESS` opens nothing more. The rule has to be written by the application: Symfony refuses `access_control` from more than one file, so no bundle can add it.
 - Without a second factor, drop the `two_factor` key; to ask it on every login, set `trusted_device.enabled: false`.
 
 ### Mails
