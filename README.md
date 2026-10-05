@@ -1,6 +1,6 @@
 # symfony-user
 
-Version: 10.0.1
+Version: 10.0.2
 
 ## Routes
 
@@ -273,7 +273,7 @@ Visit the [Wexample Suite documentation](https://docs.wexample.com) for the comp
 - php: >=8.5
 - doctrine/orm: ^3.0
 - symfony/security-bundle: ^7.4
-- wexample/symfony-helpers: >=13.0.0
+- wexample/symfony-helpers: >=14.0.0
 - wexample/symfony-security: >=2.0.0
 - wexample/symfony-translations: >=8.0.0
 - symfony/validator: ^7.4
