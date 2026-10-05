@@ -1,6 +1,6 @@
 # symfony-user
 
-Version: 10.0.2
+Version: 10.0.3
 
 ## Routes
 
@@ -278,7 +278,7 @@ Visit the [Wexample Suite documentation](https://docs.wexample.com) for the comp
 - wexample/symfony-translations: >=8.0.0
 - symfony/validator: ^7.4
 - wexample/symfony-forms: >=10.0.0
-- wexample/symfony-loader: >=19.0.0
+- wexample/symfony-loader: >=20.0.0
 - wexample/symfony-mail: >=2.0.0
 - symfony/form: ^7.4
 - symfony/rate-limiter: ^7.4
