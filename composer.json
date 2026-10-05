@@ -43,7 +43,7 @@
     "wexample/symfony-tunnels": ">=10.0.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "*",
+    "phpunit/phpunit": "^13",
     "wexample/symfony-testing": ">=2.0.0",
     "symfony/browser-kit": "^7.4",
     "symfony/css-selector": "^7.4",
