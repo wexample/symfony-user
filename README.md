@@ -1,6 +1,6 @@
 # symfony-user
 
-Version: 10.0.4
+Version: 10.0.5
 
 ## Routes
 
@@ -275,10 +275,10 @@ Visit the [Wexample Suite documentation](https://docs.wexample.com) for the comp
 - symfony/security-bundle: ^7.4
 - wexample/symfony-helpers: >=15.0.0
 - wexample/symfony-security: >=2.0.0
-- wexample/symfony-translations: >=9.0.0
+- wexample/symfony-translations: >=10.0.0
 - symfony/validator: ^7.4
 - wexample/symfony-forms: >=10.0.0
-- wexample/symfony-loader: >=20.0.0
+- wexample/symfony-loader: >=21.0.0
 - wexample/symfony-mail: >=2.0.0
 - symfony/form: ^7.4
 - symfony/rate-limiter: ^7.4
