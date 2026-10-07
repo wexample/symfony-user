@@ -27,20 +27,26 @@ class PasswordUpdaterService
      * Recorded as an activation when the account had no password yet, as a
      * reset when $reset, as set by an administrator when the signed-in user
      * is someone else, as changed otherwise.
+     *
+     * A password an administrator set is owed a change: its holder is not the
+     * only one who knows it. Every other case is the holder choosing it, and
+     * settles the debt.
      */
     public function update(AbstractUser $user, string $plainPassword, bool $reset = false): void
     {
         $activation = $user->getPassword() === null;
-        $user->setPassword($this->passwordHasher->hashPassword($user, $plainPassword));
-        $this->entityManager->flush();
-
         $actor = $this->tokenStorage->getToken()?->getUser();
+        $byAdmin = ! $activation && ! $reset && $actor && $actor !== $user;
+
+        $user->setPassword($this->passwordHasher->hashPassword($user, $plainPassword));
+        $user->setPasswordChangeRequired($byAdmin);
+        $this->entityManager->flush();
 
         if ($activation) {
             $this->journal->record(SecurityEventType::ACCOUNT_ACTIVATED, $user);
         } elseif ($reset) {
             $this->journal->record(SecurityEventType::PASSWORD_RESET, $user);
-        } elseif ($actor && $actor !== $user) {
+        } elseif ($byAdmin) {
             $this->journal->record(SecurityEventType::PASSWORD_SET_BY_ADMIN, $user, extra: ['actor' => $actor->getUserIdentifier()]);
         } else {
             $this->journal->record(SecurityEventType::PASSWORD_CHANGED, $user);

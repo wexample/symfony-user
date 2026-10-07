@@ -1,0 +1,8 @@
+wexample_symfony_activity:
+  categories:
+    security: ~
+
+services:
+  test.activity_repository:
+    alias: Wexample\SymfonyActivity\Repository\ActivityRepository
+    public: true

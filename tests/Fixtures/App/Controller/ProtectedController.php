@@ -39,6 +39,16 @@ class ProtectedController
     }
 
     /**
+     * Reached by a script and not by a reader, which the leading underscore
+     * of the path is the convention for: it does not keep a session alive.
+     */
+    #[Route(path: '/_program', name: 'program')]
+    public function program(): Response
+    {
+        return new Response('program');
+    }
+
+    /**
      * Reserved to managers by `access_control`.
      */
     #[Route(path: '/manager', name: 'manager_home')]

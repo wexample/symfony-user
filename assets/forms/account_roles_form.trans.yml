@@ -1,0 +1,31 @@
+en:
+  action:
+    submit: Save the roles
+  error:
+    refused:
+      role_not_assignable: This role is not yours to give.
+      email_domain_not_allowed: This role asks for an address of another domain.
+      exclusive_roles: These two roles are never held together.
+      target_out_of_scope: This account is not yours to administer.
+      self_deactivation: An account cannot deactivate itself.
+      self_demotion: An account cannot take its own role away.
+      last_protected_role_holder: This role would be left without an active holder.
+      account_inactive: This account cannot sign in, so it is sent no mail.
+  success:
+    message: Roles saved.
+fr:
+  action:
+    submit: Enregistrer les rôles
+  error:
+    refused:
+      role_not_assignable: Ce rôle n'est pas le vôtre à donner.
+      email_domain_not_allowed: Ce rôle demande une adresse d'un autre domaine.
+      exclusive_roles: Ces deux rôles ne vont jamais ensemble.
+      target_out_of_scope: Ce compte n'est pas le vôtre à administrer.
+      self_deactivation: Un compte ne peut pas se désactiver lui-même.
+      self_demotion: Un compte ne peut pas retirer son propre rôle.
+      last_protected_role_holder: Ce rôle resterait sans titulaire actif.
+      account_inactive: Ce compte ne peut pas se connecter, aucun mail ne lui est
+        envoyé.
+  success:
+    message: Rôles enregistrés.

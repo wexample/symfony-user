@@ -3,10 +3,12 @@
 namespace Wexample\SymfonyUser\Service;
 
 use DateTimeImmutable;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authentication\Token\SwitchUserToken;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\Signature\Exception\ExpiredSignatureException;
 use Symfony\Component\Security\Core\Signature\Exception\InvalidSignatureException;
@@ -43,6 +45,7 @@ class PasswordResetService
         private readonly RequestStack $requestStack,
         private readonly UserProviderInterface $userProvider,
         private readonly MagicLinkService $magicLinkService,
+        private readonly Security $security,
         #[Autowire(param: 'wexample_symfony_user.password_reset')]
         private readonly string $mode,
         #[Autowire(param: 'kernel.secret')]
@@ -182,17 +185,38 @@ class PasswordResetService
     }
 
     /**
-     * The user the session may set a password for, without the current one.
+     * The user the session may set a password for, without the current one:
+     * the holder of a live proof, or — with no proof — a signed-in user owing
+     * a forced change. They signed in a moment ago with the password an
+     * administrator chose for them; asking for it again proves nothing, and
+     * PasswordChangeGate lets them nowhere else.
+     *
+     * Never the account an administrator is impersonating: the impersonator
+     * would be choosing its password.
      */
     public function getProofUser(): ?AbstractUser
     {
-        $proof = $this->requestStack->getSession()->get(self::SESSION_PROOF);
+        if ($this->hasProof()) {
+            $proof = $this->requestStack->getSession()->get(self::SESSION_PROOF);
 
-        if (! is_array($proof) || ($proof['until'] ?? 0) < time()) {
-            return null;
+            return $this->loadUser((string) $proof['user']);
         }
 
-        return $this->loadUser((string) $proof['user']);
+        $token = $this->security->getToken();
+        $user = $token instanceof SwitchUserToken ? null : $token?->getUser();
+
+        return $user instanceof AbstractUser && $user->isPasswordChangeRequired() ? $user : null;
+    }
+
+    /**
+     * Whether the session carries a live proof — a reset link followed, a
+     * magic link signed in with — as opposed to a forced change.
+     */
+    public function hasProof(): bool
+    {
+        $proof = $this->requestStack->getSession()->get(self::SESSION_PROOF);
+
+        return is_array($proof) && ($proof['until'] ?? 0) >= time();
     }
 
     public function clearProof(): void

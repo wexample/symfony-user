@@ -3,7 +3,9 @@
 namespace Wexample\SymfonyUser\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Wexample\SymfonyActivity\WexampleSymfonyActivityBundle;
 use Wexample\SymfonyHelpers\DependencyInjection\AbstractWexampleSymfonyExtension;
+use Wexample\SymfonyUser\EventSubscriber\SecurityActivitySubscriber;
 use Wexample\SymfonyUser\Interface\AccountAdministrationGuardInterface;
 use Wexample\SymfonyUser\Interface\AccountGateInterface;
 
@@ -24,9 +26,12 @@ class WexampleSymfonyUserExtension extends AbstractWexampleSymfonyExtension
         $container->setParameter('wexample_symfony_user.impersonation.targets', $config['impersonation']['targets']);
         $container->setParameter('wexample_symfony_user.impersonation.list_threshold', $config['impersonation']['list_threshold']);
         $container->setParameter('wexample_symfony_user.impersonation.require_intent', $config['impersonation']['require_intent']);
+        $container->setParameter('wexample_symfony_user.session.idle_lifetime', $config['session']['idle_lifetime']);
+        $container->setParameter('wexample_symfony_user.password.refuse_leaked', $config['password']['refuse_leaked']);
         $container->setParameter('wexample_symfony_user.activation.link_lifetime', $config['activation']['link_lifetime']);
         $container->setParameter('wexample_symfony_user.request_limit.per_identifier', $config['request_limit']['per_identifier']);
         $container->setParameter('wexample_symfony_user.request_limit.per_ip', $config['request_limit']['per_ip']);
+        $container->setParameter('wexample_symfony_user.administration.page_role', $config['administration']['page_role']);
         $container->setParameter('wexample_symfony_user.administration.protected_roles', $config['administration']['protected_roles']);
         $container->setParameter('wexample_symfony_user.administration.manages', $config['administration']['manages']);
         $container->setParameter('wexample_symfony_user.administration.role_email_domains', $config['administration']['role_email_domains']);
@@ -49,5 +54,12 @@ class WexampleSymfonyUserExtension extends AbstractWexampleSymfonyExtension
             __DIR__,
             $container
         );
+
+        // The history of the accounts, where the application enabled
+        // symfony-activity: optional, so nothing of it is required here. The
+        // bundle, not the class — installed and not enabled, it has no services.
+        if (in_array(WexampleSymfonyActivityBundle::class, $container->getParameter('kernel.bundles'), true)) {
+            $container->autowire(SecurityActivitySubscriber::class)->setAutoconfigured(true);
+        }
     }
 }

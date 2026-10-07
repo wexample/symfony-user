@@ -57,10 +57,12 @@ class SetPasswordFormProcessor extends AbstractFormProcessor
     {
         $user = $this->passwordResetService->getProofUser();
 
+        // A forced change is the user choosing their own password, not a
+        // reset: the journal tells them apart.
         $this->passwordUpdater->update(
             $user,
             (string) $form->get(SetPasswordForm::FIELD_NEW_PASSWORD)->getData(),
-            reset: true
+            reset: $this->passwordResetService->hasProof()
         );
         $this->passwordResetService->clearProof();
 

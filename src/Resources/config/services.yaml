@@ -8,6 +8,8 @@ services:
         resource: '../../{EventSubscriber,Form,MessageHandler,Repository,Security,Service}'
         exclude:
             - '../../Service/Tunnel/Step/Abstract*.php'
+            # Registered by the extension, when symfony-activity is installed.
+            - '../../EventSubscriber/SecurityActivitySubscriber.php'
             - '../../Repository/AbstractUserRepository.php'
 
     # The signature of magic and reset links, wherever a log record holds their

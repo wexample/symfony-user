@@ -86,6 +86,15 @@ abstract class AbstractUser extends AbstractEntity implements
     protected ?DateTimeImmutable $dateLastLogin = null;
 
     /**
+     * A password its holder did not choose: one an administrator set, one a
+     * fixture or an import wrote. PasswordChangeGate holds the account on the
+     * page where it chooses its own, and PasswordUpdaterService clears it
+     * there.
+     */
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
+    protected bool $passwordChangeRequired = false;
+
+    /**
      * Asks a code sent by email after the password, on a device not trusted yet.
      */
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
@@ -222,6 +231,23 @@ abstract class AbstractUser extends AbstractEntity implements
         $this->dateLastLogin = $dateLastLogin === null
             ? null
             : DateTimeImmutable::createFromInterface($dateLastLogin);
+
+        return $this;
+    }
+
+    public function isPasswordChangeRequired(): bool
+    {
+        return $this->passwordChangeRequired;
+    }
+
+    /**
+     * PasswordUpdaterService keeps it in step with every password it writes;
+     * the setter is for an application creating an account with a password of
+     * its own — a fixture, an import — which its holder has to replace.
+     */
+    public function setPasswordChangeRequired(bool $passwordChangeRequired): static
+    {
+        $this->passwordChangeRequired = $passwordChangeRequired;
 
         return $this;
     }

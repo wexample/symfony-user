@@ -57,6 +57,9 @@ enum SecurityEventType: string implements SecurityEventTypeInterface
 
     case LOGOUT = 'logout';
 
+    /** A session signed out for having been left alone too long. */
+    case SESSION_EXPIRED = 'session.expired';
+
     public function isFailure(): bool
     {
         return in_array($this, [self::LOGIN_FAILED, self::SECOND_FACTOR_FAILED, self::ACCOUNT_CHANGE_REFUSED, self::SECURITY_MESSAGE_FAILED, self::ACCESS_DENIED], true);

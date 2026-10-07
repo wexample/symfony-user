@@ -7,6 +7,8 @@ parameters:
 
 wexample_symfony_user:
   administration:
+    # The screens are there, for the managers alone.
+    page_role: ROLE_MANAGER
     protected_roles: [ROLE_MANAGER]
     role_email_domains:
       ROLE_MANAGER: [example.com]
@@ -17,4 +19,7 @@ services:
   # No controller of the fixture application uses it: kept for the tests.
   test.account_administration:
     alias: Wexample\SymfonyUser\Service\AccountAdministrationService
+    public: true
+  test.csrf_token_manager:
+    alias: security.csrf.token_manager
     public: true

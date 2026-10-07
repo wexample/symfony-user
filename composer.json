@@ -46,9 +46,11 @@
     "phpunit/phpunit": "^13",
     "wexample/symfony-testing": ">=2.0.0",
     "symfony/browser-kit": "^7.4",
+    "symfony/http-client": "^7.4",
     "symfony/css-selector": "^7.4",
     "symfony/monolog-bundle": "^3.10",
-    "wexample/symfony-user-ds": "*"
+    "wexample/symfony-user-ds": "*",
+    "wexample/symfony-activity": "*"
   },
   "repositories": [
     {
@@ -65,6 +67,7 @@
     }
   },
   "suggest": {
-    "symfony/monolog-bundle": "Writes the security journal to its own channel, user_security"
+    "symfony/monolog-bundle": "Writes the security journal to its own channel, user_security",
+    "wexample/symfony-activity": "Keeps the security facts of each account as its history — the login history among them"
   }
 }

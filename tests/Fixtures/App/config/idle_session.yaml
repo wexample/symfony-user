@@ -1,0 +1,3 @@
+wexample_symfony_user:
+  session:
+    idle_lifetime: 900

@@ -4,15 +4,18 @@ namespace Wexample\SymfonyUser\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use LogicException;
+use Symfony\Component\Uid\Uuid;
 use Wexample\SymfonyHelpers\Helper\RoleHelper;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Repository\AbstractUserRepository;
 
 /**
- * The active accounts, read to be chosen from: by batches, filtered by a
- * rule, searched by email, username or name, described for a list.
- * ImpersonationService and AccountPickerService read through it.
+ * The accounts, read to be chosen from or to be administered: by batches,
+ * filtered by a rule, searched by email, username or name, described for a
+ * list. ImpersonationService and AccountPickerService read through it, and so
+ * do the administration pages.
  */
 class AccountDirectoryService
 {
@@ -55,17 +58,25 @@ class AccountDirectoryService
     }
 
     /**
+     * Every account, by email: what an administration list reads, where a
+     * disabled or locked one has to be found to be put back.
+     */
+    public function createQuery(): QueryBuilder
+    {
+        /** @var AbstractUserRepository $repository */
+        $repository = $this->entityManager->getRepository($this->getUserClass());
+
+        return $repository->createQueryBuilder('user')->orderBy('user.email');
+    }
+
+    /**
      * Enabled and unlocked accounts, $except left out, by email.
      */
     public function createActiveQuery(?AbstractUser $except = null): QueryBuilder
     {
-        /** @var AbstractUserRepository $repository */
-        $repository = $this->entityManager->getRepository($except ? $except::class : $this->getUserClass());
-
-        $builder = $repository->createQueryBuilder('user')
+        $builder = $this->createQuery()
             ->andWhere('user.enabled = true')
-            ->andWhere('user.locked = false')
-            ->orderBy('user.email');
+            ->andWhere('user.locked = false');
 
         if ($except) {
             $builder->andWhere('user.id != :except')->setParameter('except', $except->getId(), 'uuid');
@@ -75,13 +86,36 @@ class AccountDirectoryService
     }
 
     /**
+     * The account an id names, or null — a string that is no id included:
+     * what a page reads its `{id}` with, to answer 404 rather than break on
+     * a hand-typed URL.
+     */
+    public function find(string $id): ?AbstractUser
+    {
+        return Uuid::isValid($id)
+            ? $this->entityManager->getRepository($this->getUserClass())->find($id)
+            : null;
+    }
+
+    /**
+     * The account $identifier names — an email or a username —, whatever its
+     * state: what an administration screen looks an address up with before
+     * opening a second account on it.
+     */
+    public function findByIdentifier(string $identifier): ?AbstractUser
+    {
+        /** @var AbstractUserRepository $repository */
+        $repository = $this->entityManager->getRepository($this->getUserClass());
+
+        return $repository->findOneByUserIdentifier($identifier);
+    }
+
+    /**
      * The enabled, unlocked account $identifier names, or null.
      */
     public function findActive(string $identifier): ?AbstractUser
     {
-        /** @var AbstractUserRepository $repository */
-        $repository = $this->entityManager->getRepository($this->getUserClass());
-        $user = $repository->findOneByUserIdentifier($identifier);
+        $user = $this->findByIdentifier($identifier);
 
         return $user && $user->isEnabled() && ! $user->isLocked() ? $user : null;
     }
@@ -143,6 +177,28 @@ class AccountDirectoryService
         }
 
         return $kept;
+    }
+
+    /**
+     * One page of a query, and how many pages it has: what a list shows,
+     * without the page it is drawn on knowing Doctrine.
+     *
+     * @return array{accounts: list<AbstractUser>, count: int, pages_count: int}
+     */
+    public function paginate(QueryBuilder $builder, int $page, int $perPage): array
+    {
+        $paginator = new Paginator(
+            $builder->getQuery()
+                ->setFirstResult(max(0, $page - 1) * $perPage)
+                ->setMaxResults($perPage)
+        );
+        $count = count($paginator);
+
+        return [
+            'accounts' => iterator_to_array($paginator, false),
+            'count' => $count,
+            'pages_count' => (int) ceil($count / $perPage),
+        ];
     }
 
     /**

@@ -1,0 +1,31 @@
+en:
+  field:
+    first_name:
+      label: First name
+    last_name:
+      label: Last name
+    locale:
+      label: Language
+      placeholder: The default language
+
+  action:
+    submit: Save
+
+  success:
+    message: Profile saved.
+
+fr:
+  field:
+    first_name:
+      label: Prénom
+    last_name:
+      label: Nom
+    locale:
+      label: Langue
+      placeholder: La langue par défaut
+
+  action:
+    submit: Enregistrer
+
+  success:
+    message: Profil enregistré.

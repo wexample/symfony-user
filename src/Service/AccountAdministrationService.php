@@ -4,6 +4,7 @@ namespace Wexample\SymfonyUser\Service;
 
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
@@ -22,11 +23,12 @@ use Wexample\SymfonyUser\Repository\AbstractUserRepository;
  * checks the rules, applies and flushes, and journals the change — or the
  * refusal, before throwing it.
  *
- * Who may administer at all is the application's access control; here, the
- * actor only touches the accounts and roles AssignableRolesService gives
- * them, and the pairs every AccountAdministrationGuardInterface allows; never
- * deactivates, locks or demotes themselves; never leaves a protected role
- * without an active holder.
+ * Who may administer at all is `administration.page_role`, which the screens
+ * and their endpoints ask through canAdminister(): unset, nobody does. Past
+ * it the actor only touches the accounts and roles AssignableRolesService
+ * gives them, and the pairs every AccountAdministrationGuardInterface allows;
+ * never deactivates, locks or demotes themselves; never leaves a protected
+ * role without an active holder.
  *
  * The entity setters stay for fixtures and migrations.
  */
@@ -38,6 +40,7 @@ class AccountAdministrationService
      */
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
+        private readonly Security $security,
         private readonly RoleHierarchyInterface $roleHierarchy,
         private readonly ReversedRoleHierarchyService $reversedRoleHierarchy,
         private readonly AssignableRolesService $assignableRoles,
@@ -48,7 +51,29 @@ class AccountAdministrationService
         private readonly iterable $guards = [],
         #[Autowire(param: 'wexample_symfony_user.administration.protected_roles')]
         private readonly array $protectedRoles = [],
+        #[Autowire(param: 'wexample_symfony_user.administration.page_role')]
+        private readonly ?string $pageRole = null,
     ) {
+    }
+
+    /**
+     * The role the administration screens are behind, or null where the
+     * application declared none — and then they are not there at all.
+     */
+    public function getPageRole(): ?string
+    {
+        return $this->pageRole;
+    }
+
+    /**
+     * Whether the signed-in user may administer accounts. False with no role
+     * declared, whoever asks.
+     */
+    public function canAdminister(): bool
+    {
+        return $this->pageRole !== null
+            && $this->security->getUser() instanceof AbstractUser
+            && $this->security->isGranted($this->pageRole);
     }
 
     /**

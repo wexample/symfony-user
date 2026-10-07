@@ -17,6 +17,7 @@ final class UserRoute
     public const string TWO_FACTOR_RESEND = 'user_security_two_factor_resend';
     public const string TOTP_REGENERATE = 'user_totp_regenerate';
     public const string IMPERSONATE_SEARCH = 'user_impersonate_search';
+    public const string ACCOUNT_ACTION = 'user_accounts_action';
 
     // Pages.
     public const string LOGIN = 'user_security_login';
@@ -24,6 +25,10 @@ final class UserRoute
     public const string PASSWORD_FORGOT = 'user_password_forgot';
     public const string PASSWORD_NEW = 'user_password_new';
     public const string PASSWORD_ACTIVATION_INVALID = 'user_password_activation_invalid';
+    public const string PROFILE = 'user_profile_index';
+    public const string ACCOUNTS = 'user_accounts_index';
+    public const string ACCOUNT = 'user_accounts_show';
+    public const string ACCOUNT_ACTIVITY = 'user_accounts_activity';
     public const string TERMS = 'user_terms_index';
     public const string TOTP = 'user_totp_index';
     public const string TOTP_BACKUP_CODES = 'user_totp_backup_codes';
@@ -34,4 +39,8 @@ final class UserRoute
     /** The query parameter telling the forgot page it was reached by a dead link. */
     public const string PARAMETER_LINK = 'link';
     public const string LINK_INVALID = 'invalid';
+
+    /** And the one telling the login page why it is being read again. */
+    public const string PARAMETER_SESSION = 'session';
+    public const string SESSION_EXPIRED = 'expired';
 }
