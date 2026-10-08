@@ -4,6 +4,17 @@ Opened: 2026-10-01
 Updated: 2026-10-08
 Author: agent:sapiens
 
+## State (2026-10-08, agent:main)
+
+Sections 1 to 5 are built in symfony-user, tested (`tests/Integration/MembershipTest.php`, `tests/Unit/MembershipsConfigurationTest.php`) and documented (usage, "Memberships"). What differs from the plan below:
+
+- Names: `MembershipGroupInterface`, `MemberInterface`, `MembershipInterface`, `RepresentativeInterface` (an account acting for its organizations), `Entity/Traits/HasGrantsTrait`. No account-side trait: `MembershipService` (`getGrants`, `holds`, `isMember`, `getGroups`, `getMembership`) works on any member.
+- Section 2: the roles a grant gives come from a voter (`Security/Voter/MembershipRoleVoter`), read at each request. A membership changed applies at the next request **without** signing out (network #271, and `AbstractUser::isEqualTo` already leaves roles out). `getRoles()` does not hold them: the 2FA policy and the landing page after login do not see them. The "a platform role excludes memberships" rule is not built.
+- Section 3: `MembershipScopeService::restrict()`, `restrictToCurrentMember()`, `assertInScope()` (404). Ids are bound with their column type (binary uuid).
+- Section 4: `Security/Guard/MembershipAdministrationGuard`, on `memberships.administer_grant`. An actor holding it nowhere keeps the `administration` rules; an account in no group is out of reach, except while being created.
+
+Left: the screens (symfony-user-ds) and the demo (symfony-user-demo, MOJOE design-system), then Sapiens' migration below.
+
 ## Context
 
 Asked by the Sapiens app (`HOME_HABILIS/local/sapiens`). A Sapiens account belongs to one or several establishments, with its own rights in each: a carer in one, a carer and administrator in another. What it may see and administer follows from those memberships. Any B2B application has the same shape: an account inside one or several groups (company, team, site, clinic), with a role in each.

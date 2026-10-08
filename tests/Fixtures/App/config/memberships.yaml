@@ -1,0 +1,31 @@
+# symfony-testing's TestKernel sets this parameter itself, over
+# `security.role_hierarchy`: it is set again here.
+parameters:
+  security.role_hierarchy.roles:
+    ROLE_PLATFORM_ADMIN: [ROLE_TEAM_ADMIN]
+    ROLE_TEAM_ADMIN: [ROLE_TEAM_MEMBER]
+
+wexample_symfony_user:
+  administration:
+    page_role: ROLE_TEAM_ADMIN
+  memberships:
+    grants:
+      administrator: [contributor]
+      contributor: [watcher]
+      client: [watcher]
+      watcher: []
+    roles:
+      administrator: ROLE_TEAM_ADMIN
+      watcher: ROLE_TEAM_MEMBER
+    administer_grant: administrator
+
+services:
+  test.account_administration:
+    alias: Wexample\SymfonyUser\Service\AccountAdministrationService
+    public: true
+  test.membership:
+    alias: Wexample\SymfonyUser\Service\MembershipService
+    public: true
+  test.membership_scope:
+    alias: Wexample\SymfonyUser\Service\MembershipScopeService
+    public: true

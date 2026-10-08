@@ -158,6 +158,34 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('memberships')
+                    ->info('Accounts — or organizations, anything implementing MemberInterface — holding grants in groups of the application (MembershipGroupInterface): a project, a team, an establishment.')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('grants')
+                            ->info('Every grant, with the grants it includes, administrator: [contributor]. A grant asked is held by whoever holds it or one including it. Empty, no grant is known and `is_granted()` on a group abstains.')
+                            ->normalizeKeys(false)
+                            ->useAttributeAsKey('grant')
+                            ->arrayPrototype()->scalarPrototype()->end()->end()
+                            ->defaultValue([])
+                        ->end()
+                        ->arrayNode('roles')
+                            ->info('The role a grant gives, held in any group, care: ROLE_CARER: `access_control` and `is_granted()` read it at the next request, without signing the account out. Read through the voter only: AbstractUser::getRoles() and the services reading it — the second factor policy, the landing page after login — do not see it.')
+                            ->normalizeKeys(false)
+                            ->useAttributeAsKey('grant')
+                            ->scalarPrototype()->end()
+                            ->defaultValue([])
+                        ->end()
+                        ->scalarNode('administer_grant')
+                            ->info('The grant administering the accounts of a group. Set, an account administering through it reaches only the accounts all of whose groups it holds that grant in. Platform administrators, holding it nowhere, keep the rules of `administration`.')
+                            ->defaultNull()
+                        ->end()
+                    ->end()
+                    ->validate()
+                        ->ifTrue(static fn (array $memberships) => self::findMembershipsError($memberships) !== null)
+                        ->then(static fn (array $memberships) => throw new \InvalidArgumentException(self::findMembershipsError($memberships)))
+                    ->end()
+                ->end()
                 ->arrayNode('two_factor')
                     ->addDefaultsIfNotSet()
                     ->children()
@@ -183,5 +211,54 @@ class Configuration implements ConfigurationInterface
             ->end();
 
         return $treeBuilder;
+    }
+
+    /**
+     * A grant included, given a role or administering that is not declared, or
+     * a grant including itself through others.
+     */
+    private static function findMembershipsError(array $memberships): ?string
+    {
+        $grants = $memberships['grants'];
+
+        foreach ($grants as $grant => $included) {
+            foreach ($included as $includedGrant) {
+                if (! isset($grants[$includedGrant])) {
+                    return sprintf('memberships.grants: "%s" includes "%s", which is not declared.', $grant, $includedGrant);
+                }
+            }
+        }
+
+        foreach (array_keys($memberships['roles']) as $grant) {
+            if (! isset($grants[$grant])) {
+                return sprintf('memberships.roles: "%s" is not a declared grant.', $grant);
+            }
+        }
+
+        if ($memberships['administer_grant'] !== null && ! isset($grants[$memberships['administer_grant']])) {
+            return sprintf('memberships.administer_grant: "%s" is not a declared grant.', $memberships['administer_grant']);
+        }
+
+        foreach (array_keys($grants) as $grant) {
+            $path = [$grant];
+            $pending = [[$grant, $grants[$grant]]];
+
+            while ($pending) {
+                [$from, $included] = array_pop($pending);
+
+                foreach ($included as $includedGrant) {
+                    if ($includedGrant === $grant) {
+                        return sprintf('memberships.grants: "%s" includes itself.', $grant);
+                    }
+
+                    if (! in_array($includedGrant, $path, true)) {
+                        $path[] = $includedGrant;
+                        $pending[] = [$includedGrant, $grants[$includedGrant]];
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 }
