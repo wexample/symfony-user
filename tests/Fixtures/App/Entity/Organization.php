@@ -44,4 +44,9 @@ class Organization extends AbstractEntity implements MemberInterface
     {
         $this->memberships->add($membership);
     }
+
+    public function removeMembership(Membership $membership): void
+    {
+        $this->memberships->removeElement($membership);
+    }
 }

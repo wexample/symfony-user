@@ -51,6 +51,11 @@ class User extends AbstractUser implements RepresentativeInterface
         $this->memberships->add($membership);
     }
 
+    public function removeMembership(Membership $membership): void
+    {
+        $this->memberships->removeElement($membership);
+    }
+
     public function getRepresentedMembers(): iterable
     {
         return $this->organizations;

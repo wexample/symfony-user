@@ -9,6 +9,8 @@ namespace Wexample\SymfonyUser\Interface;
  */
 interface MembershipInterface
 {
+    public function getId(): mixed;
+
     public function getMember(): MemberInterface;
 
     public function getGroup(): MembershipGroupInterface;

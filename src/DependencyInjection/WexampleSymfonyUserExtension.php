@@ -8,6 +8,7 @@ use Wexample\SymfonyHelpers\DependencyInjection\AbstractWexampleSymfonyExtension
 use Wexample\SymfonyUser\EventSubscriber\SecurityActivitySubscriber;
 use Wexample\SymfonyUser\Interface\AccountAdministrationGuardInterface;
 use Wexample\SymfonyUser\Interface\AccountGateInterface;
+use Wexample\SymfonyUser\Interface\MembershipManagerInterface;
 
 class WexampleSymfonyUserExtension extends AbstractWexampleSymfonyExtension
 {
@@ -52,6 +53,9 @@ class WexampleSymfonyUserExtension extends AbstractWexampleSymfonyExtension
         $container
             ->registerForAutoconfiguration(AccountAdministrationGuardInterface::class)
             ->addTag(AccountAdministrationGuardInterface::TAG);
+        $container
+            ->registerForAutoconfiguration(MembershipManagerInterface::class)
+            ->addTag(MembershipManagerInterface::TAG);
 
         $this->loadConfig(
             __DIR__,

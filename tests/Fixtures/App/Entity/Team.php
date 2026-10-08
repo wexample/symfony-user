@@ -41,4 +41,9 @@ class Team extends AbstractEntity implements MembershipGroupInterface
     {
         $this->memberships->add($membership);
     }
+
+    public function removeMembership(Membership $membership): void
+    {
+        $this->memberships->removeElement($membership);
+    }
 }

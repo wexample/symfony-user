@@ -54,4 +54,9 @@ class Membership extends AbstractEntity implements MembershipInterface
     {
         return $this->team;
     }
+
+    public function getTeam(): Team
+    {
+        return $this->team;
+    }
 }

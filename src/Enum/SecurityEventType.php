@@ -46,6 +46,11 @@ enum SecurityEventType: string implements SecurityEventTypeInterface
     case ACCOUNT_ROLES_CHANGED = 'account.roles_changed';
     case ACCOUNT_CHANGE_REFUSED = 'account.change_refused';
 
+    case MEMBERSHIP_ADDED = 'membership.added';
+    case MEMBERSHIP_GRANTS_CHANGED = 'membership.grants_changed';
+    case MEMBERSHIP_REMOVED = 'membership.removed';
+    case MEMBERSHIP_CHANGE_REFUSED = 'membership.change_refused';
+
     case TERMS_ACCEPTED = 'terms.accepted';
 
     /** A fully signed-in user refused a page or an action. */
@@ -62,6 +67,6 @@ enum SecurityEventType: string implements SecurityEventTypeInterface
 
     public function isFailure(): bool
     {
-        return in_array($this, [self::LOGIN_FAILED, self::SECOND_FACTOR_FAILED, self::ACCOUNT_CHANGE_REFUSED, self::SECURITY_MESSAGE_FAILED, self::ACCESS_DENIED], true);
+        return in_array($this, [self::LOGIN_FAILED, self::SECOND_FACTOR_FAILED, self::ACCOUNT_CHANGE_REFUSED, self::MEMBERSHIP_CHANGE_REFUSED, self::SECURITY_MESSAGE_FAILED, self::ACCESS_DENIED], true);
     }
 }

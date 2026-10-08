@@ -8,8 +8,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Wexample\SymfonyUser\Enum\AccountAdministrationRefusal;
+use Wexample\SymfonyUser\Enum\MembershipAdministrationRefusal;
 use Wexample\SymfonyUser\Exception\AccountAdministrationException;
+use Wexample\SymfonyUser\Exception\MembershipAdministrationException;
 use Wexample\SymfonyUser\Service\AccountAdministrationService;
+use Wexample\SymfonyUser\Service\MembershipAdministrationService;
 use Wexample\SymfonyUser\Service\MembershipScopeService;
 use Wexample\SymfonyUser\Service\MembershipService;
 use Wexample\SymfonyUser\Tests\Fixtures\App\Entity\Membership;
@@ -207,6 +210,84 @@ class MembershipTest extends KernelTestCase
         $this->assertTrue($member->isLocked());
     }
 
+    public function testAGroupAdministratorManagesItsMembers(): void
+    {
+        $administrator = $this->createUser('ora');
+        $this->join($this->alpha, $administrator, ['administrator']);
+        $newcomer = $this->createUser('pam');
+
+        $administration = $this->getMembershipAdministration();
+        $membership = $administration->add($administrator, $this->alpha, $newcomer, ['watcher']);
+
+        $this->assertSame(['watcher'], $this->memberships->getGrants($newcomer, $this->alpha));
+
+        $administration->changeGrants($administrator, $membership, ['contributor']);
+        $this->assertTrue($this->memberships->holds($newcomer, 'contributor', $this->alpha));
+
+        $administration->remove($administrator, $membership);
+        $this->entityManager->clear();
+
+        $this->assertSame([], $this->memberships->getGroups($this->entityManager->find(User::class, $newcomer->getId())));
+    }
+
+    public function testMembersAreManagedByTheGroupAdministratorsOnly(): void
+    {
+        $administrator = $this->createUser('quinn');
+        $this->join($this->alpha, $administrator, ['administrator']);
+        $contributor = $this->createUser('rae');
+        $this->join($this->beta, $contributor, ['contributor']);
+
+        $administration = $this->getMembershipAdministration();
+
+        $this->assertMembershipRefused(MembershipAdministrationRefusal::GROUP_NOT_ADMINISTERED, fn () => $administration->add($administrator, $this->beta, $this->createUser('sam'), ['watcher']));
+        $this->assertMembershipRefused(MembershipAdministrationRefusal::GROUP_NOT_ADMINISTERED, fn () => $administration->add($contributor, $this->beta, $this->createUser('tom'), ['watcher']));
+
+        // The administration page role administers every group.
+        $platform = $this->createUser('uma', ['ROLE_TEAM_ADMIN']);
+        $administration->add($platform, $this->beta, $administrator, ['watcher']);
+        $this->assertTrue($this->memberships->holds($administrator, 'watcher', $this->beta));
+    }
+
+    public function testAGroupKeepsAnAdministrator(): void
+    {
+        $administrator = $this->createUser('vic');
+        $own = $this->join($this->alpha, $administrator, ['administrator']);
+
+        $administration = $this->getMembershipAdministration();
+
+        $this->assertMembershipRefused(MembershipAdministrationRefusal::LAST_ADMINISTRATOR, fn () => $administration->changeGrants($administrator, $own, ['watcher']));
+        $this->assertMembershipRefused(MembershipAdministrationRefusal::LAST_ADMINISTRATOR, fn () => $administration->remove($administrator, $own));
+
+        $other = $administration->add($administrator, $this->alpha, $this->createUser('wes'), ['administrator']);
+        $administration->remove($administrator, $own);
+
+        $this->assertSame(['administrator'], $other->getGrants());
+    }
+
+    public function testAMemberJoinsOnceWithDeclaredGrants(): void
+    {
+        $administrator = $this->createUser('xan');
+        $this->join($this->alpha, $administrator, ['administrator']);
+        $member = $this->createUser('yul');
+        $this->join($this->alpha, $member, ['watcher']);
+
+        $administration = $this->getMembershipAdministration();
+
+        $this->assertMembershipRefused(MembershipAdministrationRefusal::ALREADY_MEMBER, fn () => $administration->add($administrator, $this->alpha, $member, ['client']));
+        $this->assertMembershipRefused(MembershipAdministrationRefusal::INVALID_GRANTS, fn () => $administration->add($administrator, $this->alpha, $this->createUser('zed'), []));
+        $this->assertMembershipRefused(MembershipAdministrationRefusal::INVALID_GRANTS, fn () => $administration->add($administrator, $this->alpha, $this->createUser('abe'), ['owner']));
+    }
+
+    private function assertMembershipRefused(MembershipAdministrationRefusal $refusal, callable $action): void
+    {
+        try {
+            $action();
+            $this->fail('The change was made.');
+        } catch (MembershipAdministrationException $exception) {
+            $this->assertSame($refusal, $exception->refusal);
+        }
+    }
+
     private function assertOutOfScope(callable $action): void
     {
         try {
@@ -294,6 +375,11 @@ class MembershipTest extends KernelTestCase
     private function getScope(): MembershipScopeService
     {
         return self::getContainer()->get('test.membership_scope');
+    }
+
+    private function getMembershipAdministration(): MembershipAdministrationService
+    {
+        return self::getContainer()->get('test.membership_administration');
     }
 
     private function getAdministration(): AccountAdministrationService

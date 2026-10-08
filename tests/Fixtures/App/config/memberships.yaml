@@ -29,3 +29,9 @@ services:
   test.membership_scope:
     alias: Wexample\SymfonyUser\Service\MembershipScopeService
     public: true
+  test.membership_administration:
+    alias: Wexample\SymfonyUser\Service\MembershipAdministrationService
+    public: true
+
+  Wexample\SymfonyUser\Tests\Fixtures\App\Membership\TeamMembershipManager:
+    autoconfigure: true

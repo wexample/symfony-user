@@ -206,6 +206,18 @@ No group matches nothing, never everything: an account with no membership, or no
 
 With `administer_grant`, an account holding it in groups administers the accounts all of whose groups it holds it in (`Security\Guard\MembershipAdministrationGuard`): one group it does not, and a deactivation would cut that group off too. An account in no group is out of its reach, but for one it creates. An administrator holding the grant nowhere — a platform role — keeps the rules of `administration`.
 
+### Managing members
+
+`MembershipAdministrationService` adds a member to a group (`add($actor, $group, $member, ['contributor'])`), changes its grants (`changeGrants()`) and removes it (`remove()`). It refuses, with `Enum\MembershipAdministrationRefusal`:
+
+- `group_not_administered`: the actor holds neither `memberships.administer_grant` in the group nor `administration.page_role`;
+- `already_member`, `invalid_grants` (none, or one undeclared);
+- `last_administrator`: the group would be left with no member holding `administer_grant`.
+
+Each change is journaled — `membership.added`, `membership.grants_changed`, `membership.removed`, `membership.change_refused` —, on the account it is about, with the group, the member and the grants before and after in `extra`.
+
+The entities being the application's, it declares how they are made, one `MembershipManagerInterface` per kind of group: its name in urls (`team`), the group and member classes, `createMembership()` and `removeMembership()`. symfony-user-ds draws the screens on it.
+
 ## Impersonation
 
 Who may impersonate is the firewall's: its `switch_user` key, and the role it names. Without the key, nobody can, the impersonation page and search answer 404 — declare it under `when@dev` alone for an application impersonating in development only:
