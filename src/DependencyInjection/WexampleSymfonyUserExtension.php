@@ -56,8 +56,8 @@ class WexampleSymfonyUserExtension extends AbstractWexampleSymfonyExtension
         );
 
         // The history of the accounts, where the application enabled
-        // symfony-activity: optional, so nothing of it is required here. The
-        // bundle, not the class — installed and not enabled, it has no services.
+        // symfony-activity is always installed, but an application may leave its
+        // bundle out — and then it has no services to record into.
         if (in_array(WexampleSymfonyActivityBundle::class, $container->getParameter('kernel.bundles'), true)) {
             $container->autowire(SecurityActivitySubscriber::class)->setAutoconfigured(true);
         }

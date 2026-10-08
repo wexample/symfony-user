@@ -40,7 +40,8 @@
     "scheb/2fa-totp": "^8.6",
     "scheb/2fa-backup-code": "^8.6",
     "endroid/qr-code": "^6.0",
-    "wexample/symfony-tunnels": ">=10.0.0"
+    "wexample/symfony-tunnels": ">=10.0.0",
+    "wexample/symfony-activity": ">=1.0.1"
   },
   "require-dev": {
     "phpunit/phpunit": "^13",

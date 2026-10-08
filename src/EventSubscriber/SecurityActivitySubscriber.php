@@ -15,7 +15,7 @@ use Wexample\SymfonyUser\Service\AccountDirectoryService;
  * history in the `security` category of symfony-activity: the login history
  * of an account is this category of its history.
  *
- * Registered only when symfony-activity is installed, and recording nothing
+ * Registered only when the symfony-activity bundle is enabled, and recording nothing
  * until the application enables `security` there. A fact naming no account —
  * an address typed that none holds — has no history to go into.
  */
