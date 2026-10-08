@@ -1,7 +1,7 @@
 # Sapiens — group memberships, roles derived from them, and data scoped to them
 
 Opened: 2026-10-01
-Updated: 2026-10-01
+Updated: 2026-10-08
 Author: agent:sapiens
 
 ## Context
@@ -43,6 +43,28 @@ It is a small amount of code, but it is written the same way in every applicatio
 
 - The existing `AccountAdministrationGuardInterface` gains a ready-made implementation. An account may administer another one only if **every** group of the target is a group where it holds the administrating grant. Otherwise, deactivating an account shared with another group would cut that group's access too.
 - The grant that means "administers this group" is configurable. Platform roles (`administration.manages`) keep working as today.
+
+## 5. What network's projects add (2026-10-08, with the owner)
+
+The `symfony-project` proposal from the network archaeology is dropped: past
+its membership, a project is network's own business (invoices, contracts,
+organizations), and stays an entity of the app. What it shares with every
+application is this todo's machinery, with two more needs:
+
+- **The member is not always an account.** In network the member of a project is
+  an organization (#36, #237). The member side is an interface too — an account,
+  an organization, anything — and the group side stays `GroupInterface`, so that
+  any entity can be joined: a project, a workspace, a shared document.
+- **Grants that include one another.** network's levels, in use for years:
+  administrator ⊃ contributor ⊃ watcher, and client ⊃ watcher. A configurable
+  hierarchy of grants, and a voter answering "holds at least this grant on this
+  group" — `is_granted('contributor', $project)`.
+- Changing someone's grants must not sign them out (#271): weigh this against
+  section 2, which ends the session when roles change.
+
+Sources (read only, network runs on production data):
+`NETWORK/archeo/proposed-packages/dismiss/symfony-project/todo/extract-from-network.md`
+and the knowledge page it points to (`archeology/project.md.j2`, permission matrix).
 
 ## Tests
 
