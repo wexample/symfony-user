@@ -150,6 +150,10 @@ wexample_symfony_user:
         version: ~                 # set: every signed-in user accepts this version before anything else; changing it asks everyone again
         text_route: ~              # the route of the page holding the text, owned by the application
     magic_link_login: true         # false: no magic link form on the login page; MagicLinkService still sends the application's own links
+    session:
+        idle_lifetime: 0           # seconds a signed-in session survives unused; 0, never expires one
+    password:
+        refuse_leaked: false       # true: refuse a password found in a breach — needs symfony/http-client, and an outbound call per password set
     activation:
         link_lifetime: 604800      # seconds the link of an activation mail works
     impersonation:
@@ -163,6 +167,7 @@ wexample_symfony_user:
         per_identifier: 3
         per_ip: 20
     administration:                # the rules of AccountAdministrationService and AccountRulesService
+        page_role: ~               # the role opening the administration screens of symfony-user-ds; unset, they answer 404 for everyone
         protected_roles: []        # never left without an active holder
         manages: {}                # ROLE_X: [ROLE_A] — the roles ROLE_X administers, with no right over their pages; unset, the roles reached
         role_email_domains: {}     # ROLE_X: [example.com] — held only by an address of these domains

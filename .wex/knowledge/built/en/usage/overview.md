@@ -10,8 +10,9 @@
 | `user_password_activate` | `/password/activate` | target of the activation mail |
 | `user_security_two_factor_resend` | `/login/2fa/resend` | sends the code again (POST) |
 | `user_totp_regenerate` | `/account/authenticator/backup-codes/regenerate` | new backup codes (POST) |
+| `user_accounts_action` | `/accounts/{id}/{action}` | what an administrator does to one account (POST) |
 
-The pages — `LOGIN`, `TWO_FACTOR`, `PASSWORD_FORGOT`, `PASSWORD_NEW`, `PASSWORD_ACTIVATION_INVALID`, `TERMS`, `TOTP`, `TOTP_BACKUP_CODES`, `TOTP_SETUP` — are `symfony-user-ds`'s. The texts of the forms and the mails stay here, under `assets/forms/` and `assets/mails/`: a form reads its labels and errors from the domain of its class.
+The pages — `LOGIN`, `TWO_FACTOR`, `PASSWORD_FORGOT`, `PASSWORD_NEW`, `PASSWORD_ACTIVATION_INVALID`, `PROFILE`, `TERMS`, `TOTP`, `TOTP_BACKUP_CODES`, `TOTP_SETUP`, `ACCOUNTS`, `ACCOUNT`, `ACCOUNT_ACTIVITY` — are `symfony-user-ds`'s. The texts of the forms and the mails stay here, under `assets/forms/` and `assets/mails/`: a form reads its labels and errors from the domain of its class.
 
 ## Showing the login form elsewhere
 
@@ -81,6 +82,33 @@ The application fills it. With `remember_locale: true` and the URL prefixes of s
 - `ChangePasswordForm`: the signed-in user, current password required.
 - `SetPasswordForm` and `PasswordUpdaterService`: to let an administrator set a password in an application processor.
 - `PasswordUpdaterService::update()` ends the other sessions of the account and kills the links sent before.
+- At least 8 characters, and a medium score on Symfony's `PasswordStrength`. With `password.refuse_leaked`, one more constraint: the password must not be in a known breach. The check asks `api.pwnedpasswords.com` for the hashes sharing the first five characters of its own — never the password itself —, and lets it through when the API answers badly, so a bad minute at a third party refuses nobody their password. It needs `symfony/http-client`, which the package does not require: install it with the option. Off by default, for the applications on a closed network, which have nobody to ask.
+
+### A password its holder did not choose
+
+`AbstractUser::isPasswordChangeRequired()` marks an account whose password somebody else knows. `PasswordChangeGate`, the first of the account gates, then holds it on `/password/new` — the page of the reset walk, with the same form, asking for no current password: the one it would ask for is the one being taken away. The new password clears the flag.
+
+`PasswordUpdaterService` keeps the flag in step with every password it writes: raised when the signed-in actor is someone else than the account — an administrator setting a password —, cleared in every other case, which are all the holder choosing their own. An application creating an account with a password of its own — a fixture, an import, a migration from another system — raises it itself with `setPasswordChangeRequired(true)`.
+
+Nothing is forced after an invitation or a reset: there, the holder already chose the password, and `createAccount()` writes no password at all.
+
+`AbstractUser` carries the flag as a `password_change_required` column: an application adding this version generates a migration for it.
+
+## The account's own page
+
+`/account` (`UserRoute::PROFILE`, symfony-user-ds) is what the holder reads and changes about itself: its address — shown, not changed, being the identifier it signs in with —, its initials, its roles, its last sign-in, then two forms and a link.
+
+`ProfileForm` carries the name and the language, and only what the application's user class actually has: the first and last name when it uses `UserWithNameTrait`, the language when `framework.enabled_locales` holds more than one. With neither, `ProfileFormProcessor::hasFields()` is false and the page leaves the card out. `ChangePasswordForm` is the second one, and `/account/authenticator` the link.
+
+The entry leading there is the application's to add: the user menu takes it in its `items`.
+
+## Session lifetime
+
+`session.idle_lifetime`, in seconds, signs out a session nobody has asked anything of — the screen left open in a workshop, the tab forgotten on a shared machine. `0`, the default, expires none: the session lives as long as its cookie. It is a delay apart from Symfony's `framework.session.cookie_lifetime` and `gc_maxlifetime`, which say how long a session may live at all, not how long it may live unused.
+
+`SessionIdleSubscriber` stamps the session at each request and, past the delay, signs the account out — the remember-me cookie included, or it would sign straight back in —, journals `session.expired` and lands on `/login?session=expired`, which the login page reads to say why. An ajax call gets the `401` payload instead.
+
+What pushes the delay back is a page being read. The requests under `/_`, which a script makes and not a reader, are held to the delay without pushing it back: a page left open polling keeps no session alive.
 
 ## Second factor
 
@@ -128,6 +156,18 @@ The service refuses:
 `AccountRulesService` holds what an account must always be, whoever writes it: a role of `administration.role_email_domains` held — directly or through the hierarchy — by an address of its domains, compared whole; the roles of `administration.exclusive_roles` never given together. Only given roles count there, so an administrator can reach the roles of the accounts they administer. A Doctrine listener applies these rules on every flush; a profile form changing the address calls `assertValid()` first, to show the refusal. A database `CHECK` constraint, in the application's schema, is the last line.
 
 Each change is journaled — `account.created`, `account.activation_sent`, `account.activated`, `account.password_mail_sent`, `account.deactivated`, `.reactivated`, `.locked`, `.unlocked`, `account.roles_changed` with `roles_before` / `roles_after` —, each refusal as `account.change_refused` with its code; `extra.actor_id` names the actor.
+
+### The screens
+
+`symfony-user-ds` draws them, and `administration.page_role` decides whether they exist at all: unset — the default — `/accounts` and everything under it answers 404, for everyone, the way the impersonation page does without `switch_user`. Set, that role opens them, and the rules above still say what each administrator may then do. Declare it only where administering accounts from the interface is the intent.
+
+- `/accounts` (`UserRoute::ACCOUNTS`): every account, 25 to a page, searched by address, username or name; and the card that opens one — an address, the roles the actor administers, one switch each. An address another account holds is refused before the database is asked.
+- `/accounts/{id}` (`UserRoute::ACCOUNT`): one account — its state, its roles, the change it owes —, the roles form again, and a button per action its state allows (`Enum\AccountAction`): deactivate, reactivate, lock, unlock, send the mail to choose a password. Each posts to `user_accounts_action` with the form CSRF token of the application (`submit`), and comes back to the page with `?done=` or `?refused=<code>`. Where symfony-activity is installed, its recent history too.
+- `/accounts/{id}/activity` (`UserRoute::ACCOUNT_ACTIVITY`): the whole history of the account, a page at a time, narrowed to one category — there only where symfony-activity is installed.
+
+A refusal is shown, never an error page: both form processors call the service inside `formIsValid()`, so `AccountAdministrationRefusal` comes back as an error on the form. The roles the account holds outside the ones the actor administers are kept untouched.
+
+An application drawing its own screens instead reads through the same services: `AccountDirectoryService` lists, searches, pages and describes, `AssignableRolesService` names the roles a field may offer.
 
 ## Impersonation
 
@@ -178,14 +218,19 @@ Every security mail handed to the sender is journaled as `security_message.sent`
 
 It never carries a secret. An identifier typed for an unknown account is kept as `extra.identifier_fingerprint`, an HMAC that groups the attempts without the text.
 
-The package writes them to the `user_security` Monolog channel, warnings for failures: give that channel its own handler and retention. An audit package listens to `SecurityEvent` to store them. Facts of the application itself go through `SecurityJournalService::record()`.
+The package writes them to the `user_security` Monolog channel, warnings for failures: give that channel its own handler and retention. Facts of the application itself go through `SecurityJournalService::record()`.
+
+### The history of an account
+
+Where symfony-activity is installed and enabled, `SecurityActivitySubscriber` writes every fact naming an account into its history, in the `security` category: `security.<type>`, with the method, the cause of a failure, the IP, the user agent, and the actor when an administrator acted. A fact naming no account — an address none holds — has no history to go into. Nothing is kept until the application enables `security` in `wexample_symfony_activity.categories`; what to keep, for how long, and whether to anonymize is decided there. The login history of an account is this category of its history.
 
 The signature of magic and reset links is masked in every log record, the exceptions it carries included: the router logs each request URI, and a 404 quotes the referer. The package declares a masker (`wexample_symfony_user.log_masker.link_signature`, the `hash` query parameter) to `symfony-security`'s redaction processor; an application adds its own there too. Keep `doctrine.dbal.logging` off outside development: the SQL log carries query parameters.
 
 ## Account gates
 
-What a signed-in user must do before reaching anything else, once the second factor is checked — whatever the way they signed in. `AccountGateSubscriber` holds them on the page of the first gate still blocking (an ajax call gets a `403` naming it); logout stays open. The package ships two, in this order:
+What a signed-in user must do before reaching anything else, once the second factor is checked — whatever the way they signed in. `AccountGateSubscriber` holds them on the page of the first gate still blocking (an ajax call gets a `403` naming it); logout stays open. The package ships three, in this order:
 
+- the password change, when the account's password is one it did not choose: until it is replaced, the account signs in with a secret somebody else knows;
 - the authenticator app setup, for `two_factor.app_required_roles`;
 - the terms of use, when `terms.version` is set: `/account/terms` shows a link to `terms.text_route`, an accept button, and a way out (sign out). Each acceptance is a `TermsAcceptance` row — user id and identifier, version, UTC time, IP, user agent — never changed nor removed, one per version, journaled as `terms.accepted`. Changing the version asks everyone again at their next request. An administrator impersonating a user is not held, and cannot accept in their name.
 

@@ -5,7 +5,6 @@ namespace Wexample\SymfonyUser\Tests\Integration;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Wexample\SymfonyUser\Controller\AccountActionController;
 use Wexample\SymfonyUser\Service\FormProcessor\AccountCreateFormProcessor;
 use Wexample\SymfonyUser\Tests\Fixtures\App\AdministrationAppKernel;
 use Wexample\SymfonyUser\Tests\Fixtures\App\Entity\User;

@@ -3,7 +3,7 @@
   "description": "User accounts and authentication for Symfony",
   "type": "library",
   "license": "MIT",
-  "version": "10.0.5",
+  "version": "11.0.0",
   "autoload": {
     "psr-4": {
       "Wexample\\SymfonyUser\\": "src/"
@@ -25,11 +25,11 @@
     "doctrine/orm": "^3.0",
     "symfony/security-bundle": "^7.4",
     "wexample/symfony-helpers": ">=15.0.0",
-    "wexample/symfony-security": ">=2.0.0",
-    "wexample/symfony-translations": ">=10.0.0",
+    "wexample/symfony-security": ">=2.1.0",
+    "wexample/symfony-translations": ">=12.0.0",
     "symfony/validator": "^7.4",
-    "wexample/symfony-forms": ">=10.0.0",
-    "wexample/symfony-loader": ">=21.0.0",
+    "wexample/symfony-forms": ">=11.0.0",
+    "wexample/symfony-loader": ">=22.0.0",
     "wexample/symfony-mail": ">=2.0.0",
     "symfony/form": "^7.4",
     "symfony/rate-limiter": "^7.4",
@@ -41,7 +41,7 @@
     "scheb/2fa-backup-code": "^8.6",
     "endroid/qr-code": "^6.0",
     "wexample/symfony-tunnels": ">=10.0.0",
-    "wexample/symfony-activity": ">=1.0.1"
+    "wexample/symfony-activity": ">=2.0.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^13",
