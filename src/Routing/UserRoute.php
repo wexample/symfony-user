@@ -35,6 +35,8 @@ final class UserRoute
     public const string TOTP_SETUP = 'user_totp_setup_index';
     public const string IMPERSONATE = 'user_impersonate_index';
     public const string ACCOUNT_PICKER = 'user_account_picker';
+    public const string MEMBERSHIPS = 'user_memberships_index';
+    public const string MEMBERSHIP = 'user_memberships_show';
 
     /** The query parameter telling the forgot page it was reached by a dead link. */
     public const string PARAMETER_LINK = 'link';
