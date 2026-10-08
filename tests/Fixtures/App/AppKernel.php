@@ -4,7 +4,6 @@ namespace Wexample\SymfonyUser\Tests\Fixtures\App;
 
 use Scheb\TwoFactorBundle\SchebTwoFactorBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
-use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Wexample\SymfonyForms\WexampleSymfonyFormsBundle;
 use Wexample\SymfonyLoader\WexampleSymfonyLoaderBundle;
@@ -26,7 +25,6 @@ class AppKernel extends AbstractFixtureKernel
     protected function getExtraBundles(): iterable
     {
         return [
-            new SecurityBundle(),
             new MonologBundle(),
             new WexampleSymfonySecurityBundle(),
             new SchebTwoFactorBundle(),
@@ -39,6 +37,11 @@ class AppKernel extends AbstractFixtureKernel
             // The screens, so the walks reach real pages.
             new WexampleSymfonyUserDsBundle(),
         ];
+    }
+
+    protected function configuresItsOwnSecurity(): bool
+    {
+        return true;
     }
 
     protected function getConfigFiles(): array
