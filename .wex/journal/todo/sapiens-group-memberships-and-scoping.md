@@ -16,7 +16,7 @@ Sections 1 to 5 are built in symfony-user, tested (`tests/Integration/Membership
 Then, the same day:
 - symfony-user: `MembershipManagerInterface` (one per kind of group, the app's), `MembershipAdministrationService` (add, change grants, remove; `last_administrator` kept; journaled `membership.*`).
 - symfony-user-ds: `/memberships/{kind}:{id}` (members, read by members, changed by administrators), the member modal (grants, leaving), the add form with symfony-search's entity field (the member class carries `#[Searchable]`), `memberships_url()`, "Mes groupes" on the profile. Tested in `tests/Integration/MembershipScreenTest.php` (access and forms; the pages are not rendered in the fixture kernel).
-- symfony-user-demo: `DemoTeam`, `DemoTeamMembership`, `/user/teams`; demo administers Rédaction, watches Studio. Walked in Chrome in MOJOE design-system: add by search, grants in the modal, removal, read-only team, profile.
+- symfony-user-demo: `DemoTeam`, `DemoTeamMembership`, `/user/teams`; demo administers Editorial, watches Studio. Walked in Chrome in MOJOE design-system: add by search, grants in the modal, removal, read-only team, profile.
 
 Left:
 - A change made in the modal reloads the whole members page (`redirect`): the loader cannot refresh a page under a modal once its form succeeded. To build in symfony-loader, then use here.
