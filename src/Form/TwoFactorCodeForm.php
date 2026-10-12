@@ -2,6 +2,7 @@
 
 namespace Wexample\SymfonyUser\Form;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Wexample\SymfonyForms\Form\AbstractForm;
@@ -26,6 +27,16 @@ class TwoFactorCodeForm extends AbstractForm
 
     public static bool $ajax = true;
 
+    /**
+     * "Trust this device" only where scheb keeps trusted devices: elsewhere
+     * the switch would promise what the next sign-in does not hold.
+     */
+    public function __construct(
+        #[Autowire(param: 'scheb_two_factor.trusted_device.enabled')]
+        private readonly bool $trustedDevice = true,
+    ) {
+    }
+
     public function buildForm(
         FormBuilderInterface $builder,
         array $options
@@ -38,8 +49,10 @@ class TwoFactorCodeForm extends AbstractForm
                     self::FIELD_OPTION_NAME_LABEL => $options[self::OPTION_BACKUP_CODE] ? 'field.code.backup_label' : true,
                     'attr' => ['autocomplete' => 'one-time-code'],
                 ]
-            )
-            ->add(
+            );
+
+        if ($this->trustedDevice) {
+            $builder->add(
                 self::FIELD_TRUSTED,
                 SwitchInputType::class,
                 [
@@ -48,6 +61,7 @@ class TwoFactorCodeForm extends AbstractForm
                     'data' => true,
                 ]
             );
+        }
 
         $this->builderAddSubmit($builder);
     }

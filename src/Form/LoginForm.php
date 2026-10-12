@@ -2,6 +2,7 @@
 
 namespace Wexample\SymfonyUser\Form;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Form\FormBuilderInterface;
 use Wexample\SymfonyForms\Form\AbstractForm;
 use Wexample\SymfonyForms\Form\Type\PasswordInputType;
@@ -19,6 +20,12 @@ class LoginForm extends AbstractForm
     public const string FIELD_REMEMBER_ME = 'remember_me';
 
     public static bool $ajax = true;
+
+    public function __construct(
+        #[Autowire(param: 'wexample_symfony_user.remember_me')]
+        private readonly bool $rememberMe = true,
+    ) {
+    }
 
     public function buildForm(
         FormBuilderInterface $builder,
@@ -40,8 +47,10 @@ class LoginForm extends AbstractForm
                     self::FIELD_OPTION_NAME_LABEL => true,
                     'attr' => ['autocomplete' => 'current-password'],
                 ]
-            )
-            ->add(
+            );
+
+        if ($this->rememberMe) {
+            $builder->add(
                 self::FIELD_REMEMBER_ME,
                 SwitchInputType::class,
                 [
@@ -49,6 +58,7 @@ class LoginForm extends AbstractForm
                     self::FIELD_OPTION_NAME_REQUIRED => false,
                 ]
             );
+        }
 
         $this->builderAddSubmit($builder);
     }

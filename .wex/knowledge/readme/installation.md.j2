@@ -103,7 +103,7 @@ scheb_two_factor:
 
 - `APP_SECRET` must be 32 bytes at least: the trusted device cookie is a JWT signed with it. The authenticator secrets are encrypted with a key derived from it too: changing it makes users set their app up again.
 - While a login waits for its code, scheb only lets through the paths `access_control` opens to `PUBLIC_ACCESS` or `IS_AUTHENTICATED_2FA_IN_PROGRESS`, and sends every other request to the code's page. That includes the `/_system/` and `/_ui-state/` calls the page's scripts make — the debug toolbar, a component loaded later —: left out, they receive the code's page instead of their JSON, and the browser reports `Unexpected token '<'`. They are already open to anyone without a rule, so naming them `PUBLIC_ACCESS` opens nothing more. The rule has to be written by the application: Symfony refuses `access_control` from more than one file, so no bundle can add it.
-- Without a second factor, drop the `two_factor` key; to ask it on every login, set `trusted_device.enabled: false`.
+- Without a second factor, drop the `two_factor` key; to ask it on every login, set `trusted_device.enabled: false` — the code form then drops its "trust this device" switch.
 
 ### Mails
 
@@ -149,6 +149,7 @@ wexample_symfony_user:
     terms:
         version: ~                 # set: every signed-in user accepts this version before anything else; changing it asks everyone again
         text_route: ~              # the route of the page holding the text, owned by the application
+    remember_me: true              # false: no "stay signed in" on the login form — for a firewall without remember_me
     magic_link_login: true         # false: no magic link form on the login page; MagicLinkService still sends the application's own links
     session:
         idle_lifetime: 0           # seconds a signed-in session survives unused; 0, never expires one

@@ -1,0 +1,8 @@
+# Nothing kept from one sign-in to the next: no remember-me, and the second
+# factor asked again on every device.
+wexample_symfony_user:
+  remember_me: false
+
+scheb_two_factor:
+  trusted_device:
+    enabled: false
