@@ -49,7 +49,10 @@ class MagicLinkTest extends WebTestCase
         $this->assertTrue($known['ok']);
         $this->assertSame($known, $unknown);
         $this->assertSame($known, $locked);
-        $this->assertStringEndsWith('::success.message', $known['notification']['message']);
+        $this->assertSame(
+            'If this account exists, a sign-in link has been sent to its email address.',
+            $known['notification']['message']
+        );
     }
 
     public function testALinkSignsInOnce(): void
@@ -153,6 +156,6 @@ class MagicLinkTest extends WebTestCase
     private function assertNotLoggedIn(): void
     {
         $this->client->request('GET', '/protected');
-        $this->assertResponseRedirects('/login');
+        $this->assertResponseRedirects('/login?session=required');
     }
 }

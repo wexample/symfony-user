@@ -149,7 +149,7 @@ class TwoFactorTest extends WebTestCase
         $this->client->request('GET', '/logout');
         $this->client->request('GET', '/protected');
 
-        $this->assertResponseRedirects('/login');
+        $this->assertResponseRedirects('/login?session=required');
     }
 
     private function login(): array

@@ -128,7 +128,7 @@ class LoginTest extends WebTestCase
     public function testTheTargetPathSetBeforeLoginIsHonoured(): void
     {
         $this->client->request('GET', '/protected');
-        $this->assertResponseRedirects('/login');
+        $this->assertResponseRedirects('/login?session=required');
 
         $this->assertSame('/protected', parse_url($this->submitJson('jane', 'secret')['action']['url'], PHP_URL_PATH));
     }
@@ -204,6 +204,6 @@ class LoginTest extends WebTestCase
     private function assertNotLoggedIn(): void
     {
         $this->client->request('GET', '/protected');
-        $this->assertResponseRedirects('/login');
+        $this->assertResponseRedirects('/login?session=required');
     }
 }

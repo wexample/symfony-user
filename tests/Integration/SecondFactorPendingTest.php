@@ -90,12 +90,12 @@ class SecondFactorPendingTest extends WebTestCase
         $this->assertResponseRedirects('/login');
 
         $this->client->request('GET', '/protected');
-        $this->assertResponseRedirects('/login');
+        $this->assertResponseRedirects('/login?session=required');
 
         // The code it was given leads nowhere either.
         $this->assertFalse($this->submitCode($code)['ok'] ?? false);
         $this->client->request('GET', '/protected');
-        $this->assertResponseRedirects('/login');
+        $this->assertResponseRedirects('/login?session=required');
     }
 
     private function findJane(): User

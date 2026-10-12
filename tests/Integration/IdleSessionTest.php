@@ -58,7 +58,7 @@ class IdleSessionTest extends WebTestCase
         // Nothing signs the account back in on its own.
         $this->assertNull($this->client->getCookieJar()->get('REMEMBERME'));
         $this->client->request('GET', '/protected');
-        $this->assertResponseRedirects('/login');
+        $this->assertResponseRedirects('/login?session=required');
     }
 
     public function testAnAjaxCallGetsThe401ItKnowsHowToFollow(): void
