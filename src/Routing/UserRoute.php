@@ -45,4 +45,10 @@ final class UserRoute
     /** And the one telling the login page why it is being read again. */
     public const string PARAMETER_SESSION = 'session';
     public const string SESSION_EXPIRED = 'expired';
+
+    /**
+     * A page asked for a signed-in visitor: the login page says so, and the
+     * page is reached once signed in.
+     */
+    public const string SESSION_REQUIRED = 'required';
 }

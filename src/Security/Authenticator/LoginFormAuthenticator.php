@@ -195,15 +195,20 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     }
 
     /**
-     * An ajax call reaching a protected URL gets told where to log in,
-     * instead of following a redirect to an HTML page it cannot use.
+     * A page asking for a signed-in visitor sends to the login page, which
+     * says why; an ajax call is told where to log in instead of following a
+     * redirect to an HTML page it cannot use.
      */
     public function start(
         Request $request,
         ?AuthenticationException $authException = null
     ): Response {
+        // Sent to sign in on the way to a page, the visitor is told why;
+        // Symfony keeps the page, reached once signed in.
         if (! RequestHelper::isJsonRequest($request)) {
-            return parent::start($request, $authException);
+            return new RedirectResponse($this->urlGenerator->generate(UserRoute::LOGIN, [
+                UserRoute::PARAMETER_SESSION => UserRoute::SESSION_REQUIRED,
+            ]));
         }
 
         return new JsonResponse(
