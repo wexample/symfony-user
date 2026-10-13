@@ -1,6 +1,6 @@
 # symfony-user
 
-Version: 11.0.0
+Version: 12.0.0
 
 ## Routes
 
@@ -173,6 +173,55 @@ A refusal is shown, never an error page: both form processors call the service i
 
 An application drawing its own screens instead reads through the same services: `AccountDirectoryService` lists, searches, pages and describes, `AssignableRolesService` names the roles a field may offer.
 
+## Memberships
+
+An account belongs to groups of the application — a project, a team, an establishment —, with grants in each. The package knows neither the group nor the membership: the application implements the interfaces on its own entities, the way its `User` extends `AbstractUser`.
+
+- `MembershipGroupInterface`: what others are members of — an id, a label, its memberships.
+- `MemberInterface`: what holds grants — an account, an organization —, with its memberships. `RepresentativeInterface` is an account acting for other members, the organizations it belongs to: it holds their grants beside its own.
+- `MembershipInterface`: a member, a group, and grants, which `Entity\Traits\HasGrantsTrait` stores in a JSON column. The relations to the member and the group are the application's.
+
+```yaml
+wexample_symfony_user:
+  memberships:
+    grants:                      # each grant, with the ones it includes
+      administrator: [contributor]
+      contributor: [watcher]
+      client: [watcher]
+      watcher: []
+    roles:                       # the role a grant held in any group gives
+      administrator: ROLE_PROJECT_ADMIN
+    administer_grant: administrator
+```
+
+A grant undeclared, included or given, or one including itself, stops the container from building.
+
+- `is_granted('contributor', $project)` holds for a member granted `contributor` in that group, or `administrator`. `MembershipService` answers the same in code: `getGrants()`, `holds()`, `isMember()`, `getGroups($member, 'contributor')`.
+- The roles of `memberships.roles` — and the roles they reach — are given by a voter, so `access_control` and `is_granted('ROLE_PROJECT_ADMIN')` see them. Both read the memberships at each request: a grant changed applies at the next one, and nobody is signed out. `AbstractUser::getRoles()` does not hold them, nor do the services reading it: the second factor policy, the landing page after login, the roles an administrator assigns.
+
+Records of a group are read through `MembershipScopeService`, at each query rather than through a global Doctrine filter, invisible where the query is read and lifted for everyone by one forgotten `disable()`:
+
+```php
+$scope->restrictToCurrentMember($queryBuilder, 'note.project', 'contributor');
+$scope->assertInScope($note->getProject());              // 404 outside, never 403
+```
+
+No group matches nothing, never everything: an account with no membership, or nobody signed in, reads no row. A record of another group answers 404, which does not tell that it exists.
+
+With `administer_grant`, an account holding it in groups administers the accounts all of whose groups it holds it in (`Security\Guard\MembershipAdministrationGuard`): one group it does not, and a deactivation would cut that group off too. An account in no group is out of its reach, but for one it creates. An administrator holding the grant nowhere — a platform role — keeps the rules of `administration`.
+
+### Managing members
+
+`MembershipAdministrationService` adds a member to a group (`add($actor, $group, $member, ['contributor'])`), changes its grants (`changeGrants()`) and removes it (`remove()`). It refuses, with `Enum\MembershipAdministrationRefusal`:
+
+- `group_not_administered`: the actor holds neither `memberships.administer_grant` in the group nor `administration.page_role`;
+- `already_member`, `invalid_grants` (none, or one undeclared);
+- `last_administrator`: the group would be left with no member holding `administer_grant`.
+
+Each change is journaled — `membership.added`, `membership.grants_changed`, `membership.removed`, `membership.change_refused` —, on the account it is about, with the group, the member and the grants before and after in `extra`.
+
+The entities being the application's, it declares how they are made, one `MembershipManagerInterface` per kind of group: its name in urls (`team`), the group and member classes, `createMembership()` and `removeMembership()`. symfony-user-ds draws the screens on it.
+
 ## Impersonation
 
 Who may impersonate is the firewall's: its `switch_user` key, and the role it names. Without the key, nobody can, the impersonation page and search answer 404 — declare it under `when@dev` alone for an application impersonating in development only:
@@ -253,6 +302,7 @@ An application adds a gate by implementing `Interface\AccountGateInterface`.
 - [Second factor](#second-factor)
 - [Roles](#roles)
 - [Administering accounts](#administering-accounts)
+- [Memberships](#memberships)
 - [Impersonation](#impersonation)
 - [Account picker](#account-picker)
 - [After signing in](#after-signing-in)
@@ -339,12 +389,12 @@ Visit the [Wexample Suite documentation](https://docs.wexample.com) for the comp
 - php: >=8.5
 - doctrine/orm: ^3.0
 - symfony/security-bundle: ^7.4
-- wexample/symfony-helpers: >=15.0.0
+- wexample/symfony-helpers: >=16.0.0
 - wexample/symfony-security: >=2.1.0
-- wexample/symfony-translations: >=12.0.0
+- wexample/symfony-translations: >=13.0.0
 - symfony/validator: ^7.4
-- wexample/symfony-forms: >=11.0.0
-- wexample/symfony-loader: >=22.0.0
+- wexample/symfony-forms: >=12.0.0
+- wexample/symfony-loader: >=23.0.0
 - wexample/symfony-mail: >=2.0.0
 - symfony/form: ^7.4
 - symfony/rate-limiter: ^7.4
@@ -356,7 +406,7 @@ Visit the [Wexample Suite documentation](https://docs.wexample.com) for the comp
 - scheb/2fa-backup-code: ^8.6
 - endroid/qr-code: ^6.0
 - wexample/symfony-tunnels: >=10.0.0
-- wexample/symfony-activity: >=2.0.0
+- wexample/symfony-activity: >=3.0.0
 
 ## Versioning & Compatibility Policy
 
