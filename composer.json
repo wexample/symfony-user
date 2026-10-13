@@ -3,7 +3,7 @@
   "description": "User accounts and authentication for Symfony",
   "type": "library",
   "license": "MIT",
-  "version": "12.0.0",
+  "version": "12.0.1",
   "autoload": {
     "psr-4": {
       "Wexample\\SymfonyUser\\": "src/"

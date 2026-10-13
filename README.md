@@ -1,6 +1,6 @@
 # symfony-user
 
-Version: 12.0.0
+Version: 12.0.1
 
 ## Routes
 
