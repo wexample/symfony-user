@@ -17,6 +17,7 @@ ar:
   action:
     submit: 'إيقاف التطبيق'
   error:
+    required: 'دورك يتطلب تطبيق مصادقة: لا يمكن إيقاف تشغيله.'
     current_password: 'كلمة المرور الحالية غير صحيحة.'
 
 bn:
@@ -209,4 +210,5 @@ zh:
   action:
     submit: 关闭应用程序
   error:
+    required: 您的角色需要身份验证应用程序：无法关闭。
     current_password: 当前密码错误。

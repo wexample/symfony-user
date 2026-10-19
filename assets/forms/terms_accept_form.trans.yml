@@ -21,3 +21,23 @@ fr:
   error:
     outdated: Ces conditions ont été remplacées entre-temps, rechargez la page pour lire les nouvelles.
     impersonation: Seul l'utilisateur peut accepter les conditions, pas un administrateur à sa place.
+
+zh:
+  field:
+    accepted:
+      label: 我已阅读并接受使用条款
+  action:
+    submit: 继续
+  error:
+    outdated: 这些条款已被替换，请重新加载页面以查看新的条款。
+    impersonation: 只有用户本人可以接受条款，管理员不能代替用户。
+
+ar:
+  field:
+    accepted:
+      label: 'لقد قرأت وأقبل شروط الاستخدام'
+  action:
+    submit: استمرار
+  error:
+    outdated: 'تم استبدال هذه الشروط في هذه الأثناء، قم بإعادة تحميل الصفحة لقراءة الشروط الجديدة.'
+    impersonation: 'فقط المستخدم يمكنه قبول الشروط، وليس المدير بدلاً عنه.'

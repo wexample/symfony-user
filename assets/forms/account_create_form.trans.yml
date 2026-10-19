@@ -43,3 +43,43 @@ fr:
 
   success:
     message: Compte créé. Son titulaire a reçu le mail pour choisir un mot de passe.
+
+zh:
+  field:
+    email:
+      label: 电子邮件
+  action:
+    submit: 开通账户
+  error:
+    email_taken: 该地址已被其他账户占用。
+    refused:
+      role_not_assignable: 您无法授予此角色。
+      email_domain_not_allowed: 此角色需要另一个域的地址。
+      exclusive_roles: 这两个角色不能同时拥有。
+      target_out_of_scope: 该账户不属于您管理。
+      self_deactivation: 账户无法自我停用。
+      self_demotion: 账户无法撤销自己的角色。
+      last_protected_role_holder: 此角色将没有有效持有者。
+      account_inactive: 该账户无法登录，因此不会收到邮件。
+  success:
+    message: 账户已开通。持有人已收到选择密码的邮件。
+
+ar:
+  field:
+    email:
+      label: 'البريد الإلكتروني'
+  action:
+    submit: 'فتح الحساب'
+  error:
+    email_taken: 'هناك حساب بالفعل يحمل هذا العنوان.'
+    refused:
+      role_not_assignable: 'هذا الدور ليس لك لتمنحه.'
+      email_domain_not_allowed: 'هذا الدور يتطلب عنوانًا من نطاق آخر.'
+      exclusive_roles: 'لا يمكن أن يتم احتفاظ هذين الدورين معًا.'
+      target_out_of_scope: 'هذا الحساب ليس لك لإدارته.'
+      self_deactivation: 'لا يمكن لحساب أن يُ deaktiv نفسه.'
+      self_demotion: 'لا يمكن لحساب أن يسحب دوره الخاص.'
+      last_protected_role_holder: 'سيبقى هذا الدور بدون حامل نشط.'
+      account_inactive: 'لا يمكن لهذا الحساب تسجيل الدخول، لذا لن يتم إرسال أي بريد.'
+  success:
+    message: 'تم فتح الحساب. تم إرسال بريد إلى حامله لاختيار كلمة مرور.'

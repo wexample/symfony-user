@@ -7,3 +7,13 @@ fr:
   subject: Votre compte est prêt
   intro: "Un compte a été créé pour vous. Suivez ce lien pour choisir votre mot de passe :"
   validity: Il fonctionne une fois, jusqu'au %date%. Passé cette date, demandez un nouveau lien à la personne qui a créé votre compte.
+
+zh:
+  subject: 您的账户已准备好
+  intro: 为您创建了一个账户。请点击此链接选择您的密码：
+  validity: '它有效一次，直到 %date%。过了这个日期，请向创建您账户的人请求一个新的密码。'
+
+ar:
+  subject: 'حسابك جاهز'
+  intro: 'تم إنشاء حساب لك. اتبع هذا الرابط لاختيار كلمة المرور الخاصة بك:'
+  validity: 'يعمل مرة واحدة، حتى %date%. بعد ذلك التاريخ، اطلب من الشخص الذي أنشأ حسابك الحصول على واحدة جديدة.'

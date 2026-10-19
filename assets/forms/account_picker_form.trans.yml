@@ -9,3 +9,33 @@ en:
   error:
     not_allowed: This account cannot be signed in to.
     invalid_csrf: The form has expired, reload the page and try again.
+
+fr:
+  field:
+    account:
+      label: Compte
+  action:
+    submit: 'Se connecter'
+  error:
+    not_allowed: 'Ce compte ne peut pas être connecté.'
+    invalid_csrf: 'Le formulaire a expiré, rechargez la page et réessayez.'
+
+zh:
+  field:
+    account:
+      label: 账户
+  action:
+    submit: 登录
+  error:
+    not_allowed: 无法登录该账户。
+    invalid_csrf: 表单已过期，请重新加载页面并重试。
+
+ar:
+  field:
+    account:
+      label: الحساب
+  action:
+    submit: 'تسجيل الدخول'
+  error:
+    not_allowed: 'لا يمكن تسجيل الدخول إلى هذا الحساب.'
+    invalid_csrf: 'انتهت صلاحية النموذج، يرجى إعادة تحميل الصفحة والمحاولة مرة أخرى.'

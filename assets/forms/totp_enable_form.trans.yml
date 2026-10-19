@@ -16,7 +16,7 @@ ar:
   action:
     submit: 'شغّل التطبيق'
   error:
-    invalid: 'كود خاطئ.'
+    invalid: 'رمز غير صحيح.'
 
 bn:
   field:

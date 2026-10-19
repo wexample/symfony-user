@@ -29,3 +29,31 @@ fr:
 
   success:
     message: Profil enregistré.
+
+zh:
+  field:
+    first_name:
+      label: 名字
+    last_name:
+      label: 姓氏
+    locale:
+      label: 语言
+      placeholder: 默认语言
+  action:
+    submit: 保存
+  success:
+    message: 个人资料已保存。
+
+ar:
+  field:
+    first_name:
+      label: 'الاسم الأول'
+    last_name:
+      label: 'اسم العائلة'
+    locale:
+      label: اللغة
+      placeholder: 'اللغة الافتراضية'
+  action:
+    submit: حفظ
+  success:
+    message: 'تم حفظ الملف الشخصي.'

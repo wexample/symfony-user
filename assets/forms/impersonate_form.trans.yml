@@ -9,3 +9,33 @@ en:
 
   error:
     not_allowed: This account cannot be impersonated.
+
+fr:
+  field:
+    account:
+      label: Compte
+  action:
+    submit: Imiter
+    exit: 'Retour à mon compte'
+  error:
+    not_allowed: 'Ce compte ne peut pas être imité.'
+
+zh:
+  field:
+    account:
+      label: 账户
+  action:
+    submit: 模拟登录
+    exit: 返回我的账户
+  error:
+    not_allowed: 该账户无法被模拟登录。
+
+ar:
+  field:
+    account:
+      label: الحساب
+  action:
+    submit: 'تقمص الهوية'
+    exit: 'العودة إلى حسابي'
+  error:
+    not_allowed: 'لا يمكن تقمص هذه الحساب.'

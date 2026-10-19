@@ -29,3 +29,35 @@ fr:
         envoyé.
   success:
     message: Rôles enregistrés.
+
+zh:
+  action:
+    submit: 保存角色
+  error:
+    refused:
+      role_not_assignable: 此角色无法分配给你。
+      email_domain_not_allowed: 此角色需要使用其他域的地址。
+      exclusive_roles: 这两个角色不能同时拥有。
+      target_out_of_scope: 该账户不属于你管理。
+      self_deactivation: 账户无法自我停用。
+      self_demotion: 账户无法自己撤销角色。
+      last_protected_role_holder: 此角色将没有活跃的持有者。
+      account_inactive: 该账户无法登录，因此不会收到邮件。
+  success:
+    message: 角色已保存。
+
+ar:
+  action:
+    submit: 'حفظ الأدوار'
+  error:
+    refused:
+      role_not_assignable: 'هذا الدور ليس من حقك منحه.'
+      email_domain_not_allowed: 'هذا الدور يتطلب عنوان من نطاق آخر.'
+      exclusive_roles: 'لا يمكن أن تُحمل هذان الدوران معًا.'
+      target_out_of_scope: 'هذا الحساب ليس من حقك إدارته.'
+      self_deactivation: 'لا يمكن للحساب أن يعطل نفسه.'
+      self_demotion: 'لا يمكن للحساب أن يسحب دوره من نفسه.'
+      last_protected_role_holder: 'سيبقى هذا الدور بلا حامل نشط.'
+      account_inactive: 'لا يمكن لهذا الحساب تسجيل الدخول، لذا لا يتلقى أي بريد.'
+  success:
+    message: 'تم حفظ الأدوار.'
