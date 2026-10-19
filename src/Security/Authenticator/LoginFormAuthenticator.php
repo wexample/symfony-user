@@ -26,12 +26,12 @@ use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use Wexample\Helpers\Helper\ClassHelper;
 use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
 use Wexample\SymfonyForms\Service\FormProcessor\FormResponsePayloadBuilder;
+use Wexample\SymfonyHelpers\Attribute\WorkerSafe;
 use Wexample\SymfonyHelpers\Helper\RequestHelper;
 use Wexample\SymfonyUser\Form\LoginForm;
 use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Service\FormProcessor\LoginFormProcessor;
 use Wexample\SymfonyUser\Service\PostLoginTargetService;
-use Wexample\SymfonyHelpers\Attribute\WorkerSafe;
 
 /**
  * Logs in from LoginForm, wherever the form is shown: its submission goes

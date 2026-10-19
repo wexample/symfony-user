@@ -7,10 +7,10 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use LogicException;
 use Symfony\Component\Uid\Uuid;
+use Wexample\SymfonyHelpers\Attribute\WorkerSafe;
 use Wexample\SymfonyHelpers\Helper\RoleHelper;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Repository\AbstractUserRepository;
-use Wexample\SymfonyHelpers\Attribute\WorkerSafe;
 
 /**
  * The accounts, read to be chosen from or to be administered: by batches,
