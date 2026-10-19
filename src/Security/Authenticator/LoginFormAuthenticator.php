@@ -31,6 +31,7 @@ use Wexample\SymfonyUser\Form\LoginForm;
 use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Service\FormProcessor\LoginFormProcessor;
 use Wexample\SymfonyUser\Service\PostLoginTargetService;
+use Wexample\SymfonyHelpers\Attribute\WorkerSafe;
 
 /**
  * Logs in from LoginForm, wherever the form is shown: its submission goes
@@ -41,6 +42,7 @@ use Wexample\SymfonyUser\Service\PostLoginTargetService;
  */
 class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
+    #[WorkerSafe('The hash of a constant, for unknown users to take as long to check as known ones.')]
     private ?string $timingShieldHash = null;
 
     public function __construct(

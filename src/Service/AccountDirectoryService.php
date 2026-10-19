@@ -10,6 +10,7 @@ use Symfony\Component\Uid\Uuid;
 use Wexample\SymfonyHelpers\Helper\RoleHelper;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Repository\AbstractUserRepository;
+use Wexample\SymfonyHelpers\Attribute\WorkerSafe;
 
 /**
  * The accounts, read to be chosen from or to be administered: by batches,
@@ -24,6 +25,7 @@ class AccountDirectoryService
     /** Accounts read per query while filtering. */
     private const int BATCH = 200;
 
+    #[WorkerSafe('The user class the mapping declares, the same for every request.')]
     private ?string $userClass = null;
 
     public function __construct(
