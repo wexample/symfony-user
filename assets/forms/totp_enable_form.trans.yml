@@ -25,7 +25,7 @@ bn:
   action:
     submit: 'অ্যাপটি চালু করুন'
   error:
-    invalid: 'ভুল কোড।'
+    invalid: 'অবৈধ কোড।'
 
 de:
   field:
@@ -52,7 +52,7 @@ fa:
   action:
     submit: 'اپ را روشن کن'
   error:
-    invalid: 'کد نادرست است.'
+    invalid: 'کد اشتباه است.'
 
 fi:
   field:
@@ -61,7 +61,7 @@ fi:
   action:
     submit: 'Käynnistä sovellus'
   error:
-    invalid: 'Väärä koodi.'
+    invalid: 'Virheellinen koodi.'
 
 fr:
   field:
@@ -81,7 +81,7 @@ he:
   action:
     submit: 'הפעל את האפליקציה'
   error:
-    invalid: 'קוד לא נכון.'
+    invalid: 'קוד שגוי.'
 
 hi:
   field:
@@ -117,7 +117,7 @@ ja:
   action:
     submit: アプリを起動する
   error:
-    invalid: コードが間違っています。
+    invalid: 不正なコードです。
 
 ko:
   field:
@@ -135,7 +135,7 @@ nl:
   action:
     submit: 'Zet de app aan'
   error:
-    invalid: 'Verkeerde code.'
+    invalid: 'Ongeldige code.'
 
 pl:
   field:
@@ -144,7 +144,7 @@ pl:
   action:
     submit: 'Włącz aplikację'
   error:
-    invalid: 'Niepoprawny kod.'
+    invalid: 'Nieprawidłowy kod.'
 
 pt_BR:
   field:
@@ -171,7 +171,7 @@ th:
   action:
     submit: เปิดแอป
   error:
-    invalid: 'รหัสไม่ถูกต้อง'
+    invalid: รหัสไม่ถูกต้อง.
 
 tr:
   field:
@@ -180,7 +180,7 @@ tr:
   action:
     submit: 'Uygulamayı aç'
   error:
-    invalid: 'Yanlış kod.'
+    invalid: 'Geçersiz kod.'
 
 ur:
   field:
@@ -189,7 +189,7 @@ ur:
   action:
     submit: 'ایپ کو آن کریں'
   error:
-    invalid: 'غلط کوڈ۔'
+    invalid: 'غلط کوڈ.'
 
 vi:
   field:

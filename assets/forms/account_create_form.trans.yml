@@ -83,3 +83,383 @@ ar:
       account_inactive: 'لا يمكن لهذا الحساب تسجيل الدخول، لذا لن يتم إرسال أي بريد.'
   success:
     message: 'تم فتح الحساب. تم إرسال بريد إلى حامله لاختيار كلمة مرور.'
+
+hi:
+  field:
+    email:
+      label: ईमेल
+  action:
+    submit: 'खाता खोलें'
+  error:
+    email_taken: 'इस पते के साथ पहले से एक खाता है।'
+    refused:
+      role_not_assignable: 'यह भूमिका आपको देने के लिए नहीं है।'
+      email_domain_not_allowed: 'इस भूमिका के लिए किसी अन्य डोमेन का पता चाहिए।'
+      exclusive_roles: 'ये दो भूमिकाएँ एक साथ नहीं रखी जाती हैं।'
+      target_out_of_scope: 'यह खाता आपके प्रशासन के लिए नहीं है।'
+      self_deactivation: 'एक खाता अपने आप को निष्क्रिय नहीं कर सकता।'
+      self_demotion: 'एक खाता अपनी भूमिका नहीं ले सकता।'
+      last_protected_role_holder: 'यह भूमिका बिना सक्रिय धारक के रह जाएगी।'
+      account_inactive: 'यह खाता साइन इन नहीं कर सकता, इसलिए इसे कोई मेल नहीं भेजा जाता।'
+  success:
+    message: 'खाता खोला गया। इसके धारक को पासवर्ड चुनने के लिए मेल भेजा गया है।'
+
+he:
+  field:
+    email:
+      label: אימייל
+  action:
+    submit: 'פתח את החשבון'
+  error:
+    email_taken: 'כבר קיים חשבון עם כתובת זו.'
+    refused:
+      role_not_assignable: 'תפקיד זה אינו שלך להעניק.'
+      email_domain_not_allowed: 'תפקיד זה דורש כתובת מדומיין אחר.'
+      exclusive_roles: 'שני תפקידים אלו לא יכולים להיות מוחזקים יחד.'
+      target_out_of_scope: 'חשבון זה אינו שלך לנהל.'
+      self_deactivation: 'חשבון אינו יכול להשבית את עצמו.'
+      self_demotion: 'חשבון אינו יכול לקחת את התפקיד שלו בעצמו.'
+      last_protected_role_holder: 'תפקיד זה יישאר ללא מחזיק פעיל.'
+      account_inactive: 'חשבון זה אינו יכול להתחבר, ולכן לא נשלח אליו דואר.'
+  success:
+    message: 'החשבון נפתח. המחזיק קיבל דואר לבחור סיסמה.'
+
+fa:
+  field:
+    email:
+      label: ایمیل
+  action:
+    submit: 'حساب را باز کنید'
+  error:
+    email_taken: 'این آدرس قبلاً به یک حساب اختصاص داده شده است.'
+    refused:
+      role_not_assignable: 'این نقش به شما تعلق ندارد.'
+      email_domain_not_allowed: 'این نقش به آدرس از دامنه دیگری نیاز دارد.'
+      exclusive_roles: 'این دو نقش هرگز با هم موجود نیستند.'
+      target_out_of_scope: 'این حساب به شما تعلق ندارد.'
+      self_deactivation: 'یک حساب نمی‌تواند خود را غیرفعال کند.'
+      self_demotion: 'یک حساب نمی‌تواند نقش خود را از خود بگیرد.'
+      last_protected_role_holder: 'این نقش بدون یک دارنده فعال باقی می‌ماند.'
+      account_inactive: 'این حساب نمی‌تواند وارد شود، بنابراین هیچ ایمیلی ارسال نمی‌شود.'
+  success:
+    message: 'حساب باز شد. دارنده آن ایمیلی برای انتخاب رمز عبور دریافت کرده است.'
+
+ur:
+  field:
+    email:
+      label: 'ای میل'
+  action:
+    submit: 'اکاؤنٹ کھولیں'
+  error:
+    email_taken: 'اس ایڈریس کے ساتھ پہلے ہی ایک اکاؤنٹ موجود ہے۔'
+    refused:
+      role_not_assignable: 'یہ کردار آپ کو دینے کے لیے نہیں ہے۔'
+      email_domain_not_allowed: 'اس کردار کے لیے دوسرے ڈومین کا ایڈریس چاہیے۔'
+      exclusive_roles: 'یہ دو کردار کبھی ایک ساتھ نہیں رکھے جاتے۔'
+      target_out_of_scope: 'یہ اکاؤنٹ آپ کا انتظام کرنے کے لیے نہیں ہے۔'
+      self_deactivation: 'ایک اکاؤنٹ خود کو غیر فعال نہیں کر سکتا۔'
+      self_demotion: 'ایک اکاؤنٹ اپنی ہی حیثیت نہیں لے سکتا۔'
+      last_protected_role_holder: 'یہ کردار بغیر کسی فعال ہولڈر کے چھوڑ دیا جائے گا۔'
+      account_inactive: 'یہ اکاؤنٹ سائن ان نہیں کر سکتا، اس لیے اسے کوئی میل نہیں بھیجی گئی۔'
+  success:
+    message: 'اکاؤنٹ کھل گیا۔ اس کا ہولڈر پاس ورڈ منتخب کرنے کے لیے میل وصول کر چکا ہے۔'
+
+ja:
+  field:
+    email:
+      label: メールアドレス
+  action:
+    submit: アカウントを開く
+  error:
+    email_taken: このメールアドレスは既に別のアカウントで使用されています。
+    refused:
+      role_not_assignable: この役割はあなたには与えられません。
+      email_domain_not_allowed: この役割には別のドメインのメールアドレスが必要です。
+      exclusive_roles: これらの2つの役割は同時に持つことができません。
+      target_out_of_scope: このアカウントはあなたが管理するものではありません。
+      self_deactivation: アカウントは自分自身を無効化することはできません。
+      self_demotion: アカウントは自分の役割を取り消すことはできません。
+      last_protected_role_holder: この役割はアクティブな保有者がいなくなります。
+      account_inactive: このアカウントはサインインできないため、メールは送信されません。
+  success:
+    message: アカウントが開設されました。保有者にはパスワードを選択するためのメールが送信されました。
+
+ko:
+  field:
+    email:
+      label: 이메일
+  action:
+    submit: '계좌 열기'
+  error:
+    email_taken: '이미 이 주소를 가진 계좌가 있습니다.'
+    refused:
+      role_not_assignable: '이 역할은 당신이 부여할 수 없습니다.'
+      email_domain_not_allowed: '이 역할은 다른 도메인의 주소를 요구합니다.'
+      exclusive_roles: '이 두 역할은 함께 가질 수 없습니다.'
+      target_out_of_scope: '이 계좌는 당신이 관리할 수 없습니다.'
+      self_deactivation: '계좌는 스스로 비활성화할 수 없습니다.'
+      self_demotion: '계좌는 자신의 역할을 제거할 수 없습니다.'
+      last_protected_role_holder: '이 역할은 활성 보유자가 없게 됩니다.'
+      account_inactive: '이 계좌는 로그인할 수 없으므로 메일이 전송되지 않습니다.'
+  success:
+    message: '계좌가 열렸습니다. 보유자에게 비밀번호를 선택할 메일이 전송되었습니다.'
+
+bn:
+  field:
+    email:
+      label: ইমেইল
+  action:
+    submit: 'অ্যাকাউন্ট খুলুন'
+  error:
+    email_taken: 'একটি অ্যাকাউন্ট ইতিমধ্যে এই ঠিকানাটি ধারণ করছে।'
+    refused:
+      role_not_assignable: 'এই ভূমিকা আপনার দেওয়ার জন্য নয়।'
+      email_domain_not_allowed: 'এই ভূমিকার জন্য একটি ভিন্ন ডোমেইনের ঠিকানা প্রয়োজন।'
+      exclusive_roles: 'এই দুটি ভূমিকা একসাথে ধারণ করা যায় না।'
+      target_out_of_scope: 'এই অ্যাকাউন্টটি আপনার প্রশাসনের অধিকার নেই।'
+      self_deactivation: 'একটি অ্যাকাউন্ট নিজেকে নিষ্ক্রিয় করতে পারে না।'
+      self_demotion: 'একটি অ্যাকাউন্ট তার নিজস্ব ভূমিকা নিলাম করতে পারে না।'
+      last_protected_role_holder: 'এই ভূমিকা সক্রিয় ধারণকারী ছাড়া থাকবে।'
+      account_inactive: 'এই অ্যাকাউন্ট সাইন ইন করতে পারে না, তাই এটি কোন মেইল পায় না।'
+  success:
+    message: 'অ্যাকাউন্ট খোলা হয়েছে। এর ধারণকারীকে পাসওয়ার্ড নির্বাচন করতে মেইল পাঠানো হয়েছে।'
+
+th:
+  field:
+    email:
+      label: อีเมล
+  action:
+    submit: เปิดบัญชี
+  error:
+    email_taken: บัญชีหนึ่งมีที่อยู่ที่ลงทะเบียนนี้แล้ว
+    refused:
+      role_not_assignable: บทบาทนี้ไม่ใช่ของคุณที่จะมอบให้
+      email_domain_not_allowed: บทบาทนี้ต้องการที่อยู่ของโดเมนอื่น
+      exclusive_roles: บทบาททั้งสองนี้ไม่สามารถถือครองพร้อมกันได้
+      target_out_of_scope: บัญชีนี้ไม่ใช่ของคุณที่จะจัดการ
+      self_deactivation: บัญชีไม่สามารถปิดการใช้งานตัวเองได้
+      self_demotion: บัญชีไม่สามารถยกเลิกบทบาทของตนเองได้
+      last_protected_role_holder: บทบาทนี้จะไม่มีผู้ถือที่ใช้งานอยู่
+      account_inactive: 'บัญชีนี้ไม่สามารถเข้าสู่ระบบได้ ดังนั้นจึงไม่ได้รับอีเมล'
+  success:
+    message: 'บัญชีเปิดแล้ว ผู้ถือบัญชีได้รับอีเมลเพื่อเลือกตั้งรหัสผ่าน'
+
+de:
+  field:
+    email:
+      label: E-Mail
+  action:
+    submit: 'Konto eröffnen'
+  error:
+    email_taken: 'Ein Konto hat bereits diese Adresse.'
+    refused:
+      role_not_assignable: 'Diese Rolle kannst du nicht vergeben.'
+      email_domain_not_allowed: 'Diese Rolle erfordert eine Adresse einer anderen Domain.'
+      exclusive_roles: 'Diese beiden Rollen werden niemals zusammen gehalten.'
+      target_out_of_scope: 'Dieses Konto kannst du nicht verwalten.'
+      self_deactivation: 'Ein Konto kann sich nicht selbst deaktivieren.'
+      self_demotion: 'Ein Konto kann seine eigene Rolle nicht ablegen.'
+      last_protected_role_holder: 'Diese Rolle würde ohne aktiven Inhaber bleiben.'
+      account_inactive: 'Dieses Konto kann sich nicht anmelden, daher erhält es keine E-Mails.'
+  success:
+    message: 'Konto eröffnet. Der Inhaber hat eine E-Mail erhalten, um ein Passwort zu wählen.'
+
+fi:
+  field:
+    email:
+      label: Sähköposti
+  action:
+    submit: 'Avaa tili'
+  error:
+    email_taken: 'Tämä osoite on jo käytössä.'
+    refused:
+      role_not_assignable: 'Tätä roolia ei voi antaa.'
+      email_domain_not_allowed: 'Tämä rooli vaatii toisen domainin osoitteen.'
+      exclusive_roles: 'Näitä kahta roolia ei voi pitää yhdessä.'
+      target_out_of_scope: 'Tätä tiliä et voi hallita.'
+      self_deactivation: 'Tili ei voi deaktivoida itseään.'
+      self_demotion: 'Tili ei voi ottaa omaa rooliaan pois.'
+      last_protected_role_holder: 'Tämä rooli jäisi ilman aktiivista haltijaa.'
+      account_inactive: 'Tämä tili ei voi kirjautua sisään, joten sille ei lähetetä sähköpostia.'
+  success:
+    message: 'Tili avattu. Sen haltijalle on lähetetty sähköposti salasanan valitsemiseksi.'
+
+ru:
+  field:
+    email:
+      label: 'Электронная почта'
+  action:
+    submit: 'Открыть аккаунт'
+  error:
+    email_taken: 'Этот адрес уже занят.'
+    refused:
+      role_not_assignable: 'Эта роль не может быть назначена вам.'
+      email_domain_not_allowed: 'Эта роль требует адреса другого домена.'
+      exclusive_roles: 'Эти две роли не могут быть одновременно.'
+      target_out_of_scope: 'Этот аккаунт не ваш для администрирования.'
+      self_deactivation: 'Аккаунт не может деактивировать себя.'
+      self_demotion: 'Аккаунт не может лишить себя своей роли.'
+      last_protected_role_holder: 'Эта роль останется без активного держателя.'
+      account_inactive: 'Этот аккаунт не может войти в систему, поэтому ему не отправляется почта.'
+  success:
+    message: 'Аккаунт открыт. Его держателю отправлено письмо для выбора пароля.'
+
+pl:
+  field:
+    email:
+      label: Email
+  action:
+    submit: 'Otwórz konto'
+  error:
+    email_taken: 'To konto już posiada ten adres.'
+    refused:
+      role_not_assignable: 'Nie możesz przyznać tej roli.'
+      email_domain_not_allowed: 'Ta rola wymaga adresu z innej domeny.'
+      exclusive_roles: 'Te dwie role nie mogą być przydzielone jednocześnie.'
+      target_out_of_scope: 'To konto nie jest Twoje do zarządzania.'
+      self_deactivation: 'Konto nie może dezaktywować samego siebie.'
+      self_demotion: 'Konto nie może odebrać sobie swojej roli.'
+      last_protected_role_holder: 'Ta rola nie miałaby aktywnego posiadacza.'
+      account_inactive: 'To konto nie może się zalogować, więc nie otrzymuje żadnej poczty.'
+  success:
+    message: 'Konto otwarte. Jego posiadacz otrzymał wiadomość e-mail, aby wybrać hasło.'
+
+es:
+  field:
+    email:
+      label: 'Correo electrónico'
+  action:
+    submit: 'Abrir la cuenta'
+  error:
+    email_taken: 'Una cuenta ya tiene esta dirección.'
+    refused:
+      role_not_assignable: 'No puedes otorgar este rol.'
+      email_domain_not_allowed: 'Este rol requiere una dirección de otro dominio.'
+      exclusive_roles: 'Estos dos roles nunca se pueden tener juntos.'
+      target_out_of_scope: 'Esta cuenta no es tuya para administrar.'
+      self_deactivation: 'Una cuenta no puede desactivarse a sí misma.'
+      self_demotion: 'Una cuenta no puede quitarse su propio rol.'
+      last_protected_role_holder: 'Este rol quedaría sin un titular activo.'
+      account_inactive: 'Esta cuenta no puede iniciar sesión, por lo que no se envía ningún correo.'
+  success:
+    message: 'Cuenta abierta. Su titular ha recibido el correo para elegir una contraseña.'
+
+it:
+  field:
+    email:
+      label: Email
+  action:
+    submit: "Apri l'account"
+  error:
+    email_taken: 'Un account possiede già questo indirizzo.'
+    refused:
+      role_not_assignable: 'Questo ruolo non è tuo da assegnare.'
+      email_domain_not_allowed: 'Questo ruolo richiede un indirizzo di un altro dominio.'
+      exclusive_roles: 'Questi due ruoli non possono essere detenuti insieme.'
+      target_out_of_scope: 'Questo account non è tuo da amministrare.'
+      self_deactivation: 'Un account non può disattivarsi da solo.'
+      self_demotion: 'Un account non può togliersi il proprio ruolo.'
+      last_protected_role_holder: 'Questo ruolo rimarrebbe senza un titolare attivo.'
+      account_inactive: 'Questo account non può accedere, quindi non riceve mail.'
+  success:
+    message: 'Account aperto. Il titolare ha ricevuto la mail per scegliere una password.'
+
+pt_BR:
+  field:
+    email:
+      label: Email
+  action:
+    submit: 'Abrir a conta'
+  error:
+    email_taken: 'Uma conta já possui este endereço.'
+    refused:
+      role_not_assignable: 'Este papel não é seu para conceder.'
+      email_domain_not_allowed: 'Este papel requer um endereço de outro domínio.'
+      exclusive_roles: 'Esses dois papéis nunca são mantidos juntos.'
+      target_out_of_scope: 'Esta conta não é sua para administrar.'
+      self_deactivation: 'Uma conta não pode se desativar.'
+      self_demotion: 'Uma conta não pode retirar seu próprio papel.'
+      last_protected_role_holder: 'Este papel ficaria sem um portador ativo.'
+      account_inactive: 'Esta conta não pode fazer login, então não recebe e-mails.'
+  success:
+    message: 'Conta aberta. Seu portador recebeu um e-mail para escolher uma senha.'
+
+tr:
+  field:
+    email:
+      label: E-posta
+  action:
+    submit: 'Hesabı aç'
+  error:
+    email_taken: 'Bu adres zaten bir hesap tarafından kullanılıyor.'
+    refused:
+      role_not_assignable: 'Bu rolü vermek senin yetkin değil.'
+      email_domain_not_allowed: 'Bu rol, başka bir alan adı adresi gerektiriyor.'
+      exclusive_roles: 'Bu iki rol bir arada tutulamaz.'
+      target_out_of_scope: 'Bu hesabı yönetme yetkin yok.'
+      self_deactivation: 'Bir hesap kendini devre dışı bırakamaz.'
+      self_demotion: 'Bir hesap kendi rolünü alamaz.'
+      last_protected_role_holder: 'Bu rol, aktif bir tutucu olmadan kalır.'
+      account_inactive: 'Bu hesap oturum açamaz, bu yüzden hiçbir mail gönderilmez.'
+  success:
+    message: 'Hesap açıldı. Sahibi, bir şifre seçmek için mail almıştır.'
+
+vi:
+  field:
+    email:
+      label: Email
+  action:
+    submit: 'Mở tài khoản'
+  error:
+    email_taken: 'Một tài khoản đã giữ địa chỉ này.'
+    refused:
+      role_not_assignable: 'Vai trò này không phải của bạn để cấp.'
+      email_domain_not_allowed: 'Vai trò này yêu cầu địa chỉ thuộc miền khác.'
+      exclusive_roles: 'Hai vai trò này không bao giờ được giữ cùng nhau.'
+      target_out_of_scope: 'Tài khoản này không phải của bạn để quản lý.'
+      self_deactivation: 'Một tài khoản không thể tự hủy kích hoạt.'
+      self_demotion: 'Một tài khoản không thể tự lấy đi vai trò của mình.'
+      last_protected_role_holder: 'Vai trò này sẽ không còn người giữ hoạt động.'
+      account_inactive: 'Tài khoản này không thể đăng nhập, vì vậy nó không nhận được thư.'
+  success:
+    message: 'Tài khoản đã được mở. Người giữ tài khoản đã nhận được thư để chọn mật khẩu.'
+
+id:
+  field:
+    email:
+      label: Email
+  action:
+    submit: 'Buka akun'
+  error:
+    email_taken: 'Sebuah akun sudah memiliki alamat ini.'
+    refused:
+      role_not_assignable: 'Peran ini bukan milikmu untuk diberikan.'
+      email_domain_not_allowed: 'Peran ini meminta alamat dari domain lain.'
+      exclusive_roles: 'Dua peran ini tidak pernah dipegang bersamaan.'
+      target_out_of_scope: 'Akun ini bukan milikmu untuk dikelola.'
+      self_deactivation: 'Sebuah akun tidak dapat menonaktifkan dirinya sendiri.'
+      self_demotion: 'Sebuah akun tidak dapat mencabut perannya sendiri.'
+      last_protected_role_holder: 'Peran ini akan ditinggalkan tanpa pemegang aktif.'
+      account_inactive: 'Akun ini tidak dapat masuk, jadi tidak ada email yang dikirim.'
+  success:
+    message: 'Akun dibuka. Pemegangnya telah dikirimi email untuk memilih kata sandi.'
+
+nl:
+  field:
+    email:
+      label: E-mail
+  action:
+    submit: 'Open het account'
+  error:
+    email_taken: 'Er is al een account met dit adres.'
+    refused:
+      role_not_assignable: 'Deze rol is niet aan jou om toe te wijzen.'
+      email_domain_not_allowed: 'Deze rol vraagt om een adres van een ander domein.'
+      exclusive_roles: 'Deze twee rollen kunnen nooit samen worden gehouden.'
+      target_out_of_scope: 'Dit account is niet van jou om te beheren.'
+      self_deactivation: 'Een account kan zichzelf niet deactiveren.'
+      self_demotion: 'Een account kan zijn eigen rol niet afnemen.'
+      last_protected_role_holder: 'Deze rol zou zonder een actieve houder achterblijven.'
+      account_inactive: 'Dit account kan zich niet aanmelden, dus ontvangt het geen mail.'
+  success:
+    message: 'Account geopend. De houder heeft de mail ontvangen om een wachtwoord te kiezen.'

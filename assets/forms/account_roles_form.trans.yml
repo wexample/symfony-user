@@ -61,3 +61,307 @@ ar:
       account_inactive: 'لا يمكن لهذا الحساب تسجيل الدخول، لذا لا يتلقى أي بريد.'
   success:
     message: 'تم حفظ الأدوار.'
+
+hi:
+  action:
+    submit: 'भूमिकाएँ सहेजें'
+  error:
+    refused:
+      role_not_assignable: 'यह भूमिका आपके देने के लिए नहीं है।'
+      email_domain_not_allowed: 'इस भूमिका के लिए किसी अन्य डोमेन का पता चाहिए।'
+      exclusive_roles: 'ये दो भूमिकाएँ कभी एक साथ नहीं रखी जातीं।'
+      target_out_of_scope: 'यह खाता आपकी प्रशासनिक सीमा में नहीं है।'
+      self_deactivation: 'एक खाता स्वयं को निष्क्रिय नहीं कर सकता।'
+      self_demotion: 'एक खाता अपनी भूमिका नहीं ले सकता।'
+      last_protected_role_holder: 'यह भूमिका बिना सक्रिय धारक के छोड़ दी जाएगी।'
+      account_inactive: 'यह खाता साइन इन नहीं कर सकता, इसलिए इसे कोई मेल नहीं भेजा जाता।'
+  success:
+    message: 'भूमिकाएँ सहेजी गईं।'
+
+he:
+  action:
+    submit: 'שמור את התפקידים'
+  error:
+    refused:
+      role_not_assignable: 'תפקיד זה אינו בר השמה עבורך.'
+      email_domain_not_allowed: 'תפקיד זה דורש כתובת מדומיין אחר.'
+      exclusive_roles: 'שני התפקידים הללו לא יכולים להתקיים יחד.'
+      target_out_of_scope: 'חשבון זה אינו שלך לנהל.'
+      self_deactivation: 'חשבון אינו יכול לבטל את עצמו.'
+      self_demotion: 'חשבון אינו יכול לקחת את התפקיד שלו בעצמו.'
+      last_protected_role_holder: 'תפקיד זה יישאר ללא מחזיק פעיל.'
+      account_inactive: 'חשבון זה אינו יכול להתחבר, ולכן אינו מקבל דואר.'
+  success:
+    message: 'התפקידים נשמרו.'
+
+fa:
+  action:
+    submit: 'ذخیره نقش‌ها'
+  error:
+    refused:
+      role_not_assignable: 'این نقش متعلق به شما نیست که بتوانید آن را اعطا کنید.'
+      email_domain_not_allowed: 'این نقش به آدرس دامنه دیگری نیاز دارد.'
+      exclusive_roles: 'این دو نقش هرگز به طور همزمان نگهداری نمی‌شوند.'
+      target_out_of_scope: 'این حساب متعلق به شما نیست که مدیریت کنید.'
+      self_deactivation: 'یک حساب نمی‌تواند خود را غیرفعال کند.'
+      self_demotion: 'یک حساب نمی‌تواند نقش خود را از خود بگیرد.'
+      last_protected_role_holder: 'این نقش بدون دارنده‌ی فعال رها خواهد شد.'
+      account_inactive: 'این حساب نمی‌تواند وارد شود، بنابراین هیچ ایمیلی ارسال نمی‌شود.'
+  success:
+    message: 'نقش‌ها ذخیره شدند.'
+
+ur:
+  action:
+    submit: 'کردار محفوظ کریں'
+  error:
+    refused:
+      role_not_assignable: 'یہ کردار آپ کو دینے کے لئے نہیں ہے۔'
+      email_domain_not_allowed: 'اس کردار کے لئے دوسرے ڈومین کا ایڈریس درکار ہے۔'
+      exclusive_roles: 'یہ دونوں کردار کبھی ایک ساتھ نہیں رکھے جا سکتے۔'
+      target_out_of_scope: 'یہ اکاؤنٹ آپ کا انتظام کرنے کے لئے نہیں ہے۔'
+      self_deactivation: 'ایک اکاؤنٹ خود کو غیر فعال نہیں کر سکتا۔'
+      self_demotion: 'ایک اکاؤنٹ اپنے کردار کو نہیں لے سکتا۔'
+      last_protected_role_holder: 'یہ کردار بغیر کسی فعال حامل کے چھوڑ دیا جائے گا۔'
+      account_inactive: 'یہ اکاؤنٹ سائن ان نہیں کر سکتا، اس لئے اسے کوئی میل نہیں بھیجی گئی۔'
+  success:
+    message: 'کردار محفوظ کر لئے گئے۔'
+
+ja:
+  action:
+    submit: 役割を保存
+  error:
+    refused:
+      role_not_assignable: この役割を与えることはできません。
+      email_domain_not_allowed: この役割には別のドメインのアドレスが必要です。
+      exclusive_roles: これらの2つの役割は同時に保持できません。
+      target_out_of_scope: このアカウントは管理できません。
+      self_deactivation: アカウントは自分自身を無効にできません。
+      self_demotion: アカウントは自分の役割を取り去ることはできません。
+      last_protected_role_holder: この役割はアクティブな保持者がいなくなります。
+      account_inactive: このアカウントはサインインできないため、メールは送信されません。
+  success:
+    message: 役割が保存されました。
+
+ko:
+  action:
+    submit: '역할 저장'
+  error:
+    refused:
+      role_not_assignable: '이 역할은 당신이 부여할 수 없습니다.'
+      email_domain_not_allowed: '이 역할은 다른 도메인의 주소를 요구합니다.'
+      exclusive_roles: '이 두 역할은 함께 보유될 수 없습니다.'
+      target_out_of_scope: '이 계정은 당신이 관리할 수 없습니다.'
+      self_deactivation: '계정은 스스로 비활성화할 수 없습니다.'
+      self_demotion: '계정은 자신의 역할을 박탈할 수 없습니다.'
+      last_protected_role_holder: '이 역할은 활성 보유자가 없어질 것입니다.'
+      account_inactive: '이 계정은 로그인할 수 없으므로 메일이 전송되지 않습니다.'
+  success:
+    message: '역할이 저장되었습니다.'
+
+bn:
+  action:
+    submit: 'ভূমিগুলি সংরক্ষণ করুন'
+  error:
+    refused:
+      role_not_assignable: 'এই ভূমিটি আপনি দিতে পারবেন না।'
+      email_domain_not_allowed: 'এই ভূমির জন্য অন্য একটি ডোমেইনের ঠিকানা প্রয়োজন।'
+      exclusive_roles: 'এই দুটি ভূমি একসাথে কখনও ধরে রাখা হয় না।'
+      target_out_of_scope: 'এই অ্যাকাউন্টটি আপনার প্রশাসনের আওতায় নয়।'
+      self_deactivation: 'একটি অ্যাকাউন্ট নিজেকে নিষ্ক্রিয় করতে পারে না।'
+      self_demotion: 'একটি অ্যাকাউন্ট তার নিজস্ব ভূমি নিতে পারে না।'
+      last_protected_role_holder: 'এই ভূমিটি সক্রিয় ধারক ছাড়াই থাকবে।'
+      account_inactive: 'এই অ্যাকাউন্টটি সাইন ইন করতে পারে না, তাই এটি কোনো মেল পায় না।'
+  success:
+    message: 'ভূমিগুলি সংরক্ষিত হয়েছে।'
+
+th:
+  action:
+    submit: บันทึกบทบาท
+  error:
+    refused:
+      role_not_assignable: บทบาทนี้ไม่ใช่ของคุณที่จะมอบให้
+      email_domain_not_allowed: บทบาทนี้ต้องการที่อยู่ของโดเมนอื่น
+      exclusive_roles: บทบาททั้งสองนี้ไม่สามารถถือครองพร้อมกันได้
+      target_out_of_scope: บัญชีนี้ไม่ใช่ของคุณที่จะจัดการ
+      self_deactivation: บัญชีไม่สามารถปิดใช้งานตัวเองได้
+      self_demotion: บัญชีไม่สามารถเอาบทบาทของตัวเองออกได้
+      last_protected_role_holder: บทบาทนี้จะไม่มีผู้ถือที่ใช้งานอยู่
+      account_inactive: 'บัญชีนี้ไม่สามารถลงชื่อเข้าใช้ได้ ดังนั้นจึงไม่ส่งอีเมล'
+  success:
+    message: บันทึกบทบาทเรียบร้อยแล้ว
+
+de:
+  action:
+    submit: 'Rollen speichern'
+  error:
+    refused:
+      role_not_assignable: 'Diese Rolle kannst du nicht vergeben.'
+      email_domain_not_allowed: 'Diese Rolle erfordert eine Adresse einer anderen Domain.'
+      exclusive_roles: 'Diese beiden Rollen können niemals zusammen gehalten werden.'
+      target_out_of_scope: 'Dieses Konto gehört nicht dir.'
+      self_deactivation: 'Ein Konto kann sich nicht selbst deaktivieren.'
+      self_demotion: 'Ein Konto kann sich seine eigene Rolle nicht entziehen.'
+      last_protected_role_holder: 'Diese Rolle würde ohne einen aktiven Inhaber bleiben.'
+      account_inactive: 'Dieses Konto kann sich nicht anmelden, daher erhält es keine E-Mails.'
+  success:
+    message: 'Rollen gespeichert.'
+
+fi:
+  action:
+    submit: 'Tallenna roolit'
+  error:
+    refused:
+      role_not_assignable: 'Tätä roolia ei ole sinun annettavaksi.'
+      email_domain_not_allowed: 'Tämä rooli vaatii toisen verkkotunnuksen osoitteen.'
+      exclusive_roles: 'Nämä kaksi roolia eivät voi olla yhtä aikaa.'
+      target_out_of_scope: 'Tätä tiliä ei ole sinun hallittavaksesi.'
+      self_deactivation: 'Tili ei voi itse itseään poistaa käytöstä.'
+      self_demotion: 'Tili ei voi itse ottaa omaa rooliaan pois.'
+      last_protected_role_holder: 'Tätä roolia ei voi jättää ilman aktiivista haltijaa.'
+      account_inactive: 'Tämä tili ei voi kirjautua sisään, joten sille ei lähetetä sähköpostia.'
+  success:
+    message: 'Roolit tallennettu.'
+
+ru:
+  action:
+    submit: 'Сохранить роли'
+  error:
+    refused:
+      role_not_assignable: 'Эту роль нельзя назначить.'
+      email_domain_not_allowed: 'Эта роль требует адрес из другого домена.'
+      exclusive_roles: 'Эти две роли нельзя совмещать.'
+      target_out_of_scope: 'Этот аккаунт нельзя администрировать.'
+      self_deactivation: 'Аккаунт не может деактивировать сам себя.'
+      self_demotion: 'Аккаунт не может лишить себя своей роли.'
+      last_protected_role_holder: 'Эта роль останется без активного владельца.'
+      account_inactive: 'Этот аккаунт не может войти, поэтому ему не отправляется почта.'
+  success:
+    message: 'Роли сохранены.'
+
+pl:
+  action:
+    submit: 'Zapisz role'
+  error:
+    refused:
+      role_not_assignable: 'Ta rola nie jest twoja do przyznania.'
+      email_domain_not_allowed: 'Ta rola wymaga adresu z innej domeny.'
+      exclusive_roles: 'Te dwie role nigdy nie są przyznawane razem.'
+      target_out_of_scope: 'To konto nie jest twoje do zarządzania.'
+      self_deactivation: 'Konto nie może dezaktywować samego siebie.'
+      self_demotion: 'Konto nie może odebrać sobie własnej roli.'
+      last_protected_role_holder: 'Ta rola zostałaby bez aktywnego posiadacza.'
+      account_inactive: 'To konto nie może się zalogować, więc nie jest wysyłana żadna poczta.'
+  success:
+    message: 'Role zapisane.'
+
+es:
+  action:
+    submit: 'Guardar los roles'
+  error:
+    refused:
+      role_not_assignable: 'Este rol no te corresponde otorgar.'
+      email_domain_not_allowed: 'Este rol requiere una dirección de otro dominio.'
+      exclusive_roles: 'Estos dos roles nunca se pueden tener juntos.'
+      target_out_of_scope: 'Esta cuenta no te pertenece administrar.'
+      self_deactivation: 'Una cuenta no puede desactivarse a sí misma.'
+      self_demotion: 'Una cuenta no puede quitarse su propio rol.'
+      last_protected_role_holder: 'Este rol quedaría sin un titular activo.'
+      account_inactive: 'Esta cuenta no puede iniciar sesión, por lo que no recibe correos.'
+  success:
+    message: 'Roles guardados.'
+
+it:
+  action:
+    submit: 'Salva i ruoli'
+  error:
+    refused:
+      role_not_assignable: 'Questo ruolo non ti appartiene da assegnare.'
+      email_domain_not_allowed: 'Questo ruolo richiede un indirizzo di un altro dominio.'
+      exclusive_roles: 'Questi due ruoli non possono essere detenuti insieme.'
+      target_out_of_scope: 'Questo account non è tuo da amministrare.'
+      self_deactivation: 'Un account non può disattivarsi da solo.'
+      self_demotion: 'Un account non può togliere il proprio ruolo.'
+      last_protected_role_holder: 'Questo ruolo rimarrebbe senza un titolare attivo.'
+      account_inactive: 'Questo account non può accedere, quindi non riceve email.'
+  success:
+    message: 'Ruoli salvati.'
+
+pt_BR:
+  action:
+    submit: 'Salvar os papéis'
+  error:
+    refused:
+      role_not_assignable: 'Este papel não é seu para conceder.'
+      email_domain_not_allowed: 'Este papel requer um endereço de outro domínio.'
+      exclusive_roles: 'Esses dois papéis nunca são mantidos juntos.'
+      target_out_of_scope: 'Esta conta não é sua para administrar.'
+      self_deactivation: 'Uma conta não pode se desativar.'
+      self_demotion: 'Uma conta não pode retirar seu próprio papel.'
+      last_protected_role_holder: 'Este papel ficaria sem um detentor ativo.'
+      account_inactive: 'Esta conta não pode fazer login, então não recebe e-mails.'
+  success:
+    message: 'Papéis salvos.'
+
+tr:
+  action:
+    submit: 'Rolleri kaydet'
+  error:
+    refused:
+      role_not_assignable: 'Bu rolü vermek senin değil.'
+      email_domain_not_allowed: 'Bu rol, başka bir alan adı adresi istiyor.'
+      exclusive_roles: 'Bu iki rol asla birlikte tutulamaz.'
+      target_out_of_scope: 'Bu hesap senin yönetiminde değil.'
+      self_deactivation: 'Bir hesap kendini devre dışı bırakamaz.'
+      self_demotion: 'Bir hesap kendi rolünü alamaz.'
+      last_protected_role_holder: 'Bu rol, aktif bir tutucu olmadan kalacak.'
+      account_inactive: 'Bu hesap oturum açamaz, bu yüzden hiç mail gönderilmez.'
+  success:
+    message: 'Roller kaydedildi.'
+
+vi:
+  action:
+    submit: 'Lưu vai trò'
+  error:
+    refused:
+      role_not_assignable: 'Vai trò này không phải để bạn cấp.'
+      email_domain_not_allowed: 'Vai trò này yêu cầu một địa chỉ của miền khác.'
+      exclusive_roles: 'Hai vai trò này không bao giờ được nắm giữ cùng nhau.'
+      target_out_of_scope: 'Tài khoản này không phải của bạn để quản lý.'
+      self_deactivation: 'Một tài khoản không thể tự hủy kích hoạt.'
+      self_demotion: 'Một tài khoản không thể tự tước bỏ vai trò của mình.'
+      last_protected_role_holder: 'Vai trò này sẽ không còn người giữ nào hoạt động.'
+      account_inactive: 'Tài khoản này không thể đăng nhập, vì vậy không nhận được thư.'
+  success:
+    message: 'Các vai trò đã được lưu.'
+
+id:
+  action:
+    submit: 'Simpan peran'
+  error:
+    refused:
+      role_not_assignable: 'Peran ini bukan milikmu untuk diberikan.'
+      email_domain_not_allowed: 'Peran ini meminta alamat dari domain lain.'
+      exclusive_roles: 'Kedua peran ini tidak pernah dipegang bersamaan.'
+      target_out_of_scope: 'Akun ini bukan milikmu untuk dikelola.'
+      self_deactivation: 'Sebuah akun tidak dapat menonaktifkan dirinya sendiri.'
+      self_demotion: 'Sebuah akun tidak dapat mengambil perannya sendiri.'
+      last_protected_role_holder: 'Peran ini akan dibiarkan tanpa pemegang aktif.'
+      account_inactive: 'Akun ini tidak dapat masuk, jadi tidak ada email yang dikirim.'
+  success:
+    message: 'Peran disimpan.'
+
+nl:
+  action:
+    submit: 'Rolletjes opslaan'
+  error:
+    refused:
+      role_not_assignable: 'Deze rol is niet aan jou om toe te wijzen.'
+      email_domain_not_allowed: 'Deze rol vraagt om een adres van een ander domein.'
+      exclusive_roles: 'Deze twee rollen kunnen nooit samen worden gedragen.'
+      target_out_of_scope: 'Dit account is niet jouw om te beheren.'
+      self_deactivation: 'Een account kan zichzelf niet deactiveren.'
+      self_demotion: 'Een account kan zijn eigen rol niet afnemen.'
+      last_protected_role_holder: 'Deze rol zou zonder een actieve houder komen te zitten.'
+      account_inactive: 'Dit account kan zich niet aanmelden, dus ontvangt het geen mail.'
+  success:
+    message: 'Rollen opgeslagen.'

@@ -39,3 +39,193 @@ ar:
   error:
     not_allowed: 'لا يمكن تسجيل الدخول إلى هذا الحساب.'
     invalid_csrf: 'انتهت صلاحية النموذج، يرجى إعادة تحميل الصفحة والمحاولة مرة أخرى.'
+
+hi:
+  field:
+    account:
+      label: खाता
+  action:
+    submit: 'साइन इन करें'
+  error:
+    not_allowed: 'इस खाते में साइन इन नहीं किया जा सकता।'
+    invalid_csrf: 'फॉर्म की अवधि समाप्त हो गई है, पृष्ठ को फिर से लोड करें और फिर से प्रयास करें।'
+
+he:
+  field:
+    account:
+      label: חשבון
+  action:
+    submit: התחבר
+  error:
+    not_allowed: 'לא ניתן להתחבר לחשבון הזה.'
+    invalid_csrf: 'הטופס פג תוקף, רענן את הדף ונסה שוב.'
+
+fa:
+  field:
+    account:
+      label: 'حساب کاربری'
+  action:
+    submit: ورود
+  error:
+    not_allowed: 'این حساب کاربری قادر به ورود نیست.'
+    invalid_csrf: 'فرم منقضی شده است، صفحه را دوباره بارگذاری کنید و دوباره تلاش کنید.'
+
+ur:
+  field:
+    account:
+      label: اکاؤنٹ
+  action:
+    submit: 'لاگ ان کریں'
+  error:
+    not_allowed: 'اس اکاؤنٹ میں لاگ ان نہیں کیا جا سکتا۔'
+    invalid_csrf: 'فارم کی مدت ختم ہو گئی ہے، صفحہ دوبارہ لوڈ کریں اور دوبارہ کوشش کریں۔'
+
+ja:
+  field:
+    account:
+      label: アカウント
+  action:
+    submit: サインイン
+  error:
+    not_allowed: このアカウントにはサインインできません。
+    invalid_csrf: フォームの有効期限が切れました。ページを再読み込みして再試行してください。
+
+ko:
+  field:
+    account:
+      label: 계정
+  action:
+    submit: 로그인
+  error:
+    not_allowed: '이 계정으로 로그인할 수 없습니다.'
+    invalid_csrf: '양식의 유효 기간이 만료되었습니다. 페이지를 새로 고치고 다시 시도하세요.'
+
+bn:
+  field:
+    account:
+      label: অ্যাকাউন্ট
+  action:
+    submit: 'সাইন ইন করুন'
+  error:
+    not_allowed: 'এই অ্যাকাউন্টে সাইন ইন করা যাবে না।'
+    invalid_csrf: 'ফর্মটির মেয়াদ শেষ হয়ে গেছে, পৃষ্ঠা রিফ্রেশ করে আবার চেষ্টা করুন।'
+
+th:
+  field:
+    account:
+      label: บัญชีผู้ใช้
+  action:
+    submit: เข้าสู่ระบบ
+  error:
+    not_allowed: ไม่สามารถเข้าสู่ระบบด้วยบัญชีนี้ได้
+    invalid_csrf: 'แบบฟอร์มหมดอายุแล้ว กรุณารีโหลดหน้าและลองอีกครั้ง.'
+
+de:
+  field:
+    account:
+      label: Konto
+  action:
+    submit: Anmelden
+  error:
+    not_allowed: 'Auf dieses Konto kann nicht zugegriffen werden.'
+    invalid_csrf: 'Das Formular ist abgelaufen, laden Sie die Seite neu und versuchen Sie es erneut.'
+
+fi:
+  field:
+    account:
+      label: Tili
+  action:
+    submit: 'Kirjaudu sisään'
+  error:
+    not_allowed: 'Tähän tiliin ei voi kirjautua.'
+    invalid_csrf: 'Lomake on vanhentunut, lataa sivu uudelleen ja yritä uudelleen.'
+
+ru:
+  field:
+    account:
+      label: 'Учётная запись'
+  action:
+    submit: Войти
+  error:
+    not_allowed: 'В эту учётную запись нельзя войти.'
+    invalid_csrf: 'Форма истекла, обновите страницу и попробуйте снова.'
+
+pl:
+  field:
+    account:
+      label: Konto
+  action:
+    submit: 'Zaloguj się'
+  error:
+    not_allowed: 'Nie można się zalogować na to konto.'
+    invalid_csrf: 'Formularz wygasł, przeładuj stronę i spróbuj ponownie.'
+
+es:
+  field:
+    account:
+      label: Cuenta
+  action:
+    submit: 'Iniciar sesión'
+  error:
+    not_allowed: 'Esta cuenta no puede iniciar sesión.'
+    invalid_csrf: 'El formulario ha expirado, recarga la página e inténtalo de nuevo.'
+
+it:
+  field:
+    account:
+      label: Account
+  action:
+    submit: Accedi
+  error:
+    not_allowed: 'Non è possibile accedere a questo account.'
+    invalid_csrf: 'Il modulo è scaduto, ricarica la pagina e riprova.'
+
+pt_BR:
+  field:
+    account:
+      label: Conta
+  action:
+    submit: Entrar
+  error:
+    not_allowed: 'Esta conta não pode ser acessada.'
+    invalid_csrf: 'O formulário expirou, recarregue a página e tente novamente.'
+
+tr:
+  field:
+    account:
+      label: Hesap
+  action:
+    submit: 'Giriş yap'
+  error:
+    not_allowed: 'Bu hesaba giriş yapılamaz.'
+    invalid_csrf: 'Form süresi dolmuş, sayfayı yenileyin ve tekrar deneyin.'
+
+vi:
+  field:
+    account:
+      label: 'Tài khoản'
+  action:
+    submit: 'Đăng nhập'
+  error:
+    not_allowed: 'Tài khoản này không thể đăng nhập.'
+    invalid_csrf: 'Mẫu đã hết hạn, hãy tải lại trang và thử lại.'
+
+id:
+  field:
+    account:
+      label: Akun
+  action:
+    submit: Masuk
+  error:
+    not_allowed: 'Akun ini tidak dapat digunakan untuk masuk.'
+    invalid_csrf: 'Form telah kedaluwarsa, muat ulang halaman dan coba lagi.'
+
+nl:
+  field:
+    account:
+      label: Account
+  action:
+    submit: Inloggen
+  error:
+    not_allowed: 'Met dit account kan niet worden ingelogd.'
+    invalid_csrf: 'Het formulier is verlopen, ververs de pagina en probeer het opnieuw.'

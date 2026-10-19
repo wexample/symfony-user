@@ -57,3 +57,269 @@ ar:
     submit: حفظ
   success:
     message: 'تم حفظ الملف الشخصي.'
+
+hi:
+  field:
+    first_name:
+      label: 'पहला नाम'
+    last_name:
+      label: 'आखिरी नाम'
+    locale:
+      label: भाषा
+      placeholder: 'डिफ़ॉल्ट भाषा'
+  action:
+    submit: सहेजें
+  success:
+    message: 'प्रोफ़ाइल सुरक्षित कर ली गई।'
+
+he:
+  field:
+    first_name:
+      label: 'שם פרטי'
+    last_name:
+      label: 'שם משפחה'
+    locale:
+      label: שפה
+      placeholder: 'השפה המוגדרת כברירת מחדל'
+  action:
+    submit: שמור
+  success:
+    message: 'הפרופיל נשמר.'
+
+fa:
+  field:
+    first_name:
+      label: 'نام کوچک'
+    last_name:
+      label: 'نام خانوادگی'
+    locale:
+      label: زبان
+      placeholder: 'زبان پیش‌فرض'
+  action:
+    submit: ذخیره
+  success:
+    message: 'پروفایل ذخیره شد.'
+
+ur:
+  field:
+    first_name:
+      label: 'پہلا نام'
+    last_name:
+      label: 'آخری نام'
+    locale:
+      label: زبان
+      placeholder: 'ڈیفالٹ زبان'
+  action:
+    submit: 'محفوظ کریں'
+  success:
+    message: 'پروفائل محفوظ کر لی گئی ہے۔'
+
+ja:
+  field:
+    first_name:
+      label: 名
+    last_name:
+      label: 姓
+    locale:
+      label: 言語
+      placeholder: デフォルトの言語
+  action:
+    submit: 保存
+  success:
+    message: プロフィールが保存されました。
+
+ko:
+  field:
+    first_name:
+      label: 이름
+    last_name:
+      label: 성
+    locale:
+      label: 언어
+      placeholder: '기본 언어'
+  action:
+    submit: 저장
+  success:
+    message: '프로필이 저장되었습니다.'
+
+bn:
+  field:
+    first_name:
+      label: 'প্রথম নাম'
+    last_name:
+      label: 'শেষ নাম'
+    locale:
+      label: ভাষা
+      placeholder: 'ডিফল্ট ভাষা'
+  action:
+    submit: 'সংরক্ষণ করুন'
+  success:
+    message: 'প্রোফাইল সংরক্ষিত।'
+
+th:
+  field:
+    first_name:
+      label: ชื่อจริง
+    last_name:
+      label: นามสกุล
+    locale:
+      label: ภาษา
+      placeholder: ภาษาเริ่มต้น
+  action:
+    submit: บันทึก
+  success:
+    message: โปรไฟล์ถูกบันทึกเรียบร้อยแล้ว.
+
+de:
+  field:
+    first_name:
+      label: Vorname
+    last_name:
+      label: Nachname
+    locale:
+      label: Sprache
+      placeholder: 'Die Standardsprache'
+  action:
+    submit: Speichern
+  success:
+    message: 'Profil gespeichert.'
+
+fi:
+  field:
+    first_name:
+      label: Etunimi
+    last_name:
+      label: Sukunimi
+    locale:
+      label: Kieli
+      placeholder: Oletuskieli
+  action:
+    submit: Tallenna
+  success:
+    message: 'Profiili tallennettu.'
+
+ru:
+  field:
+    first_name:
+      label: Имя
+    last_name:
+      label: Фамилия
+    locale:
+      label: Язык
+      placeholder: 'Язык по умолчанию'
+  action:
+    submit: Сохранить
+  success:
+    message: 'Профиль сохранён.'
+
+pl:
+  field:
+    first_name:
+      label: Imię
+    last_name:
+      label: Nazwisko
+    locale:
+      label: Język
+      placeholder: 'Domyślny język'
+  action:
+    submit: Zapisz
+  success:
+    message: 'Profil zapisany.'
+
+es:
+  field:
+    first_name:
+      label: Nombre
+    last_name:
+      label: Apellido
+    locale:
+      label: Idioma
+      placeholder: 'El idioma por defecto'
+  action:
+    submit: Guardar
+  success:
+    message: 'Perfil guardado.'
+
+it:
+  field:
+    first_name:
+      label: Nome
+    last_name:
+      label: Cognome
+    locale:
+      label: Lingua
+      placeholder: 'La lingua predefinita'
+  action:
+    submit: Salva
+  success:
+    message: 'Profilo salvato.'
+
+pt_BR:
+  field:
+    first_name:
+      label: Nome
+    last_name:
+      label: Sobrenome
+    locale:
+      label: Idioma
+      placeholder: 'O idioma padrão'
+  action:
+    submit: Salvar
+  success:
+    message: 'Perfil salvo.'
+
+tr:
+  field:
+    first_name:
+      label: Ad
+    last_name:
+      label: Soyad
+    locale:
+      label: Dil
+      placeholder: 'Varsayılan dil'
+  action:
+    submit: Kaydet
+  success:
+    message: 'Profil kaydedildi.'
+
+vi:
+  field:
+    first_name:
+      label: Tên
+    last_name:
+      label: Họ
+    locale:
+      label: 'Ngôn ngữ'
+      placeholder: 'Ngôn ngữ mặc định'
+  action:
+    submit: Lưu
+  success:
+    message: 'Hồ sơ đã được lưu.'
+
+id:
+  field:
+    first_name:
+      label: 'Nama depan'
+    last_name:
+      label: 'Nama belakang'
+    locale:
+      label: Bahasa
+      placeholder: 'Bahasa default'
+  action:
+    submit: Simpan
+  success:
+    message: 'Profil disimpan.'
+
+nl:
+  field:
+    first_name:
+      label: Voornaam
+    last_name:
+      label: Achternaam
+    locale:
+      label: Taal
+      placeholder: 'De standaardtaal'
+  action:
+    submit: Opslaan
+  success:
+    message: 'Profiel opgeslagen.'

@@ -17,3 +17,98 @@ ar:
   subject: 'حسابك جاهز'
   intro: 'تم إنشاء حساب لك. اتبع هذا الرابط لاختيار كلمة المرور الخاصة بك:'
   validity: 'يعمل مرة واحدة، حتى %date%. بعد ذلك التاريخ، اطلب من الشخص الذي أنشأ حسابك الحصول على واحدة جديدة.'
+
+hi:
+  subject: 'आपका खाता तैयार है'
+  intro: 'आपके लिए एक खाता बनाया गया है। अपना पासवर्ड चुनने के लिए इस लिंक का पालन करें:'
+  validity: 'यह एक बार काम करता है, %date% तक। उस तारीख के बाद, अपने खाते को बनाने वाले व्यक्ति से नया पासवर्ड मांगें।'
+
+he:
+  subject: 'החשבון שלך מוכן'
+  intro: 'נפתח עבורך חשבון. עקוב אחרי הקישור הזה כדי לבחור סיסמה:'
+  validity: 'זה עובד פעם אחת, עד %date%. לאחר התאריך הזה, בקש מהאדם שפתח את החשבון שלך סיסמה חדשה.'
+
+fa:
+  subject: 'حساب کاربری شما آماده است'
+  intro: 'یک حساب برای شما ایجاد شده است. برای انتخاب رمز عبور خود به این لینک مراجعه کنید:'
+  validity: 'این یک بار کار می کند، تا %date%. پس از آن تاریخ، از شخصی که حساب شما را ایجاد کرده است، یک رمز جدید بخواهید.'
+
+ur:
+  subject: 'آپ کا اکاؤنٹ تیار ہے'
+  intro: 'آپ کے لیے ایک اکاؤنٹ بنایا گیا ہے۔ اپنا پاس ورڈ منتخب کرنے کے لیے اس لنک پر جائیں:'
+  validity: 'یہ ایک بار کام کرتا ہے، %date% تک۔ اس تاریخ کے بعد، اپنے اکاؤنٹ بنانے والے سے نئے کے لیے پوچھیں۔'
+
+ja:
+  subject: アカウントが準備できました
+  intro: アカウントが作成されました。パスワードを選択するには、このリンクに従ってください：
+  validity: 一度だけ機能します。%date%まで有効です。それ以降は、アカウントを作成した人に新しいものを依頼してください。
+
+ko:
+  subject: '귀하의 계정이 준비되었습니다'
+  intro: '귀하를 위한 계정이 생성되었습니다. 비밀번호를 선택하려면 이 링크를 따르세요:'
+  validity: '한 번만 사용할 수 있으며, %date%까지 유효합니다. 그 날짜가 지나면 계정을 생성한 사람에게 새 비밀번호를 요청하세요.'
+
+bn:
+  subject: 'আপনার অ্যাকাউন্ট প্রস্তুত'
+  intro: 'আপনার জন্য একটি অ্যাকাউন্ট তৈরি করা হয়েছে। আপনার পাসওয়ার্ড নির্বাচন করতে এই লিঙ্কটি অনুসরণ করুন:'
+  validity: 'এটি একবার কাজ করে, %date% পর্যন্ত। ওই তারিখের পরে, আপনার অ্যাকাউন্ট তৈরি করা ব্যক্তির কাছে একটি নতুন পাসওয়ার্ডের জন্য অনুরোধ করুন।'
+
+th:
+  subject: บัญชีของคุณพร้อมใช้งานแล้ว
+  intro: 'บัญชีถูกสร้างขึ้นสำหรับคุณแล้ว คลิกที่ลิงก์นี้เพื่อตั้งรหัสผ่านของคุณ:'
+  validity: 'ใช้ได้ครั้งเดียว จนถึง %date% หลังจากวันนั้น ให้ติดต่อผู้ที่สร้างบัญชีของคุณเพื่อขอรหัสใหม่.'
+
+de:
+  subject: 'Ihr Konto ist bereit'
+  intro: 'Ein Konto wurde für Sie erstellt. Folgen Sie diesem Link, um Ihr Passwort auszuwählen:'
+  validity: 'Es funktioniert einmalig, bis %date%. Nach diesem Datum wenden Sie sich bitte an die Person, die Ihr Konto erstellt hat, um ein neues zu erhalten.'
+
+fi:
+  subject: 'Tilisi on valmis'
+  intro: 'Sinulle on luotu tili. Seuraa tätä linkkiä valitaksesi salasanasi:'
+  validity: 'Se toimii kerran, kunnes %date%. Tämän päivämäärän jälkeen kysy tilisi luoneelta henkilöltä uutta.'
+
+ru:
+  subject: 'Ваш аккаунт готов'
+  intro: 'Для вас был создан аккаунт. Перейдите по этой ссылке, чтобы выбрать пароль:'
+  validity: 'Он работает один раз, до %date%. После этой даты попросите человека, который создал ваш аккаунт, выдать новый.'
+
+pl:
+  subject: 'Twoje konto jest gotowe'
+  intro: 'Zostało dla Ciebie utworzone konto. Kliknij ten link, aby wybrać hasło:'
+  validity: 'Działa jednorazowo, do %date%. Po tej dacie poproś osobę, która utworzyła Twoje konto, o nowe.'
+
+es:
+  subject: 'Tu cuenta está lista'
+  intro: 'Se creó una cuenta para ti. Sigue este enlace para elegir tu contraseña:'
+  validity: 'Funciona una vez, hasta %date%. Después de esa fecha, pide a la persona que creó tu cuenta uno nuevo.'
+
+it:
+  subject: 'Il tuo account è pronto'
+  intro: 'È stato creato un account per te. Segui questo link per scegliere la tua password:'
+  validity: 'Funziona una sola volta, fino a %date%. Dopo quella data, chiedi alla persona che ha creato il tuo account un nuovo codice.'
+
+pt_BR:
+  subject: 'Sua conta está pronta'
+  intro: 'Uma conta foi criada para você. Siga este link para escolher sua senha:'
+  validity: 'Funciona uma vez, até %date%. Após essa data, peça à pessoa que criou sua conta um novo.'
+
+tr:
+  subject: 'Hesabınız hazır'
+  intro: 'Sizin için bir hesap oluşturuldu. Şifrenizi seçmek için bu bağlantıyı takip edin:'
+  validity: 'Bu bir kez çalışır, %date% tarihine kadar. Bu tarihten sonra, hesabınızı oluşturan kişiden yenisini isteyin.'
+
+vi:
+  subject: 'Tài khoản của bạn đã sẵn sàng'
+  intro: 'Một tài khoản đã được tạo cho bạn. Theo liên kết này để chọn mật khẩu của bạn:'
+  validity: 'Nó chỉ có hiệu lực một lần, cho đến %date%. Sau ngày đó, hãy hỏi người đã tạo tài khoản của bạn để lấy mã mới.'
+
+id:
+  subject: 'Akun Anda sudah siap'
+  intro: 'Sebuah akun telah dibuat untuk Anda. Ikuti tautan ini untuk memilih kata sandi Anda:'
+  validity: 'Ini berfungsi sekali, sampai %date%. Setelah tanggal itu, minta kepada orang yang membuat akun Anda untuk yang baru.'
+
+nl:
+  subject: 'Uw account is klaar'
+  intro: 'Er is een account voor u aangemaakt. Volg deze link om uw wachtwoord te kiezen:'
+  validity: 'Het werkt één keer, tot %date%. Na die datum, vraag de persoon die uw account heeft aangemaakt om een nieuwe.'

@@ -41,3 +41,193 @@ ar:
   error:
     outdated: 'تم استبدال هذه الشروط في هذه الأثناء، قم بإعادة تحميل الصفحة لقراءة الشروط الجديدة.'
     impersonation: 'فقط المستخدم يمكنه قبول الشروط، وليس المدير بدلاً عنه.'
+
+hi:
+  field:
+    accepted:
+      label: 'मैंने उपयोग की शर्तें पढ़ ली हैं और उन्हें स्वीकार करता हूँ'
+  action:
+    submit: 'जारी रखें'
+  error:
+    outdated: 'इन शर्तों को इस बीच बदल दिया गया है, नए शर्तें पढ़ने के लिए पृष्ठ को पुनः लोड करें।'
+    impersonation: 'केवल उपयोगकर्ता ही शर्तों को स्वीकार कर सकता है, उनके स्थान पर कोई व्यवस्थापक नहीं।'
+
+he:
+  field:
+    accepted:
+      label: 'קראתי ומקבל את תנאי השימוש'
+  action:
+    submit: המשך
+  error:
+    outdated: 'תנאים אלו הוחלפו בינתיים, טען מחדש את העמוד כדי לקרוא את החדשים.'
+    impersonation: 'רק המשתמש יכול לקבל את התנאים, לא מנהל במקומו.'
+
+fa:
+  field:
+    accepted:
+      label: 'من شرایط استفاده را خوانده و قبول دارم'
+  action:
+    submit: ادامه
+  error:
+    outdated: 'این شرایط در این بین تغییر کرده است، صفحه را دوباره بارگذاری کنید تا شرایط جدید را بخوانید.'
+    impersonation: 'فقط کاربر می‌تواند شرایط را قبول کند، نه یک مدیر به جای او.'
+
+ur:
+  field:
+    accepted:
+      label: 'میں نے شرائط کو پڑھ لیا ہے اور قبول کرتا ہوں'
+  action:
+    submit: 'جاری رکھیں'
+  error:
+    outdated: 'ان شرائط کو اس دوران تبدیل کر دیا گیا ہے، نئے پڑھنے کے لیے صفحہ دوبارہ لوڈ کریں۔'
+    impersonation: 'صرف صارف ہی شرائط قبول کر سکتا ہے، ان کے جگہ پر کوئی منتظم نہیں۔'
+
+ja:
+  field:
+    accepted:
+      label: 利用規約を読み、同意しました
+  action:
+    submit: 続行
+  error:
+    outdated: これらの規約はその間に更新されました。新しい規約を読むにはページを再読み込みしてください。
+    impersonation: 利用規約を承諾できるのはユーザーのみで、管理者がその代わりに承諾することはできません。
+
+ko:
+  field:
+    accepted:
+      label: '이용 약관을 읽고 동의합니다.'
+  action:
+    submit: 계속
+  error:
+    outdated: '이 약관은 그동안 변경되었습니다. 새로운 약관을 읽으려면 페이지를 새로고침하세요.'
+    impersonation: '약관에 동의할 수 있는 것은 사용자만 가능하며, 관리자가 대신할 수 없습니다.'
+
+bn:
+  field:
+    accepted:
+      label: 'আমি শর্তাবলী পড়েছি এবং গ্রহণ করি'
+  action:
+    submit: 'অগ্রসর হোন'
+  error:
+    outdated: 'এই শর্তগুলো ইতিমধ্যে পরিবর্তিত হয়েছে, নতুন শর্তগুলো পড়তে পৃষ্ঠাটি রিফ্রেশ করুন।'
+    impersonation: 'শর্তগুলো গ্রহণ করার অধিকার শুধুমাত্র ব্যবহারকারীর, তাদের স্থানে কোন প্রশাসকের নয়।'
+
+th:
+  field:
+    accepted:
+      label: ฉันได้อ่านและยอมรับเงื่อนไขการใช้งานแล้ว
+  action:
+    submit: ดำเนินการต่อ
+  error:
+    outdated: 'เงื่อนไขเหล่านี้ถูกแทนที่ในระหว่างนี้ กรุณารีโหลดหน้าเพื่ออ่านเงื่อนไขใหม่'
+    impersonation: 'เฉพาะผู้ใช้เท่านั้นที่สามารถยอมรับเงื่อนไขได้ ไม่ใช่ผู้ดูแลระบบในนามของพวกเขา'
+
+de:
+  field:
+    accepted:
+      label: 'Ich habe die Nutzungsbedingungen gelesen und akzeptiere sie'
+  action:
+    submit: Fortfahren
+  error:
+    outdated: 'Diese Bedingungen wurden inzwischen ersetzt, laden Sie die Seite neu, um die neuen zu lesen.'
+    impersonation: 'Nur der Benutzer kann die Bedingungen akzeptieren, nicht ein Administrator an seiner Stelle.'
+
+fi:
+  field:
+    accepted:
+      label: 'Olen lukenut ja hyväksyn käyttöehdot'
+  action:
+    submit: Jatka
+  error:
+    outdated: 'Nämä ehdot on täytetty uudelleen, lataa sivu uudelleen lukeaksesi uudet.'
+    impersonation: 'Vain käyttäjä voi hyväksyä ehdot, ei administrator heidän puolestaan.'
+
+ru:
+  field:
+    accepted:
+      label: 'Я прочитал и принимаю условия использования'
+  action:
+    submit: Продолжить
+  error:
+    outdated: 'Эти условия были заменены, обновите страницу, чтобы прочитать новые.'
+    impersonation: 'Только пользователь может принять условия, администратор не может сделать это вместо него.'
+
+pl:
+  field:
+    accepted:
+      label: 'Przeczytałem i akceptuję warunki użytkowania'
+  action:
+    submit: Kontynuuj
+  error:
+    outdated: 'Te warunki zostały w międzyczasie zastąpione, odśwież stronę, aby przeczytać nowe.'
+    impersonation: 'Tylko użytkownik może zaakceptować warunki, nie administrator w jego imieniu.'
+
+es:
+  field:
+    accepted:
+      label: 'He leído y acepto los términos de uso'
+  action:
+    submit: Continuar
+  error:
+    outdated: 'Estos términos han sido reemplazados por otros, recarga la página para leer los nuevos.'
+    impersonation: 'Solo el usuario puede aceptar los términos, no un administrador en su lugar.'
+
+it:
+  field:
+    accepted:
+      label: 'Ho letto e accetto i termini di utilizzo'
+  action:
+    submit: Continua
+  error:
+    outdated: 'Questi termini sono stati sostituiti nel frattempo, ricarica la pagina per leggere i nuovi.'
+    impersonation: "Solo l'utente può accettare i termini, non un amministratore al suo posto."
+
+pt_BR:
+  field:
+    accepted:
+      label: 'Eu li e aceito os termos de uso'
+  action:
+    submit: Continuar
+  error:
+    outdated: 'Esses termos foram substituídos, recarregue a página para ler os novos.'
+    impersonation: 'Somente o usuário pode aceitar os termos, não um administrador em seu lugar.'
+
+tr:
+  field:
+    accepted:
+      label: 'Kullanım koşullarını okudum ve kabul ediyorum'
+  action:
+    submit: 'Devam et'
+  error:
+    outdated: 'Bu koşullar bu arada güncellenmiştir, yeni koşulları okumak için sayfayı yenileyin.'
+    impersonation: 'Koşulları yalnızca kullanıcı kabul edebilir, yerine bir yönetici kabul edemez.'
+
+vi:
+  field:
+    accepted:
+      label: 'Tôi đã đọc và chấp nhận các điều khoản sử dụng'
+  action:
+    submit: 'Tiếp tục'
+  error:
+    outdated: 'Các điều khoản này đã được thay thế, hãy tải lại trang để đọc các điều khoản mới.'
+    impersonation: 'Chỉ có người dùng mới có thể chấp nhận các điều khoản, không phải quản trị viên thay mặt họ.'
+
+id:
+  field:
+    accepted:
+      label: 'Saya telah membaca dan menerima syarat penggunaan'
+  action:
+    submit: Lanjutkan
+  error:
+    outdated: 'Syarat ini telah diganti sementara, muat ulang halaman untuk membaca yang baru.'
+    impersonation: 'Hanya pengguna yang dapat menerima syarat, bukan administrator atas nama mereka.'
+
+nl:
+  field:
+    accepted:
+      label: 'Ik heb de gebruiksvoorwaarden gelezen en accepteer deze'
+  action:
+    submit: Doorgaan
+  error:
+    outdated: 'Deze voorwaarden zijn inmiddels vervangen, vernieuw de pagina om de nieuwe te lezen.'
+    impersonation: 'Alleen de gebruiker kan de voorwaarden accepteren, niet een administrator in hun plaats.'

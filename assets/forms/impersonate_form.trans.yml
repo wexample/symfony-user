@@ -39,3 +39,193 @@ ar:
     exit: 'العودة إلى حسابي'
   error:
     not_allowed: 'لا يمكن تقمص هذه الحساب.'
+
+hi:
+  field:
+    account:
+      label: खाता
+  action:
+    submit: 'प्रतिनिधित्व करें'
+    exit: 'मेरे खाते पर वापस जाएं'
+  error:
+    not_allowed: 'इस खाते का प्रतिनिधित्व नहीं किया जा सकता।'
+
+he:
+  field:
+    account:
+      label: חשבון
+  action:
+    submit: התחפש
+    exit: 'חזרה לחשבון שלי'
+  error:
+    not_allowed: 'לא ניתן להתחפש לחשבון הזה.'
+
+fa:
+  field:
+    account:
+      label: 'حساب کاربری'
+  action:
+    submit: شخصیت‌سازی
+    exit: 'برگشت به حساب کاربری من'
+  error:
+    not_allowed: 'این حساب کاربری قابل شخصیت‌سازی نیست.'
+
+ur:
+  field:
+    account:
+      label: اکاؤنٹ
+  action:
+    submit: 'نقل کریں'
+    exit: 'میرے اکاؤنٹ پر واپس جائیں'
+  error:
+    not_allowed: 'اس اکاؤنٹ کی نقل نہیں کی جا سکتی۔'
+
+ja:
+  field:
+    account:
+      label: アカウント
+  action:
+    submit: なりすます
+    exit: マイアカウントに戻る
+  error:
+    not_allowed: このアカウントはなりすませません。
+
+ko:
+  field:
+    account:
+      label: 계정
+  action:
+    submit: '가짜 사용자로 로그인'
+    exit: '내 계정으로 돌아가기'
+  error:
+    not_allowed: '이 계정은 가짜 사용자로 로그인할 수 없습니다.'
+
+bn:
+  field:
+    account:
+      label: অ্যাকাউন্ট
+  action:
+    submit: 'প্রতিনিধিত্ব করুন'
+    exit: 'আমার অ্যাকাউন্টে ফিরে যান'
+  error:
+    not_allowed: 'এই অ্যাকাউন্টের প্রতিনিধিত্ব করা সম্ভব নয়।'
+
+th:
+  field:
+    account:
+      label: บัญชี
+  action:
+    submit: เลียนแบบ
+    exit: กลับไปยังบัญชีของฉัน
+  error:
+    not_allowed: บัญชีนี้ไม่สามารถถูกเลียนแบบได้.
+
+de:
+  field:
+    account:
+      label: Konto
+  action:
+    submit: Impersonieren
+    exit: 'Zurück zu meinem Konto'
+  error:
+    not_allowed: 'Dieses Konto kann nicht impersoniert werden.'
+
+fi:
+  field:
+    account:
+      label: Tili
+  action:
+    submit: Esittäydy
+    exit: 'Takaisin tiliini'
+  error:
+    not_allowed: 'Tätä tiliä ei voi esittää.'
+
+ru:
+  field:
+    account:
+      label: 'Учетная запись'
+  action:
+    submit: 'Выдать права'
+    exit: 'Вернуться к моей учетной записи'
+  error:
+    not_allowed: 'Эту учетную запись нельзя использовать для выдачи прав.'
+
+pl:
+  field:
+    account:
+      label: Konto
+  action:
+    submit: Zastąpienie
+    exit: 'Powrót do mojego konta'
+  error:
+    not_allowed: 'To konto nie może być zastąpione.'
+
+es:
+  field:
+    account:
+      label: Cuenta
+  action:
+    submit: Suplantar
+    exit: 'Volver a mi cuenta'
+  error:
+    not_allowed: 'Esta cuenta no puede ser suplantada.'
+
+it:
+  field:
+    account:
+      label: Account
+  action:
+    submit: Impersonifica
+    exit: 'Torna al mio account'
+  error:
+    not_allowed: 'Questo account non può essere impersonificato.'
+
+pt_BR:
+  field:
+    account:
+      label: Conta
+  action:
+    submit: Imitar
+    exit: 'Voltar para minha conta'
+  error:
+    not_allowed: 'Esta conta não pode ser imitada.'
+
+tr:
+  field:
+    account:
+      label: Hesap
+  action:
+    submit: 'Taklit et'
+    exit: 'Hesabıma geri dön'
+  error:
+    not_allowed: 'Bu hesap taklit edilemez.'
+
+vi:
+  field:
+    account:
+      label: 'Tài khoản'
+  action:
+    submit: 'Thay mặt'
+    exit: 'Quay lại tài khoản của tôi'
+  error:
+    not_allowed: 'Tài khoản này không thể được thay mặt.'
+
+id:
+  field:
+    account:
+      label: Akun
+  action:
+    submit: 'Menjadi perwakilan'
+    exit: 'Kembali ke akun saya'
+  error:
+    not_allowed: 'Akun ini tidak dapat dijadikan perwakilan.'
+
+nl:
+  field:
+    account:
+      label: Account
+  action:
+    submit: Imiteren
+    exit: 'Terug naar mijn account'
+  error:
+    not_allowed: 'Dit account kan niet geïmiteerd worden.'
