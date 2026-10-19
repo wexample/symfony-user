@@ -50,6 +50,15 @@ class AccountCreateFormProcessor extends AbstractFormProcessor
         parent::__construct($formFactory, $requestStack, $urlGenerator);
     }
 
+    /**
+     * The account this submission created, not one the next request did not.
+     */
+    public function reset(): void
+    {
+        parent::reset();
+        $this->created = null;
+    }
+
     public function createForm(
         $data = null,
         array $options = []

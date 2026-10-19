@@ -36,6 +36,15 @@ class ImpersonateFormProcessor extends AbstractFormProcessor
         parent::__construct($formFactory, $requestStack, $urlGenerator);
     }
 
+    /**
+     * The account of the submission handled, not of the next one.
+     */
+    public function reset(): void
+    {
+        parent::reset();
+        $this->target = null;
+    }
+
     public function formIsValid(FormInterface $form): bool
     {
         if (! parent::formIsValid($form)) {
