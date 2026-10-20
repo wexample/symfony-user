@@ -10,6 +10,7 @@ use Wexample\SymfonyTranslations\Translation\Translator;
 use Wexample\SymfonyUser\Enum\SecurityMessageType;
 use Wexample\SymfonyUser\Service\SecurityMessageMailerSenderService;
 use Wexample\SymfonyUser\Tests\Fixtures\App\Entity\User;
+use Wexample\SymfonyUser\Tests\Traits\DatabaseTestTrait;
 
 /**
  * Every text of the security mails comes from the yml next to their template,
@@ -17,6 +18,8 @@ use Wexample\SymfonyUser\Tests\Fixtures\App\Entity\User;
  */
 class SecurityMessageMailTest extends KernelTestCase
 {
+    use DatabaseTestTrait;
+
     public function testEveryMailIsTranslated(): void
     {
         foreach (['en' => 'Your sign-in code', 'fr' => 'Votre code de connexion'] as $locale => $subject) {
@@ -51,6 +54,8 @@ class SecurityMessageMailTest extends KernelTestCase
     ): Email {
         self::ensureKernelShutdown();
         self::bootKernel();
+        // symfony-mail's journal records each mail sent.
+        $this->createDatabaseSchema();
         $container = self::getContainer();
         // The request's language is another one: the account's wins.
         $container->get(Translator::class)->setLocale('en' === $locale ? 'fr' : 'en');
