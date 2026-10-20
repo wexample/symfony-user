@@ -15,7 +15,7 @@ fr:
     account:
       label: Compte
   action:
-    submit: Imiter
+    submit: 'Prendre l''identité'
     exit: 'Retour à mon compte'
   error:
     not_allowed: 'Ce compte ne peut pas être imité.'
