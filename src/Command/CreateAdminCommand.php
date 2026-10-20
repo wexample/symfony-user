@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Wexample\SymfonyHelpers\Helper\RoleHelper;
 use Wexample\SymfonyUser\Service\AccountDirectoryService;
@@ -25,11 +26,16 @@ class CreateAdminCommand extends Command
 {
     private const string ARGUMENT_EMAIL = 'email';
     private const string OPTION_NO_MAIL_CODE = 'no-mail-code';
+    // Held to in production only: a machine of one's own works with throwaway
+    // passwords.
+    private const int PASSWORD_MIN_LENGTH = 12;
 
     public function __construct(
         private readonly AccountDirectoryService $directory,
         private readonly EntityManagerInterface $entityManager,
         private readonly UserPasswordHasherInterface $passwordHasher,
+        #[Autowire(param: 'kernel.environment')]
+        private readonly string $environment,
     ) {
         parent::__construct();
     }
@@ -58,8 +64,8 @@ class CreateAdminCommand extends Command
         }
 
         $password = (string) $io->askHidden('Password');
-        if (mb_strlen($password) < 12) {
-            $io->error('A password of 12 characters at least.');
+        if ('prod' === $this->environment && mb_strlen($password) < self::PASSWORD_MIN_LENGTH) {
+            $io->error(sprintf('A password of %d characters at least.', self::PASSWORD_MIN_LENGTH));
 
             return Command::INVALID;
         }
