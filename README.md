@@ -1,6 +1,6 @@
 # symfony-user
 
-Version: 13.0.0
+Version: 13.0.1
 
 ## Routes
 
@@ -392,7 +392,7 @@ The suite includes packages for configuration management, file handling, prompts
 - wexample/symfony-translations: >=14.0.0
 - symfony/validator: ^7.4
 - wexample/symfony-forms: >=13.0.0
-- wexample/symfony-loader: >=23.1.0
+- wexample/symfony-loader: >=23.2.0
 - wexample/symfony-mail: >=2.0.0
 - symfony/form: ^7.4
 - symfony/rate-limiter: ^7.4
