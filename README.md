@@ -1,6 +1,6 @@
 # symfony-user
 
-Version: 14.0.0
+Version: 14.0.1
 
 ## Routes
 
@@ -387,12 +387,12 @@ The suite includes packages for configuration management, file handling, prompts
 - php: >=8.5
 - doctrine/orm: ^3.0
 - symfony/security-bundle: ^7.4
-- wexample/symfony-helpers: >=17.0.0
+- wexample/symfony-helpers: >=18.0.0
 - wexample/symfony-security: >=4.0.0
-- wexample/symfony-translations: >=15.0.0
+- wexample/symfony-translations: >=16.0.0
 - symfony/validator: ^7.4
 - wexample/symfony-forms: >=14.0.0
-- wexample/symfony-loader: >=23.3.0
+- wexample/symfony-loader: >=24.0.0
 - wexample/symfony-mail: >=3.0.0
 - symfony/form: ^7.4
 - symfony/rate-limiter: ^7.4
