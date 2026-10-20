@@ -1160,7 +1160,8 @@
     "forms/account_picker_form.fr.yml": {
         "action.submit": {
             "hash": "a4d2313525c47af15e444c88880bc766",
-            "engine": "syrtis"
+            "engine": "syrtis",
+            "reviewed": "agent"
         },
         "error.invalid_csrf": {
             "hash": "7bf2a9980c26312755deb616d9e65f87",
@@ -1172,7 +1173,8 @@
         },
         "field.account.label": {
             "hash": "00fc5daacd225edfff7f52bf5bb1f4b5",
-            "engine": "syrtis"
+            "engine": "syrtis",
+            "reviewed": "agent"
         }
     },
     "forms/account_picker_form.he.yml": {
@@ -3068,19 +3070,23 @@
     "forms/impersonate_form.fr.yml": {
         "action.exit": {
             "hash": "f23f9e3767a15bd82969875dbccdb958",
-            "engine": "syrtis"
+            "engine": "syrtis",
+            "reviewed": "agent"
         },
         "action.submit": {
             "hash": "2dc1c54cfd7bb5002585fee9ba84a9b5",
-            "engine": "syrtis"
+            "engine": "syrtis",
+            "reviewed": "agent"
         },
         "error.not_allowed": {
             "hash": "5e6bd84d762520d805a97bb5c50a63eb",
-            "engine": "syrtis"
+            "engine": "syrtis",
+            "reviewed": "agent"
         },
         "field.account.label": {
             "hash": "00fc5daacd225edfff7f52bf5bb1f4b5",
-            "engine": "syrtis"
+            "engine": "syrtis",
+            "reviewed": "agent"
         }
     },
     "forms/impersonate_form.he.yml": {
