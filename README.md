@@ -1,439 +1,197 @@
 # symfony-user
 
-Version: 14.0.3
+Version: 14.0.4
 
-## Routes
-
-`Routing\UserRoute` names every route the package sends users to. Its endpoints:
-
-| Route | Path | What |
-|---|---|---|
-| `user_security_login_link` | `/login/link` | check route of the magic links |
-| `user_security_logout` | `/logout` | handled by the firewall |
-| `user_password_reset` | `/password/reset` | target of the reset mail |
-| `user_password_activate` | `/password/activate` | target of the activation mail |
-| `user_security_two_factor_resend` | `/login/2fa/resend` | sends the code again (POST) |
-| `user_totp_regenerate` | `/account/authenticator/backup-codes/regenerate` | new backup codes (POST) |
-| `user_accounts_action` | `/accounts/{id}/{action}` | what an administrator does to one account (POST) |
-
-The pages — `LOGIN`, `TWO_FACTOR`, `PASSWORD_FORGOT`, `PASSWORD_NEW`, `PASSWORD_ACTIVATION_INVALID`, `PROFILE`, `TERMS`, `TOTP`, `TOTP_BACKUP_CODES`, `TOTP_SETUP`, `ACCOUNTS`, `ACCOUNT`, `ACCOUNT_ACTIVITY` — are `symfony-user-ds`'s. The texts of the forms and the mails stay here, under `assets/forms/` and `assets/mails/`: a form reads its labels and errors from the domain of its class.
-
-## Showing the login form elsewhere
-
-The login form is an ajax form: any page can render it, and a successful login lands on the target path saved beforehand — the way a tunnel step would use it.
-
-```php
-use TargetPathTrait;
-
-$this->saveTargetPath($request->getSession(), 'main', $this->generateUrl('checkout_payment'));
-
-return $this->renderPage('login_step', [
-    'login_form' => $loginFormProcessor->createForm()->createView(),
-]);
-```
-
-```twig
-{{ form_load(render_pass, login_form, '@WexampleSymfonyUserDsBundle/forms/login_form.html.twig') }}
-```
-
-An ajax call reaching a protected URL gets a `401` JSON payload whose action redirects to `/login`, instead of an HTML redirect.
-
-## Tunnel steps
-
-Two steps for `symfony-tunnels`, for a checkout or a sign-up that does not start with a login:
-
-- `LoginStep` (`login`) signs the visitor in with the package's login form — second factor included — and sends them on; a signed-in visitor goes straight through.
-- `AbstractUserMailStep` (`user-mail`) asks an email. An activated account goes through the login step, the address typed already; any other address gets an account, not activated, created once per tunnel session. The application extends it:
-
-```php
-class CheckoutUserMailStep extends AbstractUserMailStep
-{
-    protected function getStepAfter(TunnelCursor $cursor): AbstractTunnelStep
-    {
-        return $this->addressesStep;
-    }
-
-    protected function createUser(string $email): AbstractUser
-    {
-        return new User();
-    }
-
-    protected function onUserResolved(AbstractUser $user, TunnelCursor $cursor): void
-    {
-        $this->cart->setUser($user);
-    }
-}
-```
-
-The later steps read the account with `getTunnelUser($cursor)`. The tunnel templates of the application include the bodies `symfony-user-ds` ships: `@WexampleSymfonyUserDsBundle/tunnels/partials/user_mail.html.twig` and `login.html.twig`.
-
-## Magic links in application mails
-
-```php
-$link = $magicLinkService->createLink($user, '/invitations/42');
-```
-
-The link signs the user in and lands on the given local path. It dies with the next login or password change of the user. `MagicLinkService::createLink()` also works outside a request (commands, workers).
-
-## The account's language
-
-`AbstractUser` implements `HasLocaleInterface` (symfony-translations) and carries a nullable `locale` column, so the mails of an account can be written in its language even when they leave outside its requests (a worker, a webhook). An application adding this version generates a migration for the column.
-
-The application fills it. With `remember_locale: true` and the URL prefixes of symfony-translations, an account reading a page whose URL names a language keeps that language. Otherwise the application calls `setLocale()` where the language is chosen (sign-up, a settings page), or leaves it empty, and mails go out in the default locale.
-
-## Passwords
-
-- `ChangePasswordForm`: the signed-in user, current password required.
-- `SetPasswordForm` and `PasswordUpdaterService`: to let an administrator set a password in an application processor.
-- `PasswordUpdaterService::update()` ends the other sessions of the account and kills the links sent before.
-- At least 8 characters, and a medium score on Symfony's `PasswordStrength`. With `password.refuse_leaked`, one more constraint: the password must not be in a known breach. The check asks `api.pwnedpasswords.com` for the hashes sharing the first five characters of its own — never the password itself —, and lets it through when the API answers badly, so a bad minute at a third party refuses nobody their password. It needs `symfony/http-client`, which the package does not require: install it with the option. Off by default, for the applications on a closed network, which have nobody to ask.
-
-### A password its holder did not choose
-
-`AbstractUser::isPasswordChangeRequired()` marks an account whose password somebody else knows. `PasswordChangeGate`, the first of the account gates, then holds it on `/password/new` — the page of the reset walk, with the same form, asking for no current password: the one it would ask for is the one being taken away. The new password clears the flag.
-
-`PasswordUpdaterService` keeps the flag in step with every password it writes: raised when the signed-in actor is someone else than the account — an administrator setting a password —, cleared in every other case, which are all the holder choosing their own. An application creating an account with a password of its own — a fixture, an import, a migration from another system — raises it itself with `setPasswordChangeRequired(true)`.
-
-Nothing is forced after an invitation or a reset: there, the holder already chose the password, and `createAccount()` writes no password at all.
-
-`AbstractUser` carries the flag as a `password_change_required` column: an application adding this version generates a migration for it.
-
-## The account's own page
-
-`/account` (`UserRoute::PROFILE`, symfony-user-ds) is what the holder reads and changes about itself: its address — shown, not changed, being the identifier it signs in with —, its initials, its roles, its last sign-in, then two forms and a link.
-
-`ProfileForm` carries the name and the language, and only what the application's user class actually has: the first and last name when it uses `UserWithNameTrait`, the language when `framework.enabled_locales` holds more than one. With neither, `ProfileFormProcessor::hasFields()` is false and the page leaves the card out. `ChangePasswordForm` is the second one, and `/account/authenticator` the link.
-
-The entry leading there is the application's to add: the user menu takes it in its `items`.
-
-## Session lifetime
-
-`session.idle_lifetime`, in seconds, signs out a session nobody has asked anything of — the screen left open in a workshop, the tab forgotten on a shared machine. `0`, the default, expires none: the session lives as long as its cookie. It is a delay apart from Symfony's `framework.session.cookie_lifetime` and `gc_maxlifetime`, which say how long a session may live at all, not how long it may live unused.
-
-`SessionIdleSubscriber` stamps the session at each request and, past the delay, signs the account out — the remember-me cookie included, or it would sign straight back in —, journals `session.expired` and lands on `/login?session=expired`, which the login page reads to say why. An ajax call gets the `401` payload instead.
-
-What pushes the delay back is a page being read. The requests under `/_`, which a script makes and not a reader, are held to the delay without pushing it back: a page left open polling keeps no session alive.
-
-## Second factor
-
-- `AbstractUser::setEmailTwoFactorEnabled(false)` spares an account the code — unless `two_factor.required` is on, which makes every sign-in ask a second factor, magic link and login after a reset included.
-- `two_factor.app_required_roles` makes an authenticator app mandatory for some roles: the email code lets them in once, the authenticator gate then holds them on `/account/authenticator` until it is set up, and it cannot be turned off.
-- `AbstractUser::revokeTrustedDevices()` makes every trusted device ask for a code again.
-- Only password logins ask for the code; magic links and the login after a reset do not.
-- A correct password waiting for its second factor opens nothing: no protected page (an ajax call gets a `401`), no last login date, no remember-me cookie, no impersonation, no reset proof. It waits `two_factor.pending_lifetime` seconds; past it, the session is dropped and the sign-in starts over from the password. Listeners of `LoginSuccessEvent` in the application should skip a `TwoFactorTokenInterface` token the same way: the event comes again once the code is checked.
-- An authenticator app, once set up on `/account/authenticator`, replaces the email code. Its ten backup codes are shown once; each signs in once, on `/login/2fa?backup=1`.
-
-## Roles
-
-```php
-$repository->findByRoles($reversedRoleHierarchy->getParentRoles('ROLE_MANAGER')); // managers and above
-$assignableRoles->canAssign($editor, ['ROLE_ADMIN']);                            // never above the editor
-```
-
-`findByRoles()` matches whole roles: `ROLE_ADMIN` does not match `ROLE_SUPER_ADMIN`. For impersonation, enable `switch_user` on the firewall and test `is_granted('IS_IMPERSONATOR')` in templates.
-
-## Administering accounts
-
-An administrator creates an account with `createAccount()`: built by the application — email, roles, its own fields —, it is written enabled with no password, and its holder gets an activation mail to choose one (`/password/activate`, then `/password/new`, signed in afterwards; the second factor and the account gates apply as on any sign-in). With no password, nothing signs in with it. A dead activation link — expired, or the account already activated — shows a page telling to ask for a new one. `sendPasswordMail()` sends the activation mail again to an account waiting for it, a mail to choose a new password to an activated one; an earlier link keeps working until it expires, the password is chosen, or the address changes.
-
-Deactivate, reactivate, lock, unlock and change roles through `AccountAdministrationService`, not the entity setters — those stay for fixtures and migrations:
-
-```php
-try {
-    $administration->changeRoles($this->getUser(), $account, ['ROLE_MANAGER']);
-} catch (AccountAdministrationException $exception) {
-    $exception->refusal; // Enum\AccountAdministrationRefusal, and $exception->roles it is about
-}
-```
-
-Who may administer is the application's access control. The roles an actor administers are those they reach through the hierarchy — or, with `administration.manages`, those their roles manage: a relation apart from the hierarchy, not transitive, granting no security right, for an administrator who must not open the pages of the accounts they manage. An application narrows it further — the accounts of one organization — with an `AccountAdministrationGuardInterface`, asked before every change.
-
-The service refuses:
-
-- `role_not_assignable`: a role the actor does not administer, given or removed, or an account holding one;
-- `target_out_of_scope`: an `AccountAdministrationGuardInterface` refused the pair;
-- `account_inactive`: a password mail asked for a disabled or locked account;
-- `self_deactivation`, `self_demotion`: the actor deactivating, locking, or removing a role from themselves;
-- `last_protected_role_holder`: leaving a role of `administration.protected_roles` with no active holder. The holders are counted under a row lock: of two administrators deactivating each other at once, the second is refused;
-- `email_domain_not_allowed`, `exclusive_roles`: the rules of `AccountRulesService`.
-
-`AccountRulesService` holds what an account must always be, whoever writes it: a role of `administration.role_email_domains` held — directly or through the hierarchy — by an address of its domains, compared whole; the roles of `administration.exclusive_roles` never given together. Only given roles count there, so an administrator can reach the roles of the accounts they administer. A Doctrine listener applies these rules on every flush; a profile form changing the address calls `assertValid()` first, to show the refusal. A database `CHECK` constraint, in the application's schema, is the last line.
-
-Each change is journaled — `account.created`, `account.activation_sent`, `account.activated`, `account.password_mail_sent`, `account.deactivated`, `.reactivated`, `.locked`, `.unlocked`, `account.roles_changed` with `roles_before` / `roles_after` —, each refusal as `account.change_refused` with its code; `extra.actor_id` names the actor.
-
-### The screens
-
-`symfony-user-ds` draws them, and `administration.page_role` decides whether they exist at all: unset — the default — `/accounts` and everything under it answers 404, for everyone, the way the impersonation page does without `switch_user`. Set, that role opens them, and the rules above still say what each administrator may then do. Declare it only where administering accounts from the interface is the intent.
-
-- `/accounts` (`UserRoute::ACCOUNTS`): every account, 25 to a page, searched by address, username or name; and the card that opens one — an address, the roles the actor administers, one switch each. An address another account holds is refused before the database is asked.
-- `/accounts/{id}` (`UserRoute::ACCOUNT`): one account — its state, its roles, the change it owes —, the roles form again, and a button per action its state allows (`Enum\AccountAction`): deactivate, reactivate, lock, unlock, send the mail to choose a password. Each posts to `user_accounts_action` with the form CSRF token of the application (`submit`), and comes back to the page with `?done=` or `?refused=<code>`. Where symfony-activity is installed, its recent history too.
-- `/accounts/{id}/activity` (`UserRoute::ACCOUNT_ACTIVITY`): the whole history of the account, a page at a time, narrowed to one category — there only where symfony-activity is installed.
-
-A refusal is shown, never an error page: both form processors call the service inside `formIsValid()`, so `AccountAdministrationRefusal` comes back as an error on the form. The roles the account holds outside the ones the actor administers are kept untouched.
-
-An application drawing its own screens instead reads through the same services: `AccountDirectoryService` lists, searches, pages and describes, `AssignableRolesService` names the roles a field may offer.
-
-## Memberships
-
-An account belongs to groups of the application — a project, a team, an establishment —, with grants in each. The package knows neither the group nor the membership: the application implements the interfaces on its own entities, the way its `User` extends `AbstractUser`.
-
-- `MembershipGroupInterface`: what others are members of — an id, a label, its memberships.
-- `MemberInterface`: what holds grants — an account, an organization —, with its memberships. `RepresentativeInterface` is an account acting for other members, the organizations it belongs to: it holds their grants beside its own.
-- `MembershipInterface`: a member, a group, and grants, which `Entity\Traits\HasGrantsTrait` stores in a JSON column. The relations to the member and the group are the application's.
-
-```yaml
-wexample_symfony_user:
-  memberships:
-    grants:                      # each grant, with the ones it includes
-      administrator: [contributor]
-      contributor: [watcher]
-      client: [watcher]
-      watcher: []
-    roles:                       # the role a grant held in any group gives
-      administrator: ROLE_PROJECT_ADMIN
-    administer_grant: administrator
-```
-
-A grant undeclared, included or given, or one including itself, stops the container from building.
-
-- `is_granted('contributor', $project)` holds for a member granted `contributor` in that group, or `administrator`. `MembershipService` answers the same in code: `getGrants()`, `holds()`, `isMember()`, `getGroups($member, 'contributor')`.
-- The roles of `memberships.roles` — and the roles they reach — are given by a voter, so `access_control` and `is_granted('ROLE_PROJECT_ADMIN')` see them. Both read the memberships at each request: a grant changed applies at the next one, and nobody is signed out. `AbstractUser::getRoles()` does not hold them, nor do the services reading it: the second factor policy, the landing page after login, the roles an administrator assigns.
-
-Records of a group are read through `MembershipScopeService`, at each query rather than through a global Doctrine filter, invisible where the query is read and lifted for everyone by one forgotten `disable()`:
-
-```php
-$scope->restrictToCurrentMember($queryBuilder, 'note.project', 'contributor');
-$scope->assertInScope($note->getProject());              // 404 outside, never 403
-```
-
-No group matches nothing, never everything: an account with no membership, or nobody signed in, reads no row. A record of another group answers 404, which does not tell that it exists.
-
-With `administer_grant`, an account holding it in groups administers the accounts all of whose groups it holds it in (`Security\Guard\MembershipAdministrationGuard`): one group it does not, and a deactivation would cut that group off too. An account in no group is out of its reach, but for one it creates. An administrator holding the grant nowhere — a platform role — keeps the rules of `administration`.
-
-### Managing members
-
-`MembershipAdministrationService` adds a member to a group (`add($actor, $group, $member, ['contributor'])`), changes its grants (`changeGrants()`) and removes it (`remove()`). It refuses, with `Enum\MembershipAdministrationRefusal`:
-
-- `group_not_administered`: the actor holds neither `memberships.administer_grant` in the group nor `administration.page_role`;
-- `already_member`, `invalid_grants` (none, or one undeclared);
-- `last_administrator`: the group would be left with no member holding `administer_grant`.
-
-Each change is journaled — `membership.added`, `membership.grants_changed`, `membership.removed`, `membership.change_refused` —, on the account it is about, with the group, the member and the grants before and after in `extra`.
-
-The entities being the application's, it declares how they are made, one `MembershipManagerInterface` per kind of group: its name in urls (`team`), the group and member classes, `createMembership()` and `removeMembership()`. symfony-user-ds draws the screens on it.
-
-## Impersonation
-
-Who may impersonate is the firewall's: its `switch_user` key, and the role it names. Without the key, nobody can, the impersonation page and search answer 404 — declare it under `when@dev` alone for an application impersonating in development only:
-
-```yaml
-when@dev:
-    security:
-        firewalls:
-            main:
-                switch_user: { role: IS_AUTHENTICATED_FULLY }   # everyone, in development
-```
-
-Who may be impersonated is `impersonation.targets`: `administered`, the accounts whose roles the actor administers — the hierarchy, or `administration.manages`, read at each request —, or `any`, every account — a development setting, where the scope of the application's `AccountAdministrationGuardInterface` is not asked either. Never oneself, a disabled or a locked account. `ImpersonationService` applies the rule to the list, the search and — through `ImpersonationGuardSubscriber`, on `SwitchUserEvent` — the switch itself: an account absent from the list cannot be reached by its URL. A voter could not refuse it: with the default strategy, the role voter's grant wins.
-
-The switch happens on the page the chosen account lands on once signed in (`post_login`), so it opens where that account starts. From an impersonation, the page offers the next account and the way back: Symfony leaves the current account before taking the next, so the rights and the rule are always the original account's.
-
-A switch must come from `ImpersonateForm` (`require_intent`): a bare `?_switch_user=` link sent to an administrator switches nobody. A refusal is journaled as `access.denied`, the rule in `extra.reasons` (`impersonation=not_administered`, `no_intent`…).
-
-`GET /account/impersonate/search?q=` (`UserRoute::IMPERSONATE_SEARCH`) answers the accounts matching by email, username or name: 2 characters at least, 20 results, 30 searches a minute per actor. The page is symfony-user-ds's.
-
-## Account picker
-
-Signing in by choosing an account, with no password and no second factor: for an application whose users trust each other, or a demonstration. It is turned on by the firewall alone — no option:
-
-```yaml
-security:
-    firewalls:
-        main:
-            custom_authenticators:
-                - Wexample\SymfonyUser\Security\Authenticator\LoginFormAuthenticator
-                - Wexample\SymfonyUser\Security\Authenticator\AccountPickerAuthenticator
-```
-
-Without it, the page (`/login/accounts`, `UserRoute::ACCOUNT_PICKER`, symfony-user-ds) answers 404 and a crafted submission signs nobody in. Every active account can be chosen: all listed up to `impersonation.list_threshold`, searched above (30 searches a minute per IP). The session opens as an `AccountPickerToken`, a class scheb's `security_tokens` does not list, hence no second factor; the account gates still apply, and the journal records `login.succeeded` with the method `account_picker`. Whoever reaches the page signs in as anyone: list it only where that is the intent, or under `when@<env>` for one environment.
-
-## After signing in
-
-A user lands on the page they were sent away from, when `access_control` lets them in; otherwise on the route of the first role of `post_login.routes` they hold, through the hierarchy; otherwise on `post_login.default_route`, or the home page. Every way in ends there — password, second factor, reset, activation, terms accepted, magic link (`LoginLinkSuccessHandler`, the `success_handler` of `login_link`). A page refused by its controller rather than by `access_control` is not foreseen: it answers 403.
-
-## Security journal
-
-Every security fact is dispatched as a `Wexample\SymfonyUser\Event\SecurityEvent`: its `type` (`Enum\SecurityEventType` — `login.failed`, `second_factor.backup_code_used`, `password.set_by_admin`…), the real `cause` of a failure (`unknown_user`, `bad_password`, `disabled`, `locked`, `throttled`, `invalid_csrf`, `invalid_login_link`, `invalid`, `expired`, `too_many_attempts`, `rate_limited`), the `method` of a sign-in (`password`, `magic_link`, `password_reset`, `second_factor`), the user id, IP, user agent, firewall, request id (`X-Request-Id`, or one generated per request — the same for every package of the suite, see `symfony-security`) and UTC time. Its shape is `symfony-security`'s `AbstractSecurityEvent`, shared with the machine token journal of `symfony-api`.
-
-Every access refused to a fully signed-in user — `access_control`, `#[IsGranted]`, a voter — is journaled as `access.denied`, with `extra.route`, `path` (without its query), `http_method`, `roles`, `attributes` and `reasons`: what the voters gave to `Vote::addReason()`, where an application names the scope it refused (`organization=42`). A visitor sent to the login page is not denied. The same denial — user, route, attributes — is journaled once a minute, the next entry carrying in `suppressed` the count held back. The response stays the application's.
-
-Every security mail handed to the sender is journaled as `security_message.sent`, or `security_message.failed` with the exception class, with `extra.message_type` — never its link, code or body.
-
-It never carries a secret. An identifier typed for an unknown account is kept as `extra.identifier_fingerprint`, an HMAC that groups the attempts without the text.
-
-The package writes them to the `user_security` Monolog channel, warnings for failures: give that channel its own handler and retention. Facts of the application itself go through `SecurityJournalService::record()`.
-
-### The history of an account
-
-Where symfony-activity is installed and enabled, `SecurityActivitySubscriber` writes every fact naming an account into its history, in the `security` category: `security.<type>`, with the method, the cause of a failure, the IP, the user agent, and the actor when an administrator acted. A fact naming no account — an address none holds — has no history to go into. Nothing is kept until the application enables `security` in `wexample_symfony_activity.categories`; what to keep, for how long, and whether to anonymize is decided there. The login history of an account is this category of its history.
-
-The signature of magic and reset links is masked in every log record, the exceptions it carries included: the router logs each request URI, and a 404 quotes the referer. The package declares a masker (`wexample_symfony_user.log_masker.link_signature`, the `hash` query parameter) to `symfony-security`'s redaction processor; an application adds its own there too. Keep `doctrine.dbal.logging` off outside development: the SQL log carries query parameters.
-
-## Account gates
-
-What a signed-in user must do before reaching anything else, once the second factor is checked — whatever the way they signed in. `AccountGateSubscriber` holds them on the page of the first gate still blocking (an ajax call gets a `403` naming it); logout stays open. The package ships three, in this order:
-
-- the password change, when the account's password is one it did not choose: until it is replaced, the account signs in with a secret somebody else knows;
-- the authenticator app setup, for `two_factor.app_required_roles`;
-- the terms of use, when `terms.version` is set: `/account/terms` shows a link to `terms.text_route`, an accept button, and a way out (sign out). Each acceptance is a `TermsAcceptance` row — user id and identifier, version, UTC time, IP, user agent — never changed nor removed, one per version, journaled as `terms.accepted`. Changing the version asks everyone again at their next request. An administrator impersonating a user is not held, and cannot accept in their name.
-
-An application adds a gate by implementing `Interface\AccountGateInterface`.
+User accounts and authentication for Symfony
 
 ## Table of Contents
 
-- [Routes](#routes)
-- [Showing the login form elsewhere](#showing-the-login-form-elsewhere)
-- [Tunnel steps](#tunnel-steps)
-- [Magic links in application mails](#magic-links-in-application-mails)
-- [The account's language](#the-accounts-language)
-- [Passwords](#passwords)
-- [The account's own page](#the-accounts-own-page)
-- [Session lifetime](#session-lifetime)
-- [Second factor](#second-factor)
-- [Roles](#roles)
-- [Administering accounts](#administering-accounts)
-- [Memberships](#memberships)
-- [Impersonation](#impersonation)
-- [Account picker](#account-picker)
-- [After signing in](#after-signing-in)
-- [Security journal](#security-journal)
-- [Account gates](#account-gates)
-- [Architecture](#architecture)
-- [Integration in the Suite](#integration-in-the-suite)
-- [Dependencies](#dependencies)
-- [Versioning & Compatibility Policy](#versioning--compatibility-policy)
-- [License](#license)
-- [About us](#about-us)
-- [Migration Notes](#migration-notes)
+- [Installation](#installation)
+- [Introduction](#introduction)
 
-## Architecture
+## Installation
 
-Every form of the package is an ordinary `symfony-forms` ajax form: it posts to `/_forms/submit/{name}`, and the front `Form` class reads a `FormResponsePayload` back. The security forms keep that transport, but the firewall answers before the forms bundle does. This section follows a login through those layers.
+### Bundles
 
-### Login
+```php
+// config/bundles.php
+Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
+Scheb\TwoFactorBundle\SchebTwoFactorBundle::class => ['all' => true],
+Wexample\SymfonySecurity\WexampleSymfonySecurityBundle::class => ['all' => true],
+Wexample\SymfonyUser\WexampleSymfonyUserBundle::class => ['all' => true],
+```
 
-src/Form/LoginForm.php is rendered through src/Service/FormProcessor/LoginFormProcessor.php, which is never asked to process it. On submission, src/Security/Authenticator/LoginFormAuthenticator.php `supports()` the forms bundle route for that form name and builds a passport: a `UserBadge` resolved by the firewall provider — src/Repository/AbstractUserRepository.php reads an email or a username —, the password, a CSRF badge using the token id the form was built with, and a remember-me badge.
+`WexampleSymfonySecurityBundle` masks the package's secrets in the logs: without it, the container refuses to build.
 
-Symfony then runs its own listeners: login throttling, password check, src/Security/UserChecker.php after the password (so a locked account is only revealed to its owner), password upgrade. src/EventSubscriber/LastLoginSubscriber.php stamps `dateLastLogin`.
+The screens — login, second factor, password, terms, authenticator app — are `symfony-user-ds`'s: install it with `Wexample\SymfonyUserDs\WexampleSymfonyUserDsBundle`. An application drawing its own serves pages under the names of `Routing\UserRoute`: the package redirects to them. Its own endpoints — `/login/link`, `/logout`, the reset and activation links, the code resend, new backup codes — stay here.
 
-`onAuthenticationSuccess()` and `onAuthenticationFailure()` answer JSON with the payload builder of the forms bundle when the caller expects it, a redirect otherwise. Failures become form errors through `LoginFormProcessor::addAuthenticationError()`, which maps unknown user and wrong password to the same message.
+The scheb recipe also adds `config/routes/scheb_2fa.yaml`: delete it, the code form is served on `/login/2fa`.
 
-### Second factor
+### The user entity
 
-scheb/2fa-bundle turns the token of a password login into a `TwoFactorToken` when src/Security/TwoFactor/EmailCodeTwoFactorProvider.php begins, which it does only for the login form route. `prepare_on_login` makes src/Service/TwoFactorCodeService.php send the code with the password check: the code is kept hmac-hashed in session, with its expiry and attempts, and failures are also counted per account in `cache.app`.
+```php
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Table(name: '`user`')]
+class User extends AbstractUser
+{
+    use UserWithNameTrait; // optional: first and last name, display name
+}
 
-`LoginFormAuthenticator` sees the `TwoFactorToken` and answers with the code page, `UserRoute::TWO_FACTOR` (served by symfony-user-ds). The code form posts to the forms bundle route too, which the firewall declares as scheb's `check_path`; src/Security/Handler/TwoFactorResponseHandler.php answers success, failure and "code required" the same way the login does. Trusted devices are scheb's signed cookie, versioned by `AbstractUser::getTrustedTokenVersion()`.
+class UserRepository extends AbstractUserRepository
+{
+    public static function getEntityClassName(): string
+    {
+        return User::class;
+    }
+}
+```
 
-An authenticator app uses scheb's own `totp` provider, and the email provider steps aside for a user who has one. src/Service/TotpService.php keeps the secret being set up in session until a first code proves the app holds it, then stores it encrypted by src/Service/TotpSecretCipherService.php; src/EventSubscriber/TotpSecretSubscriber.php decrypts it on load, in memory only. Backup codes are stored as hashes on the user and checked by scheb before the provider.
+`AbstractUser` is not a mapped superclass: its columns land in the application table. Generate a migration after extending it.
 
-### Links
+### Security
 
-src/Service/MagicLinkService.php wraps the `login_link` handler of the firewall — the one of the current request, or of `main` without a request — and appends a checked local `_target_path`. src/Service/PasswordResetService.php signs reset links with Symfony's `SignatureHasher` over the password hash, so nothing is stored and the new password kills the link. Both reset modes end on a proof kept in session, granted by the reset link or, in magic link mode, by src/EventSubscriber/PasswordResetProofSubscriber.php; src/Service/FormProcessor/SetPasswordFormProcessor.php requires it.
+```yaml
+# config/packages/security.yaml
+security:
+    providers:
+        users:
+            entity:
+                class: App\Entity\User   # no `property`: email or username
+    firewalls:
+        main:
+            lazy: true
+            provider: users
+            custom_authenticators:
+                - Wexample\SymfonyUser\Security\Authenticator\LoginFormAuthenticator
+            entry_point: Wexample\SymfonyUser\Security\Authenticator\LoginFormAuthenticator
+            user_checker: Wexample\SymfonyUser\Security\UserChecker
+            logout:
+                path: user_security_logout
+            login_throttling: ~
+            remember_me:
+                secret: '%kernel.secret%'
+                signature_properties: [password]
+            login_link:
+                check_route: user_security_login_link
+                signature_properties: [password, dateLastLogin]
+                lifetime: 600
+                success_handler: Wexample\SymfonyUser\Security\Handler\LoginLinkSuccessHandler
+            two_factor:
+                auth_form_path: user_security_two_factor
+                prepare_on_login: true
+                check_path: /_forms/submit/form-two_factor_code_form
+                auth_code_parameter_name: two_factor_code_form[code]
+                trusted_parameter_name: two_factor_code_form[trusted]
+                success_handler: Wexample\SymfonyUser\Security\Handler\TwoFactorResponseHandler
+                failure_handler: Wexample\SymfonyUser\Security\Handler\TwoFactorResponseHandler
+                authentication_required_handler: Wexample\SymfonyUser\Security\Handler\TwoFactorResponseHandler
+                enable_csrf: true
+                csrf_parameter: two_factor_code_form[_token]
+                csrf_token_id: submit   # the form CSRF token id of the app
+    access_control:
+        - { path: ^/login/2fa, roles: IS_AUTHENTICATED_2FA_IN_PROGRESS }
+        # What serves the pages rather than being one: symfony-loader's
+        # components rendered on demand, symfony-design-system's ui state.
+        - { path: ^/_(system|ui-state)/, roles: PUBLIC_ACCESS }
+```
 
-Every link and code leaves through src/Interface/SecurityMessageSenderInterface.php, aliased to src/Service/SecurityMessageMailerSenderService.php, one template per src/Enum/SecurityMessageType.php under `assets/mails/`.
+```yaml
+# config/packages/scheb_2fa.yaml
+scheb_two_factor:
+    security_tokens:
+        - Symfony\Component\Security\Http\Authenticator\Token\PostAuthenticationToken
+    trusted_device:
+        enabled: true
+        lifetime: 5184000
+    # Authenticator apps, and their backup codes: /account/authenticator
+    totp:
+        enabled: true
+        issuer: 'My application'
+        leeway: 1
+    backup_codes:
+        enabled: true
+```
 
-### A password its holder did not choose
+- `APP_SECRET` must be 32 bytes at least: the trusted device cookie is a JWT signed with it. The authenticator secrets are encrypted with a key derived from it too: changing it makes users set their app up again.
+- While a login waits for its code, scheb only lets through the paths `access_control` opens to `PUBLIC_ACCESS` or `IS_AUTHENTICATED_2FA_IN_PROGRESS`, and sends every other request to the code's page. That includes the `/_system/` and `/_ui-state/` calls the page's scripts make — the debug toolbar, a component loaded later —: left out, they receive the code's page instead of their JSON, and the browser reports `Unexpected token '<'`. They are already open to anyone without a rule, so naming them `PUBLIC_ACCESS` opens nothing more. The rule has to be written by the application: Symfony refuses `access_control` from more than one file, so no bundle can add it.
+- Without a second factor, drop the `two_factor` key; to ask it on every login, set `trusted_device.enabled: false` — the code form then drops its "trust this device" switch.
 
-The forced change reuses the reset walk whole rather than adding a second password page beside it. `PasswordResetService::getProofUser()` — "who may set a password without typing the current one" — answers the holder of a session proof, and, failing that, the signed-in user whose `passwordChangeRequired` flag is up; `hasProof()` tells the two apart where it matters, which is the journal (`password.reset` against `password.changed`) and whatever a page wants to say about why it is being read. src/Security/Gate/PasswordChangeGate.php holds the account on that page, and src/Service/PasswordUpdaterService.php raises or clears the flag as it writes the password — raised when the actor is somebody else than the account, cleared in every other case.
+### Mails
 
-An impersonated account is left out of both: `getProofUser()` refuses a `SwitchUserToken` and so does the gate, or an administrator visiting an account would be choosing its password.
+Links and codes are sent through symfony-mail's `MailSenderService`, which requires `WexampleSymfonyMailBundle` to be registered. They are framed by the application's mail layout (`wexample_symfony_mail.layout`), their text part keeps the link's address, and they are written in the account's language (`AbstractUser::getLocale()`), or the default locale. The sender comes from the mailer configuration:
 
-### The administration screens
+```yaml
+framework:
+    mailer:
+        headers:
+            From: 'no-reply@example.com'
+```
 
-Two forms whose processors act inside `formIsValid()`: most of what the rules refuse — a guard of the application, a protected role left without a holder — is only known by trying, and past `onValid()` the answer is already a success. src/Service/FormProcessor/AccountCreateFormProcessor.php keeps the account it opened, src/Service/FormProcessor/AccountRolesFormProcessor.php the one it is editing, and `onValid()` is left with the notification and where to go next.
+To deliver them another way, alias `Wexample\SymfonyUser\Interface\SecurityMessageSenderInterface` to your own service. The templates are `@WexampleSymfonyUserBundle/mails/<type>.html.twig` — `magic_link`, `password_reset`, `account_activation`, `two_factor_code` —, overridden under `templates/bundles/WexampleSymfonyUserBundle/mails/`.
 
-Which account a submission is about travels in its URL — the entity form route of symfony-forms, `/_forms/submit/{name}/entity/{id}` — and never in a field: `handleSubmittedRequest()` reads the id, `createForm()` is handed the account and fills one switch per role from it. A switch per role rather than a multiple select, which the design system's `select_input` does not draw; the field is the role lowercased, and src/Traits/AccountRolesFormTrait.php is where both forms get it.
+Link mails leave through Messenger, as `Wexample\SymfonyUser\Message\SendSecurityMessage`: the message names the account and the kind of link, and the handler builds the link when it sends, so neither the transport nor the failed queue ever holds one. Route it to an asynchronous transport, so a request never waits on the mail provider:
 
-src/Controller/AccountActionController.php serves what carries no value but the intent — deactivate, lock, the password mail — as one POST route over `Enum\AccountAction`, so an action nobody declared is a 404 from the router. Its CSRF token id is the application's own form one, `submit`, so the buttons ask for no second `stateless_token_ids` entry.
+```yaml
+framework:
+    messenger:
+        failure_transport: failed
+        transports:
+            async:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                retry_strategy: { max_retries: 3, multiplier: 2 }
+            failed: 'doctrine://default?queue_name=failed'
+        routing:
+            Wexample\SymfonyUser\Message\SendSecurityMessage: async
+    router:
+        default_uri: '%env(APP_URL)%'   # the worker has no request: the links take their host from here
+```
 
-### Session lifetime
+Unrouted, the mails are sent within the request. Codes of the second factor are always sent at once. The mails are handed to the mailer transport directly, never to `MailerInterface`: with `SendEmailMessage` routed to a transport, as the Flex recipe does, the rendered mail would be queued with its link.
 
-src/EventSubscriber/SessionIdleSubscriber.php runs between the firewall (8) and the account gates (4), at priority 6: a session past `session.idle_lifetime` is signed out before a gate can hold it on a page. It signs out through `Security::logout()` rather than by emptying the token storage, which is what clears the remember-me cookie — src/EventSubscriber/TwoFactorPendingSubscriber.php can do the shorter thing, since a password waiting for its code has no such cookie yet.
+In development, keep the mails on the machine: `MAILER_DSN=null://null` drops them (the profiler still shows them), a Mailpit container (`MAILER_DSN=smtp://mailpit:1025`) shows them in its web interface.
 
-The stamp it keeps is refreshed by pages only. A request whose path opens on `/_` is reached by a program — a component rendered on demand, a live subscription — and is held to the delay without pushing it back.
+### Bundle options
 
-### Tests
+```yaml
+# config/packages/wexample_symfony_user.yaml
+wexample_symfony_user:
+    password_reset: token          # or magic_link
+    reveal_account_status: false   # true: a disabled or locked account is told so, once its password is right
+    terms:
+        version: ~                 # set: every signed-in user accepts this version before anything else; changing it asks everyone again
+        text_route: ~              # the route of the page holding the text, owned by the application
+    remember_me: true              # false: no "stay signed in" on the login form — for a firewall without remember_me
+    magic_link_login: true         # false: no magic link form on the login page; MagicLinkService still sends the application's own links
+    session:
+        idle_lifetime: 0           # seconds a signed-in session survives unused; 0, never expires one
+    password:
+        refuse_leaked: false       # true: refuse a password found in a breach — needs symfony/http-client, and an outbound call per password set
+    activation:
+        link_lifetime: 604800      # seconds the link of an activation mail works
+    impersonation:
+        targets: administered      # or any: who may be impersonated; who may impersonate is the firewall's switch_user
+        list_threshold: 50         # up to this many, the page lists them all; above, it searches
+        require_intent: true       # a switch must come from the impersonation form, not a bare ?_switch_user= link
+    post_login:
+        routes: {}                 # ROLE_X: route, in order — where a user lands when the page they came from is not theirs to open
+        default_route: ~           # for a user holding none of them; unset, the home page
+    request_limit:                 # reset and magic link mails, per hour; past it, the same answer and no mail
+        per_identifier: 3
+        per_ip: 20
+    administration:                # the rules of AccountAdministrationService and AccountRulesService
+        page_role: ~               # the role opening the administration screens of symfony-user-ds; unset, they answer 404 for everyone
+        protected_roles: []        # never left without an active holder
+        manages: {}                # ROLE_X: [ROLE_A] — the roles ROLE_X administers, with no right over their pages; unset, the roles reached
+        role_email_domains: {}     # ROLE_X: [example.com] — held only by an address of these domains
+        exclusive_roles: {}        # ROLE_X: [ROLE_A, ROLE_B] — never given together
+    two_factor:
+        pending_lifetime: 600      # seconds a correct password waits for its second factor; past it, back to the password
+        required: false            # true: every sign-in — magic link, login after a reset — asks a second factor, no account exempt
+        app_required_roles: []     # roles that must use an authenticator app: held on its setup page until it is there, never allowed to turn it off
+```
 
-The fixture kernel (tests/Fixtures/App/AppKernel.php) boots the security, forms, loader and scheb bundles, and symfony-user-ds (a dev dependency) so the walks reach real pages, on SQLite in memory, with the stateless CSRF of the Flex recipe. Integration tests walk the flows over HTTP with `disableReboot()`; three traps:
+Off — the default —, unknown address, wrong password, disabled and locked account all get the same response; an unknown address also costs a password check, so the timing tells nothing either. That shield needs the password hasher configured on `PasswordAuthenticatedUserInterface`, as the Symfony recipe does.
 
-- The test client resets services between requests: the entity manager forgets the entities a test holds, and an array cache is emptied. Reload entities before changing them, and clear `cache.rate_limiter` / `cache.app` in `setUp()` rather than using an array cache.
-- Loader pages cannot be rendered twice by the same fixture kernel: controllers redirect with a query flag rather than render an error page, and tests assert the redirect.
-- Nothing in the suite may reach the network. The leaked-password check is the one feature that would: tests/Fixtures/App/config/leaked_password.yaml gives the real validator a `MockHttpClient` answering as `api.pwnedpasswords.com` does, so the constraint is exercised offline.
+`symfony-user` is a Symfony bundle for user accounts and their authentication. An application extends `AbstractUser` for its own `User` entity and gets: a password login that works as a page, in an ajax modal or embedded in any page (a tunnel step); login throttling; a second factor sent by email on devices not trusted yet, built on `scheb/2fa-bundle`; magic links; password change and reset, by signed link or by magic link; and role helpers (users by role, roles above a role, roles an editor may grant). Forms are ordinary `symfony-forms` ajax forms rendered with the design system; the security side is plain Symfony Security, so throttling, remember-me and the user checker keep working as documented by Symfony.
 
-A delay is never waited for: a test puts the session stamp back instead, as tests/Integration/IdleSessionTest.php and tests/Integration/SecondFactorPendingTest.php do.
-
-Tests run from the design-system containers: `docker exec design_system_local_symfony sh -lc 'cd /var/www/vendor-dev/wexample/symfony-user && php vendor/bin/phpunit'`.
-
-## Integration in the Suite
-
-This package is part of the Wexample Suite — a collection of high-quality, modular tools designed to work seamlessly together across multiple languages and environments.
-
-### Related Packages
-
-The suite includes packages for configuration management, file handling, prompts, and more. Each package can be used independently or as part of the integrated suite.
-
-## Dependencies
-
-- php: >=8.5
-- doctrine/orm: ^3.0
-- symfony/security-bundle: ^7.4
-- wexample/symfony-helpers: >=18.0.0
-- wexample/symfony-security: >=4.0.0
-- wexample/symfony-translations: >=17.0.0
-- symfony/validator: ^7.4
-- wexample/symfony-forms: >=14.0.0
-- wexample/symfony-loader: >=25.0.0
-- wexample/symfony-mail: >=3.0.0
-- symfony/form: ^7.4
-- symfony/rate-limiter: ^7.4
-- symfony/mailer: ^7.4
-- symfony/twig-bridge: ^7.4
-- scheb/2fa-bundle: ^8.6
-- scheb/2fa-trusted-device: ^8.6
-- scheb/2fa-totp: ^8.6
-- scheb/2fa-backup-code: ^8.6
-- endroid/qr-code: ^6.0
-- wexample/symfony-tunnels: >=11.0.0
-- wexample/symfony-activity: >=3.0.0
-
-## Versioning & Compatibility Policy
-
-Wexample packages follow **Semantic Versioning** (SemVer):
-
-- **MAJOR**: Breaking changes
-- **MINOR**: New features, backward compatible
-- **PATCH**: Bug fixes, backward compatible
-
-We maintain backward compatibility within major versions and provide clear migration guides for breaking changes.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-Free to use in both personal and commercial projects.
-
-## About us
-
-[Wexample](https://wexample.com) stands as a cornerstone of the digital ecosystem — a collective of seasoned engineers, researchers, and creators driven by a relentless pursuit of technological excellence. More than a media platform, it has grown into a vibrant community where innovation meets craftsmanship, and where every line of code reflects a commitment to clarity, durability, and shared intelligence.
-
-This packages suite embodies this spirit. Trusted by professionals and enthusiasts alike, it delivers a consistent, high-quality foundation for modern development — open, elegant, and battle-tested. Its reputation is built on years of collaboration, refinement, and rigorous attention to detail, making it a natural choice for those who demand both robustness and beauty in their tools.
-
-Wexample cultivates a culture of mastery. Each package, each contribution carries the mark of a community that values precision, ethics, and innovation — a community proud to shape the future of digital craftsmanship.
-
-Built and maintained by [Romain Weeger](https://weeger.io).
-
-## Migration Notes
-
-When upgrading between major versions, refer to the migration guides in the documentation.
-
-Breaking changes are clearly documented with upgrade paths and examples.
+The showcase lives in `symfony-user-demo`, served on `/user/` by the design-system app, with public test accounts and a mailbox standing in for real emails.
