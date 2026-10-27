@@ -8,9 +8,8 @@ use Wexample\SymfonyForms\Form\AbstractForm;
 use Wexample\SymfonyUser\Traits\AccountRolesFormTrait;
 
 /**
- * The roles of an account an administrator already opened. The address is
- * not here: it is the identifier the account signs in with, and changing it
- * is an address to prove again.
+ * The roles of an account an administrator already opened. What the
+ * account is called — its address, its username — is AccountEditForm's.
  */
 class AccountRolesForm extends AbstractForm
 {

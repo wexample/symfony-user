@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Wexample\SymfonyUser\Service\FormProcessor\AccountCreateFormProcessor;
+use Wexample\SymfonyUser\Service\FormProcessor\AccountEditFormProcessor;
 use Wexample\SymfonyUser\Tests\Fixtures\App\AdministrationAppKernel;
 use Wexample\SymfonyUser\Tests\Fixtures\App\Entity\User;
 use Wexample\SymfonyUser\Tests\Traits\DatabaseTestTrait;
@@ -126,6 +127,63 @@ class AccountScreenTest extends WebTestCase
         $this->assertSame(['ROLE_MANAGER', 'ROLE_USER'], $this->find('manager')->getRoles());
     }
 
+    public function testWhatAnAccountIsCalledIsSaved(): void
+    {
+        $this->login('manager');
+
+        $this->assertTrue($this->edit('customer', [
+            'email' => 'Renamed@Example.com',
+            'username' => 'renamed',
+            'first_name' => 'Ada',
+            'last_name' => 'Lovelace',
+        ])['ok']);
+
+        $account = $this->find('renamed');
+        $this->assertSame('renamed@example.com', $account->getEmail());
+        $this->assertSame('Ada', $account->getFirstName());
+        $this->assertSame('Lovelace', $account->getLastName());
+    }
+
+    public function testAnAddressOrAUsernameAnotherAccountHoldsIsRefused(): void
+    {
+        $this->login('manager');
+
+        $payload = $this->edit('customer', ['email' => 'nobody@example.com', 'username' => 'nobody']);
+
+        $this->assertFalse($payload['ok']);
+        $this->assertSame([AccountEditFormProcessor::ERROR_EMAIL_TAKEN], $payload['form']['errors']['fields']['account_edit_form[email]']);
+        $this->assertSame([AccountEditFormProcessor::ERROR_USERNAME_TAKEN], $payload['form']['errors']['fields']['account_edit_form[username]']);
+        $this->assertSame('customer@example.com', $this->find('customer')->getEmail());
+
+        // Its own address and username, kept as they are, are not taken.
+        $this->assertTrue($this->edit('customer', ['email' => 'customer@example.com', 'username' => 'customer', 'first_name' => 'Kept'])['ok']);
+    }
+
+    public function testAnAccountHoldingARoleAboveTheActorIsNotEdited(): void
+    {
+        $this->entityManager->persist($this->createUser('owner', ['ROLE_OWNER']));
+        $this->entityManager->flush();
+        $this->login('manager');
+
+        $payload = $this->edit('owner', ['email' => 'taken-over@example.com', 'username' => 'owner']);
+
+        $this->assertFalse($payload['ok']);
+        $this->assertSame(['@form::error.refused.role_not_assignable'], $payload['form']['errors']['form']);
+        $this->assertSame('owner@example.com', $this->find('owner')->getEmail());
+    }
+
+    public function testAnAccountWithoutTheRoleEditsNothing(): void
+    {
+        $this->login('nobody');
+
+        $this->client->request('GET', '/accounts/' . $this->id('customer') . '/edit');
+        $this->assertResponseStatusCodeSame(403);
+
+        $this->edit('customer', ['email' => 'taken-over@example.com', 'username' => 'customer']);
+        $this->assertResponseStatusCodeSame(403);
+        $this->assertSame('customer@example.com', $this->find('customer')->getEmail());
+    }
+
     public function testAnAccountIsDeactivatedAndPutBack(): void
     {
         $this->login('manager');
@@ -236,6 +294,11 @@ class AccountScreenTest extends WebTestCase
     private function setRoles(string $username, array $roles): ?array
     {
         return $this->post('account_roles_form', $roles, '/entity/' . $this->id($username));
+    }
+
+    private function edit(string $username, array $fields): ?array
+    {
+        return $this->post('account_edit_form', $fields, '/entity/' . $this->id($username));
     }
 
     private function post(string $formName, array $data, string $suffix = ''): ?array

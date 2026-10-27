@@ -1,0 +1,25 @@
+en:
+  field:
+    email:
+      label: Email
+    username:
+      label: Username
+    first_name:
+      label: First name
+    last_name:
+      label: Last name
+
+  action:
+    submit: Save
+
+  error:
+    email_taken: An account already holds this address.
+    username_taken: An account already holds this username.
+    username_pattern: 4 to 30 lowercase letters, digits, dashes or underscores.
+    refused:
+      role_not_assignable: This account holds a role that is not yours to administer.
+      email_domain_not_allowed: One of its roles asks for an address of another domain.
+      target_out_of_scope: This account is not yours to administer.
+
+  success:
+    message: Account saved.

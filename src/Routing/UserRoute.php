@@ -29,6 +29,7 @@ final class UserRoute
     public const string ACCOUNTS = 'user_accounts_index';
     public const string ACCOUNT = 'user_accounts_show';
     public const string ACCOUNT_CREATE = 'user_accounts_create';
+    public const string ACCOUNT_EDIT = 'user_accounts_edit';
     public const string ACCOUNT_ACTIVITY = 'user_accounts_activity';
     public const string TERMS = 'user_terms_index';
     public const string TOTP = 'user_totp_index';

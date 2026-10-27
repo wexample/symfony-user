@@ -18,8 +18,9 @@ use Wexample\SymfonyUser\Interface\AccountAdministrationGuardInterface;
 use Wexample\SymfonyUser\Repository\AbstractUserRepository;
 
 /**
- * The way an administrator changes an account: create it, send it a password
- * mail, deactivate, reactivate, lock, unlock, change its roles. Every call
+ * The way an administrator changes an account: create it, edit its address,
+ * username and name, send it a password mail, deactivate, reactivate, lock,
+ * unlock, change its roles. Every call
  * checks the rules, applies and flushes, and journals the change — or the
  * refusal, before throwing it.
  *
@@ -172,6 +173,55 @@ class AccountAdministrationService
     }
 
     /**
+     * Changes what $target is called: its address, its username, and its
+     * name where the application's user class holds one. Its holder is sent
+     * nothing: the address is the administrator's to set. The journal names
+     * the fields changed, not their values.
+     *
+     * @param array{first_name?: ?string, last_name?: ?string} $names
+     *
+     * @throws AccountAdministrationException
+     */
+    public function edit(AbstractUser $actor, AbstractUser $target, string $email, ?string $username, array $names = []): void
+    {
+        $email = mb_strtolower(trim($email));
+        $username = $username === null || trim($username) === '' ? null : mb_strtolower(trim($username));
+        $names = method_exists($target, 'setFirstName') ? $names : [];
+
+        $changed = array_keys(array_filter([
+            'email' => $email !== $target->getEmail(),
+            'username' => $username !== $target->getUsername(),
+            'first_name' => array_key_exists('first_name', $names) && $names['first_name'] !== $target->getFirstName(),
+            'last_name' => array_key_exists('last_name', $names) && $names['last_name'] !== $target->getLastName(),
+        ]));
+
+        if (! $changed) {
+            return;
+        }
+
+        $roles = $this->getStoredRoles($target->getRoles());
+
+        $this->guard($actor, $target, SecurityEventType::ACCOUNT_EDITED, $roles, $roles, $this->isActive($target), function () use ($target, $email, $username, $names) {
+            $target
+                ->setEmail($email)
+                ->setUsername($username);
+
+            if (array_key_exists('first_name', $names)) {
+                $target->setFirstName($names['first_name']);
+            }
+
+            if (array_key_exists('last_name', $names)) {
+                $target->setLastName($names['last_name']);
+            }
+        }, $email);
+
+        $this->journal->record(SecurityEventType::ACCOUNT_EDITED, $target, extra: [
+            'actor_id' => (string) $actor->getId(),
+            'fields' => implode(',', $changed),
+        ]);
+    }
+
+    /**
      * @param list<string>|null $roles
      */
     private function change(
@@ -209,7 +259,8 @@ class AccountAdministrationService
 
     /**
      * Checks the rules, then applies and flushes, in one transaction; a
-     * refusal is journaled before it is thrown. $type names the action.
+     * refusal is journaled before it is thrown. $type names the action;
+     * $emailAfter, the address the account is given, when it changes.
      *
      * @param list<string> $rolesBefore
      * @param list<string> $rolesAfter
@@ -224,12 +275,13 @@ class AccountAdministrationService
         array $rolesAfter,
         bool $activeAfter,
         callable $apply,
+        ?string $emailAfter = null,
     ): void {
         $connection = $this->entityManager->getConnection();
         $connection->beginTransaction();
 
         try {
-            $this->assertAllowed($actor, $target, $rolesBefore, $rolesAfter, $activeAfter);
+            $this->assertAllowed($actor, $target, $rolesBefore, $rolesAfter, $activeAfter, $emailAfter);
             $apply();
             $this->entityManager->flush();
 
@@ -268,6 +320,7 @@ class AccountAdministrationService
         array $rolesBefore,
         array $rolesAfter,
         bool $activeAfter,
+        ?string $emailAfter = null,
     ): void {
         $assignable = $this->assignableRoles->getAssignableRoles($actor);
         $removed = array_values(array_diff($rolesBefore, $rolesAfter));
@@ -304,7 +357,7 @@ class AccountAdministrationService
             }
         }
 
-        $this->accountRules->assertValid((string) $target->getEmail(), $rolesAfter);
+        $this->accountRules->assertValid($emailAfter ?? (string) $target->getEmail(), $rolesAfter);
     }
 
     /**

@@ -44,6 +44,7 @@ enum SecurityEventType: string implements SecurityEventTypeInterface
     case ACCOUNT_LOCKED = 'account.locked';
     case ACCOUNT_UNLOCKED = 'account.unlocked';
     case ACCOUNT_ROLES_CHANGED = 'account.roles_changed';
+    case ACCOUNT_EDITED = 'account.edited';
     case ACCOUNT_CHANGE_REFUSED = 'account.change_refused';
 
     case MEMBERSHIP_ADDED = 'membership.added';
