@@ -126,6 +126,6 @@ class ImpersonationTest extends AbstractImpersonationTestCase
         $targets = json_decode($this->client->getResponse()->getContent(), true)['targets'];
 
         $this->assertSame(['support-a@example.com', 'support-b@example.com'], array_column($targets, 'identifier'));
-        $this->assertSame(['ROLE_SUPPORT'], $targets[0]['roles']);
+        $this->assertSame(['ROLE_SUPPORT', 'ROLE_USER'], $targets[0]['roles']);
     }
 }

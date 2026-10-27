@@ -8,7 +8,6 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use LogicException;
 use Symfony\Component\Uid\Uuid;
 use Wexample\SymfonyHelpers\Attribute\WorkerSafe;
-use Wexample\SymfonyHelpers\Helper\RoleHelper;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Repository\AbstractUserRepository;
 
@@ -205,7 +204,7 @@ class AccountDirectoryService
 
     /**
      * What tells an account apart in a list: its name when it has one, its
-     * email, its roles.
+     * email, every role it holds — ROLE_USER included.
      *
      * @return array{identifier: string, label: string, email: string, roles: list<string>}
      */
@@ -218,7 +217,7 @@ class AccountDirectoryService
             'identifier' => $user->getUserIdentifier(),
             'label' => $name !== '' && $name !== $email ? $name . ' — ' . $email : $email,
             'email' => $email,
-            'roles' => array_values(array_diff($user->getRoles(), [RoleHelper::ROLE_USER])),
+            'roles' => $user->getRoles(),
         ];
     }
 
