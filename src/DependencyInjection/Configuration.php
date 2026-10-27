@@ -14,6 +14,10 @@ class Configuration implements ConfigurationInterface
 
         $treeBuilder->getRootNode()
             ->children()
+                ->scalarNode('user_class')
+                    ->info('The application\'s user class, extending AbstractUser. Unset, the class of the firewall\'s entity provider; absent there too, the package\'s own User, mapped on the `user` table. Any other class leaves the package\'s User out of the mapping.')
+                    ->defaultNull()
+                ->end()
                 ->enumNode('password_reset')
                     ->info('How a user who forgot their password gets back in: a link to a reset form, or a magic link.')
                     ->values(array_map(static fn (PasswordResetMode $mode) => $mode->value, PasswordResetMode::cases()))

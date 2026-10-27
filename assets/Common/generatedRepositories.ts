@@ -1,5 +1,5 @@
-import AccountRepository from '../Repository/AccountRepository.js';
+import UserRepository from '../Repository/UserRepository.js';
 
-const generatedRepositories = [AccountRepository];
+const generatedRepositories = [UserRepository];
 
 export default generatedRepositories;

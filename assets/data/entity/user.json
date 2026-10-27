@@ -1,0 +1,37 @@
+{
+    "name": "user",
+    "type": "class",
+    "description": "An account as its administrators read it, whatever the application's user class: what UserDto sends and nothing else. Written by hand to the DTO's shape — the pseudocode export of the entity would list every field of AbstractUser, its secrets included.",
+    "properties": [
+        {
+            "name": "id",
+            "type": "Symfony\\Component\\Uid\\Uuid"
+        },
+        {
+            "name": "email",
+            "type": "string"
+        },
+        {
+            "name": "username",
+            "type": "string",
+            "nullable": true
+        },
+        {
+            "name": "label",
+            "type": "string"
+        },
+        {
+            "name": "roles",
+            "type": "array"
+        },
+        {
+            "name": "state",
+            "type": "string"
+        },
+        {
+            "name": "dateLastLogin",
+            "type": "DateTimeImmutable",
+            "nullable": true
+        }
+    ]
+}

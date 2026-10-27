@@ -2,7 +2,7 @@ wexample_symfony_user:
     resource: '../../Controller/'
     type: attribute
 
-# The list the accounts table reads, the `list` of the Account entity.
+# The list the accounts table reads, the `list` of the user.
 wexample_symfony_user_api:
     resource: '../../Api/Controller/'
     type: attribute

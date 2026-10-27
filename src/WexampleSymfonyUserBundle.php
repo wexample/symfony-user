@@ -3,6 +3,7 @@
 namespace Wexample\SymfonyUser;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Wexample\SymfonyUser\DependencyInjection\Compiler\DefaultUserMappingPass;
 use Wexample\SymfonyHelpers\Class\AbstractBundle;
 use Wexample\SymfonyHelpers\Helper\BundleHelper;
 use Wexample\SymfonyHelpers\Interface\LoaderBundleInterface;
@@ -15,6 +16,7 @@ class WexampleSymfonyUserBundle extends AbstractBundle implements LoaderBundleIn
         parent::build($container);
 
         SecurityBundleHelper::assertRegistered($container, static::class);
+        $container->addCompilerPass(new DefaultUserMappingPass());
     }
 
     public static function getLoaderFrontPaths(): array

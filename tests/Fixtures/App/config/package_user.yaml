@@ -1,0 +1,4 @@
+# The package's own User, asked for explicitly: it wins over the class the
+# security provider names, and is mapped.
+wexample_symfony_user:
+  user_class: Wexample\SymfonyUser\Entity\User

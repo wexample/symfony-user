@@ -7,6 +7,9 @@ use Wexample\SymfonyActivity\WexampleSymfonyActivityBundle;
 use Wexample\SymfonyHelpers\DependencyInjection\AbstractWexampleSymfonyExtension;
 use Wexample\SymfonyUser\EventSubscriber\SecurityActivitySubscriber;
 use Wexample\SymfonyUser\Interface\AccountAdministrationGuardInterface;
+use Wexample\SymfonyUser\DependencyInjection\Compiler\DefaultUserMappingPass;
+use Wexample\SymfonyUser\Entity\AbstractUser;
+use Wexample\SymfonyUser\Entity\User;
 use Wexample\SymfonyUser\Interface\AccountGateInterface;
 use Wexample\SymfonyUser\Interface\MembershipManagerInterface;
 
@@ -18,6 +21,7 @@ class WexampleSymfonyUserExtension extends AbstractWexampleSymfonyExtension
     ): void {
         $config = $this->processConfiguration(new Configuration(), $configs);
 
+        $container->setParameter(DefaultUserMappingPass::PARAMETER_USER_CLASS, $config['user_class'] ?? User::class);
         $container->setParameter('wexample_symfony_user.password_reset', $config['password_reset']);
         $container->setParameter('wexample_symfony_user.reveal_account_status', $config['reveal_account_status']);
         $container->setParameter('wexample_symfony_user.remember_me', $config['remember_me']);
@@ -70,5 +74,35 @@ class WexampleSymfonyUserExtension extends AbstractWexampleSymfonyExtension
         if (in_array(WexampleSymfonyActivityBundle::class, $container->getParameter('kernel.bundles'), true)) {
             $container->autowire(SecurityActivitySubscriber::class)->setAutoconfigured(true);
         }
+    }
+
+    /**
+     * The user class the firewall's entity provider names, when it extends
+     * AbstractUser: the application said it there already. Read here, where
+     * the whole configuration is at hand — load() only sees this extension's
+     * —, and prepended, so a `user_class` set by the application wins.
+     */
+    public function prepend(ContainerBuilder $container): void
+    {
+        parent::prepend($container);
+
+        if ($class = $this->getProviderUserClass($container)) {
+            $container->prependExtensionConfig($this->getAlias(), ['user_class' => $class]);
+        }
+    }
+
+    private function getProviderUserClass(ContainerBuilder $container): ?string
+    {
+        foreach ($container->getExtensionConfig('security') as $config) {
+            foreach ($config['providers'] ?? [] as $provider) {
+                $class = $provider['entity']['class'] ?? null;
+
+                if (is_string($class) && is_subclass_of($class, AbstractUser::class)) {
+                    return $class;
+                }
+            }
+        }
+
+        return null;
     }
 }

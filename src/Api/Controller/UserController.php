@@ -14,9 +14,8 @@ use Wexample\SymfonyApi\Api\Class\ApiResponse;
 use Wexample\SymfonyApi\Api\Controller\AbstractApiController;
 use Wexample\SymfonyHelpers\Controller\AbstractController;
 use Wexample\SymfonyHelpers\Helper\VariableHelper;
-use Wexample\SymfonyUser\Api\Dto\AccountDto;
-use Wexample\SymfonyUser\Api\Normalizer\Entity\Account\DefaultAccountNormalizer;
-use Wexample\SymfonyUser\Entity\Account;
+use Wexample\SymfonyUser\Api\Dto\UserDto;
+use Wexample\SymfonyUser\Api\Normalizer\Entity\User\DefaultUserNormalizer;
 use Wexample\SymfonyUser\Service\AccountAdministrationService;
 use Wexample\SymfonyUser\Service\AccountDirectoryService;
 
@@ -25,8 +24,8 @@ use Wexample\SymfonyUser\Service\AccountDirectoryService;
  * Absent where the application declared no `administration.page_role`,
  * refused to whoever lacks it — as the accounts pages are.
  */
-#[Route(path: 'api/account/', name: 'api_account_')]
-class AccountController extends AbstractApiController
+#[Route(path: 'api/user/', name: 'api_user_')]
+class UserController extends AbstractApiController
 {
     final public const string ROUTE_LIST = 'list';
 
@@ -34,13 +33,13 @@ class AccountController extends AbstractApiController
     #[PageQueryOption]
     #[LengthQueryOption]
     #[SearchQueryOption]
-    #[SortQueryOption(allowed: ['email', 'dateLastLogin'], default: 'email', emptyLast: true)]
-    #[ApiResponseData(AccountDto::class, paginated: true)]
+    #[SortQueryOption(allowed: ['email', 'username', 'dateLastLogin'], default: 'email', emptyLast: true)]
+    #[ApiResponseData(UserDto::class, paginated: true)]
     public function list(
         Request $request,
         AccountAdministrationService $administration,
         AccountDirectoryService $directory,
-        DefaultAccountNormalizer $normalizer,
+        DefaultUserNormalizer $normalizer,
     ): ApiResponse {
         if (! $administration->getPageRole()) {
             throw new NotFoundHttpException();
@@ -56,7 +55,7 @@ class AccountController extends AbstractApiController
         return self::apiResponseQueryPage(
             $request,
             $builder,
-            static fn (array $users) => $normalizer->normalizeCollection(array_map(Account::fromUser(...), $users)),
+            static fn (array $users) => $normalizer->normalizeCollection($users),
         );
     }
 }

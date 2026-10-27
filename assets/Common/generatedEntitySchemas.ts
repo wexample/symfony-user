@@ -1,9 +1,9 @@
-import account from '../data/entity/account.json';
+import user from '../data/entity/user.json';
 
 type EntitySchema = { name: string };
 
 export default function getGeneratedEntitySchemas(): Record<string, EntitySchema> {
   return {
-    [account.name]: account,
+    [user.name]: user,
   };
 }
