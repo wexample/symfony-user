@@ -25,6 +25,13 @@ services:
         tags:
             - { name: scheb_two_factor.provider, alias: email_code }
 
+    Wexample\SymfonyUser\Api\Normalizer\:
+        resource: '../../Api/Normalizer'
+
+    Wexample\SymfonyUser\Api\Controller\:
+        resource: '../../Api/Controller'
+        tags: ['controller.service_arguments']
+
     Wexample\SymfonyUser\Controller\:
         resource: '../../Controller/'
         tags: ['controller.service_arguments']

@@ -5,6 +5,7 @@ namespace Wexample\SymfonyUser\Tests\Fixtures\App;
 use Scheb\TwoFactorBundle\SchebTwoFactorBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Wexample\SymfonyApi\WexampleSymfonyApiBundle;
 use Wexample\SymfonyForms\WexampleSymfonyFormsBundle;
 use Wexample\SymfonyLoader\WexampleSymfonyLoaderBundle;
 use Wexample\SymfonyMail\WexampleSymfonyMailBundle;
@@ -31,6 +32,7 @@ class AppKernel extends AbstractFixtureKernel
             new WexampleSymfonyLoaderBundle(),
             new WexampleSymfonyTranslationsBundle(),
             new WexampleSymfonyMailBundle(),
+            new WexampleSymfonyApiBundle(),
             new WexampleSymfonyFormsBundle(),
             new WexampleSymfonyTunnelsBundle(),
             new WexampleSymfonyUserBundle(),
@@ -56,6 +58,7 @@ class AppKernel extends AbstractFixtureKernel
         $routes->import('@WexampleSymfonyFormsBundle/Resources/config/routes.yaml');
         $routes->import('@WexampleSymfonyTunnelsBundle/Resources/config/routes.yaml');
         $routes->import(__DIR__ . '/../../../src/Controller/', 'attribute');
+        $routes->import(__DIR__ . '/../../../src/Api/Controller/', 'attribute');
         $routes->import(dirname((new \ReflectionClass(WexampleSymfonyUserDsBundle::class))->getFileName()) . '/Controller/', 'attribute');
         $routes->import(__DIR__ . '/Controller/', 'attribute');
     }

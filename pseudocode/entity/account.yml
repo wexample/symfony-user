@@ -1,0 +1,76 @@
+items:
+  - name: Account
+    type: class
+    description: "An account as an administration list reads it, whatever the application's\nuser class: never stored, built from the user it shares its id with."
+    properties:
+      - name: id
+        type: Symfony\Component\Uid\Uuid
+      - name: email
+        type: string
+      - name: label
+        type: string
+      - name: roles
+        type: array
+      - name: state
+        type: string
+      - name: dateLastLogin
+        type: DateTimeImmutable
+        nullable: true
+    methods:
+      - type: method
+        name: buildEntityPath
+        parameters:
+          - type: string
+            name: className
+        return:
+          type: string
+      - type: method
+        name: getEntityKeyName
+        return:
+          type: string
+      - type: method
+        name: getEntityShortName
+        return:
+          type: string
+      - type: method
+        name: getId
+        return:
+          type: Symfony\Component\Uid\Uuid
+      - type: method
+        name: setId
+        parameters:
+          - type: Symfony\Component\Uid\Uuid
+            name: id
+        return:
+          type: void
+      - type: method
+        name: getTableizedName
+        return:
+          type: string
+      - type: method
+        name: getCamelName
+        return:
+          type: string
+      - type: method
+        name: __construct
+        description: ''
+        parameters:
+          - type: AbstractUser
+            name: user
+          - type: string
+            name: email
+          - type: string
+            name: label
+          - type: array
+            name: roles
+          - type: string
+            name: state
+          - type: DateTimeImmutable
+            name: dateLastLogin
+      - type: method
+        name: fromUser
+        parameters:
+          - type: AbstractUser
+            name: user
+        return:
+          type: self
