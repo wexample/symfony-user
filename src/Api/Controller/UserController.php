@@ -22,9 +22,10 @@ use Wexample\SymfonyUser\Service\AccountDirectoryService;
 /**
  * The accounts the administration list shows, searched, sorted and paged.
  * Absent where the application declared no `administration.page_role`,
- * refused to whoever lacks it — as the accounts pages are.
+ * refused to whoever lacks it — as the accounts pages are. Read by the
+ * pages on the session: under `/_api/` (symfony-api `usage/route-prefixes`).
  */
-#[Route(path: 'api/user/', name: 'api_user_')]
+#[Route(path: '_api/user/', name: 'api_user_')]
 class UserController extends AbstractApiController
 {
     final public const string ROUTE_LIST = 'list';

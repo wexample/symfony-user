@@ -10,7 +10,7 @@ use Wexample\SymfonyUser\Tests\Fixtures\App\Entity\User;
 use Wexample\SymfonyUser\Tests\Traits\DatabaseTestTrait;
 
 /**
- * `GET /api/user/list`, the accounts table's source: `page_role:
+ * `GET /_api/user/list`, the accounts table's source: `page_role:
  * ROLE_MANAGER`. Every account, searched, sorted and paged, in the norm the
  * front reads — typed `user` whatever the application's class.
  */
@@ -78,7 +78,7 @@ class UserListApiTest extends WebTestCase
         $this->assertSame(1, $this->list('?search=CUSTOM')['data']['pagination']['total']);
         $this->assertCount(2, $this->list('?length=2&page=0')['data']['items']);
 
-        $this->client->request('GET', '/api/user/list?sort=password', server: ['HTTP_ACCEPT' => 'application/json']);
+        $this->client->request('GET', '/_api/user/list?sort=password', server: ['HTTP_ACCEPT' => 'application/json']);
         $this->assertResponseStatusCodeSame(400);
     }
 
@@ -86,13 +86,13 @@ class UserListApiTest extends WebTestCase
     {
         $this->login('nobody');
 
-        $this->client->request('GET', '/api/user/list', server: ['HTTP_ACCEPT' => 'application/json']);
+        $this->client->request('GET', '/_api/user/list', server: ['HTTP_ACCEPT' => 'application/json']);
         $this->assertResponseStatusCodeSame(403);
     }
 
     private function list(string $query = ''): array
     {
-        $this->client->request('GET', '/api/user/list' . $query, server: ['HTTP_ACCEPT' => 'application/json']);
+        $this->client->request('GET', '/_api/user/list' . $query, server: ['HTTP_ACCEPT' => 'application/json']);
         $this->assertResponseIsSuccessful();
 
         return json_decode($this->client->getResponse()->getContent(), true);
