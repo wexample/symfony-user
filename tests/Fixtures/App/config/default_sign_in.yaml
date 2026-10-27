@@ -1,0 +1,5 @@
+# The package's defaults, over the fixture's: no switch on the sign-in forms.
+wexample_symfony_user:
+  remember_me: false
+  two_factor:
+    trust_device: always

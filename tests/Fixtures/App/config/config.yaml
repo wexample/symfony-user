@@ -76,6 +76,12 @@ security:
     - { path: ^/protected, roles: ROLE_USER }
     - { path: ^/manager, roles: ROLE_MANAGER }
 
+# The switches drawn, for the walks that use them.
+wexample_symfony_user:
+  remember_me: true
+  two_factor:
+    trust_device: ask
+
 scheb_two_factor:
   security_tokens:
     - Symfony\Component\Security\Http\Authenticator\Token\PostAuthenticationToken

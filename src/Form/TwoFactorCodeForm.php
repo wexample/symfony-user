@@ -3,6 +3,7 @@
 namespace Wexample\SymfonyUser\Form;
 
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Wexample\SymfonyForms\Form\AbstractForm;
@@ -27,13 +28,19 @@ class TwoFactorCodeForm extends AbstractForm
 
     public static bool $ajax = true;
 
+    public const string TRUST_DEVICE_ALWAYS = 'always';
+    public const string TRUST_DEVICE_ASK = 'ask';
+
     /**
-     * "Trust this device" only where scheb keeps trusted devices: elsewhere
-     * the switch would promise what the next sign-in does not hold.
+     * Only where scheb keeps trusted devices: elsewhere a device could not be
+     * remembered. Then `two_factor.trust_device` says whether the user is
+     * asked, by a switch, or the device is trusted once the code is right.
      */
     public function __construct(
         #[Autowire(param: 'scheb_two_factor.trusted_device.enabled')]
         private readonly bool $trustedDevice = true,
+        #[Autowire(param: 'wexample_symfony_user.two_factor.trust_device')]
+        private readonly string $trustDevice = self::TRUST_DEVICE_ALWAYS,
     ) {
     }
 
@@ -51,7 +58,9 @@ class TwoFactorCodeForm extends AbstractForm
                 ]
             );
 
-        if ($this->trustedDevice) {
+        if ($this->trustedDevice && $this->trustDevice === self::TRUST_DEVICE_ALWAYS) {
+            $builder->add(self::FIELD_TRUSTED, HiddenType::class, ['data' => '1']);
+        } elseif ($this->trustedDevice) {
             $builder->add(
                 self::FIELD_TRUSTED,
                 SwitchInputType::class,
