@@ -4,7 +4,6 @@ namespace Wexample\SymfonyUser\Api\Dto;
 
 use Wexample\SymfonyApi\Api\Dto\AbstractEntityDto;
 use Wexample\SymfonyHelpers\Entity\AbstractEntity;
-use Wexample\SymfonyHelpers\Helper\RoleHelper;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 
 /**
@@ -27,7 +26,9 @@ class UserDto extends AbstractEntityDto
     /** The holder's name, or the address when there is none. */
     public string $label;
 
-    /** @var list<string> */
+    /** Every role held, ROLE_USER included: what the list names.
+     *
+     * @var list<string> */
     public array $roles;
 
     /** active, disabled, locked, or waiting for its holder's first password. */
@@ -47,7 +48,7 @@ class UserDto extends AbstractEntityDto
         $dto->email = $email;
         $dto->username = $entity->getUsername();
         $dto->label = $name !== '' && $name !== $email ? $name : $email;
-        $dto->roles = array_values(array_diff($entity->getRoles(), [RoleHelper::ROLE_USER]));
+        $dto->roles = $entity->getRoles();
         $dto->state = match (true) {
             $entity->isLocked() => self::STATE_LOCKED,
             ! $entity->isEnabled() => self::STATE_DISABLED,

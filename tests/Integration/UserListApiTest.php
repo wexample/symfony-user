@@ -67,7 +67,7 @@ class UserListApiTest extends WebTestCase
         $locked = $data['data']['items'][1];
         $this->assertSame('user', $locked['type']);
         $this->assertSame('locked', $locked['entity']['state']);
-        $this->assertSame(['ROLE_CUSTOMER'], $data['data']['items'][0]['entity']['roles']);
+        $this->assertSame(['ROLE_CUSTOMER', 'ROLE_USER'], $data['data']['items'][0]['entity']['roles']);
         $this->assertArrayNotHasKey('password', $locked['entity']);
     }
 
