@@ -5,11 +5,11 @@ namespace Wexample\SymfonyUser\DependencyInjection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Wexample\SymfonyActivity\WexampleSymfonyActivityBundle;
 use Wexample\SymfonyHelpers\DependencyInjection\AbstractWexampleSymfonyExtension;
-use Wexample\SymfonyUser\EventSubscriber\SecurityActivitySubscriber;
-use Wexample\SymfonyUser\Interface\AccountAdministrationGuardInterface;
 use Wexample\SymfonyUser\DependencyInjection\Compiler\DefaultUserMappingPass;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Entity\User;
+use Wexample\SymfonyUser\EventSubscriber\SecurityActivitySubscriber;
+use Wexample\SymfonyUser\Interface\AccountAdministrationGuardInterface;
 use Wexample\SymfonyUser\Interface\AccountGateInterface;
 use Wexample\SymfonyUser\Interface\MembershipManagerInterface;
 

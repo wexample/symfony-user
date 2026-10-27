@@ -3,11 +3,11 @@
 namespace Wexample\SymfonyUser;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Wexample\SymfonyUser\DependencyInjection\Compiler\DefaultUserMappingPass;
 use Wexample\SymfonyHelpers\Class\AbstractBundle;
 use Wexample\SymfonyHelpers\Helper\BundleHelper;
 use Wexample\SymfonyHelpers\Interface\LoaderBundleInterface;
 use Wexample\SymfonySecurity\Helper\SecurityBundleHelper;
+use Wexample\SymfonyUser\DependencyInjection\Compiler\DefaultUserMappingPass;
 
 class WexampleSymfonyUserBundle extends AbstractBundle implements LoaderBundleInterface
 {
