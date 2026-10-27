@@ -222,6 +222,31 @@ class AccountDirectoryService
     }
 
     /**
+     * Everything a page shows of one account — its own profile, or its page
+     * in the administration: describe(), its name, its username, its initials,
+     * its state and its last sign-in. The name falls back on the address, and
+     * the initials are null for a user class without a name.
+     *
+     * @return array<string, mixed>
+     */
+    public function describeAccount(AbstractUser $user): array
+    {
+        return $this->describe($user) + [
+            'id' => (string) $user->getId(),
+            'name' => (method_exists($user, 'getDisplayName') ? trim((string) $user->getDisplayName()) : '') ?: (string) $user->getEmail(),
+            'username' => $user->getUsername(),
+            'initials' => method_exists($user, 'getInitials') ? $user->getInitials() : null,
+            'enabled' => $user->isEnabled(),
+            'locked' => $user->isLocked(),
+            // No password yet: the account is open and its holder has not
+            // followed the activation mail.
+            'activated' => $user->getPassword() !== null,
+            'password_change_required' => $user->isPasswordChangeRequired(),
+            'date_last_login' => $user->getDateLastLogin(),
+        ];
+    }
+
+    /**
      * Label => identifier, the choices of a select of accounts.
      *
      * @param iterable<AbstractUser> $users
