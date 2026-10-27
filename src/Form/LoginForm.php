@@ -4,8 +4,8 @@ namespace Wexample\SymfonyUser\Form;
 
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Wexample\SymfonyForms\Form\AbstractForm;
 use Wexample\SymfonyForms\Form\Type\PasswordInputType;
 use Wexample\SymfonyForms\Form\Type\SwitchInputType;
