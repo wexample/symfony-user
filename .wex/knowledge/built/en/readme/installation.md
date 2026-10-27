@@ -18,6 +18,10 @@ The scheb recipe also adds `config/routes/scheb_2fa.yaml`: delete it, the code f
 
 ### The user entity
 
+The package ships a ready `Wexample\SymfonyUser\Entity\User`, mapped on the `user` table: an application with nothing to add names it as its security provider and writes no class.
+
+An application with fields of its own extends `AbstractUser` instead:
+
 ```php
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -35,7 +39,7 @@ class UserRepository extends AbstractUserRepository
 }
 ```
 
-`AbstractUser` is not a mapped superclass: its columns land in the application table. Generate a migration after extending it.
+The package's own `User` then steps out of the Doctrine mapping, so the two never share the table: the application's class is read from the firewall's entity provider (`providers.users.entity.class`), or named in `wexample_symfony_user.user_class`, which wins. `AbstractUser` is not a mapped superclass: its columns land in the application table. Generate a migration after extending it.
 
 ### Security
 
@@ -146,6 +150,7 @@ In development, keep the mails on the machine: `MAILER_DSN=null://null` drops th
 ```yaml
 # config/packages/wexample_symfony_user.yaml
 wexample_symfony_user:
+    user_class: ~                  # the application's user class; unset, the security provider's, else the package's own User
     password_reset: token          # or magic_link
     reveal_account_status: false   # true: a disabled or locked account is told so, once its password is right
     terms:

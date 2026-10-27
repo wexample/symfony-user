@@ -3,7 +3,7 @@
   "description": "User accounts and authentication for Symfony",
   "type": "library",
   "license": "MIT",
-  "version": "15.0.0",
+  "version": "16.0.0",
   "autoload": {
     "psr-4": {
       "Wexample\\SymfonyUser\\": "src/"
@@ -29,8 +29,8 @@
     "wexample/symfony-translations": ">=17.0.1",
     "symfony/validator": "^7.4",
     "wexample/symfony-forms": ">=14.0.2",
-    "wexample/symfony-loader": ">=25.1.0",
-    "wexample/symfony-mail": ">=3.0.4",
+    "wexample/symfony-loader": ">=25.3.0",
+    "wexample/symfony-mail": ">=4.0.0",
     "symfony/form": "^7.4",
     "symfony/rate-limiter": "^7.4",
     "symfony/mailer": "^7.4",
@@ -42,7 +42,7 @@
     "endroid/qr-code": "^6.0",
     "wexample/symfony-tunnels": ">=11.0.5",
     "wexample/symfony-activity": ">=3.0.5",
-    "wexample/symfony-api": ">=14.0.7",
+    "wexample/symfony-api": ">=15.0.0",
     "wexample/php-pseudocode": ">=2.2.4"
   },
   "require-dev": {

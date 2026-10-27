@@ -132,6 +132,8 @@ $assignableRoles->canAssign($editor, ['ROLE_ADMIN']);                           
 
 An administrator creates an account with `createAccount()`: built by the application — email, roles, its own fields —, it is written enabled with no password, and its holder gets an activation mail to choose one (`/password/activate`, then `/password/new`, signed in afterwards; the second factor and the account gates apply as on any sign-in). With no password, nothing signs in with it. A dead activation link — expired, or the account already activated — shows a page telling to ask for a new one. `sendPasswordMail()` sends the activation mail again to an account waiting for it, a mail to choose a new password to an activated one; an earlier link keeps working until it expires, the password is chosen, or the address changes.
 
+`edit()` changes what an account is called — its address, its username, its name where the user class holds one —, under the same rules as a change of roles: an actor edits no account holding a role they do not administer, and a new address must suit the roles held. Its holder is sent nothing.
+
 Deactivate, reactivate, lock, unlock and change roles through `AccountAdministrationService`, not the entity setters — those stay for fixtures and migrations:
 
 ```php
@@ -155,7 +157,7 @@ The service refuses:
 
 `AccountRulesService` holds what an account must always be, whoever writes it: a role of `administration.role_email_domains` held — directly or through the hierarchy — by an address of its domains, compared whole; the roles of `administration.exclusive_roles` never given together. Only given roles count there, so an administrator can reach the roles of the accounts they administer. A Doctrine listener applies these rules on every flush; a profile form changing the address calls `assertValid()` first, to show the refusal. A database `CHECK` constraint, in the application's schema, is the last line.
 
-Each change is journaled — `account.created`, `account.activation_sent`, `account.activated`, `account.password_mail_sent`, `account.deactivated`, `.reactivated`, `.locked`, `.unlocked`, `account.roles_changed` with `roles_before` / `roles_after` —, each refusal as `account.change_refused` with its code; `extra.actor_id` names the actor.
+Each change is journaled — `account.created`, `account.activation_sent`, `account.activated`, `account.password_mail_sent`, `account.deactivated`, `.reactivated`, `.locked`, `.unlocked`, `account.roles_changed` with `roles_before` / `roles_after`, `account.edited` with the `fields` changed, never their values —, each refusal as `account.change_refused` with its code; `extra.actor_id` names the actor.
 
 ### The screens
 
@@ -163,9 +165,10 @@ Each change is journaled — `account.created`, `account.activation_sent`, `acco
 
 - `/accounts` (`UserRoute::ACCOUNTS`): every account, 25 to a page, searched by address, username or name; and the card that opens one — an address, the roles the actor administers, one switch each. An address another account holds is refused before the database is asked.
 - `/accounts/{id}` (`UserRoute::ACCOUNT`): one account — its state, its roles, the change it owes —, the roles form again, and a button per action its state allows (`Enum\AccountAction`): deactivate, reactivate, lock, unlock, send the mail to choose a password. Each posts to `user_accounts_action` with the form CSRF token of the application (`submit`), and comes back to the page with `?done=` or `?refused=<code>`. Where symfony-activity is installed, its recent history too.
+- `/accounts/{id}/edit` (`UserRoute::ACCOUNT_EDIT`): what the account is called — address, username, name —, opened in a modal from its page. An address or a username another account holds is refused before the database is asked.
 - `/accounts/{id}/activity` (`UserRoute::ACCOUNT_ACTIVITY`): the whole history of the account, a page at a time, narrowed to one category — there only where symfony-activity is installed.
 
-A refusal is shown, never an error page: both form processors call the service inside `formIsValid()`, so `AccountAdministrationRefusal` comes back as an error on the form. The roles the account holds outside the ones the actor administers are kept untouched.
+A refusal is shown, never an error page: the form processors call the service inside `formIsValid()`, so `AccountAdministrationRefusal` comes back as an error on the form. The roles the account holds outside the ones the actor administers are kept untouched.
 
 An application drawing its own screens instead reads through the same services: `AccountDirectoryService` lists, searches, pages and describes, `AssignableRolesService` names the roles a field may offer.
 
