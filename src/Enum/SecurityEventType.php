@@ -20,6 +20,8 @@ enum SecurityEventType: string implements SecurityEventTypeInterface
     case SECOND_FACTOR_SUCCEEDED = 'second_factor.succeeded';
     case SECOND_FACTOR_FAILED = 'second_factor.failed';
     case SECOND_FACTOR_BACKUP_CODE_USED = 'second_factor.backup_code_used';
+    /** Development alone: the code not asked, by the click of TwoFactorSkipController. */
+    case SECOND_FACTOR_SKIPPED = 'second_factor.skipped';
 
     case PASSWORD_RESET_REQUESTED = 'password.reset_requested';
     case PASSWORD_RESET = 'password.reset';

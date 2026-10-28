@@ -15,6 +15,7 @@ final class UserRoute
     public const string PASSWORD_RESET = 'user_password_reset';
     public const string PASSWORD_ACTIVATE = 'user_password_activate';
     public const string TWO_FACTOR_RESEND = 'user_security_two_factor_resend';
+    public const string TWO_FACTOR_SKIP = 'user_security_two_factor_skip';
     public const string TOTP_REGENERATE = 'user_totp_regenerate';
     public const string IMPERSONATE_SEARCH = 'user_impersonate_search';
     public const string ACCOUNT_ACTION = 'user_accounts_action';
