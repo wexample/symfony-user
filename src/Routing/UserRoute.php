@@ -36,6 +36,7 @@ final class UserRoute
     public const string TOTP = 'user_totp_index';
     public const string TOTP_BACKUP_CODES = 'user_totp_backup_codes';
     public const string TOTP_SETUP = 'user_totp_setup_index';
+    public const string TOTP_SETUP_SKIP = 'user_totp_setup_skip';
     public const string IMPERSONATE = 'user_impersonate_index';
     public const string ACCOUNT_PICKER = 'user_account_picker';
     public const string MEMBERSHIPS = 'user_memberships_index';

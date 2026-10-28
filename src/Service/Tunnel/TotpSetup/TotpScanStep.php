@@ -4,10 +4,13 @@ namespace Wexample\SymfonyUser\Service\Tunnel\TotpSetup;
 
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wexample\SymfonyTunnels\Class\TunnelCursor;
 use Wexample\SymfonyTunnels\Service\Step\AbstractTunnelStep;
+use Wexample\SymfonyUser\Controller\TotpSetupSkipController;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Service\TotpService;
@@ -28,6 +31,7 @@ class TotpScanStep extends AbstractTunnelStep
         private readonly TwoFactorPolicyService $policy,
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly TotpVerifyStep $verifyStep,
+        private readonly CsrfTokenManagerInterface $csrfTokenManager,
     ) {
     }
 
@@ -62,7 +66,23 @@ class TotpScanStep extends AbstractTunnelStep
             'required' => $this->policy->requiresApp($user),
             'qr_code' => $this->totpService->getPendingQrCodeDataUri($user),
             'secret' => $this->totpService->getPendingSecret(),
+            'skip_url' => $this->getSkipUrl(),
         ];
+    }
+
+    /**
+     * Going on without the app, in development alone: the route exists
+     * nowhere else (TotpSetupSkipController), and the page offers nothing.
+     */
+    private function getSkipUrl(): ?string
+    {
+        try {
+            return $this->urlGenerator->generate(UserRoute::TOTP_SETUP_SKIP, [
+                '_token' => $this->csrfTokenManager->getToken(TotpSetupSkipController::CSRF_TOKEN_ID)->getValue(),
+            ]);
+        } catch (RouteNotFoundException) {
+            return null;
+        }
     }
 
     private function getUser(): AbstractUser

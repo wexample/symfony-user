@@ -31,6 +31,8 @@ enum SecurityEventType: string implements SecurityEventTypeInterface
     case MAGIC_LINK_REQUESTED = 'magic_link.requested';
 
     case ACCOUNT_TOTP_ENABLED = 'account.totp_enabled';
+    /** Development alone: the app not set up, the gate let go for the session (TotpSetupSkipController). */
+    case ACCOUNT_TOTP_SETUP_SKIPPED = 'account.totp_setup_skipped';
     case ACCOUNT_TOTP_DISABLED = 'account.totp_disabled';
     case ACCOUNT_BACKUP_CODES_REGENERATED = 'account.backup_codes_regenerated';
     case ACCOUNT_TRUSTED_DEVICES_REVOKED = 'account.trusted_devices_revoked';

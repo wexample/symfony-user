@@ -10,6 +10,7 @@
 | `user_password_activate` | `/password/activate` | target of the activation mail |
 | `user_security_two_factor_resend` | `/login/2fa/resend` | sends the code again (POST) |
 | `user_security_two_factor_skip` | `/login/2fa/skip` | `dev` only: goes on without the code, the password given — offered on the code's page in the development tone |
+| `user_totp_setup_skip` | `/account/authenticator/setup/skip` | `dev` only: an account held until its app is set up goes on without it, for the session — offered on the setup page in the development tone |
 | `user_totp_regenerate` | `/account/authenticator/backup-codes/regenerate` | new backup codes (POST) |
 | `user_accounts_action` | `/accounts/{id}/{action}` | what an administrator does to one account (POST) |
 
