@@ -11,7 +11,9 @@ use Wexample\SymfonyUser\Entity\AbstractUser;
 
 /**
  * Any user, whatever the class the application gave it, read as the one
- * `user` type the front knows.
+ * `user` type the front knows — the accounts list's shape, UserDto, never an
+ * application's own: the normalizer the application wrote for its user class
+ * (its sign-in answer, its profile) is not asked.
  */
 class DefaultUserNormalizer extends AbstractEntityNormalizer
 {
@@ -20,6 +22,11 @@ class DefaultUserNormalizer extends AbstractEntityNormalizer
     public static function getEntityClassName(): string
     {
         return AbstractUser::class;
+    }
+
+    protected function delegates(): bool
+    {
+        return false;
     }
 
     public function normalize(
