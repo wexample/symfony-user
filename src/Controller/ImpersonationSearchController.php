@@ -17,7 +17,7 @@ use Wexample\SymfonyUser\Service\ImpersonationService;
  * searchable select. Absent where the firewall has no `switch_user`; refused
  * to whoever lacks its role; limited in results and in rate.
  */
-#[IsGranted('IS_AUTHENTICATED_FULLY')]
+#[IsGranted('IS_AUTHENTICATED')]
 final class ImpersonationSearchController extends AbstractController
 {
     #[Route(path: '/account/impersonate/search', name: UserRoute::IMPERSONATE_SEARCH, methods: [Request::METHOD_GET])]

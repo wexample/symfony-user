@@ -15,7 +15,7 @@ use Wexample\SymfonyUser\Service\TotpService;
  * New backup codes for the authenticator app of the signed-in user, shown
  * once on the page that follows.
  */
-#[IsGranted('IS_AUTHENTICATED_FULLY')]
+#[IsGranted('IS_AUTHENTICATED')]
 final class TotpBackupCodesController extends AbstractController
 {
     #[Route(path: '/account/authenticator/backup-codes/regenerate', name: UserRoute::TOTP_REGENERATE, methods: [Request::METHOD_POST])]

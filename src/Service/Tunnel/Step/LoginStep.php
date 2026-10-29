@@ -65,7 +65,7 @@ class LoginStep extends AbstractTunnelStep
             return $redirect;
         }
 
-        if ($this->security->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if ($this->security->isGranted('IS_AUTHENTICATED')) {
             return $cursor->manager->selectNextCursor($cursor);
         }
 

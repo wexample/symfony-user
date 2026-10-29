@@ -22,7 +22,7 @@ use Wexample\SymfonyUser\Service\SecurityJournalService;
  * on that page rather than a configuration that drifts from production. The
  * route exists in `dev` only: anywhere else the path leads nowhere.
  */
-#[IsGranted('IS_AUTHENTICATED_FULLY')]
+#[IsGranted('IS_AUTHENTICATED')]
 final class TotpSetupSkipController extends AbstractController
 {
     final public const string CSRF_TOKEN_ID = 'totp-setup-skip';
