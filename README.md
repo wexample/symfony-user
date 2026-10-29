@@ -1,6 +1,6 @@
 # symfony-user
 
-Version: 18.0.0
+Version: 19.0.0
 
 User accounts and authentication for Symfony
 

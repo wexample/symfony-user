@@ -232,7 +232,7 @@ when@dev:
     security:
         firewalls:
             main:
-                switch_user: { role: IS_AUTHENTICATED_FULLY }   # everyone, in development
+                switch_user: { role: IS_AUTHENTICATED }   # everyone, in development
 ```
 
 Who may be impersonated is `impersonation.targets`: `administered`, the accounts whose roles the actor administers — the hierarchy, or `administration.manages`, read at each request —, or `any`, every account — a development setting, where the scope of the application's `AccountAdministrationGuardInterface` is not asked either. Never oneself, a disabled or a locked account. `ImpersonationService` applies the rule to the list, the search and — through `ImpersonationGuardSubscriber`, on `SwitchUserEvent` — the switch itself: an account absent from the list cannot be reached by its URL. A voter could not refuse it: with the default strategy, the role voter's grant wins.
