@@ -222,6 +222,8 @@ With `administer_grant`, an account holding it in groups administers the account
 - `already_member`, `invalid_grants` (none, or one undeclared);
 - `last_administrator`: the group would be left with no member holding `administer_grant`.
 
+A group just made has nobody administering it to add its first member: `found($creator, $group)` makes its creator a member holding `administer_grant`, once — a group with members already is refused, `already_founded`.
+
 Each change is journaled — `membership.added`, `membership.grants_changed`, `membership.removed`, `membership.change_refused` —, on the account it is about, with the group, the member and the grants before and after in `extra`.
 
 The entities being the application's, it declares how they are made, one `MembershipManagerInterface` per kind of group: its name in urls (`team`), the group and member classes, `createMembership()` and `removeMembership()`. symfony-user-ds draws the screens on it.

@@ -19,4 +19,7 @@ enum MembershipAdministrationRefusal: string
 
     /** The change would leave the group with nobody administering it. */
     case LAST_ADMINISTRATOR = 'last_administrator';
+
+    /** A group founded already has members: they add the next ones. */
+    case ALREADY_FOUNDED = 'already_founded';
 }

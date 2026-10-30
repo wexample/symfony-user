@@ -181,6 +181,25 @@ class MembershipTest extends KernelTestCase
         $this->assertFalse($this->isGranted('watcher', $this->beta));
     }
 
+    public function testTheCreatorFoundsTheGroupItAdministers(): void
+    {
+        $founder = $this->createUser('kim');
+        $team = $this->persist(new Team('Delta'));
+        $this->entityManager->flush();
+
+        $membership = $this->getMembershipAdministration()->found($founder, $team);
+
+        $this->assertSame(['administrator'], $membership->getGrants());
+        $this->assertTrue($this->memberships->holds($founder, 'administrator', $team));
+
+        try {
+            $this->getMembershipAdministration()->found($this->createUser('lea'), $team);
+            $this->fail('A group with members is founded once.');
+        } catch (MembershipAdministrationException $exception) {
+            $this->assertSame(MembershipAdministrationRefusal::ALREADY_FOUNDED, $exception->refusal);
+        }
+    }
+
     public function testAGroupAdministratorReachesTheAccountsOfItsGroupsOnly(): void
     {
         $administrator = $this->createUser('hal');

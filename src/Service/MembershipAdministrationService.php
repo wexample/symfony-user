@@ -22,7 +22,7 @@ use Wexample\SymfonyUser\Interface\MembershipInterface;
  * Who administers a group: an account holding `memberships.administer_grant`
  * in it, or one holding `administration.page_role`, which administers every
  * account already. A group administered by someone always keeps someone
- * administering it.
+ * administering it; a new one gets its first through `found()`.
  */
 class MembershipAdministrationService
 {
@@ -72,6 +72,45 @@ class MembershipAdministrationService
         $this->entityManager->flush();
 
         $this->record(SecurityEventType::MEMBERSHIP_ADDED, $actor, $group, $member, [], $membership->getGrants());
+
+        return $membership;
+    }
+
+    /**
+     * The first member of a group just made — its creator, most of the time —,
+     * holding `memberships.administer_grant` there unless $grants say
+     * otherwise: nobody administers the group yet to add them. A group with
+     * members is refused, they add the next ones.
+     *
+     * @param list<string>|null $grants
+     *
+     * @throws MembershipAdministrationException
+     */
+    public function found(AbstractUser $founder, MembershipGroupInterface $group, ?array $grants = null): MembershipInterface
+    {
+        $grants ??= $this->administerGrant !== null ? [$this->administerGrant] : [];
+
+        if (! $founder instanceof MemberInterface) {
+            throw new \LogicException($founder::class . ' implements no MemberInterface: it founds no group.');
+        }
+
+        try {
+            $this->assertGrants($grants);
+
+            foreach ($group->getMemberships() as $membership) {
+                throw new MembershipAdministrationException(MembershipAdministrationRefusal::ALREADY_FOUNDED);
+            }
+        } catch (MembershipAdministrationException $exception) {
+            $this->record(SecurityEventType::MEMBERSHIP_CHANGE_REFUSED, $founder, $group, $founder, [], $grants, $exception->refusal->value, ['action' => SecurityEventType::MEMBERSHIP_ADDED->value]);
+
+            throw $exception;
+        }
+
+        $membership = $this->managers->getForGroup($group)->createMembership($group, $founder, $grants);
+        $this->entityManager->persist($membership);
+        $this->entityManager->flush();
+
+        $this->record(SecurityEventType::MEMBERSHIP_ADDED, $founder, $group, $founder, [], $membership->getGrants(), extra: ['founded' => '1']);
 
         return $membership;
     }
