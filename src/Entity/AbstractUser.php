@@ -46,7 +46,9 @@ abstract class AbstractUser extends AbstractEntity implements
     // own: its mails. Set by the application, or by RememberLocaleSubscriber.
     use HasLocaleTrait;
 
-    public const string USERNAME_PATTERN = '/^[a-z0-9][a-z0-9_-]{2,28}[a-z0-9]$/';
+    // 3 to 30 letters, digits, dashes or underscores, its case kept as typed:
+    // two usernames differing by case alone are one, at login as when taken.
+    public const string USERNAME_PATTERN = '/^[A-Za-z0-9][A-Za-z0-9_-]{1,28}[A-Za-z0-9]$/';
 
     #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
     #[Assert\NotBlank]
@@ -158,7 +160,7 @@ abstract class AbstractUser extends AbstractEntity implements
 
     public function setUsername(?string $username): static
     {
-        $this->username = $username === null ? null : mb_strtolower(trim($username));
+        $this->username = $username === null ? null : trim($username);
 
         return $this;
     }

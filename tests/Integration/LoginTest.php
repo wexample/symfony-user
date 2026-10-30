@@ -57,6 +57,17 @@ class LoginTest extends WebTestCase
         $this->assertNotNull($user->getDateLastLogin());
     }
 
+    public function testAUsernameKeepsItsCaseAndIsTypedInAny(): void
+    {
+        $this->createUser('max@example.com', 'Max');
+        $this->entityManager->flush();
+
+        $this->assertTrue($this->submitJson('max', 'secret')['ok']);
+
+        $this->entityManager->clear();
+        $this->assertSame('Max', $this->entityManager->getRepository(User::class)->findOneBy(['email' => 'max@example.com'])->getUsername());
+    }
+
     public function testWrongPasswordAndUnknownUserGiveTheSameError(): void
     {
         $wrongPassword = $this->submitJson('jane@example.com', 'wrong');

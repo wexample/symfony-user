@@ -155,8 +155,15 @@ class AccountScreenTest extends WebTestCase
         $this->assertSame([AccountEditFormProcessor::ERROR_USERNAME_TAKEN], $payload['form']['errors']['fields']['account_edit_form[username]']);
         $this->assertSame('customer@example.com', $this->find('customer')->getEmail());
 
-        // Its own address and username, kept as they are, are not taken.
+        // Another case is the same username.
+        $payload = $this->edit('customer', ['email' => 'customer@example.com', 'username' => 'NOBODY']);
+        $this->assertSame([AccountEditFormProcessor::ERROR_USERNAME_TAKEN], $payload['form']['errors']['fields']['account_edit_form[username]']);
+
+        // Its own address and username, kept as they are, are not taken; nor
+        // its username recased, three letters long.
         $this->assertTrue($this->edit('customer', ['email' => 'customer@example.com', 'username' => 'customer', 'first_name' => 'Kept'])['ok']);
+        $this->assertTrue($this->edit('customer', ['email' => 'customer@example.com', 'username' => 'Cus'])['ok']);
+        $this->assertSame('Cus', $this->find('Cus')->getUsername());
     }
 
     public function testAnAccountHoldingARoleAboveTheActorIsNotEdited(): void

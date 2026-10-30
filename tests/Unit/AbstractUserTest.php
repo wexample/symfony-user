@@ -8,15 +8,15 @@ use Wexample\SymfonyUser\Tests\Fixtures\App\Entity\User;
 
 class AbstractUserTest extends TestCase
 {
-    public function testEmailAndUsernameAreLowercased(): void
+    public function testTheEmailIsLowercasedTheUsernameKeepsItsCase(): void
     {
         $user = (new User())
             ->setEmail('  Jane.Doe@Example.COM ')
-            ->setUsername('Jane_Doe');
+            ->setUsername(' Jane_Doe ');
 
         $this->assertSame('jane.doe@example.com', $user->getEmail());
         $this->assertSame('jane.doe@example.com', $user->getUserIdentifier());
-        $this->assertSame('jane_doe', $user->getUsername());
+        $this->assertSame('Jane_Doe', $user->getUsername());
     }
 
     public function testRolesAlwaysContainRoleUserWithoutStoringIt(): void

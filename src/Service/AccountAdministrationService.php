@@ -185,7 +185,7 @@ class AccountAdministrationService
     public function edit(AbstractUser $actor, AbstractUser $target, string $email, ?string $username, array $names = []): void
     {
         $email = mb_strtolower(trim($email));
-        $username = $username === null || trim($username) === '' ? null : mb_strtolower(trim($username));
+        $username = $username === null || trim($username) === '' ? null : trim($username);
         $names = method_exists($target, 'setFirstName') ? $names : [];
 
         $changed = array_keys(array_filter([

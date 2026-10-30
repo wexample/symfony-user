@@ -21,7 +21,8 @@ abstract class AbstractUserRepository extends AbstractRepository implements
     }
 
     /**
-     * The identifier typed at login: an email, or a username.
+     * The identifier typed at login: an email, or a username, whatever its
+     * case — a username keeps the case it was given, and is matched without.
      */
     public function findOneByUserIdentifier(string $identifier): ?AbstractUser
     {
@@ -32,9 +33,16 @@ abstract class AbstractUserRepository extends AbstractRepository implements
         }
 
         // A username cannot hold "@", so the two lookups never overlap.
-        return $this->findOneBy([
-            str_contains($identifier, '@') ? 'email' : 'username' => $identifier,
-        ]);
+        if (str_contains($identifier, '@')) {
+            return $this->findOneBy(['email' => $identifier]);
+        }
+
+        return $this->createQueryBuilder('user')
+            ->where('LOWER(user.username) = :username')
+            ->setParameter('username', $identifier)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     /**
