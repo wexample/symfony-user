@@ -5,6 +5,7 @@ namespace Wexample\SymfonyUser\Tests\Fixtures\App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Wexample\SymfonySearch\Attribute\Searchable;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Entity\Traits\UserWithNameTrait;
 use Wexample\SymfonyUser\Interface\RepresentativeInterface;
@@ -12,6 +13,8 @@ use Wexample\SymfonyUser\Tests\Fixtures\App\Repository\UserRepository;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
+// Found by its address when it is added to a team.
+#[Searchable(fields: ['email', 'username'], titleField: 'email')]
 class User extends AbstractUser implements RepresentativeInterface
 {
     use UserWithNameTrait;

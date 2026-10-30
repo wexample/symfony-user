@@ -95,6 +95,19 @@ class MembershipScreenTest extends WebTestCase
         $this->assertSame(['watcher'], $this->findMembership('bob')->getGrants());
     }
 
+    public function testAnAdministratorAddsAMemberFoundBySearching(): void
+    {
+        $this->login('ada');
+        $cid = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'cid']);
+
+        // Its username, three letters, predates the current rule: it is added
+        // all the same, the account not being what the form saves.
+        $payload = $this->post('membership_add_form', ['member' => (string) $cid->getId(), 'grant_watcher' => '1'], $this->alpha);
+
+        $this->assertTrue($payload['ok'], json_encode($payload['form']['errors'] ?? null));
+        $this->assertSame(['watcher'], $this->findMembership('cid')->getGrants());
+    }
+
     public function testAnAdministratorRemovesAMember(): void
     {
         $this->login('ada');
