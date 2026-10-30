@@ -162,6 +162,25 @@ class MembershipTest extends KernelTestCase
         $this->getScope()->assertInScope($this->alpha, 'contributor');
     }
 
+    public function testThePlatformRoleOverseesEveryGroup(): void
+    {
+        $this->signIn($this->createUser('ivy', ['ROLE_PLATFORM_ADMIN']));
+
+        $this->assertSame(['Note of Alpha', 'Note of Beta', 'Note of Gamma'], $this->readNotes('administrator'));
+        $this->getScope()->assertInScope($this->gamma, 'administrator');
+        $this->assertTrue($this->isGranted('contributor', $this->beta));
+    }
+
+    public function testAGrantRoleOverseesNothing(): void
+    {
+        $user = $this->createUser('jon');
+        $this->join($this->alpha, $user, ['administrator']);
+        $this->signIn($user);
+
+        $this->assertSame(['Note of Alpha'], $this->readNotes());
+        $this->assertFalse($this->isGranted('watcher', $this->beta));
+    }
+
     public function testAGroupAdministratorReachesTheAccountsOfItsGroupsOnly(): void
     {
         $administrator = $this->createUser('hal');

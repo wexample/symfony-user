@@ -188,6 +188,10 @@ class Configuration implements ConfigurationInterface
                             ->info('The grant administering the accounts of a group. Set, an account administering through it reaches only the accounts all of whose groups it holds that grant in. Platform administrators, holding it nowhere, keep the rules of `administration`.')
                             ->defaultNull()
                         ->end()
+                        ->scalarNode('oversee_role')
+                            ->info('The role reading every group as a member holding every grant, ROLE_ADMIN: MembershipScopeService restricts nothing for it and `is_granted(\'contributor\', $project)` holds. A platform role, never one a grant gives under `roles`. Null, nobody oversees.')
+                            ->defaultNull()
+                        ->end()
                     ->end()
                     ->validate()
                         ->ifTrue(static fn (array $memberships) => self::findMembershipsError($memberships) !== null)
@@ -246,6 +250,12 @@ class Configuration implements ConfigurationInterface
             if (! isset($grants[$grant])) {
                 return sprintf('memberships.roles: "%s" is not a declared grant.', $grant);
             }
+        }
+
+        // A grant giving the overseeing role would open every group to whoever
+        // holds it in one.
+        if ($memberships['oversee_role'] !== null && in_array($memberships['oversee_role'], $memberships['roles'], true)) {
+            return sprintf('memberships.oversee_role: "%s" is given by a grant under memberships.roles.', $memberships['oversee_role']);
         }
 
         if ($memberships['administer_grant'] !== null && ! isset($grants[$memberships['administer_grant']])) {

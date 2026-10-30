@@ -34,6 +34,7 @@ class MembershipsConfigurationTest extends TestCase
         yield 'a cycle' => [['grants' => ['a' => ['b'], 'b' => ['c'], 'c' => ['a']]], '"a" includes itself'];
         yield 'a role for an undeclared grant' => [['grants' => self::GRANTS, 'roles' => ['editor' => 'ROLE_EDITOR']], 'memberships.roles: "editor"'];
         yield 'an undeclared administering grant' => [['grants' => self::GRANTS, 'administer_grant' => 'owner'], 'memberships.administer_grant: "owner"'];
+        yield 'an overseeing role a grant gives' => [['grants' => self::GRANTS, 'roles' => ['administrator' => 'ROLE_TEAM_ADMIN'], 'oversee_role' => 'ROLE_TEAM_ADMIN'], 'memberships.oversee_role: "ROLE_TEAM_ADMIN"'];
     }
 
     #[DataProvider('provideInvalidMemberships')]

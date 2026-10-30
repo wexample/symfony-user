@@ -2,7 +2,9 @@
 
 namespace Wexample\SymfonyUser\Security\Voter;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Vote;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Wexample\SymfonyUser\Interface\MemberInterface;
@@ -12,14 +14,18 @@ use Wexample\SymfonyUser\Service\MembershipService;
 
 /**
  * `is_granted('contributor', $project)`: the signed-in member holds that grant
- * in the group, or one including it. Read from the memberships at each
- * request, so a grant changed applies at the next one, nobody signed out.
+ * in the group, or one including it, or the role of `memberships.oversee_role`.
+ * Read from the memberships at each request, so a grant changed applies at
+ * the next one, nobody signed out.
  */
 class MembershipGrantVoter extends Voter
 {
     public function __construct(
         private readonly GrantHierarchyService $grantHierarchy,
         private readonly MembershipService $membershipService,
+        private readonly AccessDecisionManagerInterface $accessDecisionManager,
+        #[Autowire(param: 'wexample_symfony_user.memberships.oversee_role')]
+        private readonly ?string $overseeRole = null,
     ) {
     }
 
@@ -39,6 +45,10 @@ class MembershipGrantVoter extends Voter
         $member = $token->getUser();
 
         if ($member instanceof MemberInterface && $this->membershipService->holds($member, $attribute, $subject)) {
+            return true;
+        }
+
+        if ($this->overseeRole !== null && $this->accessDecisionManager->decide($token, [$this->overseeRole])) {
             return true;
         }
 

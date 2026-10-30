@@ -48,6 +48,7 @@ class WexampleSymfonyUserExtension extends AbstractWexampleSymfonyExtension
         $container->setParameter('wexample_symfony_user.memberships.grants', $config['memberships']['grants']);
         $container->setParameter('wexample_symfony_user.memberships.roles', $config['memberships']['roles']);
         $container->setParameter('wexample_symfony_user.memberships.administer_grant', $config['memberships']['administer_grant']);
+        $container->setParameter('wexample_symfony_user.memberships.oversee_role', $config['memberships']['oversee_role']);
         $container->setParameter('wexample_symfony_user.two_factor.trust_device', $config['two_factor']['trust_device']);
         $container->setParameter('wexample_symfony_user.two_factor.required', $config['two_factor']['required']);
         $container->setParameter('wexample_symfony_user.two_factor.pending_lifetime', $config['two_factor']['pending_lifetime']);

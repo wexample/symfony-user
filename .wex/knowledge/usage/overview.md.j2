@@ -193,6 +193,7 @@ wexample_symfony_user:
     roles:                       # the role a grant held in any group gives
       administrator: ROLE_PROJECT_ADMIN
     administer_grant: administrator
+    oversee_role: ROLE_ADMIN       # a platform role reading every group
 ```
 
 A grant undeclared, included or given, or one including itself, stops the container from building.
@@ -208,6 +209,8 @@ $scope->assertInScope($note->getProject());              // 404 outside, never 4
 ```
 
 No group matches nothing, never everything: an account with no membership, or nobody signed in, reads no row. A record of another group answers 404, which does not tell that it exists.
+
+The role of `oversee_role` is the platform's: whoever holds it reads every group as a member holding every grant — `restrictToCurrentMember()` keeps every row, `assertInScope()` lets every group through, `is_granted('contributor', $project)` holds. Records are scoped the same way for everyone, the administrator's case being the package's rather than an `if` in each controller. A role a grant gives under `roles` cannot oversee: holding it in one group would open them all.
 
 With `administer_grant`, an account holding it in groups administers the accounts all of whose groups it holds it in (`Security\Guard\MembershipAdministrationGuard`): one group it does not, and a deactivation would cut that group off too. An account in no group is out of its reach, but for one it creates. An administrator holding the grant nowhere — a platform role — keeps the rules of `administration`.
 

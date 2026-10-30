@@ -8,6 +8,7 @@ use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wexample\SymfonyUser\Interface\MemberInterface;
 use Wexample\SymfonyUser\Interface\MembershipGroupInterface;
@@ -17,14 +18,25 @@ use Wexample\SymfonyUser\Interface\MembershipGroupInterface;
  *
  * Written at each query rather than as a Doctrine filter: a global filter is
  * invisible where the query is read, and one `disable()` forgotten opens every
- * group to everyone.
+ * group to everyone. The role of `memberships.oversee_role` reads them all.
  */
 class MembershipScopeService
 {
     public function __construct(
         private readonly MembershipService $membershipService,
         private readonly Security $security,
+        #[Autowire(param: 'wexample_symfony_user.memberships.oversee_role')]
+        private readonly ?string $overseeRole = null,
     ) {
+    }
+
+    /**
+     * The signed-in account holds `memberships.oversee_role`: no group is
+     * closed to it.
+     */
+    public function oversees(): bool
+    {
+        return $this->overseeRole !== null && $this->security->isGranted($this->overseeRole);
     }
 
     /**
@@ -51,10 +63,14 @@ class MembershipScopeService
     /**
      * Keeps the rows of the groups where the signed-in member holds $grant —
      * every group of theirs with no grant asked. Nobody signed in, or someone
-     * who is no member, sees nothing.
+     * who is no member, sees nothing; the overseeing role sees every row.
      */
     public function restrictToCurrentMember(QueryBuilder $queryBuilder, string $groupPath, ?string $grant = null): QueryBuilder
     {
+        if ($this->oversees()) {
+            return $queryBuilder;
+        }
+
         return $this->restrict($queryBuilder, $groupPath, $this->getCurrentGroups($grant));
     }
 
@@ -72,12 +88,17 @@ class MembershipScopeService
 
     /**
      * Fails with a 404 where the signed-in member does not hold $grant in
-     * $group: a 403 would tell an outsider that the record exists.
+     * $group: a 403 would tell an outsider that the record exists. The
+     * overseeing role is in every group's scope.
      *
      * @throws NotFoundHttpException
      */
     public function assertInScope(?MembershipGroupInterface $group, ?string $grant = null): void
     {
+        if ($group && $this->oversees()) {
+            return;
+        }
+
         $member = $this->security->getUser();
 
         if (! $group || ! $member instanceof MemberInterface || ! $this->membershipService->isMember($member, $group, $grant)) {

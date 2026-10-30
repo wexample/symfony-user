@@ -18,6 +18,7 @@ wexample_symfony_user:
       administrator: ROLE_TEAM_ADMIN
       watcher: ROLE_TEAM_MEMBER
     administer_grant: administrator
+    oversee_role: ROLE_PLATFORM_ADMIN
 
 services:
   test.account_administration:
