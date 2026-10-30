@@ -112,8 +112,21 @@ class MembershipScreenTest extends WebTestCase
     {
         $this->login('ada');
 
-        $this->assertTrue($this->post('membership_remove_form', [], $this->bobMembership)['ok']);
+        $this->client->request('POST', '/memberships/' . $this->bobMembership . '/remove', ['_token' => 'csrf-token'], [], ['HTTP_ORIGIN' => 'http://localhost']);
+
+        $this->assertResponseRedirects('/memberships/' . $this->alpha);
         $this->assertNull($this->findMembership('bob'));
+    }
+
+    public function testTheLastAdministratorStays(): void
+    {
+        $this->login('ada');
+        $adaKey = $this->alpha . ':' . $this->findMembership('ada')->getId();
+
+        $this->client->request('POST', '/memberships/' . $adaKey . '/remove', ['_token' => 'csrf-token'], [], ['HTTP_ORIGIN' => 'http://localhost']);
+
+        $this->assertResponseRedirects('/memberships/' . $this->alpha);
+        $this->assertNotNull($this->findMembership('ada'));
     }
 
     private function createUser(string $username): User
