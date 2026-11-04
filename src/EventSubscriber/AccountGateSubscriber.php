@@ -3,6 +3,7 @@
 namespace Wexample\SymfonyUser\EventSubscriber;
 
 use Scheb\TwoFactorBundle\Security\Authentication\Token\TwoFactorTokenInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,6 +23,11 @@ use Wexample\SymfonyUser\Routing\UserRoute;
  * Holds a signed-in user on the page of the first gate still blocking them,
  * whatever the way they signed in. A page gets redirected, an ajax call a
  * `403` naming where to go.
+ *
+ * Not on a stateless firewall: a request signed by a token — a script, a
+ * device, a client of the application's api — cannot set an authenticator
+ * app up nor accept terms, and the token it presents was issued by a person
+ * who went through the gates to get it.
  */
 class AccountGateSubscriber implements EventSubscriberInterface
 {
@@ -38,6 +44,7 @@ class AccountGateSubscriber implements EventSubscriberInterface
         private readonly UrlGeneratorInterface $urlGenerator,
         #[AutowireIterator(AccountGateInterface::TAG, defaultPriorityMethod: 'getPriority')]
         private readonly iterable $gates,
+        private readonly Security $security,
     ) {
     }
 
@@ -57,6 +64,7 @@ class AccountGateSubscriber implements EventSubscriberInterface
         if (! $event->isMainRequest()
             || ! $user instanceof AbstractUser
             || $token instanceof TwoFactorTokenInterface
+            || $this->security->getFirewallConfig($request)?->isStateless()
             || $this->isAlwaysAllowed((string) $request->attributes->get('_route'), $request->getPathInfo())) {
             return;
         }

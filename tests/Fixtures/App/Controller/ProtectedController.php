@@ -49,6 +49,16 @@ class ProtectedController
     }
 
     /**
+     * Under the fixture's stateless `api` firewall.
+     */
+    #[Route(path: '/api/protected', name: 'api_protected')]
+    #[IsGranted('ROLE_USER')]
+    public function apiProtected(): Response
+    {
+        return new Response('api protected');
+    }
+
+    /**
      * Reserved to managers by `access_control`.
      */
     #[Route(path: '/manager', name: 'manager_home')]

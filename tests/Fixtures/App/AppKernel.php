@@ -6,6 +6,8 @@ use Scheb\TwoFactorBundle\SchebTwoFactorBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Wexample\SymfonyApi\WexampleSymfonyApiBundle;
+use Wexample\SymfonyDesignSystem\WexampleSymfonyDesignSystemBundle;
+use Wexample\SymfonyPreference\WexampleSymfonyPreferenceBundle;
 use Wexample\SymfonyForms\WexampleSymfonyFormsBundle;
 use Wexample\SymfonyLoader\WexampleSymfonyLoaderBundle;
 use Wexample\SymfonyMail\WexampleSymfonyMailBundle;
@@ -33,6 +35,8 @@ class AppKernel extends AbstractFixtureKernel
             new WexampleSymfonyTranslationsBundle(),
             new WexampleSymfonyMailBundle(),
             new WexampleSymfonyApiBundle(),
+            new WexampleSymfonyPreferenceBundle(),
+            new WexampleSymfonyDesignSystemBundle(),
             new WexampleSymfonyFormsBundle(),
             new WexampleSymfonyTunnelsBundle(),
             new WexampleSymfonyUserBundle(),
