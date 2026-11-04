@@ -69,13 +69,16 @@ class StrictTwoFactorPolicyTest extends WebTestCase
         $this->assertTrue($this->post('form-set_password_form', 'set_password_form', [
             'new_password' => ['first' => $password, 'second' => $password],
         ])['ok']);
+        $sentAtSignIn = \count(self::getMailerMessages());
 
         $this->client->request('GET', '/protected');
         $this->assertResponseRedirects('/login/2fa');
 
-        // Not prepared by this sign-in, the code leaves when its page shows.
+        // The code leaves once: at the sign-in the reset makes, since Symfony
+        // 7.4.23 announces it as an authentication success, or when its page
+        // shows, before.
         $this->client->request('GET', '/login/2fa');
-        $this->assertEmailCount(1);
+        $this->assertSame(1, $sentAtSignIn + \count(self::getMailerMessages()));
     }
 
     public function testTheLoginPageOffersNoMagicLink(): void
