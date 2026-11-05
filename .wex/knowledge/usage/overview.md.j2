@@ -194,6 +194,9 @@ wexample_symfony_user:
       administrator: ROLE_PROJECT_ADMIN
     administer_grant: administrator
     oversee_role: ROLE_ADMIN       # a platform role reading every group
+    access_scope:                  # the grants #[AccessScope] asks in a record's group
+      view_grant: watcher
+      edit_grant: contributor
 ```
 
 A grant undeclared, included or given, or one including itself, stops the container from building.
@@ -209,6 +212,32 @@ $scope->assertInScope($note->getProject());              // 404 outside, never 4
 ```
 
 No group matches nothing, never everything: an account with no membership, or nobody signed in, reads no row. A record of another group answers 404, which does not tell that it exists.
+
+`withUngrouped: true` keeps the rows of no group too, shared by every group — a catalog some groups add their own entries to.
+
+### Who may view, edit, delete a record
+
+A record says what it hangs from, and `AccessScopeVoter` votes `VIEW`, `EDIT` and `DELETE` (`AbstractEntityVoter`) from it — no voter to write per entity:
+
+```php
+#[AccessScope(group: 'project')]                    // the project's watchers view, its contributors change
+#[AccessScope(parents: ['scenario'])]               // decided as its scenario is
+#[AccessScope(owner: 'author', parents: ['note'])]  // its author always, otherwise as its note
+#[AccessScope(group: 'project', catalog: true)]     // a project's own, or else every account's to view
+#[AccessScope]                                      // the overseeing role alone
+```
+
+```yaml
+wexample_symfony_user:
+  memberships:
+    access_scope:
+      view_grant: watcher
+      edit_grant: contributor
+```
+
+Tried in order: the owner (always allowed), the group (its grants), the first parent set (asked the same attribute), the catalog (viewing only), then `oversee_role`. A path is one property, read through its getter; unset, it is absent. A subclass without an attribute of its own follows its parent's — a Doctrine proxy is one. A record carrying none is left to other voters: with none, refused.
+
+The voter decides on one record; a list is scoped by its query (`restrictToCurrentMember()`), never thinned row by row after paging.
 
 The role of `oversee_role` is the platform's: whoever holds it reads every group as a member holding every grant — `restrictToCurrentMember()` keeps every row, `assertInScope()` lets every group through, `is_granted('contributor', $project)` holds. Records are scoped the same way for everyone, the administrator's case being the package's rather than an `if` in each controller. A role a grant gives under `roles` cannot oversee: holding it in one group would open them all.
 

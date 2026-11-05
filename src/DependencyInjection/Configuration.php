@@ -192,6 +192,14 @@ class Configuration implements ConfigurationInterface
                             ->info('The role reading every group as a member holding every grant, ROLE_ADMIN: MembershipScopeService restricts nothing for it and `is_granted(\'contributor\', $project)` holds. A platform role, never one a grant gives under `roles`. Null, nobody oversees.')
                             ->defaultNull()
                         ->end()
+                        ->arrayNode('access_scope')
+                            ->info('The grants #[AccessScope] asks in the group a record belongs to: view_grant to view it, edit_grant to edit or delete it. Unset, a record scoped by its group is refused to its members.')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('view_grant')->defaultNull()->end()
+                                ->scalarNode('edit_grant')->defaultNull()->end()
+                            ->end()
+                        ->end()
                     ->end()
                     ->validate()
                         ->ifTrue(static fn (array $memberships) => self::findMembershipsError($memberships) !== null)
@@ -260,6 +268,12 @@ class Configuration implements ConfigurationInterface
 
         if ($memberships['administer_grant'] !== null && ! isset($grants[$memberships['administer_grant']])) {
             return sprintf('memberships.administer_grant: "%s" is not a declared grant.', $memberships['administer_grant']);
+        }
+
+        foreach ($memberships['access_scope'] as $key => $grant) {
+            if ($grant !== null && ! isset($grants[$grant])) {
+                return sprintf('memberships.access_scope.%s: "%s" is not a declared grant.', $key, $grant);
+            }
         }
 
         foreach (array_keys($grants) as $grant) {
