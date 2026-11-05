@@ -139,6 +139,22 @@ class MembershipTest extends KernelTestCase
         $this->assertSame([], $this->readNotes('administrator'));
     }
 
+    public function testARecordOfNoGroupIsKeptWhenAsked(): void
+    {
+        $this->persist(new Note(null, 'Shared note'));
+        $this->entityManager->flush();
+        $user = $this->createUser('fay');
+        $this->join($this->alpha, $user, ['watcher']);
+        $this->signIn($user);
+
+        $this->assertSame(['Note of Alpha'], $this->readNotes());
+        $this->assertSame(['Note of Alpha', 'Shared note'], $this->readNotes(withUngrouped: true));
+        $this->assertSame(['Shared note'], $this->readNotes('administrator', true));
+
+        $this->signIn($this->createUser('gil'));
+        $this->assertSame(['Shared note'], $this->readNotes(withUngrouped: true));
+    }
+
     public function testARecordOfAnotherGroupIsNotFound(): void
     {
         $user = $this->createUser('fay');
@@ -339,7 +355,7 @@ class MembershipTest extends KernelTestCase
     /**
      * @return list<string>
      */
-    private function readNotes(?string $grant = null): array
+    private function readNotes(?string $grant = null, bool $withUngrouped = false): array
     {
         $queryBuilder = $this->entityManager
             ->createQueryBuilder()
@@ -347,7 +363,7 @@ class MembershipTest extends KernelTestCase
             ->from(Note::class, 'note')
             ->orderBy('note.text');
 
-        $this->getScope()->restrictToCurrentMember($queryBuilder, 'note.team', $grant);
+        $this->getScope()->restrictToCurrentMember($queryBuilder, 'note.team', $grant, $withUngrouped);
 
         return array_map(
             static fn (Note $note) => $note->getText(),

@@ -42,21 +42,25 @@ class MembershipScopeService
     /**
      * Keeps the rows whose group, at $groupPath (`note.team`), is one of
      * $groups, all of the class the path leads to. No group matches nothing —
-     * never everything.
+     * never everything. $withUngrouped keeps too the rows of no group, shared
+     * by every group: a catalog some groups add their own entries to.
      *
      * @param list<MembershipGroupInterface> $groups
      */
-    public function restrict(QueryBuilder $queryBuilder, string $groupPath, array $groups): QueryBuilder
+    public function restrict(QueryBuilder $queryBuilder, string $groupPath, array $groups, bool $withUngrouped = false): QueryBuilder
     {
+        $ungrouped = sprintf('%s IS NULL', $groupPath);
+
         if (! $groups) {
-            return $queryBuilder->andWhere('1 = 0');
+            return $queryBuilder->andWhere($withUngrouped ? $ungrouped : '1 = 0');
         }
 
         $parameter = 'membership_scope_' . count($queryBuilder->getParameters());
         [$ids, $type] = $this->getDatabaseIds($queryBuilder->getEntityManager(), $groups);
+        $grouped = sprintf('%s IN (:%s)', $groupPath, $parameter);
 
         return $queryBuilder
-            ->andWhere(sprintf('%s IN (:%s)', $groupPath, $parameter))
+            ->andWhere($withUngrouped ? $queryBuilder->expr()->orX($ungrouped, $grouped) : $grouped)
             ->setParameter($parameter, $ids, $type);
     }
 
@@ -65,13 +69,13 @@ class MembershipScopeService
      * every group of theirs with no grant asked. Nobody signed in, or someone
      * who is no member, sees nothing; the overseeing role sees every row.
      */
-    public function restrictToCurrentMember(QueryBuilder $queryBuilder, string $groupPath, ?string $grant = null): QueryBuilder
+    public function restrictToCurrentMember(QueryBuilder $queryBuilder, string $groupPath, ?string $grant = null, bool $withUngrouped = false): QueryBuilder
     {
         if ($this->oversees()) {
             return $queryBuilder;
         }
 
-        return $this->restrict($queryBuilder, $groupPath, $this->getCurrentGroups($grant));
+        return $this->restrict($queryBuilder, $groupPath, $this->getCurrentGroups($grant), $withUngrouped);
     }
 
     /**
