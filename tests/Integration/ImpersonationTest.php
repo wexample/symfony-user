@@ -5,20 +5,24 @@ namespace Wexample\SymfonyUser\Tests\Integration;
 use Wexample\SymfonyUser\Service\ImpersonationService;
 
 /**
- * The default rule: the accounts the actor administers.
+ * The switch role is enough: every account, above the actor or out of the
+ * scope of account administration included — never oneself, a disabled or a
+ * locked one.
  */
 class ImpersonationTest extends AbstractImpersonationTestCase
 {
-    public function testOnlyTheAccountsTheActorAdministersAreListed(): void
+    public function testEveryActiveAccountButOneselfIsListed(): void
     {
+        $this->find('outsider-support')->setEnabled(false);
+        $this->entityManager->flush();
+
         $this->assertSame(
-            ['support-a@example.com', 'support-b@example.com'],
+            ['owner@example.com', 'support-a@example.com', 'support-b@example.com'],
             $this->identifiers($this->getService()->listTargets($this->find('manager')))
         );
 
         // Past the threshold, nothing is listed: the page searches.
         $this->createUser('support-c', ['ROLE_SUPPORT']);
-        $this->createUser('support-d', ['ROLE_SUPPORT']);
         $this->entityManager->flush();
         $this->assertNull($this->getService()->listTargets($this->find('manager')));
     }
@@ -28,8 +32,8 @@ class ImpersonationTest extends AbstractImpersonationTestCase
         $service = $this->getService();
         $manager = $this->find('manager');
 
-        $this->assertSame(['support-a@example.com', 'support-b@example.com'], $this->identifiers($service->searchTargets($manager, 'SUPPORT')));
-        $this->assertSame([], $service->searchTargets($manager, 'owner'));
+        $this->assertSame(['outsider-support@example.com', 'support-a@example.com', 'support-b@example.com'], $this->identifiers($service->searchTargets($manager, 'SUPPORT')));
+        $this->assertSame(['owner@example.com'], $this->identifiers($service->searchTargets($manager, 'owner')));
         $this->assertSame([], $service->searchTargets($manager, 's'));
 
         for ($i = 0; $i < ImpersonationService::SEARCHES_PER_MINUTE; ++$i) {
@@ -66,8 +70,8 @@ class ImpersonationTest extends AbstractImpersonationTestCase
         $this->assertSame('support-b@example.com', $this->getToken()->getUserIdentifier());
         $this->assertSame('manager@example.com', $this->getToken()->getOriginalToken()->getUserIdentifier());
 
-        // Still the manager's rule: the owner stays out of reach.
-        $this->assertFalse($this->chooseAccount('owner@example.com')['ok']);
+        // Still the manager's rule: the manager is not its own target.
+        $this->assertFalse($this->chooseAccount('manager@example.com')['ok']);
 
         $this->client->request('GET', '/protected?_switch_user=_exit');
         $this->assertSame('manager@example.com', $this->getToken()->getUserIdentifier());
@@ -89,18 +93,23 @@ class ImpersonationTest extends AbstractImpersonationTestCase
         $this->assertNotContains('account.impersonation_started', $this->types());
     }
 
-    public function testAnAccountTheActorDoesNotAdministerIsNeverReached(): void
+    public function testOneselfADisabledOrAnUnknownAccountIsNeverReached(): void
     {
         $this->login('manager');
 
-        foreach (['owner@example.com', 'support-off@example.com', 'outsider-support@example.com', 'manager@example.com', 'nobody@example.com'] as $identifier) {
+        foreach (['support-off@example.com', 'manager@example.com', 'nobody@example.com'] as $identifier) {
             $payload = $this->chooseAccount($identifier);
             $this->assertFalse($payload['ok'], $identifier);
         }
 
-        $this->client->request('GET', '/protected?_switch_user=owner@example.com');
+        // Above the actor, or out of the scope of account administration:
+        // reached all the same.
+        $this->assertTrue($this->chooseAccount('owner@example.com')['ok']);
+        $this->assertTrue($this->chooseAccount('outsider-support@example.com')['ok']);
+
+        // By its URL either, a disabled account is no target.
+        $this->client->request('GET', '/protected?_switch_user=support-off@example.com');
         $this->assertResponseStatusCodeSame(403);
-        $this->assertSame('impersonation=not_administered', $this->lastDenial()->extra['reasons']);
     }
 
     public function testWithoutTheSwitchRoleThePageAndTheSearchAreRefused(): void
@@ -125,7 +134,7 @@ class ImpersonationTest extends AbstractImpersonationTestCase
         $this->assertResponseIsSuccessful();
         $targets = json_decode($this->client->getResponse()->getContent(), true)['targets'];
 
-        $this->assertSame(['support-a@example.com', 'support-b@example.com'], array_column($targets, 'identifier'));
+        $this->assertSame(['outsider-support@example.com', 'support-a@example.com', 'support-b@example.com'], array_column($targets, 'identifier'));
         $this->assertSame(['ROLE_SUPPORT', 'ROLE_USER'], $targets[0]['roles']);
     }
 }

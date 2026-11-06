@@ -6,21 +6,19 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\RateLimiter\Storage\CacheStorage;
 use Symfony\Component\Security\Core\Authentication\Token\SwitchUserToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
-use Wexample\SymfonyHelpers\Helper\RoleHelper;
 use Wexample\SymfonyUser\Entity\AbstractUser;
-use Wexample\SymfonyUser\Interface\AccountAdministrationGuardInterface;
 use Wexample\SymfonyUser\Repository\AbstractUserRepository;
 
 /**
  * Who the signed-in user may impersonate, under the `switch_user` key of the
- * firewall — which decides who may impersonate at all.
+ * firewall — which decides who may impersonate at all: holding its role is
+ * enough to impersonate any account, but oneself, a disabled or a locked one.
  *
  * One rule for the list, the search and the switch itself
  * (ImpersonationGuardSubscriber): an account missing from the list cannot
@@ -28,13 +26,8 @@ use Wexample\SymfonyUser\Repository\AbstractUserRepository;
  */
 class ImpersonationService
 {
-    public const string TARGETS_ADMINISTERED = 'administered';
-    public const string TARGETS_ANY = 'any';
-
     public const string REFUSAL_SELF = 'self';
     public const string REFUSAL_INACTIVE = 'inactive';
-    public const string REFUSAL_NOT_ADMINISTERED = 'not_administered';
-    public const string REFUSAL_OUT_OF_SCOPE = 'out_of_scope';
 
     public const int SEARCH_MIN_LENGTH = AccountDirectoryService::SEARCH_MIN_LENGTH;
     public const int SEARCH_LIMIT = 20;
@@ -48,22 +41,14 @@ class ImpersonationService
 
     private readonly RateLimiterFactory $searchLimiter;
 
-    /**
-     * @param iterable<AccountAdministrationGuardInterface> $guards
-     */
     public function __construct(
         private readonly Security $security,
         private readonly AccessDecisionManagerInterface $accessDecisionManager,
         private readonly RequestStack $requestStack,
         private readonly EntityManagerInterface $entityManager,
         private readonly AccountDirectoryService $directory,
-        private readonly AssignableRolesService $assignableRoles,
         #[Autowire(service: 'cache.app')]
         CacheItemPoolInterface $cache,
-        #[AutowireIterator(AccountAdministrationGuardInterface::TAG)]
-        private readonly iterable $guards = [],
-        #[Autowire(param: 'wexample_symfony_user.impersonation.targets')]
-        private readonly string $targets = self::TARGETS_ADMINISTERED,
         #[Autowire(param: 'wexample_symfony_user.impersonation.list_threshold')]
         private readonly int $listThreshold = 50,
         #[Autowire(param: 'wexample_symfony_user.impersonation.require_intent')]
@@ -131,21 +116,6 @@ class ImpersonationService
 
         if (! $target->isEnabled() || $target->isLocked()) {
             return self::REFUSAL_INACTIVE;
-        }
-
-        // Any account: a development setting, where every account is walked.
-        if ($this->targets === self::TARGETS_ANY) {
-            return null;
-        }
-
-        if (! $this->assignableRoles->canAssign($actor, array_values(array_diff($target->getRoles(), [RoleHelper::ROLE_USER])))) {
-            return self::REFUSAL_NOT_ADMINISTERED;
-        }
-
-        foreach ($this->guards as $guard) {
-            if (! $guard->allows($actor, $target)) {
-                return self::REFUSAL_OUT_OF_SCOPE;
-            }
         }
 
         return null;

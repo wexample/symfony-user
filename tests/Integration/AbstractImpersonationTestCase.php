@@ -13,8 +13,8 @@ use Wexample\SymfonyUser\Tests\Fixtures\App\ImpersonationAppKernel;
 use Wexample\SymfonyUser\Tests\Traits\DatabaseTestTrait;
 
 /**
- * Managers hold the switch role and administer managers and support; the
- * owner is above them; "outsider-" accounts are out of scope; one support
+ * Managers hold the switch role; the owner is above them; "outsider-"
+ * accounts are out of the scope of account administration; one support
  * account is disabled.
  */
 abstract class AbstractImpersonationTestCase extends WebTestCase
