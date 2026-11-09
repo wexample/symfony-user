@@ -3,8 +3,8 @@
 namespace Wexample\SymfonyUser\Tests\Fixtures\App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Wexample\SymfonyUser\Attribute\AccessScope;
 use Wexample\SymfonyHelpers\Entity\AbstractEntity;
+use Wexample\SymfonyUser\Attribute\AccessScope;
 
 /**
  * A record of a team, read by its members only — or of none, shared by
