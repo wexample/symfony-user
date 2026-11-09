@@ -167,7 +167,7 @@ Each change is journaled — `account.created`, `account.activation_sent`, `acco
 
 - `/accounts` (`UserRoute::ACCOUNTS`): every account, 25 to a page, searched by address, username or name; and the card that opens one — an address, the roles the actor administers, one switch each. An address another account holds is refused before the database is asked.
 - `/accounts/{id}` (`UserRoute::ACCOUNT`): one account — its state, its roles, the change it owes —, the roles form again, and a button per action its state allows (`Enum\AccountAction`): deactivate, reactivate, lock, unlock, send the mail to choose a password. Each posts to `user_accounts_action` with the form CSRF token of the application (`submit`), and comes back to the page with `?done=` or `?refused=<code>`. Where symfony-activity is installed, its recent history too.
-- `/accounts/{id}/edit` (`UserRoute::ACCOUNT_EDIT`): what the account is called — address, username, name —, opened in a modal from its page. An address or a username another account holds is refused before the database is asked.
+- `/accounts/{id}/edit` (`UserRoute::ACCOUNT_EDIT`): what the account is called — address, username, name —, opened in a modal from its page. An address or a username another account holds is refused before the database is asked. A username is 3 to 30 letters, digits, dashes or underscores; it keeps the case it was typed in, and is matched without it — at login, and when another account holds it.
 - `/accounts/{id}/activity` (`UserRoute::ACCOUNT_ACTIVITY`): the whole history of the account, a page at a time, narrowed to one category — there only where symfony-activity is installed.
 
 A refusal is shown, never an error page: the form processors call the service inside `formIsValid()`, so `AccountAdministrationRefusal` comes back as an error on the form. The roles the account holds outside the ones the actor administers are kept untouched.
@@ -193,6 +193,10 @@ wexample_symfony_user:
     roles:                       # the role a grant held in any group gives
       administrator: ROLE_PROJECT_ADMIN
     administer_grant: administrator
+    oversee_role: ROLE_ADMIN       # a platform role reading every group
+    access_scope:                  # the grants #[AccessScope] asks in a record's group
+      view_grant: watcher
+      edit_grant: contributor
 ```
 
 A grant undeclared, included or given, or one including itself, stops the container from building.
@@ -209,6 +213,34 @@ $scope->assertInScope($note->getProject());              // 404 outside, never 4
 
 No group matches nothing, never everything: an account with no membership, or nobody signed in, reads no row. A record of another group answers 404, which does not tell that it exists.
 
+`withUngrouped: true` keeps the rows of no group too, shared by every group — a catalog some groups add their own entries to.
+
+### Who may view, edit, delete a record
+
+A record says what it hangs from, and `AccessScopeVoter` votes `VIEW`, `EDIT` and `DELETE` (`AbstractEntityVoter`) from it — no voter to write per entity:
+
+```php
+#[AccessScope(group: 'project')]                    // the project's watchers view, its contributors change
+#[AccessScope(parents: ['scenario'])]               // decided as its scenario is
+#[AccessScope(owner: 'author', parents: ['note'])]  // its author always, otherwise as its note
+#[AccessScope(group: 'project', catalog: true)]     // a project's own, or else every account's to view
+#[AccessScope]                                      // the overseeing role alone
+```
+
+```yaml
+wexample_symfony_user:
+  memberships:
+    access_scope:
+      view_grant: watcher
+      edit_grant: contributor
+```
+
+Tried in order: the owner (always allowed), the group (its grants), the first parent set (asked the same attribute), the catalog (viewing only), then `oversee_role`. A path is one property, read through its getter; unset, it is absent. A subclass without an attribute of its own follows its parent's — a Doctrine proxy is one. A record carrying none is left to other voters: with none, refused.
+
+The voter decides on one record; a list is scoped by its query (`restrictToCurrentMember()`), never thinned row by row after paging.
+
+The role of `oversee_role` is the platform's: whoever holds it reads every group as a member holding every grant — `restrictToCurrentMember()` keeps every row, `assertInScope()` lets every group through, `is_granted('contributor', $project)` holds. Records are scoped the same way for everyone, the administrator's case being the package's rather than an `if` in each controller. A role a grant gives under `roles` cannot oversee: holding it in one group would open them all.
+
 With `administer_grant`, an account holding it in groups administers the accounts all of whose groups it holds it in (`Security\Guard\MembershipAdministrationGuard`): one group it does not, and a deactivation would cut that group off too. An account in no group is out of its reach, but for one it creates. An administrator holding the grant nowhere — a platform role — keeps the rules of `administration`.
 
 ### Managing members
@@ -219,9 +251,13 @@ With `administer_grant`, an account holding it in groups administers the account
 - `already_member`, `invalid_grants` (none, or one undeclared);
 - `last_administrator`: the group would be left with no member holding `administer_grant`.
 
+A group just made has nobody administering it to add its first member: `found($creator, $group)` makes its creator a member holding `administer_grant`, once — a group with members already is refused, `already_founded`.
+
 Each change is journaled — `membership.added`, `membership.grants_changed`, `membership.removed`, `membership.change_refused` —, on the account it is about, with the group, the member and the grants before and after in `extra`.
 
 The entities being the application's, it declares how they are made, one `MembershipManagerInterface` per kind of group: its name in urls (`team`), the group and member classes, `createMembership()` and `removeMembership()`. symfony-user-ds draws the screens on it.
+
+The members screen is symfony-user-ds's `memberships(group)`: the members, their grants, and for an administrator the way to change each and to add one. A kind of group whose pages have a layout of their own hosts it in one of them — `{{ memberships(project) }}` in `/projects/{id}/members` —, its manager implementing `HostsMembershipsInterface` to name that page: `memberships_url(group)` and the forms, once a member changed, lead there, and the package's `/memberships/project:{id}` redirects to it. A manager hosting it nowhere keeps the package's page, in the application's private layout.
 
 ## Impersonation
 

@@ -1,6 +1,6 @@
 # symfony-user
 
-Version: 19.0.2
+Version: 20.0.0
 
 User accounts and authentication for Symfony
 
@@ -176,6 +176,7 @@ wexample_symfony_user:
     activation:
         link_lifetime: 604800      # seconds the link of an activation mail works
     impersonation:
+        targets: administered      # or any: who may be impersonated; who may impersonate is the firewall's switch_user
         list_threshold: 50         # up to this many, the page lists them all; above, it searches
         require_intent: true       # a switch must come from the impersonation form, not a bare ?_switch_user= link
     post_login:
