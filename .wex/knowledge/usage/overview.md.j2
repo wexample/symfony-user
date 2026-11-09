@@ -257,7 +257,7 @@ Each change is journaled — `membership.added`, `membership.grants_changed`, `m
 
 The entities being the application's, it declares how they are made, one `MembershipManagerInterface` per kind of group: its name in urls (`team`), the group and member classes, `createMembership()` and `removeMembership()`. symfony-user-ds draws the screens on it.
 
-The members screen is symfony-user-ds's `memberships(group)`: the members, their grants, and for an administrator the way to change each and to add one. A kind of group whose pages have a layout of their own hosts it in one of them — `{{ memberships(project) }}` in `/projects/{id}/members` —, its manager implementing `HostsMembershipsInterface` to name that page: `memberships_url(group)` and the forms, once a member changed, lead there, and the package's `/memberships/project:{id}` redirects to it. A manager hosting it nowhere keeps the package's page, in the application's private layout.
+The members screen is symfony-user-ds's `memberships(group)`: the members, their grants, and for an administrator the way to change each and to add one. A kind of group whose pages have a layout of their own hosts it in one of them — {% raw %}`{{ memberships(project) }}`{% endraw %} in `/projects/{id}/members` —, its manager implementing `HostsMembershipsInterface` to name that page: `memberships_url(group)` and the forms, once a member changed, lead there, and the package's `/memberships/project:{id}` redirects to it. A manager hosting it nowhere keeps the package's page, in the application's private layout.
 
 ## Impersonation
 
