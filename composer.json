@@ -3,7 +3,7 @@
   "description": "User accounts and authentication for Symfony",
   "type": "library",
   "license": "MIT",
-  "version": "20.0.0",
+  "version": "20.0.1",
   "autoload": {
     "psr-4": {
       "Wexample\\SymfonyUser\\": "src/"
@@ -43,7 +43,7 @@
     "wexample/symfony-tunnels": ">=11.0.5",
     "wexample/symfony-activity": ">=3.0.5",
     "wexample/symfony-api": ">=17.0.0",
-    "wexample/php-pseudocode": ">=3.0.0"
+    "wexample/php-pseudocode": ">=3.1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^13",
