@@ -77,6 +77,33 @@ class ImpersonationTest extends AbstractImpersonationTestCase
         $this->assertSame('manager@example.com', $this->getToken()->getUserIdentifier());
     }
 
+    public function testTheWayBackLeadsToAPageTheAccountBehindLandsOn(): void
+    {
+        $this->login('manager');
+        $this->assertNull($this->getService()->getExitUrl($this->client->getRequest() ?? \Symfony\Component\HttpFoundation\Request::create('/')));
+
+        $this->client->request('GET', $this->chooseAccount('support-a@example.com')['action']['url']);
+        $this->client->followRedirect();
+
+        // Not the page the way back was found on: the one the manager lands on.
+        static::getContainer()->get('request_stack')->push($this->client->getRequest());
+        $this->assertSame('/protected?_switch_user=_exit', $this->getService()->getExitUrl($this->client->getRequest()));
+        $this->client->request('GET', $this->getService()->getExitUrl($this->client->getRequest()));
+        $this->assertSame('manager@example.com', $this->getToken()->getUserIdentifier());
+    }
+
+    public function testAnAccountMayBeTakenAsTheRulesAllow(): void
+    {
+        $this->login('manager');
+        $this->client->request('GET', '/protected');
+        static::getContainer()->get('request_stack')->push($this->client->getRequest());
+        $service = $this->getService();
+
+        $this->assertTrue($service->mayTake($this->find('support-a')));
+        $this->assertFalse($service->mayTake($this->find('manager')));
+        $this->assertFalse($service->mayTake($this->find('support-off')));
+    }
+
     public function testASwitchNotChosenThroughTheFormIsRefused(): void
     {
         $this->login('manager');

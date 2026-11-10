@@ -88,6 +88,20 @@ class ImpersonationService
             && $this->accessDecisionManager->decide($token, [$config['role']]);
     }
 
+    /**
+     * $account may be taken by whoever impersonates now: a switch_user, the
+     * role it asks, another account than the actor's, none the rules refuse.
+     */
+    public function mayTake(AbstractUser $account): bool
+    {
+        $actor = $this->getActor();
+
+        return $actor !== null
+            && $this->canImpersonate()
+            && $account->getUserIdentifier() !== $actor->getUserIdentifier()
+            && $this->getRefusal($actor, $account) === null;
+    }
+
     /** An account is being impersonated: there is a way back. */
     public function isImpersonating(): bool
     {
@@ -101,6 +115,7 @@ class ImpersonationService
     public function getSwitchUrl(Request $request, AbstractUser $target): string
     {
         return $this->withSwitchParameter(
+            $request,
             $this->postLoginTarget->getRolesUrl($request, $target->getRoles()),
             $target->getUserIdentifier()
         );
@@ -118,13 +133,14 @@ class ImpersonationService
             return null;
         }
 
-        return $this->withSwitchParameter($this->postLoginTarget->getRolesUrl($request, $actor->getRoles()), '_exit');
+        return $this->withSwitchParameter($request, $this->postLoginTarget->getRolesUrl($request, $actor->getRoles()), '_exit');
     }
 
-    private function withSwitchParameter(string $url, string $value): string
+    // The parameter is the firewall's of the request the address is made for.
+    private function withSwitchParameter(Request $request, string $url, string $value): string
     {
         return $url . (str_contains($url, '?') ? '&' : '?') . http_build_query([
-            $this->getSwitchUserConfig()['parameter'] => $value,
+            $this->security->getFirewallConfig($request)?->getSwitchUser()['parameter'] => $value,
         ]);
     }
 
