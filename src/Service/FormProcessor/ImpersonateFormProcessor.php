@@ -11,7 +11,6 @@ use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Form\ImpersonateForm;
 use Wexample\SymfonyUser\Service\ImpersonationService;
-use Wexample\SymfonyUser\Service\PostLoginTargetService;
 
 /**
  * Checks the account chosen against the rules, remembers the choice — the
@@ -31,7 +30,6 @@ class ImpersonateFormProcessor extends AbstractFormProcessor
         RequestStack $requestStack,
         UrlGeneratorInterface $urlGenerator,
         private readonly ImpersonationService $impersonation,
-        private readonly PostLoginTargetService $postLoginTarget,
     ) {
         parent::__construct($formFactory, $requestStack, $urlGenerator);
     }
@@ -71,10 +69,6 @@ class ImpersonateFormProcessor extends AbstractFormProcessor
 
         // The switch happens on the page the account lands on once signed in,
         // where the firewall then sends the browser back, as that account.
-        $url = $this->postLoginTarget->getRolesUrl($this->request, $this->target->getRoles());
-
-        $this->redirect($url . (str_contains($url, '?') ? '&' : '?') . http_build_query([
-            $this->impersonation->getSwitchUserConfig()['parameter'] => $this->target->getUserIdentifier(),
-        ]));
+        $this->redirect($this->impersonation->getSwitchUrl($this->request, $this->target));
     }
 }

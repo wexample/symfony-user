@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\RateLimiter\Storage\CacheStorage;
@@ -47,6 +48,7 @@ class ImpersonationService
         private readonly RequestStack $requestStack,
         private readonly EntityManagerInterface $entityManager,
         private readonly AccountDirectoryService $directory,
+        private readonly PostLoginTargetService $postLoginTarget,
         #[Autowire(service: 'cache.app')]
         CacheItemPoolInterface $cache,
         #[Autowire(param: 'wexample_symfony_user.impersonation.list_threshold')]
@@ -84,6 +86,46 @@ class ImpersonationService
         return $config !== null
             && $token?->getUser() instanceof AbstractUser
             && $this->accessDecisionManager->decide($token, [$config['role']]);
+    }
+
+    /** An account is being impersonated: there is a way back. */
+    public function isImpersonating(): bool
+    {
+        return $this->security->getToken() instanceof SwitchUserToken;
+    }
+
+    /**
+     * Where $target is taken: the page it lands on once signed in, through the
+     * firewall's switch — which leaves an impersonation first.
+     */
+    public function getSwitchUrl(Request $request, AbstractUser $target): string
+    {
+        return $this->withSwitchParameter(
+            $this->postLoginTarget->getRolesUrl($request, $target->getRoles()),
+            $target->getUserIdentifier()
+        );
+    }
+
+    /**
+     * The way back to the account behind the impersonation, on the page that
+     * account lands on — one it may open —; null when nobody is impersonated.
+     */
+    public function getExitUrl(Request $request): ?string
+    {
+        $actor = $this->getActor();
+
+        if (! $this->isImpersonating() || ! $actor) {
+            return null;
+        }
+
+        return $this->withSwitchParameter($this->postLoginTarget->getRolesUrl($request, $actor->getRoles()), '_exit');
+    }
+
+    private function withSwitchParameter(string $url, string $value): string
+    {
+        return $url . (str_contains($url, '?') ? '&' : '?') . http_build_query([
+            $this->getSwitchUserConfig()['parameter'] => $value,
+        ]);
     }
 
     /**
