@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Vote;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Wexample\SymfonyHelpers\Attribute\WorkerSafe;
+use Wexample\SymfonyHelpers\Entity\Interfaces\AbstractEntityInterface;
 use Wexample\SymfonyHelpers\Voter\AbstractEntityVoter;
 use Wexample\SymfonyUser\Attribute\AccessScope;
 use Wexample\SymfonyUser\Interface\MembershipGroupInterface;
@@ -76,7 +77,7 @@ class AccessScopeVoter extends Voter
 
         if (null !== $scope->owner
             && ($owner = $this->read($subject, $scope->owner)) instanceof UserInterface
-            && $owner->getUserIdentifier() === $user->getUserIdentifier()) {
+            && $this->isSameUser($owner, $user)) {
             return true;
         }
 
@@ -125,6 +126,21 @@ class AccessScopeVoter extends Voter
         }
 
         return $this->scopes[$class] ?: null;
+    }
+
+    /**
+     * By id where both carry one: an owner not yet loaded knows its id, and
+     * would be loaded from the database to tell its identifier.
+     */
+    private function isSameUser(
+        UserInterface $owner,
+        UserInterface $user
+    ): bool {
+        if ($owner instanceof AbstractEntityInterface && $user instanceof AbstractEntityInterface) {
+            return $owner->getId()->equals($user->getId());
+        }
+
+        return $owner->getUserIdentifier() === $user->getUserIdentifier();
     }
 
     private function read(

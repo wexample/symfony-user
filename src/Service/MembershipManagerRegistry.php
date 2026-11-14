@@ -2,10 +2,10 @@
 
 namespace Wexample\SymfonyUser\Service;
 
+use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutowireLocator;
 use Symfony\Component\DependencyInjection\ServiceLocator;
-use Throwable;
 use Wexample\SymfonyUser\Interface\MembershipGroupInterface;
 use Wexample\SymfonyUser\Interface\MembershipManagerInterface;
 
@@ -47,7 +47,10 @@ class MembershipManagerRegistry
     {
         try {
             return $this->entityManager->find($manager->getGroupClass(), $id);
-        } catch (Throwable) {
+        } catch (ConversionException) {
+            // What an id that is no id raises, its type refusing to convert it.
+            // Anything else — the database out of reach — is no missing group,
+            // and is left to fail as the error it is rather than turn into a 404.
             return null;
         }
     }

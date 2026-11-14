@@ -14,10 +14,10 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\TooManyLoginAttemptsAuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
-use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
 use Wexample\SymfonyForms\Service\FormProcessor\FormResponsePayloadBuilder;
 use Wexample\SymfonyHelpers\Helper\RequestHelper;
 use Wexample\SymfonyUser\Enum\TwoFactorCodeFailure;
+use Wexample\SymfonyUser\Helper\RedirectResponseHelper;
 use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Service\FormProcessor\TwoFactorCodeFormProcessor;
 use Wexample\SymfonyUser\Service\PostLoginTargetService;
@@ -87,14 +87,9 @@ class TwoFactorResponseHandler implements
 
     public function onAuthenticationRequired(Request $request, TokenInterface $token): Response
     {
-        $url = $this->urlGenerator->generate(UserRoute::TWO_FACTOR);
-
-        if (! RequestHelper::isJsonRequest($request)) {
-            return new RedirectResponse($url);
-        }
-
-        return new JsonResponse(
-            ['ok' => false, 'action' => ['type' => AbstractFormProcessor::ACTION_REDIRECT, 'url' => $url]],
+        return RedirectResponseHelper::redirect(
+            $request,
+            $this->urlGenerator->generate(UserRoute::TWO_FACTOR),
             Response::HTTP_UNAUTHORIZED
         );
     }

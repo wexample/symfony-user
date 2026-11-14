@@ -150,6 +150,20 @@ class PostLoginTest extends WebTestCase
         $this->assertSame(4, $this->denials[1]->extra['suppressed']);
     }
 
+    public function testDistinctDenialsAreHeldBackApart(): void
+    {
+        $this->loginJson('member');
+
+        foreach (['/manager', '/organizations/2', '/manager', '/organizations/2'] as $path) {
+            $this->client->request('GET', $path);
+        }
+
+        // One entry for each denial, the second of each held back: a burst
+        // on one route does not silence a denial elsewhere.
+        $this->assertSame(['/manager', '/organizations/2'], array_map(static fn (SecurityEvent $event) => $event->extra['path'], $this->denials));
+        $this->assertSame([0, 0], array_map(static fn (SecurityEvent $event) => $event->extra['suppressed'], $this->denials));
+    }
+
     /**
      * Signs in through the ajax login form, and returns where it sends.
      */

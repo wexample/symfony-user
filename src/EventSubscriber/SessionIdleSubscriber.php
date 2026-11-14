@@ -6,18 +6,15 @@ use Scheb\TwoFactorBundle\Security\Authentication\Token\TwoFactorTokenInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Wexample\SymfonyForms\Service\FormProcessor\AbstractFormProcessor;
-use Wexample\SymfonyHelpers\Helper\RequestHelper;
 use Wexample\SymfonyUser\Entity\AbstractUser;
 use Wexample\SymfonyUser\Enum\SecurityEventType;
+use Wexample\SymfonyUser\Helper\RedirectResponseHelper;
 use Wexample\SymfonyUser\Routing\UserRoute;
 use Wexample\SymfonyUser\Service\SecurityJournalService;
 
@@ -108,14 +105,7 @@ class SessionIdleSubscriber implements EventSubscriberInterface
             [UserRoute::PARAMETER_SESSION => UserRoute::SESSION_EXPIRED]
         );
 
-        $event->setResponse(
-            RequestHelper::isJsonRequest($request)
-                ? new JsonResponse(
-                    ['ok' => false, 'action' => ['type' => AbstractFormProcessor::ACTION_REDIRECT, 'url' => $url]],
-                    Response::HTTP_UNAUTHORIZED
-                )
-                : new RedirectResponse($url)
-        );
+        $event->setResponse(RedirectResponseHelper::redirect($request, $url, Response::HTTP_UNAUTHORIZED));
     }
 
     /**

@@ -96,6 +96,20 @@ class AccessScopeTest extends KernelTestCase
         $this->assertSame([false, false, false], $this->votes($comment));
     }
 
+    public function testTheOwnerIsRecognisedWithoutBeingLoaded(): void
+    {
+        $author = $this->member('author', ['watcher']);
+        $comment = $this->persist(new NoteComment($this->note, $author));
+        $this->entityManager->flush();
+        $this->entityManager->clear();
+
+        $comment = $this->entityManager->find(NoteComment::class, $comment->getId());
+        $this->signIn($author);
+
+        $this->assertSame([true, true, true], $this->votes($comment));
+        $this->assertTrue($this->entityManager->getUnitOfWork()->isUninitializedObject($comment->getAuthor()));
+    }
+
     public function testARecordHangingFromNothingIsTheOverseersAlone(): void
     {
         $secret = $this->persist(new Secret());

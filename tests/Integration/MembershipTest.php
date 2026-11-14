@@ -13,6 +13,7 @@ use Wexample\SymfonyUser\Exception\AccountAdministrationException;
 use Wexample\SymfonyUser\Exception\MembershipAdministrationException;
 use Wexample\SymfonyUser\Service\AccountAdministrationService;
 use Wexample\SymfonyUser\Service\MembershipAdministrationService;
+use Wexample\SymfonyUser\Service\MembershipManagerRegistry;
 use Wexample\SymfonyUser\Service\MembershipScopeService;
 use Wexample\SymfonyUser\Service\MembershipService;
 use Wexample\SymfonyUser\Tests\Fixtures\App\Entity\Membership;
@@ -330,6 +331,16 @@ class MembershipTest extends KernelTestCase
         $this->assertMembershipRefused(MembershipAdministrationRefusal::ALREADY_MEMBER, fn () => $administration->add($administrator, $this->alpha, $member, ['client']));
         $this->assertMembershipRefused(MembershipAdministrationRefusal::INVALID_GRANTS, fn () => $administration->add($administrator, $this->alpha, $this->createUser('zed'), []));
         $this->assertMembershipRefused(MembershipAdministrationRefusal::INVALID_GRANTS, fn () => $administration->add($administrator, $this->alpha, $this->createUser('abe'), ['owner']));
+    }
+
+    public function testAGroupIsFoundByIdAndAnIdThatIsNoIdFindsNone(): void
+    {
+        $registry = self::getContainer()->get(MembershipManagerRegistry::class);
+        $manager = $registry->get('team');
+
+        $this->assertSame($this->alpha, $registry->findGroup($manager, (string) $this->alpha->getId()));
+        $this->assertNull($registry->findGroup($manager, '0199a1b2-c3d4-7000-8000-000000000000'));
+        $this->assertNull($registry->findGroup($manager, 'not-a-uuid'));
     }
 
     private function assertMembershipRefused(MembershipAdministrationRefusal $refusal, callable $action): void
