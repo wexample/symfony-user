@@ -3,7 +3,7 @@
   "description": "User accounts and authentication for Symfony",
   "type": "library",
   "license": "MIT",
-  "version": "22.0.0",
+  "version": "22.0.1",
   "autoload": {
     "psr-4": {
       "Wexample\\SymfonyUser\\": "src/"
@@ -26,7 +26,7 @@
     "symfony/security-bundle": "^7.4",
     "wexample/symfony-helpers": ">=19.3.0",
     "wexample/symfony-security": ">=5.0.0",
-    "wexample/symfony-translations": ">=19.0.0",
+    "wexample/symfony-translations": ">=20.0.0",
     "symfony/validator": "^7.4",
     "wexample/symfony-forms": ">=17.0.0",
     "wexample/symfony-loader": ">=28.0.0",
