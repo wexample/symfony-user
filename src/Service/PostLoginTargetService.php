@@ -14,7 +14,9 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 /**
  * Where a user lands once signed in — second factor passed, gates cleared:
  *
- * - the page they were sent away from, when `access_control` lets them in;
+ * - the page they were sent away from, when it is a page — never what a
+ *   program reads, under `/_` or `/api/`, saved by a call the page's scripts
+ *   made after the session ended — and `access_control` lets them in;
  * - otherwise the route of the first role of `post_login.routes` they hold,
  *   through the hierarchy;
  * - otherwise `post_login.default_route`, or the home page.
@@ -83,13 +85,22 @@ class PostLoginTargetService
             : $request->getBasePath() . '/';
     }
 
+    /**
+     * A path a program reads rather than a person: under `/_` — `/_api/`,
+     * `/_forms/`, `/_system/` — or `/api/`, the stack's two prefixes for them.
+     */
+    public static function isProgramPath(string $path): bool
+    {
+        return str_starts_with($path, '/_') || str_starts_with($path, '/api/');
+    }
+
     private function isReachable(string $url, Request $request, TokenInterface $token): bool
     {
         // A target path is saved from the request itself: an absolute URL of
         // this host, or a path.
         $target = Request::create($url, server: $request->server->all());
 
-        if ($target->getHost() !== $request->getHost()) {
+        if ($target->getHost() !== $request->getHost() || self::isProgramPath($target->getPathInfo())) {
             return false;
         }
 

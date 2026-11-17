@@ -49,6 +49,17 @@ class ProtectedController
     }
 
     /**
+     * What a page's script reads on the session, as a table's list: asked
+     * for once the session is gone, it is not where a sign-in leads.
+     */
+    #[Route(path: '/_program/protected', name: 'program_protected')]
+    #[IsGranted('ROLE_USER')]
+    public function programProtected(): Response
+    {
+        return new Response('program protected');
+    }
+
+    /**
      * Under the fixture's stateless `api` firewall.
      */
     #[Route(path: '/api/protected', name: 'api_protected')]

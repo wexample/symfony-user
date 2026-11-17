@@ -144,6 +144,29 @@ class LoginTest extends WebTestCase
         $this->assertSame('/protected', parse_url($this->submitJson('jane', 'secret')['action']['url'], PHP_URL_PATH));
     }
 
+    /**
+     * A script's call after the session ended — a fetch, not flagged as ajax
+     * — is saved as the target too: the sign-in goes past it.
+     */
+    public function testWhatAProgramReadsIsNoTargetPath(): void
+    {
+        $this->client->request('GET', '/_program/protected');
+        $this->assertResponseRedirects('/login?session=required');
+
+        $this->assertSame('/', parse_url($this->submitJson('jane', 'secret')['action']['url'], PHP_URL_PATH));
+    }
+
+    /**
+     * Signed in, the login page is nothing to do: on to where a sign-in leads.
+     */
+    public function testTheLoginPageSendsASignedInVisitorOn(): void
+    {
+        $this->assertTrue($this->submitJson('jane', 'secret')['ok']);
+
+        $this->client->request('GET', '/login');
+        $this->assertResponseRedirects('/');
+    }
+
     public function testAnAjaxCallToAProtectedUrlGetsJson(): void
     {
         $this->client->xmlHttpRequest('GET', '/protected');
