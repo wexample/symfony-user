@@ -2,6 +2,7 @@
 
 namespace Wexample\SymfonyUser\Api\Controller;
 
+use Wexample\SymfonyApi\Api\Attribute\ApiAccess;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
@@ -26,6 +27,7 @@ use Wexample\SymfonyUser\Service\AccountDirectoryService;
  * pages on the session: under `/_api/` (symfony-api `usage/route-prefixes`).
  */
 #[Route(path: '_api/user/', name: 'api_user_')]
+#[ApiAccess(ApiAccess::CONTROLLER, "administration.page_role, checked by AccountAdministrationService")]
 class UserController extends AbstractApiController
 {
     final public const string ROUTE_LIST = 'list';
