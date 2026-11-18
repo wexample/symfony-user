@@ -1,6 +1,6 @@
 # symfony-user
 
-Version: 23.0.2
+Version: 24.0.0
 
 User accounts and authentication for Symfony
 

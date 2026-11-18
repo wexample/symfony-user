@@ -3,7 +3,7 @@
   "description": "User accounts and authentication for Symfony",
   "type": "library",
   "license": "MIT",
-  "version": "23.0.2",
+  "version": "24.0.0",
   "autoload": {
     "psr-4": {
       "Wexample\\SymfonyUser\\": "src/"
@@ -42,7 +42,7 @@
     "endroid/qr-code": "^6.0",
     "wexample/symfony-tunnels": ">=11.0.5",
     "wexample/symfony-activity": ">=5.0.0",
-    "wexample/symfony-api": ">=19.0.0",
+    "wexample/symfony-api": ">=20.0.0",
     "wexample/php-pseudocode": ">=3.1.0"
   },
   "require-dev": {
