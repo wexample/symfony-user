@@ -23,3 +23,509 @@ en:
 
   success:
     message: Account saved.
+
+fr:
+  field:
+    email:
+      label: Email
+    username:
+      label: "Nom d'utilisateur"
+    first_name:
+      label: Prénom
+    last_name:
+      label: Nom
+  action:
+    submit: Enregistrer
+  error:
+    email_taken: 'Un compte possède déjà cette adresse.'
+    username_taken: "Un compte possède déjà ce nom d'utilisateur."
+    username_pattern: '3 à 30 lettres, chiffres, tirets ou underscores.'
+    refused:
+      role_not_assignable: 'Ce compte a un rôle que vous ne pouvez pas administrer.'
+      email_domain_not_allowed: "L'un de ses rôles demande une adresse d'un autre domaine."
+      target_out_of_scope: "Ce compte n'est pas le vôtre à administrer."
+  success:
+    message: 'Compte enregistré.'
+
+zh:
+  field:
+    email:
+      label: 电子邮件
+    username:
+      label: 用户名
+    first_name:
+      label: 名
+    last_name:
+      label: 姓
+  action:
+    submit: 保存
+  error:
+    email_taken: 该地址已被其他账户使用。
+    username_taken: 该用户名已被其他账户使用。
+    username_pattern: 3到30个字母、数字、短横线或下划线。
+    refused:
+      role_not_assignable: 该账户持有您无法管理的角色。
+      email_domain_not_allowed: 其角色之一要求使用其他域的地址。
+      target_out_of_scope: 该账户不是您可以管理的。
+  success:
+    message: 账户已保存。
+
+ar:
+  field:
+    email:
+      label: 'البريد الإلكتروني'
+    username:
+      label: 'اسم المستخدم'
+    first_name:
+      label: 'الاسم الأول'
+    last_name:
+      label: 'الاسم الأخير'
+  action:
+    submit: حفظ
+  error:
+    email_taken: 'يوجد حساب بالفعل يحمل هذا العنوان.'
+    username_taken: 'يوجد حساب بالفعل يحمل هذا اسم المستخدم.'
+    username_pattern: 'من 3 إلى 30 حرفًا، أرقام، شرطات أو شرطات سفلية.'
+    refused:
+      role_not_assignable: 'هذا الحساب يحمل دورًا ليس من اختصاصك إدارته.'
+      email_domain_not_allowed: 'واحد من أدواره يتطلب عنوانًا من نطاق آخر.'
+      target_out_of_scope: 'هذا الحساب ليس من اختصاصك إدارته.'
+  success:
+    message: 'تم حفظ الحساب.'
+
+hi:
+  field:
+    email:
+      label: ईमेल
+    username:
+      label: 'उपयोगकर्ता नाम'
+    first_name:
+      label: 'पहला नाम'
+    last_name:
+      label: 'अंतिम नाम'
+  action:
+    submit: सहेजें
+  error:
+    email_taken: 'इस पते पर पहले से एक खाता है।'
+    username_taken: 'इस उपयोगकर्ता नाम पर पहले से एक खाता है।'
+    username_pattern: '3 से 30 अक्षर, अंक, डैश या अंडरस्कोर।'
+    refused:
+      role_not_assignable: 'इस खाते में एक भूमिका है जिसे आप प्रबंधित नहीं कर सकते।'
+      email_domain_not_allowed: 'इसकी एक भूमिका दूसरे डोमेन के पते की मांग करती है।'
+      target_out_of_scope: 'यह खाता आपके प्रबंधन में नहीं है।'
+  success:
+    message: 'खाता सहेजा गया।'
+
+he:
+  field:
+    email:
+      label: אימייל
+    username:
+      label: 'שם משתמש'
+    first_name:
+      label: 'שם פרטי'
+    last_name:
+      label: 'שם משפחה'
+  action:
+    submit: שמור
+  error:
+    email_taken: 'כתובת זו כבר שייכת לחשבון אחר.'
+    username_taken: 'שם המשתמש הזה כבר שייך לחשבון אחר.'
+    username_pattern: '3 עד 30 אותיות, מספרים, מקפים או קווים תחתונים.'
+    refused:
+      role_not_assignable: 'חשבון זה מחזיק בתפקיד שאינו שלך לנהל.'
+      email_domain_not_allowed: 'אחד התפקידים שלו דורש כתובת מדומיין אחר.'
+      target_out_of_scope: 'חשבון זה אינו שלך לנהל.'
+  success:
+    message: 'החשבון נשמר.'
+
+fa:
+  field:
+    email:
+      label: ایمیل
+    username:
+      label: 'نام کاربری'
+    first_name:
+      label: نام
+    last_name:
+      label: 'نام خانوادگی'
+  action:
+    submit: ذخیره
+  error:
+    email_taken: 'یک حساب کاربری این آدرس را قبلاً دارد.'
+    username_taken: 'یک حساب کاربری این نام کاربری را قبلاً دارد.'
+    username_pattern: 'از ۳ تا ۳۰ حرف، عدد، خط تیره یا زیرخط.'
+    refused:
+      role_not_assignable: 'این حساب کاربری یک نقش دارد که شما اجازه مدیریت آن را ندارید.'
+      email_domain_not_allowed: 'یکی از نقش‌های آن به آدرس دامنه دیگری نیاز دارد.'
+      target_out_of_scope: 'این حساب کاربری متعلق به شما نیست.'
+  success:
+    message: 'حساب کاربری ذخیره شد.'
+
+ur:
+  field:
+    email:
+      label: 'ای میل'
+    username:
+      label: 'صارف نام'
+    first_name:
+      label: 'پہلا نام'
+    last_name:
+      label: 'آخری نام'
+  action:
+    submit: 'محفوظ کریں'
+  error:
+    email_taken: 'اس پتے کے ساتھ ایک اکاؤنٹ پہلے سے موجود ہے۔'
+    username_taken: 'اس صارف نام کے ساتھ ایک اکاؤنٹ پہلے سے موجود ہے۔'
+    username_pattern: '3 سے 30 حروف، اعداد، ڈیش یا انڈر اسکور۔'
+    refused:
+      role_not_assignable: 'اس اکاؤنٹ میں ایک ایسا کردار ہے جسے آپ انتظام نہیں کر سکتے۔'
+      email_domain_not_allowed: 'اس کے کرداروں میں سے ایک دوسرے ڈومین کا پتہ مانگتا ہے۔'
+      target_out_of_scope: 'یہ اکاؤنٹ آپ کے انتظام میں نہیں ہے۔'
+  success:
+    message: 'اکاؤنٹ محفوظ کر لیا گیا۔'
+
+ja:
+  field:
+    email:
+      label: メールアドレス
+    username:
+      label: ユーザー名
+    first_name:
+      label: 名
+    last_name:
+      label: 姓
+  action:
+    submit: 保存
+  error:
+    email_taken: このアドレスはすでに別のアカウントで使用されています。
+    username_taken: このユーザー名はすでに別のアカウントで使用されています。
+    username_pattern: 3文字から30文字の英数字、ハイフン、またはアンダースコア。
+    refused:
+      role_not_assignable: このアカウントはあなたが管理できない役割を持っています。
+      email_domain_not_allowed: その役割の1つが別のドメインのアドレスを要求しています。
+      target_out_of_scope: このアカウントはあなたが管理できるものではありません。
+  success:
+    message: アカウントが保存されました。
+
+ko:
+  field:
+    email:
+      label: 이메일
+    username:
+      label: '사용자 이름'
+    first_name:
+      label: 이름
+    last_name:
+      label: 성
+  action:
+    submit: 저장
+  error:
+    email_taken: '이미 이 주소가 사용 중입니다.'
+    username_taken: '이미 이 사용자 이름이 사용 중입니다.'
+    username_pattern: '3에서 30자의 문자, 숫자, 대시 또는 밑줄.'
+    refused:
+      role_not_assignable: '이 계정은 관리할 수 없는 역할을 가지고 있습니다.'
+      email_domain_not_allowed: '역할 중 하나가 다른 도메인의 주소를 요구합니다.'
+      target_out_of_scope: '이 계정은 관리할 수 없습니다.'
+  success:
+    message: '계정이 저장되었습니다.'
+
+bn:
+  field:
+    email:
+      label: ইমেইল
+    username:
+      label: 'ব্যবহারকারীর নাম'
+    first_name:
+      label: 'প্রথম নাম'
+    last_name:
+      label: 'শেষ নাম'
+  action:
+    submit: 'সংরক্ষণ করুন'
+  error:
+    email_taken: 'একটি অ্যাকাউন্ট ইতোমধ্যে এই ঠিকানাটি ধারণ করে।'
+    username_taken: 'একটি অ্যাকাউন্ট ইতোমধ্যে এই ব্যবহারকারীর নামটি ধারণ করে।'
+    username_pattern: '৩ থেকে ৩০টি অক্ষর, সংখ্যা, ড্যাশ বা আন্ডারস্কোর।'
+    refused:
+      role_not_assignable: 'এই অ্যাকাউন্টে একটি ভূমিকা রয়েছে যা আপনার প্রশাসনের জন্য নয়।'
+      email_domain_not_allowed: 'এর মধ্যে একটি ভূমিকা অন্য ডোমেইনের একটি ঠিকানা চায়।'
+      target_out_of_scope: 'এই অ্যাকাউন্ট আপনার প্রশাসনের জন্য নয়।'
+  success:
+    message: 'অ্যাকাউন্ট সংরক্ষিত।'
+
+th:
+  field:
+    email:
+      label: อีเมล
+    username:
+      label: ชื่อผู้ใช้
+    first_name:
+      label: ชื่อ
+    last_name:
+      label: นามสกุล
+  action:
+    submit: บันทึก
+  error:
+    email_taken: มีบัญชีที่ใช้ที่อยู่นี้แล้ว
+    username_taken: มีบัญชีที่ใช้ชื่อผู้ใช้นี้แล้ว
+    username_pattern: '3 ถึง 30 ตัวอักษร, ตัวเลข, ขีดกลางหรือตัวขีดล่าง'
+    refused:
+      role_not_assignable: บัญชีนี้มีบทบาทที่คุณไม่สามารถจัดการได้
+      email_domain_not_allowed: หนึ่งในบทบาทของมันต้องการที่อยู่อีเมลจากโดเมนอื่น
+      target_out_of_scope: บัญชีนี้ไม่ใช่ของคุณที่จะจัดการ
+  success:
+    message: บัญชีถูกบันทึกแล้ว.
+
+de:
+  field:
+    email:
+      label: E-Mail
+    username:
+      label: Benutzername
+    first_name:
+      label: Vorname
+    last_name:
+      label: Nachname
+  action:
+    submit: Speichern
+  error:
+    email_taken: 'Ein Konto hat bereits diese Adresse.'
+    username_taken: 'Ein Konto hat bereits diesen Benutzernamen.'
+    username_pattern: '3 bis 30 Buchstaben, Ziffern, Bindestriche oder Unterstriche.'
+    refused:
+      role_not_assignable: 'Dieses Konto hat eine Rolle, die Sie nicht verwalten dürfen.'
+      email_domain_not_allowed: 'Eine seiner Rollen verlangt eine Adresse einer anderen Domain.'
+      target_out_of_scope: 'Dieses Konto gehört nicht Ihnen.'
+  success:
+    message: 'Konto gespeichert.'
+
+fi:
+  field:
+    email:
+      label: Sähköposti
+    username:
+      label: Käyttäjätunnus
+    first_name:
+      label: Etunimi
+    last_name:
+      label: Sukunimi
+  action:
+    submit: Tallenna
+  error:
+    email_taken: 'Tämä osoite on jo käytössä toisella tilillä.'
+    username_taken: 'Tämä käyttäjätunnus on jo käytössä toisella tilillä.'
+    username_pattern: '3–30 kirjainta, numeroa, viivaa tai alaviivaa.'
+    refused:
+      role_not_assignable: 'Tällä tilillä on rooli, jota et voi hallita.'
+      email_domain_not_allowed: 'Yksi sen rooleista vaatii toisen domainin osoitteen.'
+      target_out_of_scope: 'Tätä tiliä et voi hallita.'
+  success:
+    message: 'Tili tallennettu.'
+
+ru:
+  field:
+    email:
+      label: 'Электронная почта'
+    username:
+      label: 'Имя пользователя'
+    first_name:
+      label: Имя
+    last_name:
+      label: Фамилия
+  action:
+    submit: Сохранить
+  error:
+    email_taken: 'Этот адрес уже занят.'
+    username_taken: 'Этот имя пользователя уже занято.'
+    username_pattern: 'От 3 до 30 букв, цифр, дефисов или подчеркиваний.'
+    refused:
+      role_not_assignable: 'У этой учетной записи есть роль, которую вы не можете администрировать.'
+      email_domain_not_allowed: 'Одна из ролей требует адрес другой доменной зоны.'
+      target_out_of_scope: 'Эта учетная запись не ваша для администрирования.'
+  success:
+    message: 'Учетная запись сохранена.'
+
+pl:
+  field:
+    email:
+      label: Email
+    username:
+      label: 'Nazwa użytkownika'
+    first_name:
+      label: Imię
+    last_name:
+      label: Nazwisko
+  action:
+    submit: Zapisz
+  error:
+    email_taken: 'To konto już posiada ten adres.'
+    username_taken: 'To konto już posiada tę nazwę użytkownika.'
+    username_pattern: '3 do 30 liter, cyfr, myślników lub podkreśleń.'
+    refused:
+      role_not_assignable: 'To konto ma rolę, którą nie możesz zarządzać.'
+      email_domain_not_allowed: 'Jedna z jego ról wymaga adresu z innej domeny.'
+      target_out_of_scope: 'To konto nie jest twoje do zarządzania.'
+  success:
+    message: 'Konto zapisane.'
+
+es:
+  field:
+    email:
+      label: 'Correo electrónico'
+    username:
+      label: 'Nombre de usuario'
+    first_name:
+      label: Nombre
+    last_name:
+      label: Apellido
+  action:
+    submit: Guardar
+  error:
+    email_taken: 'Una cuenta ya tiene esta dirección.'
+    username_taken: 'Una cuenta ya tiene este nombre de usuario.'
+    username_pattern: 'De 3 a 30 letras, dígitos, guiones o guiones bajos.'
+    refused:
+      role_not_assignable: 'Esta cuenta tiene un rol que no puedes administrar.'
+      email_domain_not_allowed: 'Uno de sus roles requiere una dirección de otro dominio.'
+      target_out_of_scope: 'Esta cuenta no es tuya para administrar.'
+  success:
+    message: 'Cuenta guardada.'
+
+it:
+  field:
+    email:
+      label: Email
+    username:
+      label: Username
+    first_name:
+      label: Nome
+    last_name:
+      label: Cognome
+  action:
+    submit: Salva
+  error:
+    email_taken: 'Un account possiede già questo indirizzo.'
+    username_taken: 'Un account possiede già questo username.'
+    username_pattern: 'Da 3 a 30 lettere, numeri, trattini o underscore.'
+    refused:
+      role_not_assignable: 'Questo account ha un ruolo che non puoi gestire.'
+      email_domain_not_allowed: 'Uno dei suoi ruoli richiede un indirizzo di un altro dominio.'
+      target_out_of_scope: 'Questo account non è tuo da gestire.'
+  success:
+    message: 'Account salvato.'
+
+pt_BR:
+  field:
+    email:
+      label: Email
+    username:
+      label: 'Nome de usuário'
+    first_name:
+      label: 'Primeiro nome'
+    last_name:
+      label: Sobrenome
+  action:
+    submit: Salvar
+  error:
+    email_taken: 'Já existe uma conta com este endereço.'
+    username_taken: 'Já existe uma conta com este nome de usuário.'
+    username_pattern: '3 a 30 letras, dígitos, traços ou sublinhados.'
+    refused:
+      role_not_assignable: 'Esta conta possui uma função que você não pode administrar.'
+      email_domain_not_allowed: 'Uma de suas funções exige um endereço de outro domínio.'
+      target_out_of_scope: 'Esta conta não é sua para administrar.'
+  success:
+    message: 'Conta salva.'
+
+tr:
+  field:
+    email:
+      label: E-posta
+    username:
+      label: 'Kullanıcı adı'
+    first_name:
+      label: Ad
+    last_name:
+      label: Soyad
+  action:
+    submit: Kaydet
+  error:
+    email_taken: 'Bu adres zaten bir hesaba ait.'
+    username_taken: 'Bu kullanıcı adı zaten bir hesaba ait.'
+    username_pattern: '3 ile 30 arası harf, rakam, tire veya alt çizgi.'
+    refused:
+      role_not_assignable: 'Bu hesap, sizin yönetmeniz için uygun olmayan bir role sahip.'
+      email_domain_not_allowed: 'Rollerinden biri başka bir alan adında bir adres talep ediyor.'
+      target_out_of_scope: 'Bu hesabı yönetmek sizin için uygun değil.'
+  success:
+    message: 'Hesap kaydedildi.'
+
+vi:
+  field:
+    email:
+      label: Email
+    username:
+      label: 'Tên đăng nhập'
+    first_name:
+      label: Tên
+    last_name:
+      label: Họ
+  action:
+    submit: Lưu
+  error:
+    email_taken: 'Một tài khoản đã giữ địa chỉ này.'
+    username_taken: 'Một tài khoản đã giữ tên đăng nhập này.'
+    username_pattern: '3 đến 30 ký tự, chữ số, dấu gạch ngang hoặc gạch dưới.'
+    refused:
+      role_not_assignable: 'Tài khoản này có một vai trò mà bạn không được quản lý.'
+      email_domain_not_allowed: 'Một trong những vai trò của nó yêu cầu địa chỉ của miền khác.'
+      target_out_of_scope: 'Tài khoản này không phải của bạn để quản lý.'
+  success:
+    message: 'Tài khoản đã được lưu.'
+
+id:
+  field:
+    email:
+      label: Email
+    username:
+      label: 'Nama pengguna'
+    first_name:
+      label: 'Nama depan'
+    last_name:
+      label: 'Nama belakang'
+  action:
+    submit: Simpan
+  error:
+    email_taken: 'Akun sudah memiliki alamat ini.'
+    username_taken: 'Akun sudah memiliki nama pengguna ini.'
+    username_pattern: '3 sampai 30 huruf, angka, tanda hubung, atau garis bawah.'
+    refused:
+      role_not_assignable: 'Akun ini memiliki peran yang bukan milikmu untuk dikelola.'
+      email_domain_not_allowed: 'Salah satu perannya meminta alamat dari domain lain.'
+      target_out_of_scope: 'Akun ini bukan milikmu untuk dikelola.'
+  success:
+    message: 'Akun disimpan.'
+
+nl:
+  field:
+    email:
+      label: E-mail
+    username:
+      label: Gebruikersnaam
+    first_name:
+      label: Voornaam
+    last_name:
+      label: Achternaam
+  action:
+    submit: Opslaan
+  error:
+    email_taken: 'Er is al een account dat dit adres gebruikt.'
+    username_taken: 'Er is al een account dat deze gebruikersnaam gebruikt.'
+    username_pattern: '3 tot 30 letters, cijfers, streepjes of underscores.'
+    refused:
+      role_not_assignable: 'Dit account heeft een rol die je niet kunt beheren.'
+      email_domain_not_allowed: 'Een van zijn rollen vraagt om een adres van een ander domein.'
+      target_out_of_scope: 'Dit account is niet jouw om te beheren.'
+  success:
+    message: 'Account opgeslagen.'

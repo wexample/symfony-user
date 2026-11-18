@@ -1049,6 +1049,1106 @@
             "engine": "syrtis"
         }
     },
+    "forms/account_edit_form.ar.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.bn.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.de.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.es.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.fa.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.fi.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.fr.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.he.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.hi.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.id.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.it.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.ja.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.ko.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.nl.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.pl.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.pt_BR.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.ru.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.th.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.tr.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.ur.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.vi.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
+    "forms/account_edit_form.zh.yml": {
+        "action.submit": {
+            "hash": "cfd38aa1d471aa99c901bc5d0c40d4fe",
+            "engine": "syrtis"
+        },
+        "error.email_taken": {
+            "hash": "fa89ac2445951f6ae8b8da03a0847f85",
+            "engine": "syrtis"
+        },
+        "error.refused.email_domain_not_allowed": {
+            "hash": "f006d8fec206358399721d8e2683aebd",
+            "engine": "syrtis"
+        },
+        "error.refused.role_not_assignable": {
+            "hash": "edcab4913e6439f16cddb5ae2a9a4c14",
+            "engine": "syrtis"
+        },
+        "error.refused.target_out_of_scope": {
+            "hash": "708672eed32a1864a250c7b246098af4",
+            "engine": "syrtis"
+        },
+        "error.username_pattern": {
+            "hash": "fee68c19f4f9fa643594d7b98e8418a9",
+            "engine": "syrtis"
+        },
+        "error.username_taken": {
+            "hash": "6d30f67d9a458d8f4f268ef2a351f1cb",
+            "engine": "syrtis"
+        },
+        "field.email.label": {
+            "hash": "2598beb66d173eff6b50a4377fca718d",
+            "engine": "syrtis"
+        },
+        "field.first_name.label": {
+            "hash": "87a7841d50d609aa351d68e2195fc13d",
+            "engine": "syrtis"
+        },
+        "field.last_name.label": {
+            "hash": "b9cba7b92bc8be4d235e3a7e758c3106",
+            "engine": "syrtis"
+        },
+        "field.username.label": {
+            "hash": "561c61b58a31ea0b22febc09c6fbf885",
+            "engine": "syrtis"
+        },
+        "success.message": {
+            "hash": "2b4f2029ebef930cf9c93e1a3508e451",
+            "engine": "syrtis"
+        }
+    },
     "forms/account_picker_form.ar.yml": {
         "action.submit": {
             "hash": "a4d2313525c47af15e444c88880bc766",
